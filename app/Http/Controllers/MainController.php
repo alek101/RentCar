@@ -430,7 +430,8 @@ class MainController extends Controller
     {
         $auto=$this->getOneCar($id);
         $knjizica=$this->servisnaKnjizica($id);
-        return view('auto.info',['auto'=>$auto[0],'knjizica'=>$knjizica]);
+        $niz=$this->getFutureReservationCar($id);
+        return view('auto.info',['auto'=>$auto[0],'knjizica'=>$knjizica, 'niz'=>$niz]);
     }
 
     //
@@ -578,7 +579,7 @@ class MainController extends Controller
         FROM
             `rezervacija` as R
         join `automobili` as A on R.ID_vozila=A.Broj_sasije
-        where CURRENT_DATE()<R.`Datum_pocetka` and R.`Napomena` != 'SERVIS'
+        where CURRENT_DATE()<=R.`Datum_pocetka`
         order by `Datum_pocetka` ASC",[]);   
     }
 
@@ -608,7 +609,7 @@ class MainController extends Controller
     }
 
     //
-    public function getAllReservations()
+    public function getAllReservations($num)
     {
         return DB::select(
             "SELECT
@@ -625,7 +626,75 @@ class MainController extends Controller
         FROM
             `rezervacija` as R
         join `automobili` as A on R.ID_vozila=A.Broj_sasije
-        order by `Datum_pocetka` DESC",[]);
-            
+        order by `Datum_pocetka` DESC
+        LIMIT ?",[$num]);   
     }
+
+    //
+    public function rezervacijeSve($num=25)
+    {
+        $niz=$this->getAllReservations($num);  
+        return view('rezervacijeInfo.sve',['niz'=>$niz]);
+    }
+
+    //
+    public function rezervacijeSveForm(Request $request)
+    {
+        if(isset($request->num))
+        {
+            $niz=$this->getAllReservations($request->num);  
+            return view('rezervacijeInfo.sve',['niz'=>$niz]);
+        }
+        
+        if(isset($request->dateStart) && isset($request->dateEnd))
+        {
+            $niz=$this->getReservationsDate($request->dateStart,$request->dateEnd);  
+            return view('rezervacijeInfo.sve',['niz'=>$niz]);
+        }
+    }
+
+    //
+    public function getReservationsDate($dateStart,$dateEnd)
+    {
+        return DB::select(
+            "SELECT
+            R.`ID_rezervacije` as 'id',
+            R.`Ime_prezime_kupca` as 'ime',
+            R.`Email` as 'meil',
+            R.`Broj_telefona` as 'telefon',
+            A.`Broj_registarskih_tablica` as 'tablice',
+            A.`Model` as 'model',
+            R.`Datum_pocetka` as 'start',
+            R.`Datum_zavrsetka` as 'finish',
+            R.`Cena` as 'cena',
+            R.`Napomena` as 'opis'
+        FROM
+            `rezervacija` as R
+        join `automobili` as A on R.ID_vozila=A.Broj_sasije
+        where ((R.`Datum_pocetka` >=? and R.`Datum_pocetka` <=?) and (R.`Datum_zavrsetka` >=? and R.`Datum_zavrsetka` <=?))
+        order by `Datum_pocetka` DESC
+        ",[$dateStart,$dateEnd,$dateStart,$dateEnd]);   
+    }
+
+    //
+    public function getFutureReservationCar($id)
+    {
+        return DB::select("SELECT
+            R.`ID_rezervacije` as 'id',
+            R.`Ime_prezime_kupca` as 'ime',
+            R.`Email` as 'meil',
+            R.`Broj_telefona` as 'telefon',
+            A.`Broj_registarskih_tablica` as 'tablice',
+            A.`Model` as 'model',
+            R.`Datum_pocetka` as 'start',
+            R.`Datum_zavrsetka` as 'finish',
+            R.`Cena` as 'cena',
+            R.`Napomena` as 'opis'
+        FROM
+            `rezervacija` as R
+        join `automobili` as A on R.ID_vozila=A.Broj_sasije
+        where CURRENT_DATE()<=R.`Datum_pocetka` and A.Broj_sasije =?
+        order by `Datum_pocetka` ASC",[$id]); 
+    }
+
 }

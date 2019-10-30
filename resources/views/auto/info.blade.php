@@ -148,4 +148,67 @@
         @endforeach
     </table>
 
+    <h3>Buduce Rezervacije</h3>
+
+    <table>
+        <tr>
+            <th>Ime</th>
+            <th>Mejl</th>
+            <th>Telefon</th>
+            <th>Tablice</th>
+            <th>Model</th>
+            <th>Datum pocetka</th>
+            <th>Datum zavrsetka</th>
+            <th>Cena</th>
+            <th>Opis</th>
+        </tr>
+    
+        
+    
+        @foreach ($niz as $auto)
+            {!! 
+            "<tr>" .
+    
+                "<td>" .
+                    $auto->ime
+                    . "</td>".
+    
+                    "<td>" .
+                    $auto->meil
+                    . "</td>".
+    
+                    "<td>" .
+                    $auto->telefon
+                    . "</td>".
+    
+                    "<td>" .
+                    $auto->tablice
+                    . "</td>".
+    
+                    "<td>" .
+                    $auto->model
+                    . "</td>".
+    
+                    "<td>" .
+                    $auto->start
+                    . "</td>".
+    
+                    "<td>" .
+                    $auto->finish
+                    . "</td>".
+    
+                    "<td>" .
+                    $auto->cena
+                    . "</td>".
+
+                    "<td>" .
+                    $auto->opis
+                    . "</td>"
+    
+    
+             . "</tr>";
+            !!}
+        @endforeach
+    </table>
+
 @endsection

@@ -12,8 +12,9 @@
         <a href="/servis">Servis</a>
         <a href="/prijem">Dodaj km</a>
         <a href="/auto">Spisak automobila</a>
-        <a href="/rezervacija">Rezervacija</a>
-        <a href="/rezervacijeInfo">Rezervacije</a>
+        <a href="/rezervacija">Rezervisi</a>
+        <a href="/rezervacijeInfo/sve">Sve Rezervacije</a>
+        <a href="/rezervacijeInfo">Buduce Rezervacije</a>
     </div>
 
     @section('Page')

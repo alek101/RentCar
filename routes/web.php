@@ -54,6 +54,8 @@ Route::prefix('/rezervacija')->group(function()
 Route::prefix('/rezervacijeInfo')->group(function()
 {
     Route::get('/','MainController@rezervacijeInfo');
-    
+    Route::post('forma1','MainController@rezervacijeSveForm');
+    Route::get('/sve','MainController@rezervacijeSve');
+    Route::get('/sve/{num}','MainController@rezervacijeSve');
     Route::get('/cancel/{id}','MainController@cancelReservation');
 });

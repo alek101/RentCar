@@ -5,7 +5,20 @@
     var_dump($niz);
 @endphp --}}
 
-<h3><a href="/rezervacijeInfo/sve">Sve rezervacije</a></h3>
+<h3><a href="/rezervacijeInfo">Buduce rezervacije</a></h3>
+
+<form method="POST" action="/rezervacijeInfo/forma1">
+    @csrf
+    Broj Unosa <input type="number" name="num" id="">
+    Pocetni datum <input type="date" name="dateStart" id="">
+    Krajnji datum <input type="date" name="dateEnd" id="">
+<input type="submit" value="Posalji">
+
+</form>
+
+
+
+
 
 <table>
         <tr>
@@ -18,7 +31,6 @@
             <th>Datum zavrsetka</th>
             <th>Cena</th>
             <th>Opis</th>
-            <th>Otkazi</th>
         </tr>
     
         
@@ -63,7 +75,6 @@
                     $auto->opis
                     . "</td>"
     
-                    ."<td> <a href='/rezervacijeInfo/cancel/".$auto->id."' class='cancel'>Otkazi</td>"
     
              . "</tr>";
             !!}
@@ -71,10 +82,7 @@
     </table>
 
     <script src="">
-        [...document.querySelectorAll('.cancel')].map(c=>c.addEventListener('click',function(e)
-        {
-            e.target.parentElement().parentElement().remove();
-        }))
+       
     </script>
 
 @endsection
