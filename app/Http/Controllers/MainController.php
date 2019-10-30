@@ -606,4 +606,26 @@ class MainController extends Controller
         $this->cancelFutureReservation($id);
         return $this->rezervacijeInfo();
     }
+
+    //
+    public function getAllReservations()
+    {
+        return DB::select(
+            "SELECT
+            R.`ID_rezervacije` as 'id',
+            R.`Ime_prezime_kupca` as 'ime',
+            R.`Email` as 'meil',
+            R.`Broj_telefona` as 'telefon',
+            A.`Broj_registarskih_tablica` as 'tablice',
+            A.`Model` as 'model',
+            R.`Datum_pocetka` as 'start',
+            R.`Datum_zavrsetka` as 'finish',
+            R.`Cena` as 'cena',
+            R.`Napomena` as 'opis'
+        FROM
+            `rezervacija` as R
+        join `automobili` as A on R.ID_vozila=A.Broj_sasije
+        order by `Datum_pocetka` DESC",[]);
+            
+    }
 }
