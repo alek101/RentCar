@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../plavi3.css">
+</head>
+<body>
+    
+
+    <script>
+        let=niz = [
+            ['45671e3', 'BP', 'Adr', 1],
+            ['45681e', 'BP2', 'Adr', 1],
+            ['45691e', 'BP3', 'Adr', 1]
+        ];
+
+        let opcije={
+            method: "POST",
+            body: JSON.stringify(niz),
+        }
+
+        fetch('primer_pozvan_transaction.php',opcije)
+        .then(resp=>resp.text())
+        .then(txt=>document.body.innerHTML=txt);
+        
+        </script>
+</body>
+</html>
