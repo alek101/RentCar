@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('mainPage');
 });
 
-Route::prefix('/kriticni')->group(function()
+Route::prefix('/kriticni')->middleware('login')->group(function()
 {
     Route::get('/','MainController@kriticni');
     Route::post('/posalji1','MainController@posalji1');
@@ -23,27 +23,27 @@ Route::prefix('/kriticni')->group(function()
     Route::get('/{id}','MainController@zakaziServis');
 });
 
-Route::prefix('/servis')->group(function()
+Route::prefix('/servis')->middleware('login')->group(function()
 {
     Route::get('/','MainController@servis');
     Route::post('/finish','MainController@endServis');
     Route::get('/{id}','MainController@servisCar');
 });
 
-Route::prefix('/prijem')->group(function()
+Route::prefix('/prijem')->middleware('login')->group(function()
 {
     Route::get('/','MainController@prijem');
     Route::post('/izmeniKM','MainController@izmeniKM');
     
 });
 
-Route::prefix('/auto')->group(function()
+Route::prefix('/auto')->middleware('login')->group(function()
 {
     Route::get('/','MainController@auto');
     Route::get('/{id}','MainController@autoInfo');
 });
 
-Route::prefix('/rezervacija')->group(function()
+Route::prefix('/rezervacija')->middleware('login')->group(function()
 {
     Route::get('/','MainController@rezervacija1');
     Route::post('/posalji1','MainController@rezervacija2');
@@ -51,7 +51,7 @@ Route::prefix('/rezervacija')->group(function()
     
 });
 
-Route::prefix('/rezervacijeInfo')->group(function()
+Route::prefix('/rezervacijeInfo')->middleware('login')->group(function()
 {
     Route::get('/','MainController@rezervacijeInfo');
     Route::post('forma1','MainController@rezervacijeSveForm');
@@ -59,3 +59,7 @@ Route::prefix('/rezervacijeInfo')->group(function()
     Route::get('/sve/{num}','MainController@rezervacijeSve');
     Route::get('/cancel/{id}','MainController@cancelReservation');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
