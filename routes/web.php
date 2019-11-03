@@ -63,3 +63,12 @@ Route::prefix('/rezervacijeInfo')->middleware('login')->group(function()
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::prefix('/admin')->middleware('admin')->group(function()
+{
+    Route::get('/','AdminController@home');
+    Route::get('/{id}','AdminController@formaRole');
+    Route::post('/forma1','AdminController@change');
+    Route::get('/delete/{id}','AdminController@delete');
+    
+});

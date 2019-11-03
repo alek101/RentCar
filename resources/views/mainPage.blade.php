@@ -16,6 +16,7 @@
             <a href="/rezervacija">Rezervisi</a>
             <a href="/rezervacijeInfo/sve">Sve Rezervacije</a>
             <a href="/rezervacijeInfo">Buduce Rezervacije</a>
+            <a href="/admin">Admin</a>
         </div>
 
         <div class="login">
