@@ -102,9 +102,15 @@
 
 </form>
 
-<h3>
+{{-- <h3>
     <a href="/kriticni/{{$auto->sasija}}">Zakazi Servis</a>
+</h3> --}}
+
+<h3>
+    Zakazi Servis
 </h3>
+
+<button class="zakaziServis">Servis</button>
 
 <h3>Servisna knjizica</h3>
 
@@ -210,5 +216,13 @@
             !!}
         @endforeach
     </table>
+
+    <script>
+        let sasija=document.querySelector('#id').value;
+        document.querySelector('.zakaziServis').addEventListener('click',function()
+        {
+            window.open("/kriticni/"+sasija);
+        })
+    </script>
 
 @endsection

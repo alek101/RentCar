@@ -12,7 +12,7 @@
     Broj Unosa <input type="number" name="num" id="">
     Pocetni datum <input type="date" name="dateStart" id="">
     Krajnji datum <input type="date" name="dateEnd" id="">
-<input type="submit" value="Posalji">
+<input type="submit" value="Posalji" id="dugme">
 
 </form>
 

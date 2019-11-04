@@ -165,6 +165,31 @@
         {
             margin: 10px auto;
         }
+
+        form
+        {
+            background-color: lightgreen;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        form *
+        {
+            padding: 2px;
+            margin: 3px;
+        }
+        
+        button,#dugme
+        {
+            padding: 5px;
+            box-shadow: 2px 2px gray;
+        }
+
+        button,#dugme:hover
+        {
+            cursor: pointer;
+            box-shadow: 0px 0px gray;
+        }
     
     </style>
 </head>
