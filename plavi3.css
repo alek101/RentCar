@@ -1,0 +1,148 @@
+html{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+body{
+    width: 100%;
+    height: 100%;
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+a {
+    text-decoration: none;
+}
+ol,ul,li{
+    list-style-type: none;
+}
+
+body{
+    background-image: linear-gradient(lightblue,darkblue);
+    height: auto;
+  }
+
+  span{
+    color: red;
+    font-weight: bold;
+    padding-right: 10px;
+  }
+  
+  div{
+    background-color: rgb(196, 238, 243);
+    margin: 10px;
+    padding: 5px;
+  }
+  
+  input{
+    background-color: rgb(219, 219, 157);
+  }
+  h1{
+    text-align: center;
+    color:blue;
+    margin-bottom: 40px;
+    margin-top: 20px;
+    font-style: italic;
+  }
+  .dugme{
+    background-color: rgb(189, 30, 141);
+    padding: 3px;
+    height: 40px;
+    color:rgb(243, 188, 168);
+    width: 200px;
+    box-shadow: 2px 2px gray;
+    
+  }
+  .dugme:hover{
+    color: rgb(189, 30, 141);
+    background-color:rgb(243, 188, 168);
+    cursor: pointer;
+    
+  }
+  
+  .center{
+    text-align: center;
+  }
+
+.mali_okvir{
+    border: 2px solid purple;
+}
+
+.okvir{
+    
+    border: 2px solid purple;
+  border-radius: 10px;
+  box-shadow: 5px 5px darkblue;
+}
+
+.red{
+    color: red;
+}
+
+.blue{
+    color:blue;
+}
+
+.black{
+    color:black;
+}
+
+.green{
+    color:green;
+}
+
+.bck_blue{
+  background-color: blue;
+}
+
+.bck_purple{
+  background-color: purple;
+}
+
+.bck_red{
+  background-color: red;
+}
+
+.bck_yellow{
+  background-color: yellow;
+}
+
+.bck_green{
+  background-color: green;
+}
+
+.hidden{
+  display: none;
+}
+
+.pointer{
+  cursor: pointer;
+}
+
+.flex{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.tekst_zadatka{
+  width: 750px;
+  border: 5px solid blue;
+}
+
+.resenja{
+  min-width: 300px;
+  flex-flow: 1;
+  border: 4px dashed purple;
+}
+
+.slicica{
+  width: 200px;
+  height: 200px;
+}

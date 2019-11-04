@@ -5,7 +5,7 @@
     var_dump($niz);
 @endphp --}}
 
-<h3><a href="/rezervacijeInfo">Buduce rezervacije</a></h3>
+<h3>Sve Rezervacije</h3>
 
 <form method="POST" action="/rezervacijeInfo/forma1">
     @csrf

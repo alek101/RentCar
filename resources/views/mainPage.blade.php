@@ -5,6 +5,168 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>RentCar</title>
+    <style>
+
+        html
+        {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body
+        {
+            width: 100%;
+            height: 100%;
+            margin:0;
+            padding:0;
+            box-sizing: border-box;
+            background-image: linear-gradient(lightblue,rgb(85, 85, 114));
+            position: relative;
+        }
+
+        *
+        {
+            margin:0;
+            padding:0;
+            box-sizing: border-box;
+        }
+
+        a 
+        {
+            text-decoration: none;
+        }
+
+        ol,ul,li
+        {
+            list-style-type: none;
+        }
+        
+        .header
+        {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            background-color: crimson;
+            height: 80px;
+            font-size: 1.2em;
+        }
+
+        a:link 
+        {
+        color: white;
+        }
+
+        /* visited link */
+        a:visited 
+        {
+        color: white;
+        }
+
+        /* mouse over link */
+        a:hover 
+        {
+        color: blue;
+        font-weight: bold;
+        }
+
+        /* selected link */
+        a:active 
+        {
+        color: blue;
+        font-weight: bold;
+        }
+
+        .links
+        {
+            padding: 25px;
+        }
+
+        .links a
+        {
+            padding-right: 10px;
+        }
+
+        .footer
+        {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            background-color: crimson;
+            height: 80px;
+            font-size: 1.2em;
+            position: absolute;
+            bottom: 0px;
+            width: 100%;
+            color: white;
+            padding: 10px;
+        }
+
+        .glavna
+        {
+            width: 100%;
+            text-align: center;
+        }
+    
+        table
+        {
+            border: 3px solid crimson;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        tr
+        {
+            background-color: chartreuse;
+        }
+
+        tr:nth-child(2n)
+        {
+            background-color: green;
+        }
+
+        th
+        {
+            background-color: gray;
+            /* border: 1px solid black; */
+            padding: 3px 5px;
+        }
+
+        td
+        {
+            /* border: 1px solid black; */
+            padding: 3px 5px;
+        }
+
+        table a:link
+        {
+            color: black;
+        }
+
+        table a:visited
+        {
+            color: black;
+        }
+
+        table a:hover
+        {
+            color: red;
+            font-weight: bold;
+        }
+
+        table a:active
+        {
+            color: red;
+            font-weight: bold;
+        }
+
+        h1,h3
+        {
+            margin: 10px auto;
+        }
+    
+    </style>
 </head>
 <body>
     <div class="header">
@@ -34,15 +196,24 @@
                 </div>
             @endif
         </div>
-        
     </div>
 
-    @section('Page')
-        <h1>Dobrodosli</h1>
-    @show
+    <div class="glavna">
+        @section('Page')
+            <h1>Dobrodosli</h1>
+            
+        @show
+    </div>
 
     <div class="footer">
-        Ovo je footer!
+        <div>
+            Završni rad: RentCar
+        </div>
+
+        <div>
+            Aleksandar Petrović
+            PHP grupa II
+        </div>
     </div>
 
     

@@ -5,7 +5,7 @@
     var_dump($niz);
 @endphp --}}
 
-<h3><a href="/rezervacijeInfo/sve">Sve rezervacije</a></h3>
+<h3>Buduce Rezervacije</h3>
 
 <table>
         <tr>
