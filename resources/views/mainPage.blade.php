@@ -220,6 +220,13 @@
             color: crimson;
             margin: 30px auto;
         }
+
+        .bckRed
+        {
+            background-color: red;
+            border: 1px solid green;
+            font-weight: bold;
+        }
     
     </style>
 </head>

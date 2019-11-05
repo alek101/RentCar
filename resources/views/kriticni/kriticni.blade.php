@@ -35,6 +35,7 @@
     </tr>
 
     @foreach ($niz as $auto)
+        
         {!! 
         "<tr>" .
 
@@ -72,26 +73,42 @@
 
                 "<td>" .
                 $auto->veliki_servis
-                . "</td>".
-
-                "<td>" .
+                . "</td>";
+            !!}
+            @if($auto->isticanje_registracije<=30)
+                {!! "<td class='bckRed'>" .
                 $auto->isticanje_registracije
-                . "</td>".
-
+                . "</td>" !!}
+            @else
+            {!! "<td>" .
+                    $auto->isticanje_registracije
+                . "</td>"; !!}
+            @endif
+            @if ($auto->predjeno_km_mali>=10000)
+                {!! "<td class='bckRed'>" .
+                        $auto->predjeno_km_mali
+                        . "</td>"; !!}
+            @else
+                {!! 
                 "<td>" .
-                $auto->predjeno_km_mali
-                . "</td>".
-
+                        $auto->predjeno_km_mali
+                        . "</td>";
+                 !!}
+            @endif
+            @if ($auto->predjeno_km_veliki>=100000)
+            {!! 
+                "<td class='bckRed'>" .
+                $auto->predjeno_km_veliki
+                . "</td>"; !!}
+            @else
+                {!! 
                 "<td>" .
                 $auto->predjeno_km_veliki
-                . "</td>"
-
-                ."<td> <a href='/kriticni/".$auto->sasija."'>Zakazi Servis</td>"
-
-
-
-         . "</tr>";
-        !!}
+                . "</td>"; !!}
+            @endif
+                {!! "<td> <a href='/kriticni/".$auto->sasija."'>Zakazi Servis</td>"
+                    . "</tr>"; !!}
+                    
     @endforeach
 </table>
 
