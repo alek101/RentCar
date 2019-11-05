@@ -43,7 +43,7 @@ Route::prefix('/auto')->middleware('login')->group(function()
     Route::get('/{id}','MainController@autoInfo');
 });
 
-Route::prefix('/rezervacija')->middleware('login')->group(function()
+Route::prefix('/rezervacija')->group(function()
 {
     Route::get('/','MainController@rezervacija1');
     Route::post('/posalji1','MainController@rezervacija2');

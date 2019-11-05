@@ -605,7 +605,8 @@ class MainController extends Controller
     {
         $info=$this->returnInformation($id);
         $this->cancelFutureReservation($id);
-        return $this->rezervacijeInfo();
+        // return $this->rezervacijeInfo();
+        return redirect('/rezervacijeInfo');
     }
 
     //

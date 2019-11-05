@@ -190,6 +190,29 @@
             cursor: pointer;
             box-shadow: 0px 0px gray;
         }
+
+        .hidden
+        {
+            visibility: hidden;
+        }
+
+        .kartica
+        {
+            position: absolute;
+            top: 30%; left: 35%;
+            height: 50px; width: 200px;
+            border: 2px solid crimson;
+            background-color: chartreuse;
+            z-index: 10;
+            padding: 5px;
+            box-shadow: 2px 5px 10px rbga(0,0,0,0.5);
+            transition: 0.3s;
+        }
+
+        .kartica:hover
+        {
+            box-shadow: 2px 10px 20px rbga(0,0,0,0.5);
+        }
     
     </style>
 </head>

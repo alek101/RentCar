@@ -62,6 +62,6 @@ class AdminController extends Controller
           $user->delete();  
         }
         
-        return $this->home();
+        return redirect('/admin');
     }
 }
