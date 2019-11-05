@@ -543,6 +543,7 @@ class MainController extends Controller
     {
         return DB::select(
         "SELECT
+        `ID_rezervacije` as 'id_rez',
         `Ime_prezime_kupca` as 'ime',
         `Email` as 'email',
         `Broj_telefona` as 'telefon',

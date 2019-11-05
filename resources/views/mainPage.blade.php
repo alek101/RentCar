@@ -213,6 +213,13 @@
         {
             box-shadow: 2px 10px 20px rbga(0,0,0,0.5);
         }
+
+        .info_rez
+        {
+            font-size: 1.4em;
+            color: crimson;
+            margin: 30px auto;
+        }
     
     </style>
 </head>
@@ -249,6 +256,8 @@
     <div class="glavna">
         @section('Page')
             <h1>Dobrodosli</h1>
+
+            <h3><a href="/rezervacija">Da li zelite da rezervisete auto za iznajmljivanje?</a></h3>
             
         @show
     </div>
