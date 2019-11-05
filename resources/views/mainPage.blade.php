@@ -166,14 +166,14 @@
             margin: 10px auto;
         }
 
-        form
+        form, .forma
         {
             background-color: lightgreen;
             margin: 20px auto;
             padding: 20px;
         }
 
-        form *
+        form,.forma *
         {
             padding: 2px;
             margin: 3px;
@@ -226,6 +226,12 @@
             background-color: red;
             border: 1px solid green;
             font-weight: bold;
+        }
+
+        .response
+        {
+            border: 1px solid crimson;
+            background-color: aqua;
         }
     
     </style>
