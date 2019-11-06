@@ -4,9 +4,7 @@
 
 
 <form >
-    @csrf 
-    {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}" id='token'> --}}
-     
+    @csrf     
     <input type="submit" value="Posalji" id='dugme'>
 
 </form>
@@ -25,9 +23,15 @@
                 }
             }
     
-            fetch('/test/posalji1',opcije)
+            // fetch('/test/posalji1',opcije)
+            //     .then(resp=>resp.json())
+            //     .then(jsn=>napravi(jsn,resDiv));
+
+            fetch('/test/posalji1')
                 .then(resp=>resp.json())
                 .then(jsn=>napravi(jsn,resDiv));
+
+
         })
 
         let resDiv=document.querySelector('.response');
