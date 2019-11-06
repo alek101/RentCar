@@ -1,32 +1,8 @@
 @extends('mainPage')
 @section('Page')
 
-{{-- @php
-    var_dump($cars);
-    var_dump($models);
-@endphp --}}
-
-{{-- <div class='forma'> --}}
-    {{-- @csrf  --}}
-    {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}" id='token'> --}}
-     {{-- <input type="date" name="dateStart" id="start" value="{{$dateStart}}" hidden>
-     <input type="date" name="dateEnd" id="end" value="{{$dateEnd}}" hidden>
-    Model 
-    <select name="model" id="model">
-        @foreach ($models as $model)
-            {!! "<option value='$model'> $model </option>" !!}
-        @endforeach
-    </select>
-    Ime <input type="text" name="ime" id="ime" required>
-    Email <input type="email" name="email" id="email" required>
-    Telefon <input type="number" name="telefon" id="telefon">
-    Komentar <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
-    <button id="dugme">Posalji</button> --}}
-{{-- </div> --}}
-
 <form >
     @csrf 
-    {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}" id='token'> --}}
      <input type="date" name="dateStart" id="start" value="{{$dateStart}}" hidden>
      <input type="date" name="dateEnd" id="end" value="{{$dateEnd}}" hidden>
     Model 
@@ -43,6 +19,13 @@
     <input type="submit" value="Posalji" id='dugme'>
 
 </form>
+
+<div class="response"></div>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 <script>
         document.querySelector('#dugme').addEventListener('click',function(e)
@@ -71,21 +54,22 @@
             }
     
             console.log(niz);
-            // let fd = new FormData();
-            // fd.append("dateStart", dateStart);
-            // fd.append("_token", document.querySelector('input[name="_token"]').value);
 
-            let opcije={
-                method: "POST",
-                body: JSON.stringify(niz),
+            $.ajax({
+                type: "POST",
+                url: '/rezervacija/posalji3',
+                data: niz,
                 headers: {
                     'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
+                },
+                success: function(response)
+                {
+                    console.log('uspeo');
+                    let odgovor=JSON.parse(response);
+                    let r=`Uspesno ste rezervisali auto sa tablicama ${odgovor.tablice}. Sifra rezervacije je ${odgovor.id_rez}.`;
+                    document.querySelector('.response').innerHTML=r;
                 }
-            }
-    
-            fetch('/rezervacija/posalji3',opcije)
-                .then(resp=>resp.text())
-                .then(jsn=>alert(jsn));
+            })
         })
     
     </script>

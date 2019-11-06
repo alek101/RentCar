@@ -505,9 +505,9 @@ class MainController extends Controller
         //preko forme
         // return view('rezervacija.rezervacija2',['cars'=>$cars,'models'=>$models, 'dateStart'=>$dateStart, 'dateEnd'=>$dateEnd, 'cene'=>$cene]);
         //preko fetcha-ne radi
-        // return view('rezervacija.rezervacija3',['cars'=>$cars,'models'=>$models, 'dateStart'=>$dateStart, 'dateEnd'=>$dateEnd, 'cene'=>$cene]); 
+        // return view('rezervacija.rezervacija4',['cars'=>$cars,'models'=>$models, 'dateStart'=>$dateStart, 'dateEnd'=>$dateEnd, 'cene'=>$cene]); 
         //preko ajax-a i jQuerija
-            return view('rezervacija.rezervacija4',['cars'=>$cars,'models'=>$models, 'dateStart'=>$dateStart, 'dateEnd'=>$dateEnd, 'cene'=>$cene]);
+            return view('rezervacija.rezervacija3',['cars'=>$cars,'models'=>$models, 'dateStart'=>$dateStart, 'dateEnd'=>$dateEnd, 'cene'=>$cene]);
     }
 
     //preko forme
@@ -531,7 +531,7 @@ class MainController extends Controller
         return view('rezervacija.info',['info'=>$info]);
     }
 
-    //preko fetch-a
+    //preko ajax-a
     public function rezervacija4(Request $request)
     {
         $dateStart=$request->dateStart;
@@ -543,6 +543,42 @@ class MainController extends Controller
         $comment=$request->comment;
 
         // $test=['test'=>'test2','start'=>$dateStart,'end'=>$dateEnd,'model'=>$model, 'ime'=>$ime, 'tel'=>$telefon, 'meil'=>$email, 'kom'=>$comment];
+        
+        // return $request;
+        // return $test;
+
+        $cars=$this->aveilibleCars($dateStart,$dateEnd);
+        $broj=rand(0,count($cars[$model])-1);
+
+        $izabranAutoID=$cars[$model][$broj];
+        $cena=$this->totalCost($model,$dateStart,$dateEnd);
+        $idRezervacije=$this->insertReservation($izabranAutoID,$ime,$email,$telefon,$dateStart,$dateEnd,$comment,$cena);
+        if($idRezervacije > 0)
+        {
+            $info=$this->returnInformation($idRezervacije);
+            // $this->posaljiMejl($izabranAutoID,$model,$ime,$email,$dateStart,$dateEnd,$info,$cena);
+            return json_encode($info[0]);  
+        }
+        else
+        {
+            return json_encode('Rezervacija, neuspesna');
+        }
+    }
+
+    //preko fetch-a
+    public function rezervacija5(Request $request)
+    {
+        $dateStart=$request->dateStart;
+        $dateEnd=$request->dateEnd;
+        $model=$request->model;
+        $ime=$request->ime;
+        $telefon=$request->telefon;
+        $email=$request->email;
+        $comment=$request->comment;
+
+        return request()->all();
+
+        return $test=['test'=>'test2','start'=>$dateStart,'end'=>$dateEnd,'model'=>$model, 'ime'=>$ime, 'tel'=>$telefon, 'meil'=>$email, 'kom'=>$comment];
         
         // return $request;
         // return $test;
