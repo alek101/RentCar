@@ -73,3 +73,12 @@ Route::prefix('/admin')->middleware('admin')->group(function()
     Route::get('/delete/{id}','AdminController@delete');
     
 });
+
+Route::prefix('/test')->group(function()
+{
+    Route::get('/','MainController@test1');
+    Route::get('/posalji1','MainController@test2');
+    
+    
+});
+

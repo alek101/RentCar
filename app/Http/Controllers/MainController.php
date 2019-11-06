@@ -745,4 +745,15 @@ class MainController extends Controller
         order by `Datum_pocetka` ASC",[$id]); 
     }
 
+    //
+    public function test1()
+    {
+        return view('test.form1');
+    }
+    public function test2()
+    {
+        $cars=$this->getAllCars();
+        return json_encode($cars);
+    }
+
 }
