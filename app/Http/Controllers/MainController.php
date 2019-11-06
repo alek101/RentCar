@@ -508,6 +508,8 @@ class MainController extends Controller
         // return view('rezervacija.rezervacija4',['cars'=>$cars,'models'=>$models, 'dateStart'=>$dateStart, 'dateEnd'=>$dateEnd, 'cene'=>$cene]); 
         //preko ajax-a i jQuerija
             return view('rezervacija.rezervacija3',['cars'=>$cars,'models'=>$models, 'dateStart'=>$dateStart, 'dateEnd'=>$dateEnd, 'cene'=>$cene]);
+        //preko axiosa-ne radi
+        // return view('rezervacija.rezervacija5',['cars'=>$cars,'models'=>$models, 'dateStart'=>$dateStart, 'dateEnd'=>$dateEnd, 'cene'=>$cene]);
     }
 
     //preko forme
@@ -531,7 +533,7 @@ class MainController extends Controller
         return view('rezervacija.info',['info'=>$info]);
     }
 
-    //preko ajax-a
+    //preko ajax-a i jQuerija
     public function rezervacija4(Request $request)
     {
         $dateStart=$request->dateStart;
@@ -541,11 +543,6 @@ class MainController extends Controller
         $telefon=$request->telefon;
         $email=$request->email;
         $comment=$request->comment;
-
-        // $test=['test'=>'test2','start'=>$dateStart,'end'=>$dateEnd,'model'=>$model, 'ime'=>$ime, 'tel'=>$telefon, 'meil'=>$email, 'kom'=>$comment];
-        
-        // return $request;
-        // return $test;
 
         $cars=$this->aveilibleCars($dateStart,$dateEnd);
         $broj=rand(0,count($cars[$model])-1);
@@ -576,12 +573,10 @@ class MainController extends Controller
         $email=$request->email;
         $comment=$request->comment;
 
-        return request()->all();
-
-        return $test=['test'=>'test2','start'=>$dateStart,'end'=>$dateEnd,'model'=>$model, 'ime'=>$ime, 'tel'=>$telefon, 'meil'=>$email, 'kom'=>$comment];
+        $test=['test'=>'test2','start'=>$dateStart,'end'=>$dateEnd,'model'=>$model, 'ime'=>$ime, 'tel'=>$telefon, 'meil'=>$email, 'kom'=>$comment];
         
         // return $request;
-        // return $test;
+        // return json_encode($test);
 
         $cars=$this->aveilibleCars($dateStart,$dateEnd);
         $broj=rand(0,count($cars[$model])-1);
@@ -593,11 +588,11 @@ class MainController extends Controller
         {
             $info=$this->returnInformation($idRezervacije);
             // $this->posaljiMejl($izabranAutoID,$model,$ime,$email,$dateStart,$dateEnd,$info,$cena);
-            return json_encode($info[0]);  
+            // return json_encode($info[0]);  
         }
         else
         {
-            return json_encode('Rezervacija, neuspesna');
+            // return json_encode('Rezervacija, neuspesna');
         }
     }
 

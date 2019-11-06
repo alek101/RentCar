@@ -4,9 +4,8 @@
 
 
 <form >
-    @csrf     
+    {{-- @csrf      --}}
     <input type="submit" value="Posalji" id='dugme'>
-
 </form>
 
 <div class="response"></div>
@@ -16,12 +15,12 @@
         {
             e.preventDefault();
 
-            let opcije={
-                method: "GET",
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
-                }
-            }
+            // let opcije={
+            //     method: "GET",
+            //     headers: {
+            //         // 'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
+            //     }
+            // }
     
             // fetch('/test/posalji1',opcije)
             //     .then(resp=>resp.json())
