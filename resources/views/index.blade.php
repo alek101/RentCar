@@ -343,6 +343,27 @@
         {
             margin: 20px;
         }
+
+        .modelsWraper
+        {
+            display: flex;
+            flex-direction: row;
+            max-width: 1280px;
+            margin: 20px auto;
+        }
+
+        .card
+        {
+            display: flex;
+            flex-direction: row;
+            margin: 10px;
+
+        }
+
+        .opis
+        {
+            padding: 5px;
+        }
         
     
     </style>

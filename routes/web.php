@@ -89,6 +89,7 @@ Route::prefix('/zakazi')->group(function()
 {
     Route::get('/','MainController@zakaziPrikaz1');
     Route::post('/posalji1','MainController@podaci');
+    Route::post('/posalji2','MainController@rezervacija4');
 });
 
 

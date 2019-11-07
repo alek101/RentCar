@@ -814,12 +814,12 @@ class MainController extends Controller
 
         foreach($models as $model)
         {
-            $readyModels[$model]=TipoviAutomobila::where('Model',$model)->first()->get();
+            $readyModels[$model]=TipoviAutomobila::where('Model',$model)->first();
             $cene[$model]=$this->totalCost($model,$dateStart,$dateEnd);
         }
 
         $json=[];
-        $json['cars']=$cars;
+        // $json['cars']=$cars;
         $json['unique_models']=$models;
         $json['cene']=$cene;
         $json['podaci']=$readyModels;
