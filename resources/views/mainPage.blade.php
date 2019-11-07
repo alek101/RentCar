@@ -257,6 +257,8 @@
         {
             border: 1px solid crimson;
             background-color: aqua;
+            width: 60%;
+            margin: 10px auto;
         }
 
         .flexRow
@@ -300,6 +302,16 @@
             background-color: #f5f5f5;
         }
 
+        .formZakazivanje
+        {
+            max-width: 1200px;
+            margin: 10px auto;
+        }
+
+        textarea
+        {
+            width: 50%;
+        }
         
         
     

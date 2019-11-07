@@ -45,8 +45,8 @@ class MainController extends Controller
     public function posalji1(Request $request )
     {
         $id=$request->id;
-        $brojDana=$request->brojDana;
-        if($brojDana>=1)
+        $brojDana=$request->brojDana-1;
+        if($brojDana>=0)
         {
         $dateStart=$this->findNextFreeDate($id,$brojDana);
         $dateEnd=$dateEnd=date('Y-m-d', strtotime($dateStart." + $brojDana days"));
@@ -228,12 +228,13 @@ class MainController extends Controller
         $tip=$request->tip;
         $datum=$request->datum;
         $opis=$request->opis;
-        $this->madeServis($id,$tip,$datum,$opis);
+        $registracija=$request->registracija;
+        $this->madeServis($id,$tip,$datum,$opis,$registracija);
         return $this->servis();
     }
 
     //
-    function madeServis($id,$tip,$datum,$opis)
+    function madeServis($id,$tip,$datum,$opis,$registracija)
         {
             $km=$this->getKM($id)[0]->km;
 
@@ -256,7 +257,7 @@ class MainController extends Controller
             }
             if($tip=='registracija')
             {
-                $this->setRegistracija($id,$datum);
+                $this->setRegistracija($id,$registracija);
                 $this->changeCarServis($id);
             }
         }
