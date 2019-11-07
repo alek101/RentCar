@@ -24,17 +24,8 @@
         <div>
             <label for="comment"> Komentar <br><textarea name="comment" id="comment" cols="30" rows="10"></textarea></label>
         </div>
-        <div><input type="submit" value="Posalji" id='dugme'></div>
-            
-            
-           
-            
-            
-           
-            
+        <div><input type="submit" value="Posalji" id='dugme'></div>  
     </div>
-        
-
 </form>
 
 <div class="response"></div>
