@@ -66,9 +66,14 @@
                 {
                     console.log('uspeo');
                     let odgovor=JSON.parse(response);
-                    if(odgovor==='Rezervacija: Neuspesna')
+                    if(odgovor==='Nije proslo!')
                     {
-                        document.querySelector('.response').innerHTML=odgovor+" Proveriti vremenske intervale!";
+                        document.querySelector('.response').innerHTML="Rezervacija nije uspela, molimo pokusajte ponovo!";
+                    }
+                    else if(odgovor==='Los period!')
+                    {
+                        document.querySelector('.response').innerHTML=`Rezervacija nije uspela! Morate rezervisati barem jedan pun dan,
+                        krajnji datum mora ici pre pocetnog datuma!`;
                     }
                     else
                     {

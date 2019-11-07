@@ -505,9 +505,9 @@ class MainController extends Controller
         //preko forme
         // return view('rezervacija.rezervacija2',['cars'=>$cars,'models'=>$models, 'dateStart'=>$dateStart, 'dateEnd'=>$dateEnd, 'cene'=>$cene]);
         //preko fetcha
-        return view('rezervacija.rezervacija4',['cars'=>$cars,'models'=>$models, 'dateStart'=>$dateStart, 'dateEnd'=>$dateEnd, 'cene'=>$cene]); 
+        // return view('rezervacija.rezervacija4',['cars'=>$cars,'models'=>$models, 'dateStart'=>$dateStart, 'dateEnd'=>$dateEnd, 'cene'=>$cene]); 
         //preko ajax-a i jQuerija
-            // return view('rezervacija.rezervacija3',['cars'=>$cars,'models'=>$models, 'dateStart'=>$dateStart, 'dateEnd'=>$dateEnd, 'cene'=>$cene]);
+            return view('rezervacija.rezervacija3',['cars'=>$cars,'models'=>$models, 'dateStart'=>$dateStart, 'dateEnd'=>$dateEnd, 'cene'=>$cene]);
         //preko axiosa
         // return view('rezervacija.rezervacija5',['cars'=>$cars,'models'=>$models, 'dateStart'=>$dateStart, 'dateEnd'=>$dateEnd, 'cene'=>$cene]);
     }
@@ -544,21 +544,30 @@ class MainController extends Controller
         $email=$request->email;
         $comment=$request->comment;
 
-        $cars=$this->aveilibleCars($dateStart,$dateEnd);
-        $broj=rand(0,count($cars[$model])-1);
-        $izabranAutoID=$cars[$model][$broj];
-        $cena=$this->totalCost($model,$dateStart,$dateEnd);
-        $idRezervacije=$this->insertReservation($izabranAutoID,$ime,$email,$telefon,$dateStart,$dateEnd,$comment,$cena);
         
-        if(isset($idRezervacije) and $idRezervacije > 0 and $cena>0 )
+        $cena=$this->totalCost($model,$dateStart,$dateEnd);
+        
+        if($cena>0 )
         {
-            $info=$this->returnInformation($idRezervacije);
-            // $this->posaljiMejl($izabranAutoID,$model,$ime,$email,$dateStart,$dateEnd,$info,$cena);
-            return json_encode($info[0]);  
+            $cars=$this->aveilibleCars($dateStart,$dateEnd);
+            $broj=rand(0,count($cars[$model])-1);
+            $izabranAutoID=$cars[$model][$broj];
+            $idRezervacije=$this->insertReservation($izabranAutoID,$ime,$email,$telefon,$dateStart,$dateEnd,$comment,$cena);
+            if($idRezervacije > 0)
+            {
+                $info=$this->returnInformation($idRezervacije);
+                // $this->posaljiMejl($izabranAutoID,$model,$ime,$email,$dateStart,$dateEnd,$info,$cena);
+                return json_encode($info[0]); 
+            }
+            else
+            {
+                return json_encode("Nije proslo!");
+            }
+             
         }
         else
         {
-            return json_encode("Rezervacija: Neuspesna");
+            return json_encode("Los period!");
         }
     }
 
