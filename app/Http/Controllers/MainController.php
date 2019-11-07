@@ -553,8 +553,11 @@ class MainController extends Controller
             $cars=$this->aveilibleCars($dateStart,$dateEnd);
             $broj=rand(0,count($cars[$model])-1);
             $izabranAutoID=$cars[$model][$broj];
-            $idRezervacije=$this->insertReservation($izabranAutoID,$ime,$email,$telefon,$dateStart,$dateEnd,$comment,$cena);
-            if($idRezervacije > 0)
+            if($this->freeCar($izabranAutoID,$dateStart,$dateEnd))
+            {
+                $idRezervacije=$this->insertReservation($izabranAutoID,$ime,$email,$telefon,$dateStart,$dateEnd,$comment,$cena);
+            }
+            if(isset($idRezervacije) and $idRezervacije > 0)
             {
                 $info=$this->returnInformation($idRezervacije);
                 // $this->posaljiMejl($izabranAutoID,$model,$ime,$email,$dateStart,$dateEnd,$info,$cena);

@@ -4,6 +4,7 @@
 {{-- @php
     var_dump($users);
 @endphp --}}
+{{-- <div class="margin_20"><label for="filter">Filter: <input type="text" id="filter" class='filter'></label></div> --}}
 
 <div class="prazan"></div>
 
@@ -72,6 +73,7 @@
 </table>
 
 <script>
+    //obrisi sa proverom
     let butoniObrisi=[...document.querySelectorAll('.obrisi')];
     butoniObrisi.map(b=>b.addEventListener('click', function()
     {
@@ -99,5 +101,40 @@
 
         document.querySelector('.prazan').appendChild(div);
     }))
+
+    // //filter
+    
+    // document.querySelector('#filter').addEventListener('change',function(e)
+    // {
+    //     let word=document.querySelector('#filter').value.toLowerCase();
+    //     let trNiz=[...document.querySelectorAll('tr')];
+    //     for(tr of trNiz)
+    //     {
+    //         let array=[...tr.childNodes];
+    //         let c1=false; let c2=false;
+    //         array.map(function(c)
+    //         {
+    //             if(c.tagName=='TD')
+    //             {
+    //                 c1=true;
+    //             }
+
+    //             if(typeof(c.innerHTML)==='string' && c.innerHTML.toLowerCase().includes(word))
+    //             {
+    //                 c2=true;
+    //             }
+    //         })
+            
+    //         if(c1 && c2)
+    //         {
+    //             tr.classList.remove('disapear');
+    //         }
+    //         else if(c1 && !c2)
+    //         {
+    //             tr.classList.add('disapear');
+    //         }
+    //     }
+    // })
+
 </script>
 @endsection

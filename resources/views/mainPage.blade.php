@@ -196,13 +196,21 @@
             background-color: lightgreen;
             margin: 20px auto;
             padding: 20px;
+            max-width: 1280px;
         }
 
-        form,.forma *
+        form *
         {
             padding: 2px;
             margin: 3px;
         }
+
+        .forma *
+        {
+            padding: 2px;
+            margin: 3px;
+        }
+
         
         button,#dugme
         {
@@ -219,6 +227,11 @@
         .hidden
         {
             visibility: hidden;
+        }
+
+        .disapear
+        {
+            display:none;
         }
 
         .kartica
@@ -279,7 +292,7 @@
         .sveRez
         {
             max-width: 490px;
-            margin: 10px auto;
+            margin: 20px auto;
         }
 
         .glavna::-webkit-scrollbar
@@ -305,7 +318,7 @@
         .formZakazivanje
         {
             max-width: 1200px;
-            margin: 10px auto;
+            margin: 20px auto;
         }
 
         textarea
@@ -313,6 +326,23 @@
             width: 50%;
         }
         
+        .formAddKM
+        {
+            max-width: 400px;
+            margin: 20px auto;
+            border: 1px solid crimson;
+            border-radius: 6px;
+        }
+
+        .margin_5
+        {
+            margin: 5px;
+        }
+
+        .margin_20
+        {
+            margin: 20px;
+        }
         
     
     </style>
@@ -349,6 +379,7 @@
         </div>
 
         <div class="glavna">
+                <div class="margin_20"><label for="filter">Filter tabela: <input type="text" id="filter" class='filter'></label></div>
             @section('Page')
                 <h1>Dobrodosli u admin panel</h1>
 
@@ -369,5 +400,41 @@
         </div>
     </div>
     
+    <script>
+        
+        //filter
+    
+        document.querySelector('#filter').addEventListener('change',function(e)
+        {
+            let word=document.querySelector('#filter').value.toLowerCase();
+            let trNiz=[...document.querySelectorAll('tr')];
+            for(tr of trNiz)
+            {
+                let array=[...tr.childNodes];
+                let c1=false; let c2=false;
+                array.map(function(c)
+                {
+                    if(c.tagName=='TD')
+                    {
+                        c1=true;
+                    }
+
+                    if(typeof(c.innerHTML)==='string' && c.innerHTML.toLowerCase().includes(word))
+                    {
+                        c2=true;
+                    }
+                })
+                
+                if(c1 && c2)
+                {
+                    tr.classList.remove('disapear');
+                }
+                else if(c1 && !c2)
+                {
+                    tr.classList.add('disapear');
+                }
+            }
+        })
+    </script>
 </body>
 </html>

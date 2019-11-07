@@ -92,10 +92,8 @@
     </table>
 
     <h3>Dodaj kilometrazu</h3>
-<form method="POST" action="/prijem/izmeniKM">
+<form method="POST" action="/prijem/izmeniKM" class="formAddKM">
     @csrf
-    {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}" id='token'> --}}
-    {{-- Broj Sasije  --}}
     <input type="text" name='id' value="<?=$auto->sasija?>" id="id" hidden>
     Dodaj KM <input type="number" name="km" id="km" value="">
     <input type="submit" value="Posalji" id="dugme">
