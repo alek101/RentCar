@@ -83,6 +83,14 @@ Route::prefix('/test')->group(function()
     Route::get('/','MainController@test1');
     Route::get('/posalji1','MainController@test2');
     
-    
 });
+
+Route::prefix('/zakazi')->group(function()
+{
+    Route::get('/','MainController@zakaziPrikaz1');
+    Route::post('/posalji1','MainController@podaci');
+});
+
+
+
 

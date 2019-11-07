@@ -116,7 +116,7 @@
             flex-direction: row;
             justify-content: space-between;
             background-color: crimson;
-            height: 80px;
+            height: 40px;
             font-size: 1.2em;
             position: absolute;
             bottom: 0px;

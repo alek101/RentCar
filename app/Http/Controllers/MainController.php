@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 use App;
+use App\TipoviAutomobila;
 
 class MainController extends Controller
 {
@@ -792,6 +793,41 @@ class MainController extends Controller
     {
         $cars=$this->getAllCars();
         return json_encode($cars);
+    }
+
+    public function zakaziPrikaz1()
+    {
+        return view('zakazi.prikaz1');
+    }
+
+    public function podaci(Request $request)
+    {
+        $dateStart=$request->dateStart;
+        $dateEnd=$request->dateEnd;
+       
+        // return json_encode(''.$dateStart.$dateEnd);
+
+        $cars=$this->aveilibleCars($dateStart,$dateEnd);
+        $models=array_keys($cars);
+        $readyModels=[];
+        $cene=[];
+
+        foreach($models as $model)
+        {
+            $readyModels[$model]=TipoviAutomobila::where('Model',$model)->first()->get();
+            $cene[$model]=$this->totalCost($model,$dateStart,$dateEnd);
+        }
+
+        $json=[];
+        $json['cars']=$cars;
+        $json['unique_models']=$models;
+        $json['cene']=$cene;
+        $json['podaci']=$readyModels;
+
+        $paket=json_encode($json);
+        
+        return $paket;
+        // return view('zakazi.prikaz2',['json'=>$json,'paket'=>$paket]); 
     }
 
 }

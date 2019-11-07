@@ -22,8 +22,7 @@
             margin:0;
             padding:0;
             box-sizing: border-box;
-            background-image: linear-gradient(lightblue,rgb(85, 85, 114));
-            position: relative;
+            
         }
 
         *
@@ -32,6 +31,29 @@
             padding:0;
             box-sizing: border-box;
         }
+
+        .container
+        {
+            /* background-image: linear-gradient(lightblue,rgb(85, 85, 114)); */
+            position: relative;
+            height: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            
+        }
+
+        .container::before {
+            content: "";
+            background-image: linear-gradient(lightblue,blue);
+            opacity: 0.6;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: -1000;
+        }
+        
 
         a 
         {
@@ -94,7 +116,7 @@
             flex-direction: row;
             justify-content: space-between;
             background-color: crimson;
-            height: 80px;
+            height: 40px;
             font-size: 1.2em;
             position: absolute;
             bottom: 0px;
@@ -106,7 +128,9 @@
         .glavna
         {
             width: 100%;
+            height: 80vh;
             text-align: center;
+            overflow-y: scroll;
         }
     
         table
@@ -114,6 +138,7 @@
             border: 3px solid crimson;
             margin: 20px auto;
             border-collapse: collapse;
+            max-width: 1280px;
         }
 
         tr
@@ -171,13 +196,21 @@
             background-color: lightgreen;
             margin: 20px auto;
             padding: 20px;
+            max-width: 1280px;
         }
 
-        form,.forma *
+        form *
         {
             padding: 2px;
             margin: 3px;
         }
+
+        .forma *
+        {
+            padding: 2px;
+            margin: 3px;
+        }
+
         
         button,#dugme
         {
@@ -194,6 +227,11 @@
         .hidden
         {
             visibility: hidden;
+        }
+
+        .disapear
+        {
+            display:none;
         }
 
         .kartica
@@ -232,14 +270,87 @@
         {
             border: 1px solid crimson;
             background-color: aqua;
+            width: 60%;
+            margin: 10px auto;
         }
+
+        .flexRow
+        {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin: 5px;
+        }
+
+        .flexColumn
+        {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .sveRez
+        {
+            max-width: 490px;
+            margin: 20px auto;
+        }
+
+        .glavna::-webkit-scrollbar
+        {
+            /* mora nesto da bude upisano u -scrollbar ; mora da bude povezano
+            sa elementom koji ima scrolbar */
+            /* background-color: green; */
+            width: 15px;
+        }
+
+        .glavna::-webkit-scrollbar-thumb
+        {
+            border-radius: 6px;
+            background-color: green;
+        }
+
+        .glavna::-webkit-scrollbar-track
+        {
+            -webkit-box-shadow: inset 0 0 6px;
+            background-color: #f5f5f5;
+        }
+
+        .formZakazivanje
+        {
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        textarea
+        {
+            width: 50%;
+        }
+        
+        .formAddKM
+        {
+            max-width: 400px;
+            margin: 20px auto;
+            border: 1px solid crimson;
+            border-radius: 6px;
+        }
+
+        .margin_5
+        {
+            margin: 5px;
+        }
+
+        .margin_20
+        {
+            margin: 20px;
+        }
+        
     
     </style>
 </head>
 <body>
     <div class="header">
         <div class="links">
-            
+            <a href="/zakazi">Zakazi</a>
         </div>
 
         <div class="login">
@@ -263,6 +374,7 @@
         @section('PageF')
             <h1>Dobrodosli</h1>
 
+            
             
             
         @show
