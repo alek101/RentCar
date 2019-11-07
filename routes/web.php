@@ -53,7 +53,6 @@ Route::prefix('/rezervacija')->middleware('login')->group(function()
     Route::post('/posalji1','MainController@rezervacija2');
     Route::post('/posalji2','MainController@rezervacija3');
     Route::post('/posalji3','MainController@rezervacija4');
-    Route::post('/posalji4','MainController@rezervacija5');
     
 });
 

@@ -56,7 +56,7 @@
             axios(
                 {
                     method:'post', 
-                    url: '/rezervacija/posalji4',
+                    url: '/rezervacija/posalji3',
                     data: niz,
                     headers: {
                     'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
@@ -65,10 +65,17 @@
             ).then(function(response)
                 {
                     console.log('uspeo');
-                    console.log(response);
-                    let odgovor=response; //nesto
-                    let r=`Uspesno ste rezervisali auto sa tablicama ${odgovor.tablice}. Sifra rezervacije je ${odgovor.id_rez}.`;
-                    document.querySelector('.response').innerHTML=r;
+                    let odgovor=response.data;
+
+                    if(odgovor==='Rezervacija: Neuspesna')
+                    {
+                        document.querySelector('.response').innerHTML=odgovor+" Proveriti vremenske intervale!";
+                    }
+                    else
+                    {
+                        let r=`Uspesno ste rezervisali auto sa tablicama ${odgovor.tablice}. Sifra rezervacije je ${odgovor.id_rez}.`;
+                        document.querySelector('.response').innerHTML=r;
+                    }  
                 });
         })
     

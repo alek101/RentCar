@@ -505,14 +505,14 @@ class MainController extends Controller
         //preko forme
         // return view('rezervacija.rezervacija2',['cars'=>$cars,'models'=>$models, 'dateStart'=>$dateStart, 'dateEnd'=>$dateEnd, 'cene'=>$cene]);
         //preko fetcha
-        // return view('rezervacija.rezervacija4',['cars'=>$cars,'models'=>$models, 'dateStart'=>$dateStart, 'dateEnd'=>$dateEnd, 'cene'=>$cene]); 
+        return view('rezervacija.rezervacija4',['cars'=>$cars,'models'=>$models, 'dateStart'=>$dateStart, 'dateEnd'=>$dateEnd, 'cene'=>$cene]); 
         //preko ajax-a i jQuerija
-            return view('rezervacija.rezervacija3',['cars'=>$cars,'models'=>$models, 'dateStart'=>$dateStart, 'dateEnd'=>$dateEnd, 'cene'=>$cene]);
-        //preko axiosa-radi, ali ne umem da izvucem povratnu informaciju
+            // return view('rezervacija.rezervacija3',['cars'=>$cars,'models'=>$models, 'dateStart'=>$dateStart, 'dateEnd'=>$dateEnd, 'cene'=>$cene]);
+        //preko axiosa
         // return view('rezervacija.rezervacija5',['cars'=>$cars,'models'=>$models, 'dateStart'=>$dateStart, 'dateEnd'=>$dateEnd, 'cene'=>$cene]);
     }
 
-    //preko forme
+    //preko forme-izbaceno
     public function rezervacija3(Request $request)
     {
         $dateStart=$request->dateStart;
@@ -522,8 +522,8 @@ class MainController extends Controller
         $telefon=$request->telefon;
         $email=$request->email;
         $comment=$request->comment;
-        $cars=$this->aveilibleCars($dateStart,$dateEnd);
 
+        $cars=$this->aveilibleCars($dateStart,$dateEnd);
         $broj=rand(0,count($cars[$model])-1);
         $izabranAutoID=$cars[$model][$broj];
         $cena=$this->totalCost($model,$dateStart,$dateEnd);
@@ -533,7 +533,7 @@ class MainController extends Controller
         return view('rezervacija.info',['info'=>$info]);
     }
 
-    //preko ajax-a i jQuerija
+    //preko ajax-a ili fetch-a
     public function rezervacija4(Request $request)
     {
         $dateStart=$request->dateStart;
@@ -546,46 +546,11 @@ class MainController extends Controller
 
         $cars=$this->aveilibleCars($dateStart,$dateEnd);
         $broj=rand(0,count($cars[$model])-1);
-
         $izabranAutoID=$cars[$model][$broj];
         $cena=$this->totalCost($model,$dateStart,$dateEnd);
         $idRezervacije=$this->insertReservation($izabranAutoID,$ime,$email,$telefon,$dateStart,$dateEnd,$comment,$cena);
-        if($idRezervacije > 0)
-        {
-            $info=$this->returnInformation($idRezervacije);
-            // $this->posaljiMejl($izabranAutoID,$model,$ime,$email,$dateStart,$dateEnd,$info,$cena);
-            return json_encode($info[0]);  
-        }
-        else
-        {
-            return json_encode('Rezervacija, neuspesna');
-        }
-    }
-
-    //preko fetch-a
-    public function rezervacija5(Request $request)
-    {
-        $dateStart=$request->dateStart;
-        $dateEnd=$request->dateEnd;
-        $model=$request->model;
-        $ime=$request->ime;
-        $telefon=$request->telefon;
-        $email=$request->email;
-        $comment=$request->comment;
-
-        // $test=['test'=>'pozivamBojanovo','start'=>$dateStart,'end'=>$dateEnd,'model'=>$model, 'ime'=>$ime, 'tel'=>$telefon, 'meil'=>$email, 'kom'=>$comment];
-        // return $test;
         
-        // return $request;
-        // return json_encode($test);
-
-        $cars=$this->aveilibleCars($dateStart,$dateEnd);
-        $broj=rand(0,count($cars[$model])-1);
-
-        $izabranAutoID=$cars[$model][$broj];
-        $cena=$this->totalCost($model,$dateStart,$dateEnd);
-        $idRezervacije=$this->insertReservation($izabranAutoID,$ime,$email,$telefon,$dateStart,$dateEnd,$comment,$cena);
-        if($idRezervacije > 0)
+        if(isset($idRezervacije) and $idRezervacije > 0 and $cena>0 )
         {
             $info=$this->returnInformation($idRezervacije);
             // $this->posaljiMejl($izabranAutoID,$model,$ime,$email,$dateStart,$dateEnd,$info,$cena);
@@ -593,7 +558,7 @@ class MainController extends Controller
         }
         else
         {
-            return json_encode([$info=>'Rezervacija, neuspesna']);
+            return json_encode("Rezervacija: Neuspesna");
         }
     }
 

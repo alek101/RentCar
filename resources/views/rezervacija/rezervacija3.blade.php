@@ -66,8 +66,16 @@
                 {
                     console.log('uspeo');
                     let odgovor=JSON.parse(response);
-                    let r=`Uspesno ste rezervisali auto sa tablicama ${odgovor.tablice}. Sifra rezervacije je ${odgovor.id_rez}.`;
-                    document.querySelector('.response').innerHTML=r;
+                    if(odgovor==='Rezervacija: Neuspesna')
+                    {
+                        document.querySelector('.response').innerHTML=odgovor+" Proveriti vremenske intervale!";
+                    }
+                    else
+                    {
+                        let r=`Uspesno ste rezervisali auto sa tablicama ${odgovor.tablice}. Sifra rezervacije je ${odgovor.id_rez}.`;
+                        document.querySelector('.response').innerHTML=r;
+                    }  
+                    
                 }
             })
         })

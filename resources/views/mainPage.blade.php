@@ -268,7 +268,7 @@
 
     <div class="glavna">
         @section('Page')
-            <h1>Dobrodosli</h1>
+            <h1>Dobrodosli u admin panel</h1>
 
             
             

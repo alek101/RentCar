@@ -16,7 +16,9 @@
 
                     Vi ste ulogovani!
                     <br>
-                    <a href="/glavna">Povratak na glavnu stranicu</a>
+                    <a href="/">Povratak na glavnu stranicu</a>
+                    <br>
+                    <a href="/glavna">Idi na admin stranicu</a>
                 </div>
             </div>
         </div>

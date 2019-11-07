@@ -62,15 +62,23 @@
                 }
             }
     
-            fetch('/rezervacija/posalji4',opcije)
+            fetch('/rezervacija/posalji3',opcije)
                 .then(resp=>resp.json())
                 .then(jsn=>ispisi(jsn));
         })
 
         function ispisi(odgovor)
         {
-            let r=`Uspesno ste rezervisali auto sa tablicama ${odgovor.tablice}. Sifra rezervacije je ${odgovor.id_rez}.`;
-            document.querySelector('.response').innerHTML=r;
+            console.log(odgovor);
+            if(odgovor==='Rezervacija: Neuspesna')
+            {
+                document.querySelector('.response').innerHTML=odgovor+" Proveriti vremenske intervale!";
+            }
+            else
+            {
+                let r=`Uspesno ste rezervisali auto sa tablicama ${odgovor.tablice}. Sifra rezervacije je ${odgovor.id_rez}.`;
+                document.querySelector('.response').innerHTML=r;
+            }  
         }
     
     </script>

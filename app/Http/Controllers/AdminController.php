@@ -10,7 +10,8 @@ class AdminController extends Controller
     //
     public function home()
     {
-        $users=UserModel::all();
+        // $users=UserModel::all();
+        $users=UserModel::orderBy('role','desc')->get();
         return view('admin.home',['users'=>$users]);
     }
 
