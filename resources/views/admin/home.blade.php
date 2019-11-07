@@ -4,7 +4,7 @@
 {{-- @php
     var_dump($users);
 @endphp --}}
-{{-- <div class="margin_20"><label for="filter">Filter: <input type="text" id="filter" class='filter'></label></div> --}}
+<div class="margin_20"><label for="filter">Filter: <input type="text" id="filter" class='filter'></label></div>
 
 <div class="prazan"></div>
 

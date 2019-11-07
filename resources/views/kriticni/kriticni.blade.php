@@ -1,6 +1,8 @@
 @extends('mainPage')
 @section('Page')
 
+<div class="margin_20"><label for="filter">Filter tabela: <input type="text" id="filter" class='filter'></label></div>
+
 <table>
     <tr>
         <th>Broj Sasije</th>

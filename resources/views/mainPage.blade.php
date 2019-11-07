@@ -379,7 +379,7 @@
         </div>
 
         <div class="glavna">
-                <div class="margin_20"><label for="filter">Filter tabela: <input type="text" id="filter" class='filter'></label></div>
+                {{-- <div class="margin_20"><label for="filter">Filter tabela: <input type="text" id="filter" class='filter'></label></div> --}}
             @section('Page')
                 <h1>Dobrodosli u admin panel</h1>
 
