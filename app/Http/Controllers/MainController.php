@@ -505,9 +505,9 @@ class MainController extends Controller
         //preko forme
         // return view('rezervacija.rezervacija2',['cars'=>$cars,'models'=>$models, 'dateStart'=>$dateStart, 'dateEnd'=>$dateEnd, 'cene'=>$cene]);
         //preko fetcha
-        // return view('rezervacija.rezervacija4',['cars'=>$cars,'models'=>$models, 'dateStart'=>$dateStart, 'dateEnd'=>$dateEnd, 'cene'=>$cene]); 
+        return view('rezervacija.rezervacija4',['cars'=>$cars,'models'=>$models, 'dateStart'=>$dateStart, 'dateEnd'=>$dateEnd, 'cene'=>$cene]); 
         //preko ajax-a i jQuerija
-            return view('rezervacija.rezervacija3',['cars'=>$cars,'models'=>$models, 'dateStart'=>$dateStart, 'dateEnd'=>$dateEnd, 'cene'=>$cene]);
+        // return view('rezervacija.rezervacija3',['cars'=>$cars,'models'=>$models, 'dateStart'=>$dateStart, 'dateEnd'=>$dateEnd, 'cene'=>$cene]);
         //preko axiosa
         // return view('rezervacija.rezervacija5',['cars'=>$cars,'models'=>$models, 'dateStart'=>$dateStart, 'dateEnd'=>$dateEnd, 'cene'=>$cene]);
     }
@@ -650,7 +650,7 @@ class MainController extends Controller
         FROM
             `rezervacija`
         WHERE
-            `ID_rezervacije`=? and CURRENT_DATE()<`Datum_pocetka`",[$id]);
+            `ID_rezervacije`=? and CURRENT_DATE()<=`Datum_pocetka`",[$id]);
     }
 
     //
@@ -685,7 +685,7 @@ class MainController extends Controller
     }
 
     //
-    public function rezervacijeSve($num=25)
+    public function rezervacijeSve($num=50)
     {
         $niz=$this->getAllReservations($num);  
         return view('rezervacijeInfo.sve',['niz'=>$niz]);
@@ -703,6 +703,12 @@ class MainController extends Controller
         if(isset($request->dateStart) && isset($request->dateEnd))
         {
             $niz=$this->getReservationsDate($request->dateStart,$request->dateEnd);  
+            return view('rezervacijeInfo.sve',['niz'=>$niz]);
+        }
+
+        if(isset($request->id))
+        {
+            $niz=$this->getReservationsID($request->id);
             return view('rezervacijeInfo.sve',['niz'=>$niz]);
         }
     }
@@ -731,6 +737,28 @@ class MainController extends Controller
     }
 
     //
+    public function getReservationsID($id)
+    {
+        return DB::select(
+            "SELECT
+            R.`ID_rezervacije` as 'id',
+            R.`Ime_prezime_kupca` as 'ime',
+            R.`Email` as 'meil',
+            R.`Broj_telefona` as 'telefon',
+            A.`Broj_registarskih_tablica` as 'tablice',
+            A.`Model` as 'model',
+            R.`Datum_pocetka` as 'start',
+            R.`Datum_zavrsetka` as 'finish',
+            R.`Cena` as 'cena',
+            R.`Napomena` as 'opis'
+        FROM
+            `rezervacija` as R
+        join `automobili` as A on R.ID_vozila=A.Broj_sasije
+        where R.`ID_rezervacije`=?
+        ",[$id]);
+    }
+
+    //daj buduce rezervacije za odredjeni auto
     public function getFutureReservationCar($id)
     {
         return DB::select("SELECT

@@ -106,7 +106,9 @@
         .glavna
         {
             width: 100%;
+            height: 80vh;
             text-align: center;
+            overflow-y: scroll;
         }
     
         table
@@ -233,6 +235,48 @@
             border: 1px solid crimson;
             background-color: aqua;
         }
+
+        .flexRow
+        {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin: 5px;
+        }
+
+        .flexColumn
+        {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .sveRez
+        {
+            max-width: 490px;
+            margin: 10px auto;
+        }
+
+        .glavna::-webkit-scrollbar
+        {
+            /* mora nesto da bude upisano u -scrollbar ; mora da bude povezano
+            sa elementom koji ima scrolbar */
+            /* background-color: green; */
+            width: 15px;
+        }
+
+        .glavna::-webkit-scrollbar-thumb
+        {
+            border-radius: 6px;
+            background-color: green;
+        }
+
+        .glavna::-webkit-scrollbar-track
+        {
+            -webkit-box-shadow: inset 0 0 6px;
+            background-color: #f5f5f5;
+        }
+        
     
     </style>
 </head>

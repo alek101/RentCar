@@ -11,6 +11,7 @@
 
 <table>
         <tr>
+            <th>ID Rezervacije</th>
             <th>Ime</th>
             <th>Mejl</th>
             <th>Telefon</th>
@@ -28,6 +29,10 @@
         @foreach ($niz as $auto)
             {!! 
             "<tr>" .
+
+                "<td>" .
+                    $auto->id
+                    . "</td>".
     
                 "<td>" .
                     $auto->ime
