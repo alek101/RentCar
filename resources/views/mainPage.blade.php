@@ -22,8 +22,7 @@
             margin:0;
             padding:0;
             box-sizing: border-box;
-            background-image: linear-gradient(lightblue,rgb(85, 85, 114));
-            position: relative;
+            
         }
 
         *
@@ -32,6 +31,29 @@
             padding:0;
             box-sizing: border-box;
         }
+
+        .container
+        {
+            /* background-image: linear-gradient(lightblue,rgb(85, 85, 114)); */
+            position: relative;
+            height: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            
+        }
+
+        .container::before {
+            content: "";
+            background-image: linear-gradient(lightblue,blue);
+            opacity: 0.6;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: -1000;
+        }
+        
 
         a 
         {
@@ -116,6 +138,7 @@
             border: 3px solid crimson;
             margin: 20px auto;
             border-collapse: collapse;
+            max-width: 1280px;
         }
 
         tr
@@ -276,60 +299,63 @@
             -webkit-box-shadow: inset 0 0 6px;
             background-color: #f5f5f5;
         }
+
+        
         
     
     </style>
 </head>
 <body>
-    <div class="header">
-        <div class="links">
-            <a href="/kriticni">Kriticni</a>
-            <a href="/servis">Servis</a>
-            <a href="/prijem">Dodaj km</a>
-            <a href="/auto">Spisak automobila</a>
-            <a href="/rezervacija">Rezervisi</a>
-            <a href="/rezervacijeInfo/sve">Sve Rezervacije</a>
-            <a href="/rezervacijeInfo">Buduce Rezervacije</a>
-            <a href="/admin">Admin</a>
+    <div class="container">
+        <div class="header">
+            <div class="links">
+                <a href="/kriticni">Kriticni</a>
+                <a href="/servis">Servis</a>
+                <a href="/prijem">Dodaj km</a>
+                <a href="/auto">Spisak automobila</a>
+                <a href="/rezervacija">Rezervisi</a>
+                <a href="/rezervacijeInfo/sve">Sve Rezervacije</a>
+                <a href="/rezervacijeInfo">Buduce Rezervacije</a>
+                <a href="/admin">Admin</a>
+            </div>
+
+            <div class="login">
+                    @if (Route::has('login'))
+                    <div class="top-right links">
+                        @auth
+                            <a href="{{ url('/home') }}">Home</a>
+                        @else
+                            <a href="{{ route('login') }}">Login</a>
+
+                            @if (Route::has('register'))
+                                <a href="{{ route('register') }}">Register</a>
+                            @endif
+                        @endauth
+                    </div>
+                @endif
+            </div>
         </div>
 
-        <div class="login">
-                @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
+        <div class="glavna">
+            @section('Page')
+                <h1>Dobrodosli u admin panel</h1>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
+                
+                
+            @show
+        </div>
+
+        <div class="footer">
+            <div>
+                Završni rad: RentCar
+            </div>
+
+            <div>
+                Aleksandar Petrović
+                PHP grupa II
+            </div>
         </div>
     </div>
-
-    <div class="glavna">
-        @section('Page')
-            <h1>Dobrodosli u admin panel</h1>
-
-            
-            
-        @show
-    </div>
-
-    <div class="footer">
-        <div>
-            Završni rad: RentCar
-        </div>
-
-        <div>
-            Aleksandar Petrović
-            PHP grupa II
-        </div>
-    </div>
-
     
 </body>
 </html>
