@@ -1,32 +1,8 @@
 @extends('mainPage')
 @section('Page')
 
-{{-- @php
-    var_dump($cars);
-    var_dump($models);
-@endphp --}}
-
-{{-- <div class='forma'> --}}
-    {{-- @csrf  --}}
-    {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}" id='token'> --}}
-     {{-- <input type="date" name="dateStart" id="start" value="{{$dateStart}}" hidden>
-     <input type="date" name="dateEnd" id="end" value="{{$dateEnd}}" hidden>
-    Model 
-    <select name="model" id="model">
-        @foreach ($models as $model)
-            {!! "<option value='$model'> $model </option>" !!}
-        @endforeach
-    </select>
-    Ime <input type="text" name="ime" id="ime" required>
-    Email <input type="email" name="email" id="email" required>
-    Telefon <input type="number" name="telefon" id="telefon">
-    Komentar <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
-    <button id="dugme">Posalji</button> --}}
-{{-- </div> --}}
-
 <form >
     @csrf 
-    {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}" id='token'> --}}
      <input type="date" name="dateStart" id="start" value="{{$dateStart}}" hidden>
      <input type="date" name="dateEnd" id="end" value="{{$dateEnd}}" hidden>
     Model 
@@ -79,19 +55,23 @@
 
             let opcije={
                 method: "POST",
-                body: niz,
+                body: JSON.stringify(niz),
                 headers: {
                     'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
+                    'Content-Type': 'application/json'   //BITNO!!!
                 }
-                // header: new Headers()
             }
-
-
     
             fetch('/rezervacija/posalji4',opcije)
-                .then(resp=>resp.text())
-                .then(jsn=>alert(jsn));
+                .then(resp=>resp.json())
+                .then(jsn=>ispisi(jsn));
         })
+
+        function ispisi(odgovor)
+        {
+            let r=`Uspesno ste rezervisali auto sa tablicama ${odgovor.tablice}. Sifra rezervacije je ${odgovor.id_rez}.`;
+            document.querySelector('.response').innerHTML=r;
+        }
     
     </script>
 @endsection

@@ -53,22 +53,6 @@
     
             console.log(niz);
             
-
-            // let opcije={
-            //     method: "POST",
-            //     body: niz,
-            //     headers: {
-            //         'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
-            //     }
-            //     // header: new Headers()
-            // }
-
-
-    
-            // fetch('/rezervacija/posalji4',opcije)
-            //     .then(resp=>resp.text())
-            //     .then(jsn=>alert(jsn));
-
             axios(
                 {
                     method:'post', 
@@ -82,9 +66,9 @@
                 {
                     console.log('uspeo');
                     console.log(response);
-                    // let odgovor=JSON.parse(response);
-                    // let r=`Uspesno ste rezervisali auto sa tablicama ${odgovor.tablice}. Sifra rezervacije je ${odgovor.id_rez}.`;
-                    // document.querySelector('.response').innerHTML=r;
+                    let odgovor=response; //nesto
+                    let r=`Uspesno ste rezervisali auto sa tablicama ${odgovor.tablice}. Sifra rezervacije je ${odgovor.id_rez}.`;
+                    document.querySelector('.response').innerHTML=r;
                 });
         })
     

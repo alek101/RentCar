@@ -239,14 +239,7 @@
 <body>
     <div class="header">
         <div class="links">
-            <a href="/kriticni">Kriticni</a>
-            <a href="/servis">Servis</a>
-            <a href="/prijem">Dodaj km</a>
-            <a href="/auto">Spisak automobila</a>
-            <a href="/rezervacija">Rezervisi</a>
-            <a href="/rezervacijeInfo/sve">Sve Rezervacije</a>
-            <a href="/rezervacijeInfo">Buduce Rezervacije</a>
-            <a href="/admin">Admin</a>
+            
         </div>
 
         <div class="login">
@@ -267,7 +260,7 @@
     </div>
 
     <div class="glavna">
-        @section('Page')
+        @section('PageF')
             <h1>Dobrodosli</h1>
 
             

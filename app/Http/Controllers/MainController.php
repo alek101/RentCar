@@ -504,11 +504,11 @@ class MainController extends Controller
 
         //preko forme
         // return view('rezervacija.rezervacija2',['cars'=>$cars,'models'=>$models, 'dateStart'=>$dateStart, 'dateEnd'=>$dateEnd, 'cene'=>$cene]);
-        //preko fetcha-ne radi
+        //preko fetcha
         // return view('rezervacija.rezervacija4',['cars'=>$cars,'models'=>$models, 'dateStart'=>$dateStart, 'dateEnd'=>$dateEnd, 'cene'=>$cene]); 
         //preko ajax-a i jQuerija
             return view('rezervacija.rezervacija3',['cars'=>$cars,'models'=>$models, 'dateStart'=>$dateStart, 'dateEnd'=>$dateEnd, 'cene'=>$cene]);
-        //preko axiosa-ne radi
+        //preko axiosa-radi, ali ne umem da izvucem povratnu informaciju
         // return view('rezervacija.rezervacija5',['cars'=>$cars,'models'=>$models, 'dateStart'=>$dateStart, 'dateEnd'=>$dateEnd, 'cene'=>$cene]);
     }
 
@@ -573,7 +573,8 @@ class MainController extends Controller
         $email=$request->email;
         $comment=$request->comment;
 
-        $test=['test'=>'test2','start'=>$dateStart,'end'=>$dateEnd,'model'=>$model, 'ime'=>$ime, 'tel'=>$telefon, 'meil'=>$email, 'kom'=>$comment];
+        // $test=['test'=>'pozivamBojanovo','start'=>$dateStart,'end'=>$dateEnd,'model'=>$model, 'ime'=>$ime, 'tel'=>$telefon, 'meil'=>$email, 'kom'=>$comment];
+        // return $test;
         
         // return $request;
         // return json_encode($test);
@@ -588,11 +589,11 @@ class MainController extends Controller
         {
             $info=$this->returnInformation($idRezervacije);
             // $this->posaljiMejl($izabranAutoID,$model,$ime,$email,$dateStart,$dateEnd,$info,$cena);
-            // return json_encode($info[0]);  
+            return json_encode($info[0]);  
         }
         else
         {
-            // return json_encode('Rezervacija, neuspesna');
+            return json_encode([$info=>'Rezervacija, neuspesna']);
         }
     }
 
