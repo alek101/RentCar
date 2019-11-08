@@ -455,6 +455,26 @@ class MainController extends Controller
 
     //REZERVACIJE
 
+    public function checkExparationReg($id,$dateEnd,$crit_time=3)
+    {
+        $razlika=DB::select(
+            "SELECT
+            DATEDIFF(`Datum_vazenja_registracije`,?) as razlika
+        FROM
+            `automobili`
+        WHERE
+            `Broj_sasije`=?",[$dateEnd,$id])[0];
+
+        if($razlika->razlika>=$crit_time)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     //
     public function aveilibleCars($dateStart,$dateEnd)
     {
@@ -462,7 +482,7 @@ class MainController extends Controller
         $rezultat=[];
         foreach($automobili as $auto)
         {
-            if($this->freeCar($auto->sasija,$dateStart,$dateEnd))
+            if($this->freeCar($auto->sasija,$dateStart,$dateEnd) and $this->checkExparationReg($auto->sasija,$dateEnd))
             {
                 $model=$auto->model;
                 if(!isset($rezultat[$model]))
@@ -718,7 +738,7 @@ class MainController extends Controller
         }
     }
 
-    //
+    //spisak rezervacija u vremenskom okviru
     public function getReservationsDate($dateStart,$dateEnd)
     {
         return DB::select(
@@ -752,6 +772,7 @@ class MainController extends Controller
             R.`Broj_telefona` as 'telefon',
             A.`Broj_registarskih_tablica` as 'tablice',
             A.`Model` as 'model',
+            A.`Broj_sasije` as 'id_car',            
             R.`Datum_pocetka` as 'start',
             R.`Datum_zavrsetka` as 'finish',
             R.`Cena` as 'cena',
@@ -828,6 +849,37 @@ class MainController extends Controller
         
         return $paket;
         // return view('zakazi.prikaz2',['json'=>$json,'paket'=>$paket]); 
+    }
+
+    //produzenje rezervacije
+    public function extendReservation($id,$brojDana)
+    {
+        $rezervacija=$this->getReservationsID($id)[0];
+        $id_auto=$rezervacija->id_car;
+        $model=$rezervacija->model;
+        $dateStart=$rezervacija->start;
+        $dateEnd=$rezervacija->finish;
+        $newDateStart=date('Y-m-d', strtotime($dateEnd." + 1 days"));
+        $newDateEnd=date('Y-m-d', strtotime($dateEnd." + ".$brojDana." days"));
+        if($this->freeCar($id_auto,$newDateStart,$newDateEnd) and $this->checkExparationReg($id_auto,$newDateEnd))
+        {
+            $newCost=$this->totalCost($model,$dateStart,$newDateEnd);
+            DB::update(
+                "
+                UPDATE `rezervacija` 
+                SET `Datum_zavrsetka` = ?, 
+                `Cena`=? 
+                WHERE `rezervacija`.`ID_rezervacije` = ?
+                ",[$newDateEnd,$newCost,$id]
+            );
+            
+            return json_encode("Rezervacija $id je produzena do $newDateEnd. Nova cena je $newCost.");
+        }
+        else
+        {
+            return json_encode("Rezervacija se ne moze produziti!");
+        }
+        
     }
 
 }

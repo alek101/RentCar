@@ -8,49 +8,50 @@
     <link rel="stylesheet" href="{{ url('/css/mainStyle.css') }}">
 </head>
 <body>
-    <div class="header">
-        <div class="links">
-            <a href="/zakazi">Zakazi</a>
+    <div class="container">
+        <div class="header">
+            <div class="links">
+                <a href="/zakazi">Zakazi</a>
+            </div>
+
+            <div class="login">
+                    @if (Route::has('login'))
+                    <div class="top-right links">
+                        @auth
+                            <a href="{{ url('/home') }}">Home</a>
+                        @else
+                            <a href="{{ route('login') }}">Login</a>
+
+                            @if (Route::has('register'))
+                                <a href="{{ route('register') }}">Register</a>
+                            @endif
+                        @endauth
+                    </div>
+                @endif
+            </div>
         </div>
 
-        <div class="login">
-                @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
+        <div class="glavnaF">
+            @section('PageF')
+                <h1>Dobrodosli</h1>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
+                
+                
+                
+            @show
+        </div>
+
+        <div class="footer">
+            <div>
+                Završni rad: RentCar
+            </div>
+
+            <div>
+                Aleksandar Petrović
+                PHP grupa II
+            </div>
         </div>
     </div>
-
-    <div class="glavna">
-        @section('PageF')
-            <h1>Dobrodosli</h1>
-
-            
-            
-            
-        @show
-    </div>
-
-    <div class="footer">
-        <div>
-            Završni rad: RentCar
-        </div>
-
-        <div>
-            Aleksandar Petrović
-            PHP grupa II
-        </div>
-    </div>
-
     
 </body>
 </html>
