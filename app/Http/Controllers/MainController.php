@@ -736,6 +736,8 @@ class MainController extends Controller
             $niz=$this->getReservationsID($request->id);
             return view('rezervacijeInfo.sve',['niz'=>$niz]);
         }
+
+        return $this->rezervacijeSve();
     }
 
     //spisak rezervacija u vremenskom okviru

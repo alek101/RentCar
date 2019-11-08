@@ -31,12 +31,19 @@
             </div>
         </div>
 
-        <div class="glavnaF">
+        <div class="glavna">
             @section('PageF')
                 <h1>Dobrodosli</h1>
 
+                {{-- http://rentacarserbia.com/sr/strana/cenovnik --}}
                 
-                
+               
+
+                <img src="{!! asset('images/citroen-c3-1-4-hdi.jpg') !!}" alt="nema">
+                <img src="{!! asset('images/peugeot-208-1-4-hdi.jpg') !!}" alt="nema">
+                <img src="{!! asset('images/peugeot-308-1-6-hdi.jpg') !!}" alt="nema">
+                <img src="{!! asset('images/seat-ibiza-1-2-tdi.jpg') !!}" alt="nema">
+               
                 
             @show
         </div>
@@ -51,6 +58,7 @@
                 PHP grupa II
             </div>
         </div>
+        
     </div>
     
 </body>

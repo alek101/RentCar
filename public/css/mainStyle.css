@@ -11,497 +11,506 @@
 
 
 html
-        {
-            width: 100%;
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            font-family: 'Volkhov', serif
-        }
+{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Volkhov', serif
+}
 
-        body
-        {
-            width: 100%;
-            height: 100%;
-            margin:0;
-            padding:0;
-            box-sizing: border-box;
-            
-        }
+body
+{
+    width: 100%;
+    height: 100%;
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
 
-        *
-        {
-            margin:0;
-            padding:0;
-            box-sizing: border-box;
-        }
+*
+{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
 
-        .container
-        {
-            /* background-image: linear-gradient(lightblue,rgb(85, 85, 114)); */
-            position: relative;
-            height: 100%;
-            max-width: 1400px;
-            margin: 0 auto;
-            
-        }
 
-        .container::before {
-            content: "";
-            background-image: linear-gradient(var(--compl-color),var(--compl-color-2));
-            background-image: url('../images/white-pattern-wallpaper.png');
-            opacity: 0.6;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            z-index: -1000;
-        }
-        
 
-        a 
-        {
-            text-decoration: none;
-        }
+.footer
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color:var(--main-color);;
+    height: 50px;
+    font-size: 1.2em;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    margin: 0 auto;
+    color: white;
+    padding: 10px;
+}
 
-        ol,ul,li
-        {
-            list-style-type: none;
-        }
-        
-        .header
-        {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            background-color: var(--main-color);
-            height: 80px;
-            font-size: 1.2em;
-        }
 
-        a:link 
-        {
-        color: white;
-        }
-
-        /* visited link */
-        a:visited 
-        {
-        color: white;
-        }
-
-        /* mouse over link */
-        a:hover 
-        {
-        color: var(--link-hover);
-        font-weight: bold;
-        }
-
-        /* selected link */
-        a:active 
-        {
-        color: var(--link-hover);
-        font-weight: bold;
-        }
-
-        .links
-        {
-            padding: 25px;
-            display: flex;
-        }
-
-        .meni,.adminMeni
-        {
-            margin-right: 20px;
-            cursor: pointer;
-            height: 80px;
-            color: white;
-        }
-
-        .meniCart,.adminMeniCart
-        {
-            border-top: 1px solid black;
-            background-color: var(--main-color);
-            position: absolute;
-            line-height: 30px;
-            top:80px;
-            /* visibility: hidden; */
-            display: none;
-            overflow: hidden;
-        }
-
-        .meni:hover .meniCart
-        {
-            /* visibility: visible; */
-            display: block;
-            animation: padajuci_meni 0.4s;
-            animation-timing-function: linear;
-            height: auto;
-        }
-
-        .adminMeni:hover .adminMeniCart
-        {
-            /* visibility: visible; */
-            display: block;
-            /* animation: padajuci_meni 0.4s;
-            animation-timing-function: linear;
-            height: auto; */
-        }
-
-        @keyframes padajuci_meni{
-            0% {
-                height: 0px;
-            }
-        
-            10% {
-                height: 18px;
-            }
-        
-            20% {
-                height: 36px;
-            }
-        
-            30% {
-                height: 54px;
-            }
-        
-            40% {
-                height: 72px;
-            }
-        
-            50% {
-                height: 90px;
-            }
-        
-            60% {
-                height: 108px;
-            }
-        
-            70% {
-                height: 126px;
-            }
-        
-            80% {
-                height: 144px;
-            }
-        
-            90% {
-                height: 152px;
-            }
-        
-            100% {
-                height: 180px;
-            }
-        }
-        
-
-        .footer
-        {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            background-color:var(--main-color);;
-            height: 40px;
-            font-size: 1.2em;
-            position: absolute;
-            bottom: 0px;
-            width: 100%;
-            color: white;
-            padding: 10px;
-        }
-
-        .glavna
-        {
-            width: 100%;
-            height: 80vh;
-            text-align: center;
-            overflow-y: scroll;
-        }
+.container
+{
+    /* background-image: linear-gradient(lightblue,rgb(85, 85, 114)); */
+    position: relative;
+    height: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
     
-        table
-        {
-            border: 2px solid black;
-            margin: 20px auto;
-            border-collapse: collapse;
-            max-width: 1280px;
-        }
+}
 
-        tr
-        {
-            background-color: var(--main-color);
-        }
+.container::before {
+    content: "";
+    background-image: linear-gradient(var(--compl-color),var(--compl-color-2));
+    background-image: url('../images/white-pattern-wallpaper.png');
+    opacity: 0.6;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1000;
+}
 
-        tr:nth-child(2n)
-        {
-            background-color: var(--mono-color);
-        }
+.container::after {
+    content: '';
+    display: block;
+    height: 50px; /* Set same as footer's height */
+    }
 
-        th
-        {
-            background-color: var(--compl-color-2);
-            /* border: 1px solid black; */
-            padding: 3px 5px;
-        }
+a 
+{
+    text-decoration: none;
+}
 
-        td
-        {
-            /* border: 1px solid black; */
-            padding: 3px 5px;
-        }
+ol,ul,li
+{
+    list-style-type: none;
+}
 
-        table a:link
-        {
-            color: black;
-        }
+.header
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: var(--main-color);
+    height: 80px;
+    font-size: 1.2em;
+}
 
-        table a:visited
-        {
-            color: black;
-        }
+a:link 
+{
+color: white;
+}
 
-        table a:hover
-        {
-            color: var(--link-hover);
-            font-weight: bold;
-        }
+/* visited link */
+a:visited 
+{
+color: white;
+}
 
-        table a:active
-        {
-            color: var(--link-hover);
-            font-weight: bold;
-        }
+/* mouse over link */
+a:hover 
+{
+color: var(--link-hover);
+font-weight: bold;
+}
 
-        h1,h2,h3,h4,h5,h6
-        {
-            margin: 20px auto;
-        }
+/* selected link */
+a:active 
+{
+color: var(--link-hover);
+font-weight: bold;
+}
 
-        form, .forma
-        {
-            background-color: var(--main-color);
-            margin: 20px auto;
-            padding: 20px;
-            max-width: 1280px;
-        }
+.links
+{
+    padding: 25px;
+    display: flex;
+}
 
-        form *
-        {
-            padding: 2px;
-            margin: 3px;
-        }
+.meni,.adminMeni
+{
+    margin-right: 20px;
+    cursor: pointer;
+    height: 80px;
+    color: white;
+}
 
-        .forma *
-        {
-            padding: 2px;
-            margin: 3px;
-        }
+.meniCart,.adminMeniCart
+{
+    border-top: 1px solid black;
+    background-color: var(--main-color);
+    position: absolute;
+    line-height: 30px;
+    top:80px;
+    /* visibility: hidden; */
+    display: none;
+    overflow: hidden;
+    padding: 0px 5px;
+}
 
-        
-        button,#dugme
-        {
-            padding: 5px;
-            box-shadow: 2px 2px gray;
-            transition: all 0.3s;
-        }
+.meni:hover .meniCart
+{
+    /* visibility: visible; */
+    display: block;
+    animation: padajuci_meni 0.4s;
+    animation-timing-function: linear;
+    height: auto;
+}
 
-        button:hover
-        {
-            cursor: pointer;
-            box-shadow: 0px 0px gray;
-            background-color: var(--compl-color-2);
-            color: white;
-            transform: translate(2px,2px);
-            border-top: 2px solid var(--compl-color-2);
-            border-left: 2px solid var(--compl-color-2);
-            
-        }
+.adminMeni:hover .adminMeniCart
+{
+    /* visibility: visible; */
+    display: block;
+    /* animation: padajuci_meni 0.4s;
+    animation-timing-function: linear;
+    height: auto; */
+}
 
-        #dugme:hover
-        {
-            cursor: pointer;
-            box-shadow: 0px 0px gray;
-            background-color: var(--compl-color-2);
-            color: white;
-            transform: translate(2px,2px);
-            border-top: 2px solid var(--compl-color-2);
-            border-left: 2px solid var(--compl-color-2);
-        }
+@keyframes padajuci_meni{
+    0% {
+        height: 0px;
+    }
 
-        .hidden
-        {
-            visibility: hidden;
-        }
+    10% {
+        height: 18px;
+    }
 
-        .disapear
-        {
-            display:none;
-        }
+    20% {
+        height: 36px;
+    }
 
-        .kartica
-        {
-            position: absolute;
-            top: 30%; left: 35%;
-            height: 50px; width: 200px;
-            
-            background-color: var(--compl-color);
-            z-index: 10;
-            padding: 5px;
-            box-shadow: 2px 5px 10px rgba(0,0,0,0.5);
-            transition: 0.3s;
-        }
+    30% {
+        height: 54px;
+    }
 
-        .kartica:hover
-        {
-            box-shadow: 2px 10px 20px rgba(0,0,0,0.5);
-        }
+    40% {
+        height: 72px;
+    }
 
-        .info_rez
-        {
-            font-size: 1.4em;
-            color: var(--main-color);
-            margin: 30px auto;
-        }
+    50% {
+        height: 90px;
+    }
 
-        .bckRed
-        {
-            background-color: var(--compl-color);
-            border: 1px solid var(--compl-color-2);
-            font-weight: bold;
-        }
+    60% {
+        height: 108px;
+    }
 
-        .response
-        {
-            
-            background-color: var(--main-color);
-            width: 60%;
-            margin: 10px auto;
-            padding: 10px;
-        }
+    70% {
+        height: 126px;
+    }
 
-        .flexRow
-        {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            margin: 5px;
-            flex-wrap: wrap;
-        }
+    80% {
+        height: 144px;
+    }
 
-        .flexColumn
-        {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-        }
+    90% {
+        height: 152px;
+    }
 
-        .sveRez
-        {
-            max-width: 490px;
-            margin: 20px auto;
-        }
+    100% {
+        height: 180px;
+    }
+}
 
-        .glavna::-webkit-scrollbar
-        {
-            /* mora nesto da bude upisano u -scrollbar ; mora da bude povezano
-            sa elementom koji ima scrolbar */
-            /* background-color: green; */
-            width: 15px;
-        }
+li:hover
+{
+    background-color: var(--mono-color);
+}
 
-        .glavna::-webkit-scrollbar-thumb
-        {
-            border-radius: 6px;
-            background-color: var(--compl-color-2);
-        }
+.glavna
+{
+    width: 100%;
+    height: 80vh;
+    text-align: center;
+    overflow-y: scroll;
+}
 
-        .glavna::-webkit-scrollbar-track
-        {
-            -webkit-box-shadow: inset 0 0 6px;
-            background-color: #f5f5f5;
-        }
+table
+{
+    border: 2px solid black;
+    margin: 20px auto;
+    border-collapse: collapse;
+    max-width: 1280px;
+}
 
-        .formZakazivanje
-        {
-            background-color: var(--mono-color);
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 5px;
-        }
+tr
+{
+    background-color: var(--main-color);
+}
 
-        textarea
-        {
-            width: 50%;
-        }
-        
-        .formAddKM
-        {
-            max-width: 400px;
-            margin: 20px auto;
-            border: 1px solid black;
-            border-radius: 6px;
-        }
+tr:nth-child(2n)
+{
+    background-color: var(--mono-color);
+}
 
-        .margin_5
-        {
-            margin: 5px;
-        }
+th
+{
+    background-color: var(--compl-color-2);
+    /* border: 1px solid black; */
+    padding: 3px 5px;
+}
 
-        .margin_20
-        {
-            margin: 20px;
-        }
+td
+{
+    /* border: 1px solid black; */
+    padding: 3px 5px;
+}
 
-        .modelsWraper
-        {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            max-width: 1280px;
-            margin: 20px auto;
-        }
+table a:link
+{
+    color: black;
+}
 
-        .card
-        {
-            display: flex;
-            flex-direction: row;
-            margin: 20px;
-            background-color: var(--main-color);
-            padding: 0px 2px 2px 0px;
-            box-shadow: 2px 5px 10px rgba(0,0,0,0.5);
-            transition: 0.2s;
+table a:visited
+{
+    color: black;
+}
 
-        }
+table a:hover
+{
+    color: var(--link-hover);
+    font-weight: bold;
+}
 
-        .card:hover
-        {
-            box-shadow: 2px 10px 25px rgba(0,0,0,0.5);
-        }
+table a:active
+{
+    color: var(--link-hover);
+    font-weight: bold;
+}
 
-        .opis
-        {
-            padding: 15px;
-        }
+h1,h2,h3,h4,h5,h6
+{
+    margin: 20px auto;
+}
 
-        label
-        {
-            margin: 5px;
-        }
+form, .forma
+{
+    background-color: var(--main-color);
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 1280px;
+}
 
-        .modelCardName
-        {
-            font-weight: bold;
-            font-size: 1.2em;
-            padding-bottom: 20px;
-            
-        }
+form *
+{
+    padding: 2px;
+    margin: 3px;
+}
 
-        .glavnaF
-        {
-            width: 100%;
-            height: 80vh;
-            text-align: center;
-        
-        }
+.forma *
+{
+    padding: 2px;
+    margin: 3px;
+}
 
-        
+
+button,#dugme
+{
+    padding: 5px;
+    box-shadow: 2px 2px gray;
+    transition: all 0.3s;
+}
+
+button:hover
+{
+    cursor: pointer;
+    box-shadow: 0px 0px gray;
+    background-color: var(--compl-color-2);
+    color: white;
+    transform: translate(2px,2px);
+    border-top: 2px solid var(--compl-color-2);
+    border-left: 2px solid var(--compl-color-2);
+    
+}
+
+#dugme:hover
+{
+    cursor: pointer;
+    box-shadow: 0px 0px gray;
+    background-color: var(--compl-color-2);
+    color: white;
+    transform: translate(2px,2px);
+    border-top: 3px solid var(--compl-color-2);
+    border-left: 3px solid var(--compl-color-2);
+}
+
+.hidden
+{
+    visibility: hidden;
+}
+
+.disapear
+{
+    display:none;
+}
+
+.kartica
+{
+    position: absolute;
+    top: 30%; left: 35%;
+    height: 50px; width: 200px;
+    
+    background-color: var(--compl-color);
+    z-index: 10;
+    padding: 5px;
+    box-shadow: 2px 5px 10px rgba(0,0,0,0.5);
+    transition: 0.3s;
+}
+
+.kartica:hover
+{
+    box-shadow: 2px 10px 20px rgba(0,0,0,0.5);
+}
+
+.info_rez
+{
+    font-size: 1.4em;
+    color: var(--main-color);
+    margin: 30px auto;
+}
+
+.bckRed
+{
+    background-color: var(--compl-color);
+    border: 1px solid var(--compl-color-2);
+    font-weight: bold;
+}
+
+.response
+{
+    
+    background-color: var(--main-color);
+    width: 60%;
+    margin: 10px auto;
+    padding: 10px;
+}
+
+.flexRow
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 5px;
+    flex-wrap: wrap;
+}
+
+.flexColumn
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.sveRez
+{
+    max-width: 490px;
+    margin: 20px auto;
+}
+
+.glavna::-webkit-scrollbar
+{
+    /* mora nesto da bude upisano u -scrollbar ; mora da bude povezano
+    sa elementom koji ima scrolbar */
+    /* background-color: green; */
+    width: 15px;
+}
+
+.glavna::-webkit-scrollbar-thumb
+{
+    border-radius: 6px;
+    background-color: var(--compl-color-2);
+}
+
+.glavna::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px;
+    background-color: #f5f5f5;
+}
+
+.formZakazivanje
+{
+    background-color: var(--mono-color);
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 5px;
+}
+
+textarea
+{
+    width: 50%;
+}
+
+.formAddKM
+{
+    max-width: 400px;
+    margin: 20px auto;
+    border: 1px solid black;
+    border-radius: 6px;
+}
+
+.margin_5
+{
+    margin: 5px;
+}
+
+.margin_20
+{
+    margin: 20px;
+}
+
+.modelsWraper
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 1280px;
+    margin: 20px auto;
+}
+
+.card
+{
+    max-width: 600px;
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+    background-color: var(--main-color);
+    padding: 0px 2px 2px 0px;
+    box-shadow: 2px 5px 10px rgba(0,0,0,0.5);
+    transition: 0.2s;
+
+}
+
+.card:hover
+{
+    box-shadow: 2px 10px 25px rgba(0,0,0,0.5);
+}
+
+.opis
+{
+    padding: 15px;
+}
+
+label
+{
+    margin: 5px;
+}
+
+.modelCardName
+{
+    font-weight: bold;
+    font-size: 1.2em;
+    padding-bottom: 20px;
+    
+}
+
+.slicica
+{
+    max-width: 300px;
+}
