@@ -737,6 +737,20 @@ class MainController extends Controller
             return view('rezervacijeInfo.sve',['niz'=>$niz]);
         }
 
+        if(isset($request->dateStart) && !isset($request->dateEnd))
+        {
+            $dateEnd=date('Y-m-d', strtotime($request->dateStart." + 365 days"));
+            $niz=$this->getReservationsDate($request->dateStart,$dateEnd);  
+            return view('rezervacijeInfo.sve',['niz'=>$niz]);
+        }
+        
+        if(!isset($request->dateStart) && isset($request->dateEnd))
+        {
+            $dateStart=date('Y-m-d', strtotime($request->dateEnd." - 365 days"));
+            $niz=$this->getReservationsDate($dateStart,$request->dateEnd);  
+            return view('rezervacijeInfo.sve',['niz'=>$niz]);
+        }
+
         return $this->rezervacijeSve();
     }
 
