@@ -61,6 +61,8 @@ Route::prefix('/rezervacijeInfo')->middleware('login')->group(function()
     Route::get('/sve','MainController@rezervacijeSve');
     Route::get('/sve/{num}','MainController@rezervacijeSve');
     Route::get('/cancel/{id}','MainController@cancelReservation');
+    Route::get('/extendForm/{id}','MainController@getExtendForm');
+    Route::post('/extend','MainController@extend');
 });
 
 Auth::routes();

@@ -854,32 +854,50 @@ class MainController extends Controller
     //produzenje rezervacije
     public function extendReservation($id,$brojDana)
     {
-        $rezervacija=$this->getReservationsID($id)[0];
-        $id_auto=$rezervacija->id_car;
-        $model=$rezervacija->model;
-        $dateStart=$rezervacija->start;
-        $dateEnd=$rezervacija->finish;
-        $newDateStart=date('Y-m-d', strtotime($dateEnd." + 1 days"));
-        $newDateEnd=date('Y-m-d', strtotime($dateEnd." + ".$brojDana." days"));
-        if($this->freeCar($id_auto,$newDateStart,$newDateEnd) and $this->checkExparationReg($id_auto,$newDateEnd))
+        if($brojDana>0)
         {
-            $newCost=$this->totalCost($model,$dateStart,$newDateEnd);
-            DB::update(
-                "
-                UPDATE `rezervacija` 
-                SET `Datum_zavrsetka` = ?, 
-                `Cena`=? 
-                WHERE `rezervacija`.`ID_rezervacije` = ?
-                ",[$newDateEnd,$newCost,$id]
-            );
-            
-            return json_encode("Rezervacija $id je produzena do $newDateEnd. Nova cena je $newCost.");
+            $rezervacija=$this->getReservationsID($id)[0];
+            $id_auto=$rezervacija->id_car;
+            $model=$rezervacija->model;
+            $dateStart=$rezervacija->start;
+            $dateEnd=$rezervacija->finish;
+            $newDateStart=date('Y-m-d', strtotime($dateEnd." + 1 days"));
+            $newDateEnd=date('Y-m-d', strtotime($dateEnd." + ".$brojDana." days"));
+            if($this->freeCar($id_auto,$newDateStart,$newDateEnd) and $this->checkExparationReg($id_auto,$newDateEnd))
+            {
+                $newCost=$this->totalCost($model,$dateStart,$newDateEnd);
+                DB::update(
+                    "
+                    UPDATE `rezervacija` 
+                    SET `Datum_zavrsetka` = ?, 
+                    `Cena`=? 
+                    WHERE `rezervacija`.`ID_rezervacije` = ?
+                    ",[$newDateEnd,$newCost,$id]
+                );
+                
+                return ("Rezervacija $id je produzena do $newDateEnd. Nova cena je $newCost.");
+            }
+            else
+            {
+                return ("Rezervacija se ne moze produziti!");
+            }
         }
         else
         {
-            return json_encode("Rezervacija se ne moze produziti!");
+            return ("Broj dana mora biti veci od 0!");
         }
-        
+            
+    }
+
+    //
+    public function getExtendForm($id)
+    {
+        return view('rezervacijeInfo.extendForm',['id'=>$id]);
+    }
+
+    public function extend(Request $request)
+    {
+        return $this->extendReservation($request->id,$request->brojDana);
     }
 
 }

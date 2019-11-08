@@ -28,9 +28,6 @@
         </div> --}}
         <div><input type="submit" value="Posalji" id="dugme"> </div>
     </div>
-    
-    
-
 </form>
 
 
@@ -49,7 +46,7 @@
             <th>Datum zavrsetka</th>
             <th>Cena</th>
             <th>Opis</th>
-            {{-- <th>Otkazi</th> --}}
+            <th>Produzi</th>
         </tr>
     
         
@@ -98,41 +95,19 @@
                     $auto->opis
                     . "</td>"
     
-                    // ."<td><button class='obrisi' data-link='/rezervacijeInfo/cancel/$auto->id'>Otkazi</button></td>"
+                    ."<td><button class='produzi' data-link='/rezervacijeInfo/extendForm/$auto->id'>Produzi</button></td>"
     
              . "</tr>";
             !!}
         @endforeach
     </table>
 
-    {{-- <script>
-        let butoniObrisi=[...document.querySelectorAll('.obrisi')];
+    <script>
+        let butoniObrisi=[...document.querySelectorAll('.produzi')];
         butoniObrisi.map(b=>b.addEventListener('click', function()
         {
-            let link=b.getAttribute('data-link');
-            let div=document.createElement('div');
-            div.className='kartica';
-            div.append('Da li ste sigurni?   ');
-
-            let butY=document.createElement('button');
-            butY.innerHTML="Da";
-            butY.addEventListener('click',function(e)
-            {
-                window.open(link);
-                e.target.parentElement.remove();
-            })
-            div.appendChild(butY);
-
-            let butN=document.createElement('button');
-            butN.innerHTML="Ne";
-            butN.addEventListener('click',function(e)
-            {
-                e.target.parentElement.remove();
-            })
-            div.appendChild(butN);
-
-            document.querySelector('.prazan').appendChild(div);
-        }))
-    </script> --}}
+            window.open(b.getAttribute('data-link'));
+        }));
+    </script>
 
 @endsection
