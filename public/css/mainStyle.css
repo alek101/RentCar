@@ -108,12 +108,93 @@ html
         .links
         {
             padding: 25px;
+            display: flex;
         }
 
-        .links a
+        .meni,.adminMeni
         {
-            padding-right: 10px;
+            margin-right: 20px;
+            cursor: pointer;
+            height: 80px;
+            color: white;
         }
+
+        .meniCart,.adminMeniCart
+        {
+            border-top: 1px solid black;
+            background-color: var(--main-color);
+            position: absolute;
+            line-height: 30px;
+            top:80px;
+            /* visibility: hidden; */
+            display: none;
+            overflow: hidden;
+        }
+
+        .meni:hover .meniCart
+        {
+            /* visibility: visible; */
+            display: block;
+            animation: padajuci_meni 0.4s;
+            animation-timing-function: linear;
+            height: auto;
+        }
+
+        .adminMeni:hover .adminMeniCart
+        {
+            /* visibility: visible; */
+            display: block;
+            /* animation: padajuci_meni 0.4s;
+            animation-timing-function: linear;
+            height: auto; */
+        }
+
+        @keyframes padajuci_meni{
+            0% {
+                height: 0px;
+            }
+        
+            10% {
+                height: 18px;
+            }
+        
+            20% {
+                height: 36px;
+            }
+        
+            30% {
+                height: 54px;
+            }
+        
+            40% {
+                height: 72px;
+            }
+        
+            50% {
+                height: 90px;
+            }
+        
+            60% {
+                height: 108px;
+            }
+        
+            70% {
+                height: 126px;
+            }
+        
+            80% {
+                height: 144px;
+            }
+        
+            90% {
+                height: 152px;
+            }
+        
+            100% {
+                height: 180px;
+            }
+        }
+        
 
         .footer
         {

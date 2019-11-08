@@ -18,14 +18,26 @@
     <div class="container">
         <div class="header">
             <div class="links">
-                <a href="/kriticni">Kriticni</a>
-                <a href="/servis">Servis</a>
-                <a href="/prijem">Dodaj km</a>
-                <a href="/auto">Spisak automobila</a>
-                <a href="/rezervacija">Rezervisi</a>
-                <a href="/rezervacijeInfo/sve">Sve Rezervacije</a>
-                <a href="/rezervacijeInfo">Buduce Rezervacije</a>
-                <a href="/admin">Admin</a>
+                <div class="meni">Meni
+                    <div class="meniCart">
+                        <ul>
+                            <li><a href="/kriticni">Kriticni</a></li>
+                            <li><a href="/servis">Servis</a></li>
+                            <li><a href="/prijem">Dodaj km</a></li>
+                            <li><a href="/auto">Spisak automobila</a></li>
+                            <li><a href="/rezervacija">Rezervisi</a></li>
+                            <li><a href="/rezervacijeInfo/sve">Sve Rezervacije</a></li>
+                            <li><a href="/rezervacijeInfo">Buduce Rezervacije</a></li>
+                        </ul>
+                    </div>
+                 </div>   
+                <div class="adminMeni">Admin
+                    <div class="adminMeniCart">
+                        <ul>
+                            <li><a href="/admin">Admin</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
 
             <div class="login">
