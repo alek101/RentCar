@@ -15,9 +15,7 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/glavna', function () {
-    return view('mainPage');
-})->middleware('login');
+Route::get('/glavna','MainController@kriticni')->middleware('login');
 
 Route::prefix('/kriticni')->middleware('login')->group(function()
 {

@@ -17,15 +17,15 @@
     <div class="flexColumn">
         <div>@csrf</div>
         <div class="flexRow">
-            <label for="num">Broj Zadnjih Unosa <input type="number" name="num" id="num" ></label>
+            <label for="num">Broj Zadnjih Unosa <br> <input type="number" name="num" id="num" ></label>
         </div>
         <div class="flexRow">
             <label for="start">Pocetni datum <input type="date" name="dateStart" id="start"></label>
             <label for="end">Krajnji datum <input type="date" name="dateEnd" id="end"></label>
         </div>
-        <div class="flexRow">
+        {{-- <div class="flexRow">
             <label for="rezID">ID Rezervacije <input type="number" name="id" id="rezID"></label>
-        </div>
+        </div> --}}
         <div><input type="submit" value="Posalji" id="dugme"> </div>
     </div>
     

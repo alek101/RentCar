@@ -46,7 +46,7 @@ class MainController extends Controller
     public function posalji1(Request $request )
     {
         $id=$request->id;
-        $brojDana=$request->brojDana-1;
+        $brojDana=$request->brojDana;
         if($brojDana>=0)
         {
         $dateStart=$this->findNextFreeDate($id,$brojDana);

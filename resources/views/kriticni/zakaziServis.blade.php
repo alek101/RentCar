@@ -9,7 +9,7 @@
     @csrf
     {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}" id='token'> --}}
     Broj Sasije <input type="text" name='id' value="<?=$id?>" id="id">
-    Broj Dana <input type="number" name="brojDana" id="brojDana" value="2">
+    Broj Dana <input type="number" name="brojDana" id="brojDana" value="1">
     <input type="submit" value="Posalji" id="dugme">
 
 </form>

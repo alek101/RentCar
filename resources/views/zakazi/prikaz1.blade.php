@@ -3,7 +3,7 @@
 
 
 
-<div class="formZakazivanje">
+<div class="formZakazivanje form">
         <div class="flexColumn">
             <div> @csrf </div>
             <div class="flexRow">
@@ -23,7 +23,7 @@
         </div>
     </div>
 
-    <div class="response"></div>
+    <div class="response hidden"></div>
 
 <div class="modelsWraper"></div>
 
@@ -125,7 +125,7 @@
                         fetch('/zakazi/posalji2',opcije)
                             .then(resp=>resp.json())
                             .then(jsn=>odgovor(jsn))
-                            .then(document.querySelector('.modelsWraper').innerHTML="");
+                            .then(reset());
                     });
 
             dm.append(p1,p2,p3,p4,p5,p6);
@@ -134,6 +134,13 @@
             d.append(pic,dm,button);
             
             return d;
+        }
+
+        function reset()
+        {
+            document.querySelector('.modelsWraper').innerHTML="";
+            document.querySelector('.response').innerHTML=""
+            document.querySelector('.response').classList.add('hidden');
         }
 
         function makeElement(type="div",settings={
@@ -173,21 +180,23 @@
 
     function odgovor(odgovor)
         {
+            let div=document.querySelector('.response');
+            div.classList.remove('hidden');
             console.log(odgovor);
 
             if(odgovor==='Nije proslo!')
             {
-                document.querySelector('.response').innerHTML="Rezervacija nije uspela, molimo pokusajte ponovo!";
+                div.innerHTML="Rezervacija nije uspela, molimo pokusajte ponovo!";
             }
             else if(odgovor==='Los period!')
             {
-                document.querySelector('.response').innerHTML=`Rezervacija nije uspela! Morate rezervisati barem jedan pun dan,
+                div.innerHTML=`Rezervacija nije uspela! Morate rezervisati barem jedan pun dan,
                  krajnji datum mora ici pre pocetnog datuma!`;
             }
             else
             {
                 let r=`Uspesno ste rezervisali auto sa tablicama ${odgovor.tablice}. Sifra rezervacije je ${odgovor.id_rez}.`;
-                document.querySelector('.response').innerHTML=r;
+                div.innerHTML=r;
             }  
         }
 

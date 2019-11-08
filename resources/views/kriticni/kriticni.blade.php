@@ -1,6 +1,8 @@
 @extends('mainPage')
 @section('Page')
 
+<h2>Kritični automobili</h2>
+
 <div class="margin_20"><label for="filter">Filter tabela: <input type="text" id="filter" class='filter'></label></div>
 
 <table>
@@ -17,7 +19,7 @@
         <th>Isticanje registracije</th>
         <th>Predjeno od Malog</th>
         <th>Predjeno od Velikog</th>
-        <th>Zakazivanje</th>
+        <th>Zakazi Servis</th>
     </tr>
 
     <tr>
@@ -108,10 +110,30 @@
                 $auto->predjeno_km_veliki
                 . "</td>"; !!}
             @endif
-                {!! "<td> <a href='/kriticni/".$auto->sasija."'>Zakazi Servis</td>"
-                    . "</tr>"; !!}
+                {{-- {!! "<td> <a href='/kriticni/".$auto->sasija."'>Zakazi Servis</td>"
+                    . "</tr>"; !!} --}}
+                 {!! "<td>
+                        <button class='zakaziServis' date-sasija=".$auto->sasija.">Servis</button>
+                     </td>"; !!}
+                        
+                    
                     
     @endforeach
 </table>
+
+<script>
+        // let sasija=document.querySelector('#id').value;
+        // document.querySelector('.zakaziServis').addEventListener('click',function()
+        // {
+        //     window.open("/kriticni/"+sasija);
+        // })
+
+        let dugmici=[...document.querySelectorAll('.zakaziServis')];
+        dugmici.map(c=>c.addEventListener('click',function(e)
+        {
+            let sasija=e.target.getAttribute("date-sasija");
+            window.open("/kriticni/"+sasija);
+        }))
+</script>
 
 @endsection

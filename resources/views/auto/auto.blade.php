@@ -17,7 +17,7 @@
             <th>Isticanje registracije</th>
             <th>Predjeno od Malog</th>
             <th>Predjeno od Velikog</th>
-            <th>Dodaj km</th>
+            <th>Detaljnije</th>
         </tr>
     
         <tr>

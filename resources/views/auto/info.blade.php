@@ -18,6 +18,7 @@
             <th>Isticanje registracije</th>
             <th>Predjeno od Malog</th>
             <th>Predjeno od Velikog</th>
+            <th>Zakazi Servis</th>
            
         </tr>
     
@@ -34,6 +35,7 @@
             <th>dani</th>
             <th>km</th>
             <th>km</th>
+            <th></th>
             
         </tr>
     
@@ -87,6 +89,10 @@
                     "<td>" .
                     $auto->predjeno_km_veliki
                     . "</td>"
+
+                   ."<td>
+                        <button class='zakaziServis'>Servis</button>
+                     </td>"
     
              . "</tr>";
             !!}
@@ -106,11 +112,11 @@
     <a href="/kriticni/{{$auto->sasija}}">Zakazi Servis</a>
 </h3> --}}
 
-<h3>
+{{-- <h3>
     Zakazi Servis
-</h3>
+</h3> --}}
 
-<button class="zakaziServis">Servis</button>
+
 
 <h3>Servisna knjizica</h3>
 
@@ -161,8 +167,6 @@
             <th>Ime</th>
             <th>Mejl</th>
             <th>Telefon</th>
-            <th>Tablice</th>
-            <th>Model</th>
             <th>Datum pocetka</th>
             <th>Datum zavrsetka</th>
             <th>Cena</th>
@@ -185,14 +189,6 @@
     
                     "<td>" .
                     $auto->telefon
-                    . "</td>".
-    
-                    "<td>" .
-                    $auto->tablice
-                    . "</td>".
-    
-                    "<td>" .
-                    $auto->model
                     . "</td>".
     
                     "<td>" .
