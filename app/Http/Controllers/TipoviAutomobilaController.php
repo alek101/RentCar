@@ -42,7 +42,7 @@ class TipoviAutomobilaController extends Controller
         $newModel->opis=$request->opis;
 
         $newCena1=new CenovnikModel;
-        $newCena1->Model=$request->model;
+        $newCena1->Model=$request->Model;
         $newCena1->Max_broj_dana=3;
         if($request->cena_3>0)
         {
@@ -50,19 +50,19 @@ class TipoviAutomobilaController extends Controller
         }
         
         $newCena2=new CenovnikModel;
-        $newCena2->Model=$request->model;
+        $newCena2->Model=$request->Model;
         $newCena2->Max_broj_dana=7;
         if($request->cena_7>0)
         {
-        $newCena1->cena_po_danu=$request->cena_7;    
+        $newCena2->cena_po_danu=$request->cena_7;    
         }
 
         $newCena3=new CenovnikModel;
-        $newCena3->Model=$request->model;
+        $newCena3->Model=$request->Model;
         $newCena3->Max_broj_dana=12700;
         if($request->cena_max>0)
         {
-        $newCena1->cena_po_danu=$request->cena_max;    
+        $newCena3->cena_po_danu=$request->cena_max;    
         }
 
         //treba transakcija
