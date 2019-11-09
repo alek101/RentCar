@@ -73,4 +73,21 @@ class TipoviAutomobilaController extends Controller
 
         return redirect('/auto/sviModeli');
     }
+
+    //
+    public function getIzmeni()
+    {
+        return view('baza.modelID');
+    }
+
+    //
+    public function getFormIzmeni(Request $request)
+    {
+        $modelID=$request->Model;
+        $model=TipoviAutomobilaModel::where('Model',$modelID)->firstOrFail();
+        $cena_3=CenovnikModel::where('Model',$modelID)->where('Max_broj_dana',3)->firstOrFail();
+        $cena_7=CenovnikModel::where('Model',$modelID)->where('Max_broj_dana',7)->firstOrFail();
+        $cena_max=CenovnikModel::where('Model',$modelID)->where('Max_broj_dana',12700)->firstOrFail();
+        return view('baza.formaIzmeni',['model'=>$model,'cena_3'=>$cena_3,'cena_7'=>$cena_7,'cena_max'=>$cena_max]);
+    }
 }
