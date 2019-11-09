@@ -100,6 +100,7 @@ Route::prefix('/baza')->middleware('admin')->group(function()
     Route::post('/posalji1','TipoviAutomobilaController@Dodaj');
     Route::get('/change','TipoviAutomobilaController@getIzmeni');
     Route::post('/posalji2','TipoviAutomobilaController@getFormIzmeni');
+    Route::post('/posalji3','TipoviAutomobilaController@izmeni');
 });
 
 Route::prefix('/klient')->group(function()
