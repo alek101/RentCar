@@ -1,12 +1,16 @@
-@import url('https://fonts.googleapis.com/css?family=Volkhov:400,700&display=swap');
+/* @import url('https://fonts.googleapis.com/css?family=Volkhov:400,700&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css?family=Maven+Pro:400,700&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css?family=Russo+One&display=swap'); */
+@import url('https://fonts.googleapis.com/css?family=Hammersmith+One&display=swap');
 
 :root
 {
-    --main-color: #6495ed;
+    --main-color: #84a0d4;
     --compl-color: #ed9d64;
-    --mono-color: #84a0d4;
+    --mono-color: #6495ed;
     --compl-color-2: #ed7b64;
     --link-hover: #d13415;
+    
 }
 
 
@@ -16,7 +20,10 @@ html
     height: 100%;
     margin: 0;
     padding: 0;
-    font-family: 'Volkhov', serif
+    /* font-family: 'Volkhov', serif */
+    /* font-family: 'Maven Pro', sans-serif; */
+    /* font-family: 'Russo One', sans-serif; */
+    font-family: 'Hammersmith One', sans-serif;
 }
 
 body
@@ -117,14 +124,14 @@ color: white;
 /* mouse over link */
 a:hover 
 {
-color: var(--link-hover);
+color: var(--compl-color-2);
 font-weight: bold;
 }
 
 /* selected link */
 a:active 
 {
-color: var(--link-hover);
+color: var(--compl-color-2);
 font-weight: bold;
 }
 
@@ -132,6 +139,11 @@ font-weight: bold;
 {
     padding: 25px;
     display: flex;
+}
+
+.links a
+{
+    padding-right: 20px;
 }
 
 .meni,.adminMeni
@@ -313,8 +325,9 @@ form *
 
 button,#dugme
 {
-    padding: 5px;
+    padding: 20px 30px;
     box-shadow: 2px 2px gray;
+    font-size: 1.2em;
     transition: all 0.3s;
 }
 
@@ -436,10 +449,13 @@ button:hover
 
 .formZakazivanje
 {
-    background-color: var(--mono-color);
-    max-width: 1200px;
+    background-color: var(--main-color);
+    max-width: 1400px;
+    /* width: 100%; */
     margin: 20px auto;
     padding: 5px;
+    border-radius: 3%;
+    
 }
 
 textarea
@@ -518,4 +534,9 @@ label
 .top-right a
 {
     padding-left: 10px;
+}
+
+input
+{
+    border-radius: 8px;
 }

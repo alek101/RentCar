@@ -114,7 +114,7 @@
                     . "</tr>"; !!} --}}
                  {!! "<td>
                         <button class='zakaziServis' date-sasija=".$auto->sasija.">Servis</button>
-                     </td>"; !!}
+                     </td></tr>"; !!}
                         
                     
                     

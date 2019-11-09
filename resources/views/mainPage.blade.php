@@ -25,6 +25,7 @@
                             <li><a href="/servis">Servis</a></li>
                             <li><a href="/prijem">Dodaj km</a></li>
                             <li><a href="/auto">Spisak automobila</a></li>
+                            <li><a href="/auto/sviModeli">Spisak Modela</a></li>
                             <li><a href="/rezervacija">Rezervisi</a></li>
                             <li><a href="/rezervacijeInfo/sve">Sve Rezervacije</a></li>
                             <li><a href="/rezervacijeInfo">Buduce Rezervacije</a></li>
@@ -35,6 +36,7 @@
                     <div class="adminMeniCart">
                         <ul>
                             <li><a href="/admin">Admin</a></li>
+                            <li><a href="/baza/add">Dodaj model</a></li>
                         </ul>
                     </div>
                 </div>

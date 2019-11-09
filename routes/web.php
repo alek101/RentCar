@@ -42,6 +42,7 @@ Route::prefix('/prijem')->middleware('login')->group(function()
 Route::prefix('/auto')->middleware('login')->group(function()
 {
     Route::get('/','MainController@auto');
+    Route::get('/sviModeli','TipoviAutomobilaController@modeli1');
     Route::get('/{id}','MainController@autoInfo');
 });
 
@@ -90,6 +91,18 @@ Route::prefix('/zakazi')->group(function()
     Route::get('/','MainController@zakaziPrikaz1');
     Route::post('/posalji1','MainController@podaci');
     Route::post('/posalji2','MainController@rezervacija4');
+});
+
+Route::prefix('/baza')->middleware('admin')->group(function()
+{
+    
+    Route::get('/add','TipoviAutomobilaController@getDodaj');
+    Route::post('/posalji1','TipoviAutomobilaController@Dodaj');
+});
+
+Route::prefix('/klient')->group(function()
+{
+    Route::get('/sviModeli','TipoviAutomobilaController@modeli2');
 });
 
 
