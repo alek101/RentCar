@@ -77,13 +77,14 @@ class TipoviAutomobilaController extends Controller
     //
     public function getIzmeni()
     {
-        return view('baza.modelID');
+        $models=TipoviAutomobilaModel::all();
+        return view('baza.modelID',['models'=>$models]);
     }
 
     //
     public function getFormIzmeni(Request $request)
     {
-        $modelID=$request->Model;
+        $modelID=str_replace("_"," ",$request->Model);
         $model=TipoviAutomobilaModel::where('Model',$modelID)->firstOrFail();
         $cena_3=CenovnikModel::where('Model',$modelID)->where('Max_broj_dana',3)->firstOrFail();
         $cena_7=CenovnikModel::where('Model',$modelID)->where('Max_broj_dana',7)->firstOrFail();

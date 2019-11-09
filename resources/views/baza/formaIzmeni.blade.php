@@ -54,9 +54,9 @@
             </label>
         </div>
         <div class="flexRow">
-            <label for="Broj_sedista">Broj Sedista<input type="text" name="Broj_sedista" id="Broj_sedista" value={!! $model->Broj_sedista !!}></label>
-            <label for="Broj_vrata">Broj Vrata<input type="text" name="Broj_vrata" id="Broj_vrata" value={!! $model->Broj_vrata !!}></label>
-            <label for="Broj_torbi">Broj Torbi<input type="text" name="Broj_torbi" id="Broj_torbi" value={!! $model->Broj_torbi !!}></label>
+            <label for="Broj_sedista">Broj Sedista<input type="number" name="Broj_sedista" id="Broj_sedista" value={!! $model->Broj_sedista !!}></label>
+            <label for="Broj_vrata">Broj Vrata<input type="number" name="Broj_vrata" id="Broj_vrata" value={!! $model->Broj_vrata !!}></label>
+            <label for="Broj_torbi">Broj Torbi<input type="number" name="Broj_torbi" id="Broj_torbi" value={!! $model->Broj_torbi !!}></label>
         </div>
         <div class="flexRow">
             <label for="opis">Opis <br><textarea name="opis" id="opis" cols="100" rows="10" >{!! $model->opis !!}</textarea></label>

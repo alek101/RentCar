@@ -101,6 +101,13 @@ Route::prefix('/baza')->middleware('admin')->group(function()
     Route::get('/change','TipoviAutomobilaController@getIzmeni');
     Route::post('/posalji2','TipoviAutomobilaController@getFormIzmeni');
     Route::post('/posalji3','TipoviAutomobilaController@izmeni');
+
+    Route::get('/add2','CarController@getDodaj');
+    Route::post('/posalji4','CarController@dodaj');
+    Route::get('/change2','CarController@getIzmeni');
+    Route::post('/posalji5','CarController@getFormIzmeni');
+    Route::post('/posalji6','CarController@izmeni');
+
 });
 
 Route::prefix('/klient')->group(function()

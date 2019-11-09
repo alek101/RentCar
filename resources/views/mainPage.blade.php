@@ -38,6 +38,8 @@
                             <li><a href="/admin">Admin</a></li>
                             <li><a href="/baza/add">Dodaj model</a></li>
                             <li><a href="/baza/change">Izmeni model i cenu</a></li>
+                            <li><a href="/baza/add2">Dodaj automobil</a></li>
+                            <li><a href="/baza/change2">Izmeni vozilo</a></li>
                         </ul>
                     </div>
                 </div>
