@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 use App;
-use App\TipoviAutomobila;
+use App\TipoviAutomobilaModel;
 
 class MainController extends Controller
 {
@@ -28,7 +28,7 @@ class MainController extends Controller
     FROM
         `automobili`
     WHERE
-        `Servis`=0 and
+        `Servis`=0 and `Aktivan`=1 and
          (DATEDIFF(`Datum_vazenja_registracije`,CURRENT_DATE())<=? OR
          `Predjena_km`-`Radjen_mali_servis_km`>=? OR
          `Predjena_km`-`Radjen_veliki_servis_km`>=?)",[30,10000,100000]);
@@ -96,7 +96,7 @@ class MainController extends Controller
         ON
             A.Broj_sasije = R.ID_vozila
         WHERE
-            A.Broj_sasije=?
+            A.Broj_sasije=? and A.Aktivan=1
             and
             ((
                 ? >= R.Datum_pocetka AND ? <= R.Datum_zavrsetka
@@ -211,7 +211,7 @@ class MainController extends Controller
     FROM
         `automobili`
     WHERE
-        `Servis`=1 ",[]);
+        `Servis`=1 and `Aktivan`=1",[]);
         
         return view('servis.servis',['niz'=>$niz]);
     }
@@ -393,6 +393,8 @@ class MainController extends Controller
         `Predjena_km`-`Radjen_veliki_servis_km` as 'predjeno_km_veliki'
     FROM
         `automobili`
+    WHERE
+        `Aktivan`=1
     ",[]);
     }
 
@@ -851,7 +853,7 @@ class MainController extends Controller
 
         foreach($models as $model)
         {
-            $readyModels[$model]=TipoviAutomobila::where('Model',$model)->first();
+            $readyModels[$model]=TipoviAutomobilaModel::where('Model',$model)->first();
             $cene[$model]=$this->totalCost($model,$dateStart,$dateEnd);
         }
 

@@ -514,3 +514,8 @@ label
 {
     max-width: 300px;
 }
+
+.top-right a
+{
+    padding-left: 10px;
+}

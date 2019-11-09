@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TipoviAutomobila extends Model
+class TipoviAutomobilaModel extends Model
 {
     //
     protected $table='model';
