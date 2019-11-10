@@ -325,10 +325,15 @@ form *
 
 button,#dugme
 {
-    padding: 20px 30px;
+    padding: 5px;
     box-shadow: 2px 2px gray;
     font-size: 1.2em;
     transition: all 0.3s;
+}
+
+#dugme
+{
+    padding: 20px 30px;
 }
 
 button:hover
@@ -368,7 +373,7 @@ button:hover
 {
     position: absolute;
     top: 30%; left: 35%;
-    height: 50px; width: 200px;
+    height: 180px; width: 250px;
     
     background-color: var(--compl-color);
     z-index: 10;
