@@ -14,7 +14,7 @@
         </div>
         <div class="flexRow">
             <label for="Model">Model Automobila<input type="text" name="Model" id="Model" value={!! str_replace(' ','_',$model->Model) !!} ></label>
-            <label for="slika">Ime fajla slike<input type="text" name="slika" id="slika" value={!! substr($model->slika,8) !!}></label>
+            <label for="slika">Ime slike<input type="text" name="slika" id="slika" value={!! str_replace(' ','_',substr($model->slika,8)) !!}></label>
         </div>
         <div class="flexRow">
             <label for="Klasa">

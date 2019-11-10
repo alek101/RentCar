@@ -33,7 +33,7 @@ class TipoviAutomobilaController extends Controller
     {
         $newModel=new TipoviAutomobilaModel;
         $newModel->Model=$request->Model;
-        $newModel->slika='/images/'.$request->slika;
+        $newModel->slika='/images/'.str_replace("_"," ",$request->slika);
         $newModel->Klasa=$request->Klasa;
         $newModel->Tip_menjaca=$request->Tip_menjaca;
         $newModel->Broj_sedista=$request->Broj_sedista;
@@ -96,7 +96,7 @@ class TipoviAutomobilaController extends Controller
     {
         $model=str_replace("_"," ",$request->Model);
         $newModel=TipoviAutomobilaModel::where('Model',$model)->firstOrFail();
-        $newModel->slika='/images/'.$request->slika;
+        $newModel->slika='/images/'.str_replace("_"," ",$request->slika);
         $newModel->Klasa=$request->Klasa;
         $newModel->Tip_menjaca=$request->Tip_menjaca;
         $newModel->Broj_sedista=$request->Broj_sedista;

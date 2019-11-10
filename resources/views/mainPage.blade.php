@@ -40,6 +40,7 @@
                             <li><a href="/baza/change">Izmeni model i cenu</a></li>
                             <li><a href="/baza/add2">Dodaj automobil</a></li>
                             <li><a href="/baza/change2">Izmeni vozilo</a></li>
+                            <li><a href="/baza/addImage1">Uploaduj Sliku</a></li>
                         </ul>
                     </div>
                 </div>

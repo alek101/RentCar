@@ -109,6 +109,9 @@ Route::prefix('/baza')->middleware('admin')->group(function()
     Route::post('/posalji5','CarController@getFormIzmeni');
     Route::post('/posalji6','CarController@izmeni');
 
+    Route::get('/addImage1','AdminController@getFormImage');
+    Route::post('/posaljiSliku','AdminController@uploadImage');
+
 });
 
 Route::prefix('/klient')->group(function()

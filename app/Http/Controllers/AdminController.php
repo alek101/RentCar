@@ -65,4 +65,51 @@ class AdminController extends Controller
         
         return redirect('/admin');
     }
+
+    //
+    public function getFormImage()
+    {
+        return view('baza.formImage');
+    }
+
+    public function uploadImage(Request $request)
+    {
+        //proverava da li je name::image slika
+        $request->validate([
+            'slika' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+  
+        //dodajemo ime slike i extenziju
+        // $imageName = $request->nazivSlike.'.'.$request->slika->extension(); 
+
+        //dodajemo ime slike bez ekstenzije
+        $imageName = $request->nazivSlike; 
+   
+        //preuzima sliku i ubacuje je u fajl images
+        $request->slika->move(public_path('images'), $imageName);
+   
+        return back()
+            ->with('success','You have successfully upload image.')
+            ->with('image',$imageName);
+    }
+
+    //original code:: change name of incoming picture with img
+    // public function uploadImage(Request $request)
+    // {
+    //     //proverava da li je name::image slika
+    //     $request->validate([
+    //         'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    //     ]);
+  
+    //     //dodajemo ime slike i extenziju
+    //     $imageName = $request->nazivSlike.'.'.$request->image->extension(); 
+   
+    //     //preuzima sliku i ubacuje je u fajl images
+    //     $request->image->move(public_path('images'), $imageName);
+   
+    //     return back()
+    //         ->with('success','You have successfully upload image.')
+    //         ->with('image',$imageName);
+    // }
+
 }

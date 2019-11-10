@@ -180,9 +180,9 @@ font-weight: bold;
 {
     /* visibility: visible; */
     display: block;
-    /* animation: padajuci_meni 0.4s;
+    animation: padajuci_meni 0.4s;
     animation-timing-function: linear;
-    height: auto; */
+    height: auto;
 }
 
 @keyframes padajuci_meni{

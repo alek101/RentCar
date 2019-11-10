@@ -8,7 +8,7 @@
         </div>
         <div class="flexRow">
             <label for="Model">Model Automobila<input type="text" name="Model" id="Model"></label>
-            <label for="slika">Ime fajla slike<input type="text" name="slika" id="slika"></label>
+            <label for="slika">Ime slike<input type="text" name="slika" id="slika"></label>
         </div>
         <div class="flexRow">
             <label for="Klasa">
