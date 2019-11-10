@@ -91,37 +91,41 @@
         //filter
     
         try {
-            document.querySelector('#filter').addEventListener('change',function(e)
+            if(document.querySelector('#filter')!=null)
             {
-                let word=document.querySelector('#filter').value.toLowerCase();
-                let trNiz=[...document.querySelectorAll('tr')];
-                for(tr of trNiz)
+                document.querySelector('#filter').addEventListener('change',function(e)
                 {
-                    let array=[...tr.childNodes];
-                    let c1=false; let c2=false;
-                    array.map(function(c)
+                    let word=document.querySelector('#filter').value.toLowerCase();
+                    let trNiz=[...document.querySelectorAll('tr')];
+                    for(tr of trNiz)
                     {
-                        if(c.tagName=='TD')
+                        let array=[...tr.childNodes];
+                        let c1=false; let c2=false;
+                        array.map(function(c)
                         {
-                            c1=true;
-                        }
+                            if(c.tagName=='TD')
+                            {
+                                c1=true;
+                            }
 
-                        if(typeof(c.innerHTML)==='string' && c.innerHTML.toLowerCase().includes(word))
+                            if(typeof(c.innerHTML)==='string' && c.innerHTML.toLowerCase().includes(word))
+                            {
+                                c2=true;
+                            }
+                        })
+                        
+                        if(c1 && c2)
                         {
-                            c2=true;
+                            tr.classList.remove('disapear');
                         }
-                    })
-                    
-                    if(c1 && c2)
-                    {
-                        tr.classList.remove('disapear');
+                        else if(c1 && !c2)
+                        {
+                            tr.classList.add('disapear');
+                        }
                     }
-                    else if(c1 && !c2)
-                    {
-                        tr.classList.add('disapear');
-                    }
-                }
-            })
+                })
+            }
+            
         } catch (error) {
             console.log("Smisli nesto za: "+error);
         }
