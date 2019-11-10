@@ -45,5 +45,13 @@
     </div>
 </form>
 
+<script>
+    let nameImage=sessionStorage.getItem('nameImage');
+    if(nameImage!=null)
+    {
+        document.querySelector('#slika').value=nameImage;
+    }
+
+</script>
 
 @endsection

@@ -19,7 +19,9 @@
 <script>
     document.querySelector('#slika').addEventListener('change',function(e)
     {
-        document.querySelector('#naziv').value=document.querySelector('#slika').value.slice(12);
+        let nameImage=document.querySelector('#slika').value.slice(12);
+        document.querySelector('#naziv').value=nameImage;
+        sessionStorage.setItem('nameImage',nameImage);
     })
 
 </script>
