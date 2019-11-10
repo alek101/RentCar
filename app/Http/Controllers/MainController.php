@@ -630,7 +630,8 @@ class MainController extends Controller
         `Datum_zavrsetka` as 'dateEnd',
         `Broj_registarskih_tablica` as 'tablice',
         `Model` as 'model',
-        `Cena` as 'cena'
+        `Cena` as 'cena',
+        A.Broj_sasije as 'car_id'
         FROM
             `rezervacija` AS R
         JOIN `automobili` AS A
@@ -687,6 +688,15 @@ class MainController extends Controller
         $this->cancelFutureReservation($id);
         // return $this->rezervacijeInfo();
         return redirect('/rezervacijeInfo');
+    }
+
+    //
+    public function cancelReservationA($id)
+    {
+        $info=$this->returnInformation($id);
+        $this->cancelFutureReservation($id);
+        // return $this->rezervacijeInfo();
+        return redirect('/auto/info/'.$info[0]->car_id);
     }
 
     //

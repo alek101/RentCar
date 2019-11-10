@@ -1,7 +1,13 @@
 @extends('mainPage')
 @section('Page')
 
+{{-- @php
+    var_dump($niz);
+@endphp --}}
+
 <div class="margin_20"><label for="filter">Filter tabela: <input type="text" id="filter" class='filter'></label></div>
+
+<div class="prazan"></div>
 
 <h3>Osnonvne Informacije</h3>
 <table>
@@ -122,6 +128,7 @@
 
 <table>
         <tr>
+            
             <th>Datum</th>
             <th>Tip Servisa</th>
             <th>Kilometraza</th>
@@ -129,6 +136,7 @@
         </tr>
     
         <tr>
+            
             <th></th>
             <th></th>
             <th>km</th>
@@ -164,6 +172,7 @@
 
     <table>
         <tr>
+            <th>ID rezervacije</th>
             <th>Ime</th>
             <th>Mejl</th>
             <th>Telefon</th>
@@ -171,46 +180,52 @@
             <th>Datum zavrsetka</th>
             <th>Cena</th>
             <th>Opis</th>
+            <th>Otkazi</th>
         </tr>
     
         
     
-        @foreach ($niz as $auto)
+        @foreach ($niz as $rez)
             {!! 
             "<tr>" .
     
-                "<td>" .
-                    $auto->ime
-                    . "</td>".
-    
                     "<td>" .
-                    $auto->meil
-                    . "</td>".
-    
-                    "<td>" .
-                    $auto->telefon
-                    . "</td>".
-    
-                    "<td>" .
-                    $auto->start
-                    . "</td>".
-    
-                    "<td>" .
-                    $auto->finish
-                    . "</td>".
-    
-                    "<td>" .
-                    $auto->cena
+                    $rez->id
                     . "</td>".
 
                     "<td>" .
-                    $auto->opis
+                    $rez->ime
+                    . "</td>".
+    
+                    "<td>" .
+                    $rez->meil
+                    . "</td>".
+    
+                    "<td>" .
+                    $rez->telefon
+                    . "</td>".
+    
+                    "<td>" .
+                    $rez->start
+                    . "</td>".
+    
+                    "<td>" .
+                    $rez->finish
+                    . "</td>".
+    
+                    "<td>" .
+                    $rez->cena
+                    . "</td>".
+
+                    "<td>" .
+                    $rez->opis
                     . "</td>"
     
+                    ."<td><button class='obrisi' data-link='/auto/cancel/".$rez->id."'>Otkazi</button></td>"
     
              . "</tr>";
-            !!}
-        @endforeach
+            !!} 
+         @endforeach
     </table>
 
     <script>
@@ -219,6 +234,34 @@
         {
             window.open("/kriticni/"+sasija);
         })
+
+        let butoniObrisi=[...document.querySelectorAll('.obrisi')];
+        butoniObrisi.map(b=>b.addEventListener('click', function()
+        {
+            let link=b.getAttribute('data-link');
+            let div=document.createElement('div');
+            div.className='kartica';
+            div.append('Da li ste sigurni?   ');
+
+            let butY=document.createElement('button');
+            butY.innerHTML="Da";
+            butY.addEventListener('click',function(e)
+            {
+                window.open(link);
+                e.target.parentElement.remove();
+            })
+            div.appendChild(butY);
+
+            let butN=document.createElement('button');
+            butN.innerHTML="Ne";
+            butN.addEventListener('click',function(e)
+            {
+                e.target.parentElement.remove();
+            })
+            div.appendChild(butN);
+
+            document.querySelector('.prazan').appendChild(div);
+        }))
     </script>
 
 @endsection

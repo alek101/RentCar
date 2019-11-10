@@ -43,7 +43,8 @@ Route::prefix('/auto')->middleware('login')->group(function()
 {
     Route::get('/','MainController@auto');
     Route::get('/sviModeli','TipoviAutomobilaController@modeli1');
-    Route::get('/{id}','MainController@autoInfo');
+    Route::get('/info/{id}','MainController@autoInfo');
+    Route::get('/cancel/{id}','MainController@cancelReservationA');
 });
 
 Route::prefix('/rezervacija')->middleware('login')->group(function()
@@ -60,10 +61,10 @@ Route::prefix('/rezervacijeInfo')->middleware('login')->group(function()
     Route::get('/','MainController@rezervacijeInfo');
     Route::post('forma1','MainController@rezervacijeSveForm');
     Route::get('/sve','MainController@rezervacijeSve');
+    Route::post('/extend','MainController@extend');
     Route::get('/sve/{num}','MainController@rezervacijeSve');
     Route::get('/cancel/{id}','MainController@cancelReservation');
     Route::get('/extendForm/{id}','MainController@getExtendForm');
-    Route::post('/extend','MainController@extend');
 });
 
 Auth::routes();
