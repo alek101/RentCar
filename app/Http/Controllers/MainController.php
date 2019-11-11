@@ -9,7 +9,7 @@ use App\TipoviAutomobilaModel;
 
 class MainController extends Controller
 {
-    //Daje automobile koji moraju uskro da imaju servis
+    //Daje automobile koji moraju uskoro da imaju servis
     public function kriticni()
     {
         $niz=DB::select("SELECT
@@ -222,7 +222,7 @@ class MainController extends Controller
         return view('servis.uradi',['id'=>$id]);
     }
 
-    //
+    //funkcija koja prima podatke za zavrsetak servisa
     public function endServis(Request $request)
     {
         $id=$request->id;
@@ -234,7 +234,7 @@ class MainController extends Controller
         return $this->servis();
     }
 
-    //
+    //pomocna funkcij akoja radi servis
     function madeServis($id,$tip,$datum,$opis,$registracija)
         {
             $km=$this->getKM($id)[0]->km;
@@ -284,7 +284,7 @@ class MainController extends Controller
             ",[$km,$id]);   
     }
 
-    //
+    //funkcija koj upisuje servis u bazu
     public function insertServis($id,$datum,$km,$tip,$opis)
     {
         DB::insert("INSERT INTO `servisna_knjizica`(`ID_automobila`, `Datum`, `Kilometraza`, `Tip_servisa`, `Opis`) 
@@ -343,7 +343,7 @@ class MainController extends Controller
         return view('prijem.prijem');
     }
 
-    //
+    //funkcija za dodavanje km automobilu
     public function izmeniKM(Request $request)
     {
         $id=$request->id;
@@ -361,8 +361,6 @@ class MainController extends Controller
             $this->addKM($id,$km);
             return $this->prijem();
         }
-
-        
     }
 
 
@@ -375,7 +373,7 @@ class MainController extends Controller
     }
 
     //automobili
-    //
+    //vraca sve automobile
     public function getAllCars()
     {
         return DB::select("SELECT
@@ -456,7 +454,7 @@ class MainController extends Controller
     }
 
     //REZERVACIJE
-
+    //pomocna funkcija koja proverava da li auto sme da se rezervise
     public function checkExparationReg($id,$dateEnd,$crit_time=3)
     {
         $razlika=DB::select(
@@ -477,7 +475,7 @@ class MainController extends Controller
         }
     }
 
-    //
+    //svi automobili koji smeju da se rezervisu
     public function aveilibleCars($dateStart,$dateEnd)
     {
         $automobili=$this->getAllCars();
@@ -500,7 +498,7 @@ class MainController extends Controller
         return $rezultat;
     }
 
-    //
+    //svi modeli
     public function aveilibleModels($dateStart,$dateEnd)
     {
         return array_keys($this->aveilibleCars($dateStart,$dateEnd));
@@ -512,6 +510,7 @@ class MainController extends Controller
         return view('rezervacija.rezervacija1');
     }
 
+    //
     public function rezervacija2(Request $request)
     {
         $dateStart=$request->dateStart;
@@ -553,7 +552,7 @@ class MainController extends Controller
         $cena=$this->totalCost($model,$dateStart,$dateEnd);
         $idRezervacije=$this->insertReservation($izabranAutoID,$ime,$email,$telefon,$dateStart,$dateEnd,$comment,$cena);
         $info=$this->returnInformation($idRezervacije);
-        // $this->posaljiMejl($izabranAutoID,$model,$ime,$email,$dateStart,$dateEnd,$info,$cena);
+        $this->sendMeil($info[0],'new');
         return view('rezervacija.info',['info'=>$info]);
     }
 
@@ -583,7 +582,7 @@ class MainController extends Controller
             if(isset($idRezervacije) and $idRezervacije > 0)
             {
                 $info=$this->returnInformation($idRezervacije);
-                // $this->posaljiMejl($izabranAutoID,$model,$ime,$email,$dateStart,$dateEnd,$info,$cena);
+                $this->sendMeil($info[0],'new');
                 return json_encode($info[0]); 
             }
             else
@@ -598,7 +597,7 @@ class MainController extends Controller
         }
     }
 
-    //
+    //funkcija za racunanje cene rezervacije
     public function totalCost($model,$dateStart,$dateEnd)
     {
         $niz=DB::select("
@@ -617,7 +616,7 @@ class MainController extends Controller
         return $niz[0]->razlika*$max;
     }
 
-    //
+    //informacije o rezervaciji
     public function returnInformation($idRezervacije)
     {
         return DB::select(
@@ -643,7 +642,7 @@ class MainController extends Controller
 
     //INFO rezervacije
 
-    //
+    //sve buduce rezervacije
     public function futureReservations()
     {
         return DB::select("SELECT
@@ -660,7 +659,7 @@ class MainController extends Controller
         FROM
             `rezervacija` as R
         join `automobili` as A on R.ID_vozila=A.Broj_sasije
-        where CURRENT_DATE()<=R.`Datum_pocetka`
+        where CURRENT_DATE()<=R.`Datum_pocetka`+3
         order by `Datum_pocetka` ASC",[]);   
     }
 
@@ -678,7 +677,7 @@ class MainController extends Controller
         FROM
             `rezervacija`
         WHERE
-            `ID_rezervacije`=? and CURRENT_DATE()<=`Datum_pocetka`",[$id]);
+            `ID_rezervacije`=? and CURRENT_DATE()<=`Datum_pocetka`+3",[$id]);
     }
 
     //
@@ -686,7 +685,7 @@ class MainController extends Controller
     {
         $info=$this->returnInformation($id);
         $this->cancelFutureReservation($id);
-        // return $this->rezervacijeInfo();
+        $this->sendMeil($info[0],'cancel');
         return redirect('/rezervacijeInfo');
     }
 
@@ -695,7 +694,7 @@ class MainController extends Controller
     {
         $info=$this->returnInformation($id);
         $this->cancelFutureReservation($id);
-        // return $this->rezervacijeInfo();
+        $this->sendMeil($info[0],'cancel');
         return redirect('/auto/info/'.$info[0]->car_id);
     }
 
@@ -829,7 +828,7 @@ class MainController extends Controller
         FROM
             `rezervacija` as R
         join `automobili` as A on R.ID_vozila=A.Broj_sasije
-        where CURRENT_DATE()<=R.`Datum_pocetka` and A.Broj_sasije =?
+        where CURRENT_DATE()<=R.`Datum_pocetka`+3 and A.Broj_sasije =?
         order by `Datum_pocetka` ASC",[$id]); 
     }
 
@@ -849,6 +848,7 @@ class MainController extends Controller
         return view('zakazi.prikaz1');
     }
 
+    //funkcija koja pravi json za fron end stranu
     public function podaci(Request $request)
     {
         $dateStart=$request->dateStart;
@@ -903,6 +903,8 @@ class MainController extends Controller
                     ",[$newDateEnd,$newCost,$id]
                 );
                 
+                $info=$this->returnInformation($id)[0];
+                $this->sendMeil($info,'extend');
                 return ("Rezervacija $id je produzena do $newDateEnd. Nova cena je $newCost.");
             }
             else
@@ -923,9 +925,43 @@ class MainController extends Controller
         return view('rezervacijeInfo.extendForm',['id'=>$id]);
     }
 
+    //
     public function extend(Request $request)
     {
         return $this->extendReservation($request->id,$request->brojDana);
     }
+
+    //Funkcija koja salje mejl kupcu-trenutno je iskljucena da ne bi bagovala
+    function sendMeil($info,$tip='new')
+        {
+
+        //     if($tip=='new')
+        //     {
+        //         $naslov="Uspesna rezervacija";
+        //         $poruka="Uspesno ste rezervisali auto $info->model sa registarskim tablicama $info->tablice na ime: $info->ime
+        //         , u vremenskom periodu od $info->dateStart do $info->dateEnd. Broj Vase rezervacije je $info->id_rez. Ukupna cena je $info->cena.";
+        //         $poruka=wordwrap($poruka,70,"\n");
+        //         mail($info->email,$naslov,$poruka);
+        //     }
+
+        //     if($tip=='extend')
+        //     {
+        //         $naslov="Uspesno produznje";
+        //         $poruka="Uspesno ste produzili rezervaciju automobila $info->model sa registarskim tablicama $info->tablice na ime: $info->ime
+        //         , u novom vremenskom periodu od $info->dateStart do $info->dateEnd. Broj Vase rezervacije je $info->id_rez. Nova cena je $info->cena.";
+        //         $poruka=wordwrap($poruka,70,"\n");
+        //         mail($info->email,$naslov,$poruka);
+        //     }
+
+        //     if($tip=='cancel')
+        //     {
+        //         $naslov="Rezervaicja je ukinuta";
+        //         $poruka="Rrezervaciju automobila $info->model sa registarskim tablicama $info->tablice na ime: $info->ime
+        //         , u novom vremenskom periodu od $info->dateStart do $info->dateEnd je ukinuta. Broj Vase rezervacije je $info->id_rez.";
+        //         $poruka=wordwrap($poruka,70,"\n");
+        //         mail($info->email,$naslov,$poruka);
+        //     }
+
+        }
 
 }
