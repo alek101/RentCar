@@ -11,6 +11,7 @@
     <div class="container">
         <div class="header">
             <div class="links">
+                <a href="/">Pocetna</a>
                 <a href="/zakazi">Zakazi</a>
                 <a href="/klient/sviModeli">Svi Modeli</a>
             </div>

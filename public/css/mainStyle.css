@@ -336,6 +336,11 @@ button,#dugme
     padding: 20px 30px;
 }
 
+#dugme2
+{
+    padding: 10px 15px;
+}
+
 button:hover
 {
     cursor: pointer;
@@ -349,6 +354,17 @@ button:hover
 }
 
 #dugme:hover
+{
+    cursor: pointer;
+    box-shadow: 0px 0px gray;
+    background-color: var(--compl-color-2);
+    color: white;
+    transform: translate(2px,2px);
+    border-top: 3px solid var(--compl-color-2);
+    border-left: 3px solid var(--compl-color-2);
+}
+
+#dugme2:hover
 {
     cursor: pointer;
     box-shadow: 0px 0px gray;
@@ -409,6 +425,16 @@ button:hover
     margin: 10px auto;
     padding: 10px;
 }
+
+.response2
+{
+    
+    background-color: var(--main-color);
+    width: 60%;
+    margin: 10px auto;
+    padding: 10px;
+}
+
 
 .flexRow
 {
@@ -544,4 +570,37 @@ label
 input
 {
     border-radius: 8px;
+}
+
+.linkA a
+{
+ margin: 10px;
+}
+
+
+.linkA a:link 
+{
+color: var(--main-color);
+font-weight: bold;
+}
+
+/* visited link */
+.linkA a:visited 
+{
+color: var(--main-color);
+font-weight: bold;
+}
+
+/* mouse over link */
+.linkA a:hover 
+{
+color: var(--compl-color-2);
+font-weight: bold;
+}
+
+/* selected link */
+.linkA a:active 
+{
+color: var(--compl-color-2);
+font-weight: bold;
 }

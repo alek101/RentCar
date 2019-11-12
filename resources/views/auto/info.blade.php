@@ -110,7 +110,7 @@
     @csrf
     <input type="text" name='id' value="<?=$auto->sasija?>" id="id" hidden>
     Dodaj KM <input type="number" name="km" id="km" value="">
-    <input type="submit" value="Posalji" id="dugme">
+    <input type="submit" value="Posalji" id="dugme2">
 
 </form>
 
