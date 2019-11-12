@@ -99,12 +99,19 @@
             dateEnd=dateEndInput.value;
             if(dateEnd=="")
             {
-               errors.push('Mora da postoji krajnji datum!'); 
-               dateEndInput.classList.add('errorBorder');
+                errors.push('Mora da postoji krajnji datum!'); 
+                dateEndInput.classList.add('errorBorder');
             }
             else
             {
                 dateEndInput.classList.remove('errorBorder');
+            }
+
+            if(createDate(dateStart)>=createDate(dateEnd))
+            {
+                errors.push('Krajnji datum mora da bude veci od pocetnog'); 
+                dateStartInput.classList.add('errorBorder');
+                dateEndInput.classList.add('errorBorder');
             }
             
             if(errors.length==0)
@@ -188,12 +195,6 @@
 
                         let dateStart,dateEnd,ime,telefon,email,comment;
 
-                        // dateStart=dateStartInput.value;
-                        // if(dateStart=="") errors.push('Mora da postoji pocetni datum!');
-
-                        // dateEnd=dateEndInput.value;
-                        // if(dateEnd=="") errors.push('Mora da postoji krajnji datum!');
-
                         dateStart=dateStartInput.value;
                         if(dateStart=="")
                         {
@@ -215,6 +216,13 @@
                         else
                         {
                             dateEndInput.classList.remove('errorBorder');
+                        }
+
+                        if(createDate(dateStart)>=createDate(dateEnd))
+                        {
+                            errors.push('Krajnji datum mora da bude veci od pocetnog'); 
+                            dateStartInput.classList.add('errorBorder');
+                            dateEndInput.classList.add('errorBorder');
                         }
 
                         ime=imeInput.value;
@@ -402,6 +410,12 @@
     function validateEmail(email) {
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(String(email).toLowerCase());
+    }
+
+    function createDate(inputDate)
+    {
+        inputDate=inputDate.split('-');
+        return new Date(inputDate[0],inputDate[1]-1,inputDate[2]);
     }
 
 </script>
