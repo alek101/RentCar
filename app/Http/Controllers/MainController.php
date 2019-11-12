@@ -87,32 +87,44 @@ class MainController extends Controller
     //pomocna fun koja daje da li je auto slobodan tog datuma ili ne
     public function freeCar($id,$dateStart,$dateEnd)
     {
-        $niz=DB::select(
-            'SELECT
-            A.Broj_sasije AS "id"
-        FROM
-            `automobili` AS A
-        LEFT JOIN `rezervacija` AS R
-        ON
-            A.Broj_sasije = R.ID_vozila
-        WHERE
-            A.Broj_sasije=? and A.Aktivan=1
-            and
-            ((
-                ? >= R.Datum_pocetka AND ? <= R.Datum_zavrsetka
-            ) OR(
-                ? >= R.Datum_pocetka AND ? <= R.Datum_zavrsetka
-            ))',[$id,$dateStart,$dateStart,$dateEnd,$dateEnd]
-        );
+        //proveravamo da li pravimo rezervaciju u proslosti
+        $trenutni=date('Y-m-d');
+        $check=strtotime($dateEnd) - strtotime($trenutni);
+        if($check>0)
+        {
+            //vadimo sve rezervacije za auto u vremnskom periodu, ako neka postoji, auto nije slobodan
+            $niz=DB::select(
+                'SELECT
+                A.Broj_sasije AS "id"
+            FROM
+                `automobili` AS A
+            LEFT JOIN `rezervacija` AS R
+            ON
+                A.Broj_sasije = R.ID_vozila
+            WHERE
+                A.Broj_sasije=? and A.Aktivan=1
+                and
+                ((
+                    ? >= R.Datum_pocetka AND ? <= R.Datum_zavrsetka
+                ) OR(
+                    ? >= R.Datum_pocetka AND ? <= R.Datum_zavrsetka
+                ))',[$id,$dateStart,$dateStart,$dateEnd,$dateEnd]
+            );
 
-        if(count($niz)==0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            };
+            if(count($niz)==0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                };
+        }
+        else
+        {
+            return false;
+        }
+        
     }
 
     //pomocna funkcija koja daje sledeci slobodan datum
@@ -546,14 +558,21 @@ class MainController extends Controller
         $email=$request->email;
         $comment=$request->comment;
 
-        $cars=$this->aveilibleCars($dateStart,$dateEnd);
-        $broj=rand(0,count($cars[$model])-1);
-        $izabranAutoID=$cars[$model][$broj];
         $cena=$this->totalCost($model,$dateStart,$dateEnd);
-        $idRezervacije=$this->insertReservation($izabranAutoID,$ime,$email,$telefon,$dateStart,$dateEnd,$comment,$cena);
-        $info=$this->returnInformation($idRezervacije);
-        $this->sendMeil($info[0],'new');
-        return view('rezervacija.info',['info'=>$info]);
+        if($cena>0)
+        {
+            $cars=$this->aveilibleCars($dateStart,$dateEnd);
+            $broj=rand(0,count($cars[$model])-1);
+            $izabranAutoID=$cars[$model][$broj];
+            $idRezervacije=$this->insertReservation($izabranAutoID,$ime,$email,$telefon,$dateStart,$dateEnd,$comment,$cena);
+            $info=$this->returnInformation($idRezervacije);
+            $this->sendMeil($info[0],'new');
+            return view('rezervacija.info',['info'=>$info]);
+        }
+        else
+        {
+            return redirect ('/rezervacija');
+        }
     }
 
     //preko ajax-a ili fetch-a
@@ -853,30 +872,39 @@ class MainController extends Controller
     {
         $dateStart=$request->dateStart;
         $dateEnd=$request->dateEnd;
-       
-        // return json_encode(''.$dateStart.$dateEnd);
 
-        $cars=$this->aveilibleCars($dateStart,$dateEnd);
-        $models=array_keys($cars);
-        $readyModels=[];
-        $cene=[];
-
-        foreach($models as $model)
-        {
-            $readyModels[$model]=TipoviAutomobilaModel::where('Model',$model)->first();
-            $cene[$model]=$this->totalCost($model,$dateStart,$dateEnd);
-        }
-
+        $diff = strtotime($dateEnd) - strtotime($dateStart);
         $json=[];
-        // $json['cars']=$cars;
-        $json['unique_models']=$models;
-        $json['cene']=$cene;
-        $json['podaci']=$readyModels;
+
+        if($diff>0)
+        {
+            $cars=$this->aveilibleCars($dateStart,$dateEnd);
+            $models=array_keys($cars);
+            $readyModels=[];
+            $cene=[];
+
+            foreach($models as $model)
+            {
+                $readyModels[$model]=TipoviAutomobilaModel::where('Model',$model)->first();
+                $cene[$model]=$this->totalCost($model,$dateStart,$dateEnd);
+            }
+
+            
+            // $json['cars']=$cars;
+            $json['unique_models']=$models;
+            $json['cene']=$cene;
+            $json['podaci']=$readyModels;
+        }
+        else
+        {
+            $json['unique_models']=[];
+            $json['cene']=[];
+            $json['podaci']=[];
+        }
 
         $paket=json_encode($json);
         
         return $paket;
-        // return view('zakazi.prikaz2',['json'=>$json,'paket'=>$paket]); 
     }
 
     //produzenje rezervacije

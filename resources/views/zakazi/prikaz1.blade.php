@@ -32,6 +32,7 @@
     
 
 <div class="divKartice disapear">
+    <div class="response2 hidden"></div>
     <div class="modelsWraper"></div>
 </div>
 
@@ -57,17 +58,22 @@
             showForma();
         })
 
-        document.querySelector('#aKartica').addEventListener('click',function(e)
-        {
-            e.preventDefault();
-            showKartice();
-        })
+    document.querySelector('#aKartica').addEventListener('click',function(e)
+    {
+        e.preventDefault();
+        showKartice();
+    })
 
     
     //ovo je za rezervacije
 
     let modelsWraper=document.querySelector('.modelsWraper');
     let responseDiv=document.querySelector('.response');
+    let responseDiv2=document.querySelector('.response2');
+    let dateStartInput=document.querySelector('#start');
+    let dateEndInput=document.querySelector('#end');
+    let imeInput=document.querySelector('#ime');
+    let emailInput=document.querySelector('#email');
 
 
     document.querySelector('.posalji').addEventListener('click',function(e)
@@ -78,11 +84,28 @@
 
             let dateStart,dateEnd,model,ime,telefon,email,comment;
 
-            dateStart=document.querySelector('#start').value;
-            if(dateStart=="") errors.push('Mora da postoji pocetni datum!');
+            dateStart=dateStartInput.value;
+            if(dateStart=="")
+            {
+                errors.push('Mora da postoji pocetni datum!');
+                dateStartInput.classList.add('errorBorder');
+            }
+            else
+            {
+                dateStartInput.classList.remove('errorBorder');
+            }
+            
 
-            dateEnd=document.querySelector('#end').value;
-            if(dateEnd=="") errors.push('Mora da postoji krajnji datum!');
+            dateEnd=dateEndInput.value;
+            if(dateEnd=="")
+            {
+               errors.push('Mora da postoji krajnji datum!'); 
+               dateEndInput.classList.add('errorBorder');
+            }
+            else
+            {
+                dateEndInput.classList.remove('errorBorder');
+            }
             
             if(errors.length==0)
             {
@@ -118,14 +141,25 @@
 
         function ispisi(json)
         {
-            // let div=modelsWraper;
+            
             modelsWraper.innerHTML="";
-            for(let model of json.unique_models )
+            console.log("json koji je stigao: ",json);
+            //proveravamo da li je json ,,prazan"
+            if(json.unique_models.length>0)
             {
-                let card=madeCard(model,json);
-                modelsWraper.appendChild(card);
+                for(let model of json.unique_models )
+                {
+                    let card=madeCard(model,json);
+                    modelsWraper.appendChild(card);
+                }
             }
-            console.log(json);
+            else
+            {
+                let r="Nije pronadjen nijedan automobil koji moze da se rezervise u vremnskom periodu!";
+                let dd=makeElement('div',{text:r,className:'response2'});
+                modelsWraper.append(dd);
+            }
+            
             showKartice();
         }
         
@@ -135,10 +169,20 @@
             let pic=makeElement('img',{src:json.podaci[model].slika,alt:'nema',className:'slicica'});
             let dm=makeElement('div',{text:null,className:"opis"});
                 let p1=makeElement('p',{text:model,className:"modelCardName"});
-                let p2=makeElement('p',{text:`Tip menjaca: ${json.podaci[model].Tip_menjaca}`});
-                let p3=makeElement('p',{text:`Broj vrata: ${json.podaci[model].Broj_vrata}`});
-                let p4=makeElement('p',{text:`Broj Sedista: ${json.podaci[model].Broj_sedista}`});
-                let p5=makeElement('p',{text:`Broj Torbi: ${json.podaci[model].Broj_torbi}`});
+                // let p2=makeElement('p',{text:`Tip menjaca: ${json.podaci[model].Tip_menjaca}`});
+                // let p3=makeElement('p',{text:`Broj vrata: ${json.podaci[model].Broj_vrata}`});
+                // let p4=makeElement('p',{text:`Broj Sedista: ${json.podaci[model].Broj_sedista}`});
+                // let p5=makeElement('p',{text:`Broj Torbi: ${json.podaci[model].Broj_torbi}`});
+                let p2=makeElement('p',{text:`<img class='icon' src='{!! asset('/images/icons/solid--car-gears.svg') !!}' alt='Tip Menjaca: '>
+                 ${json.podaci[model].Tip_menjaca}`});
+                let row2=makeElement('div',{className:'flexRow'});
+                let p3=makeElement('p',{text:`<img class='icon' src='{!! asset('/images/icons/solid--car-door.svg') !!}' alt='Broj Vrata: '> 
+                ${json.podaci[model].Broj_vrata}`});
+                let p4=makeElement('p',{text:`<img class='icon' src='{!! asset('/images/icons/solid--car-seat.svg') !!}' alt='Broj Sedista: '>
+                ${json.podaci[model].Broj_sedista}`});
+                let p5=makeElement('p',{text:`<img class='icon' src='{!! asset('/images/icons/solid--big-bag.svg') !!}' alt='Broj Torbi: '>
+                ${json.podaci[model].Broj_torbi}`});
+                row2.append(p3,p4,p5);
                 let cena=formatBroja(json.cene[model]);
                 let p6=makeElement('p',{text:`Cena: ${cena}`});
                 let button=makeElement('button',{text:'Rezervisi',className:'dugmeRezervisi'});
@@ -148,24 +192,76 @@
 
                         let dateStart,dateEnd,ime,telefon,email,comment;
 
-                        dateStart=document.querySelector('#start').value;
-                        if(dateStart=="") errors.push('Mora da postoji pocetni datum!');
+                        // dateStart=dateStartInput.value;
+                        // if(dateStart=="") errors.push('Mora da postoji pocetni datum!');
 
-                        dateEnd=document.querySelector('#end').value;
-                        if(dateEnd=="") errors.push('Mora da postoji krajnji datum!');
+                        // dateEnd=dateEndInput.value;
+                        // if(dateEnd=="") errors.push('Mora da postoji krajnji datum!');
 
-                        ime=document.querySelector('#ime').value;
-                        if(ime=="") errors.push('Mora da unese ime!');
+                        dateStart=dateStartInput.value;
+                        if(dateStart=="")
+                        {
+                            errors.push('Mora da postoji pocetni datum!');
+                            dateStartInput.classList.add('errorBorder');
+                        }
+                        else
+                        {
+                            dateStartInput.classList.remove('errorBorder');
+                        }
+                        
 
-                        email=document.querySelector('#email').value;
-                        if(email=="") errors.push('Mora da se unese email!');
+                        dateEnd=dateEndInput.value;
+                        if(dateEnd=="")
+                        {
+                            errors.push('Mora da postoji krajnji datum!'); 
+                            dateEndInput.classList.add('errorBorder');
+                        }
+                        else
+                        {
+                            dateEndInput.classList.remove('errorBorder');
+                        }
+
+                        ime=imeInput.value;
+                        if(ime=="")
+                        {
+                           errors.push('Mora da unese ime!'); 
+                           imeInput.classList.add('errorBorder');
+                        }
+                        else
+                        {
+                            imeInput.classList.remove('errorBorder');
+                        }
+                         
+
+                        email=emailInput.value;
+                        if(email=="")
+                        {
+                          errors.push('Mora da se unese email!');
+                          emailInput.classList.add('errorBorder'); 
+                        }
+                        else
+                        {
+                            emailInput.classList.remove('errorBorder'); 
+                        }
+                         
+
+                        if(!validateEmail(email))
+                        {
+                           errors.push('Email nije validan!'); 
+                           emailInput.classList.add('errorBorder'); 
+                        }
+                        else
+                        {
+                            emailInput.classList.remove('errorBorder'); 
+                        }
+                         
 
                         telefon=document.querySelector('#telefon').value || 000;
                         comment=document.querySelector('#comment').value || 'no comment';
                 
                         if (errors.length==0)
                         {
-                            reset();
+            
                             let niz=
                             {
                                 dateStart:dateStart,
@@ -200,7 +296,7 @@
                         
                     });
 
-            dm.append(p1,p2,p3,p4,p5,p6);
+            dm.append(p1,p2,row2,p6);
             
             
             d.append(pic,dm,button);
@@ -213,28 +309,34 @@
             modelsWraper.innerHTML="";
             responseDiv.innerHTML="";
             responseDiv.classList.add('hidden');
+            responseDiv2.innerHTML="";
+            responseDiv2.classList.add('hidden');
         }
 
         function errorsPrint(errors)
         {
             console.log(errors);
-            reset();
+            
+            responseDiv.innerHTML="";
             responseDiv.classList.remove('hidden');
-            let newDiv=makeElement('div',{text:"",className:"response2"});
-            // let newDiv2=makeElement('div',{text:""});
+            responseDiv2.innerHTML="";
+            responseDiv2.classList.remove('hidden');
+            let fr=document.createDocumentFragment();
+            let fr2=document.createDocumentFragment();
 
             for(let error of errors)
             {
                 let p=makeElement('p',{text:error,className:"errorP"});
                 let p2=makeElement('p',{text:error,className:"errorP"});
-                newDiv.append(p);
-                responseDiv.append(p2);
+                fr.append(p);
+                fr2.append(p2);
             }
-            modelsWraper.append(newDiv);
+            responseDiv.append(fr);
+            responseDiv2.append(fr2);
         }
 
         function makeElement(type="div",settings={
-        text: null,
+        text: "",
         className:"",
         src:"",
         alt:"There is no Picture aveilable",
@@ -243,6 +345,12 @@
         href:"",
         })
         {
+
+            settings.text=settings.text || "";
+            settings.className=settings.className || "";
+            settings.src=settings.src || "";
+            settings.alt=settings.alt || "There is no Picture aveilable";
+            settings.href=settings.href || "";
         let element=document.createElement(type);
             element.className=settings.className;
         switch(type){
@@ -271,31 +379,34 @@
 
     function odgovor(odgovor)
         {
-            let div=responseDiv;
-            let div2=modelsWraper;
-            div.classList.remove('hidden');
+            responseDiv.classList.remove('hidden');
             console.log(odgovor);
 
             if(odgovor==='Nije proslo!')
             {
-                div.innerHTML="Rezervacija nije uspela, molimo pokusajte ponovo!";
+                responseDiv.innerHTML="Rezervacija nije uspela, molimo pokusajte ponovo!";
                 showForma(); 
             }
             else if(odgovor==='Los period!')
             {
-                div.innerHTML=`Rezervacija nije uspela! Morate rezervisati barem jedan pun dan,
+                responseDiv.innerHTML=`Rezervacija nije uspela! Morate rezervisati barem jedan pun dan,
                  krajnji datum mora ici pre pocetnog datuma!`;
                  showForma(); 
             }
             else
             {
                 let r=`Uspesno ste rezervisali auto sa tablicama ${odgovor.tablice}. Sifra rezervacije je ${odgovor.id_rez}.`;
-                div.innerHTML=r;
-                let divOdg=makeElement('div',{text:r,className:"response2"});
-                div2.innerHTML="";
-                div2.append(divOdg);
+                responseDiv.innerHTML=r;
+                responseDiv2.innerHTML=r;
+                let dd=makeElement('div',{text:r,className:'response2'});
+                modelsWraper.append(dd);
             } 
         }
+
+    function validateEmail(email) {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
 
 </script>
 

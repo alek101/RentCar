@@ -560,6 +560,7 @@ label
 .slicica
 {
     max-width: 300px;
+    max-height: 182px;
 }
 
 .top-right a
@@ -603,4 +604,14 @@ font-weight: bold;
 {
 color: var(--compl-color-2);
 font-weight: bold;
+}
+
+.errorBorder
+{
+    border: 2px solid var(--link-hover);
+}
+
+p
+{
+    margin: 2px;
 }

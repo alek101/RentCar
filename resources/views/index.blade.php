@@ -68,6 +68,8 @@
             //filter
         
             try {
+            if(document.querySelector('#filter')!=null)
+            {
                 document.querySelector('#filter').addEventListener('change',function(e)
                 {
                     let word=document.querySelector('#filter').value.toLowerCase();
@@ -82,7 +84,7 @@
                             {
                                 c1=true;
                             }
-    
+
                             if(typeof(c.innerHTML)==='string' && c.innerHTML.toLowerCase().includes(word))
                             {
                                 c2=true;
@@ -99,9 +101,11 @@
                         }
                     }
                 })
-            } catch (error) {
-                console.log("Smisli nesto za: "+error);
             }
+            
+        } catch (error) {
+            console.log("Smisli nesto za: "+error);
+        }
             
         </script>
     
