@@ -8,10 +8,10 @@
         <th></th>
         <th>Naziv</th>
         <th>Klasa</th>
-        <th>Tip Menjaca</th>
-        <th>Broj Sedista</th>
-        <th>Broj Vrata</th>
-        <th>Broj Torbi</th>
+        <th><img class='icon' src='{!! asset('/images/icons/solid--car-gears.svg') !!}' alt='Tip Menjaca: '></th>
+        <th><img class='icon' src='{!! asset('/images/icons/solid--car-door.svg') !!}' alt='Broj Vrata: '></th>
+        <th><img class='icon' src='{!! asset('/images/icons/solid--car-seat.svg') !!}' alt='Broj Sedista: '></th>
+        <th><img class='icon' src='{!! asset('/images/icons/solid--big-bag.svg') !!}' alt='Broj Torbi: '></th>
     </tr>
 
     @foreach ($models as $model)

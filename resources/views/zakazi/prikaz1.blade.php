@@ -169,10 +169,6 @@
             let pic=makeElement('img',{src:json.podaci[model].slika,alt:'nema',className:'slicica'});
             let dm=makeElement('div',{text:null,className:"opis"});
                 let p1=makeElement('p',{text:model,className:"modelCardName"});
-                // let p2=makeElement('p',{text:`Tip menjaca: ${json.podaci[model].Tip_menjaca}`});
-                // let p3=makeElement('p',{text:`Broj vrata: ${json.podaci[model].Broj_vrata}`});
-                // let p4=makeElement('p',{text:`Broj Sedista: ${json.podaci[model].Broj_sedista}`});
-                // let p5=makeElement('p',{text:`Broj Torbi: ${json.podaci[model].Broj_torbi}`});
                 let p2=makeElement('p',{text:`<img class='icon' src='{!! asset('/images/icons/solid--car-gears.svg') !!}' alt='Tip Menjaca: '>
                  ${json.podaci[model].Tip_menjaca}`});
                 let row2=makeElement('div',{className:'flexRow'});
