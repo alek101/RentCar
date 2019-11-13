@@ -134,7 +134,7 @@
         dugmici.map(c=>c.addEventListener('click',function(e)
         {
             let sasija=e.target.getAttribute("date-sasija");
-            window.open("/kriticni/"+sasija);
+            window.open("/kriticni/initiateServis/"+sasija);
         }))
 </script>
 

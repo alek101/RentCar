@@ -35,7 +35,7 @@
                     $user->role
                     . "</td>"
     
-                    ."<td> <a href='/admin/".$user->id."'>Change</td>"
+                    ."<td> <a href='/admin/roleChange/".$user->id."'>Change</td>"
     
                     
                     // ."<td> <a href='/admin/delete/".$user->id."'>Delete</td>"

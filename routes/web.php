@@ -25,16 +25,16 @@ Route::get('/glavna','MainController@kriticni')->middleware('login');
 Route::prefix('/kriticni')->middleware('login')->group(function()
 {
     Route::get('/','MainController@kriticni');
-    Route::post('/posalji1','MainController@posalji1');
-    Route::post('/posalji2','MainController@posalji2');
-    Route::get('/{id}','MainController@zakaziServis');
+    Route::post('/findServiseDate','MainController@findServiseDate');
+    Route::post('/sheduleServise','MainController@sheduleServise');
+    Route::get('/initiateServis/{id}','MainController@initiateServis');
 });
 
 Route::prefix('/servis')->middleware('login')->group(function()
 {
     Route::get('/','MainController@servis');
-    Route::post('/finish','MainController@endServis');
-    Route::get('/{id}','MainController@servisCar');
+    Route::post('/endServis','MainController@endServis');
+    Route::get('/servisCar/{id}','MainController@servisCar');
 });
 
 Route::prefix('/prijem')->middleware('login')->group(function()
@@ -52,6 +52,7 @@ Route::prefix('/auto')->middleware('login')->group(function()
     Route::get('/cancel/{id}','MainController@cancelReservationA');
 });
 
+//depricated
 Route::prefix('/rezervacija')->middleware('login')->group(function()
 {
     Route::get('/','MainController@rezervacija1');
@@ -61,6 +62,7 @@ Route::prefix('/rezervacija')->middleware('login')->group(function()
     
 });
 
+//ovo ne diram, jedva ga namestih
 Route::prefix('/rezervacijeInfo')->middleware('login')->group(function()
 {
     Route::get('/','MainController@rezervacijeInfo');
@@ -79,12 +81,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::prefix('/admin')->middleware('admin')->group(function()
 {
     Route::get('/','AdminController@home');
-    Route::get('/{id}','AdminController@formaRole');
-    Route::post('/forma1','AdminController@change');
+    Route::get('/roleChange/{id}','AdminController@formaRole');
+    Route::post('/change','AdminController@change');
     Route::get('/delete/{id}','AdminController@delete');
     
 });
 
+//ovo je nebitno
 Route::prefix('/test')->group(function()
 {
     Route::get('/','MainController@test1');
@@ -95,8 +98,8 @@ Route::prefix('/test')->group(function()
 Route::prefix('/zakazi')->group(function()
 {
     Route::get('/','MainController@zakaziPrikaz1');
-    Route::post('/posalji1','MainController@podaci');
-    Route::post('/posalji2','MainController@rezervacija4');
+    Route::post('/makeJSONforBooking','MainController@makeJSONforBooking');
+    Route::post('/makeBookingWithFetch','MainController@makeBookingWithFetch');
 });
 
 Route::prefix('/baza')->middleware('admin')->group(function()

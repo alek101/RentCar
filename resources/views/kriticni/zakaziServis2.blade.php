@@ -7,7 +7,7 @@
     
 @endphp
 
-<form method="POST" action="/kriticni/posalji2">
+<form method="POST" action="/kriticni/sheduleServise">
     @csrf
     {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}" id='token'> --}}
     Broj Sasije <input type="text" name='id' value="<?=$id?>" id="id">

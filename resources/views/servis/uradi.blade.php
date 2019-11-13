@@ -3,7 +3,7 @@
 
 <h3>Za produzenje registracije, izaberite opciju.</h3>
 
-<form method="POST" action="/servis/finish" class='formZakazivanje'>
+<form method="POST" action="/servis/endServis" class='formZakazivanje'>
     <div class="flexColumn">
         <div>@csrf</div>
         

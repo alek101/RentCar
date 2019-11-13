@@ -37,13 +37,13 @@ class MainController extends Controller
     }
 
     //zakazivanej servisa
-    public function zakaziServis($id)
+    public function initiateServis($id)
     {
         return view('kriticni.zakaziServis',['id'=>$id]);
     }
 
     //trazenje pogodnog datuma za servis
-    public function posalji1(Request $request )
+    public function findServiseDate(Request $request )
     {
         $id=$request->id;
         $brojDana=$request->brojDana;
@@ -61,7 +61,7 @@ class MainController extends Controller
     }
 
     //i konacno zakazivanje istog
-    public function posalji2(Request $request )
+    public function sheduleServise(Request $request )
     {
         $id=$request->id;
         $dateStart=$request->dateStart;
@@ -253,7 +253,7 @@ class MainController extends Controller
 
             if($tip=='mali')
             {
-                DB::transaction(function() use($id,$tip,$datum,$opis,$registracija)
+                DB::transaction(function() use($id,$datum,$opis,$km)
                 {
                     $this->insertServis($id,$datum,$km,'mali',$opis);
                     $this->setMaliServisKM($id,$km);
@@ -263,7 +263,7 @@ class MainController extends Controller
             }
             if($tip=='veliki')
             {
-                DB::transaction(function() use($id,$tip,$datum,$opis,$registracija)
+                DB::transaction(function() use($id,$datum,$opis,$km)
                 {
                     $this->insertServis($id,$datum,$km,'mali',$opis);
                     $this->setMaliServisKM($id,$km);
@@ -588,7 +588,7 @@ class MainController extends Controller
     }
 
     //preko ajax-a ili fetch-a
-    public function rezervacija4(Request $request)
+    public function makeBookingWithFetch(Request $request)
     {
         $dateStart=$request->dateStart;
         $dateEnd=$request->dateEnd;
@@ -880,7 +880,7 @@ class MainController extends Controller
     }
 
     //funkcija koja pravi json za fron end stranu
-    public function podaci(Request $request)
+    public function makeJSONforBooking(Request $request)
     {
         $dateStart=$request->dateStart;
         $dateEnd=$request->dateEnd;

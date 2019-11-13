@@ -5,7 +5,7 @@
     var_dump($users);
 @endphp --}}
 
-<form method="POST" action="/admin/forma1">
+<form method="POST" action="/admin/change">
     @csrf
     {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}" id='token'> --}}
     <input type="number" name='id' id='id' value={{ $users->id }} hidden>

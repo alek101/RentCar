@@ -152,7 +152,7 @@
                     }
                 }
         
-                fetch('/zakazi/posalji1',opcije)
+                fetch('/zakazi/makeJSONforBooking',opcije)
                     .then(resp=>resp.json())
                     .then(jsn=>ispisi(jsn));
             }
@@ -318,7 +318,7 @@
                                 }
                             }
                     
-                            fetch('/zakazi/posalji2',opcije)
+                            fetch('/zakazi/makeBookingWithFetch',opcije)
                                 .then(resp=>resp.json())
                                 .then(jsn=>odgovor(jsn))
                                 .then(reset());

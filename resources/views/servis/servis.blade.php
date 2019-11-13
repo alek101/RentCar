@@ -88,7 +88,7 @@
                     $auto->predjeno_km_veliki
                     . "</td>"
     
-                    ."<td> <a href='/servis/".$auto->sasija."'>Upisi</td>"
+                    ."<td> <a href='/servis/servisCar/".$auto->sasija."'>Upisi</td>"
     
     
     
