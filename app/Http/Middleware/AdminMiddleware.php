@@ -18,7 +18,7 @@ class AdminMiddleware
         $user=$request->user();
         if(!isset($user->role) or $user->role<10)
         {
-            return redirect('/');
+            return redirect('/login');
         }
         return $next($request);
     }

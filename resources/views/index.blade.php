@@ -14,6 +14,7 @@
                 <a href="/nama">O Nama</a>
                 <a href="/zakazi">Zakazi</a>
                 <a href="/klient/sviModeli">Svi Modeli</a>
+                <a href="/kriticni">Admin Panel</a>
             </div>
 
             <div class="login">

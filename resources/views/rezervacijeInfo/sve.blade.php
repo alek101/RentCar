@@ -46,7 +46,7 @@
             <th>Datum zavrsetka</th>
             <th>Cena</th>
             <th>Opis</th>
-            <th>Produzi</th>
+            <th>Produži/Skrati</th>
         </tr>
     
         
@@ -95,7 +95,7 @@
                     $auto->opis
                     . "</td>"
     
-                    ."<td><button class='produzi' data-link='/rezervacijeInfo/extendForm/$auto->id'>Produzi</button></td>"
+                    ."<td><button class='produzi' data-link='/rezervacijeInfo/extendForm/$auto->id'>Izmeni</button></td>"
     
              . "</tr>";
             !!}

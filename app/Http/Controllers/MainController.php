@@ -910,13 +910,22 @@ class MainController extends Controller
     //produzenje rezervacije
     public function extendReservation($id,$brojDana)
     {
+        $rezervacija=$this->getReservationsID($id)[0];
+        $dateStart=$rezervacija->start;
+        $dateEnd=$rezervacija->finish;
+        $trajanje = (strtotime($dateEnd)-strtotime($dateStart))/24/60/60;
+        $test=strtotime($dateStart) - strtotime(date("Y-m-d"));
+
+        $trajanjeDoKraja=(strtotime($dateEnd)-strtotime(date("Y-m-d")))/24/60/60;
+        $test2=strtotime($dateEnd) - strtotime(date("Y-m-d"));
+        
+        // return ("$id + $brojDana + $test");
+        
+        
         if($brojDana>0)
         {
-            $rezervacija=$this->getReservationsID($id)[0];
             $id_auto=$rezervacija->id_car;
             $model=$rezervacija->model;
-            $dateStart=$rezervacija->start;
-            $dateEnd=$rezervacija->finish;
             $newDateStart=date('Y-m-d', strtotime($dateEnd." + 1 days"));
             $newDateEnd=date('Y-m-d', strtotime($dateEnd." + ".$brojDana." days"));
             if($this->freeCar($id_auto,$newDateStart,$newDateEnd) and $this->checkExparationReg($id_auto,$newDateEnd))
@@ -940,9 +949,49 @@ class MainController extends Controller
                 return ("Rezervacija se ne moze produziti!");
             }
         }
+        //jos uvek nije pocela i skracenje je manje od trajanja ili rezervacij je u toku, ali je skracivanje manje od ukupnog preostalog vremena
+        elseif(($test>0 and $trajanje>abs($brojDana)) or ($test<=0 and $test2>0 and $trajanjeDoKraja>abs($brojDana)))
+        {
+            $id_auto=$rezervacija->id_car;
+            $model=$rezervacija->model;
+            $newDateEnd=date('Y-m-d', strtotime($dateEnd." - ".abs($brojDana)." days"));
+            $newCost=$this->totalCost($model,$dateStart,$newDateEnd);
+                DB::update(
+                    "
+                    UPDATE `rezervacija` 
+                    SET `Datum_zavrsetka` = ?, 
+                    `Cena`=? 
+                    WHERE `rezervacija`.`ID_rezervacije` = ?
+                    ",[$newDateEnd,$newCost,$id]
+                );
+                
+                $info=$this->returnInformation($id)[0];
+                $this->sendMeil($info,'shortend');
+                return ("Rezervacija $id je skracena do $newDateEnd. Nova cena je $newCost.");
+        }
+        //rezervacij je u toku, ali je skracivanje manje od ukupnog preostalog vremena
+        // elseif($test<=0 and $test2>0 and $trajanjeDoKraja>abs($brojDana))
+        // {
+        //     $id_auto=$rezervacija->id_car;
+        //     $model=$rezervacija->model;
+        //     $newDateEnd=date('Y-m-d', strtotime($dateEnd." - ".abs($brojDana)." days"));
+        //     $newCost=$this->totalCost($model,$dateStart,$newDateEnd);
+        //         DB::update(
+        //             "
+        //             UPDATE `rezervacija` 
+        //             SET `Datum_zavrsetka` = ?, 
+        //             `Cena`=? 
+        //             WHERE `rezervacija`.`ID_rezervacije` = ?
+        //             ",[$newDateEnd,$newCost,$id]
+        //         );
+                
+        //         $info=$this->returnInformation($id)[0];
+        //         $this->sendMeil($info,'shortend');
+        //         return ("Rezervacija $id je skracena do $newDateEnd. Nova cena je $newCost.");
+        // }
         else
         {
-            return ("Broj dana mora biti veci od 0!");
+            return ("Broj dana nije pravilan!");
         }
             
     }
@@ -976,6 +1025,15 @@ class MainController extends Controller
         //     {
         //         $naslov="Uspesno produznje";
         //         $poruka="Uspesno ste produzili rezervaciju automobila $info->model sa registarskim tablicama $info->tablice na ime: $info->ime
+        //         , u novom vremenskom periodu od $info->dateStart do $info->dateEnd. Broj Vase rezervacije je $info->id_rez. Nova cena je $info->cena.";
+        //         $poruka=wordwrap($poruka,70,"\n");
+        //         mail($info->email,$naslov,$poruka);
+        //     }
+
+        //     if($tip=='shortend')
+        //     {
+        //         $naslov="Uspesno skracenje";
+        //         $poruka="Uspesno ste skratili rezervaciju automobila $info->model sa registarskim tablicama $info->tablice na ime: $info->ime
         //         , u novom vremenskom periodu od $info->dateStart do $info->dateEnd. Broj Vase rezervacije je $info->id_rez. Nova cena je $info->cena.";
         //         $poruka=wordwrap($poruka,70,"\n");
         //         mail($info->email,$naslov,$poruka);
