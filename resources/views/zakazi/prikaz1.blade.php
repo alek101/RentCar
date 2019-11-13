@@ -80,6 +80,7 @@
     let dateEndInput=document.querySelector('#end');
     let imeInput=document.querySelector('#ime');
     let emailInput=document.querySelector('#email');
+    let danas=new Date();
 
 
     document.querySelector('.posalji').addEventListener('click',function(e)
@@ -89,6 +90,8 @@
             let errors=[];
 
             let dateStart,dateEnd,model,ime,telefon,email,comment;
+
+            
 
             dateStart=dateStartInput.value;
             if(dateStart=="")
@@ -100,7 +103,16 @@
             {
                 dateStartInput.classList.remove('errorBorder');
             }
-            
+
+            if(danas>=createDateDayFoward(dateStart))
+            {
+                errors.push('Ne mozete da rezervisete proslost!');
+                dateStartInput.classList.add('errorBorder');
+            }
+            else
+            {
+                dateStartInput.classList.remove('errorBorder');
+            }
 
             dateEnd=dateEndInput.value;
             if(dateEnd=="")
@@ -201,10 +213,22 @@
 
                         let dateStart,dateEnd,ime,telefon,email,comment;
 
+                        
+
                         dateStart=dateStartInput.value;
                         if(dateStart=="")
                         {
                             errors.push('Mora da postoji pocetni datum!');
+                            dateStartInput.classList.add('errorBorder');
+                        }
+                        else
+                        {
+                            dateStartInput.classList.remove('errorBorder');
+                        }
+
+                        if(danas>=createDateDayFoward(dateStart))
+                        {
+                            errors.push('Ne mozete da rezervisete proslost!');
                             dateStartInput.classList.add('errorBorder');
                         }
                         else
@@ -343,6 +367,7 @@
             }
             responseDiv.append(fr);
             responseDiv2.append(fr2);
+            showForma();
         }
 
         function makeElement(type="div",settings={
@@ -422,6 +447,17 @@
     {
         inputDate=inputDate.split('-');
         return new Date(inputDate[0],inputDate[1]-1,inputDate[2]);
+    }
+
+    //da bismo mogli da rezervisemo danas, mi blefiramo da je danas u stvari sutra
+    function createDateDayFoward(inputDate)
+    {
+        inputDate=inputDate.split('-');
+        let time=new Date(inputDate[0],inputDate[1]-1,inputDate[2]);
+        console.log('time',time);
+        time=time.setTime(time.getTime()+(24*60*60*1000));
+        console.log('time',time);
+        return time;
     }
 
 </script>
