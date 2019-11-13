@@ -9,14 +9,14 @@ use App\AutomobiliModel;
 class CarController extends Controller
 {
     //
-    public function getDodaj()
+    public function getAdd()
     {
         $models=TipoviAutomobilaModel::all();
         return view('baza.carFormaDodaj',['models'=>$models]);
     }
 
     //
-    public function dodaj(Request $request)
+    public function add(Request $request)
     {
         $newCar=new AutomobiliModel;
         $newCar->Broj_sasije=$request->Broj_sasije;
@@ -35,13 +35,13 @@ class CarController extends Controller
     }
 
     //
-    public function getIzmeni()
+    public function getChange()
     {
         return view('baza.carModelID');
     }
 
     //
-    public function getFormIzmeni(Request $request)
+    public function getFormChange(Request $request)
     {
         $models=TipoviAutomobilaModel::all();
 
@@ -61,7 +61,7 @@ class CarController extends Controller
     }
 
     //
-    public function izmeni(Request $request)
+    public function change(Request $request)
     {
         $newCar=AutomobiliModel::where('Broj_sasije',$request->Broj_sasije)->firstOrFail();
         $newCar->Broj_sasije=$request->Broj_sasije;

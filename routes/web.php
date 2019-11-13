@@ -58,7 +58,7 @@ Route::prefix('/rezervacija')->middleware('login')->group(function()
     Route::get('/','MainController@rezervacija1');
     Route::post('/posalji1','MainController@rezervacija2');
     Route::post('/posalji2','MainController@rezervacija3');
-    Route::post('/posalji3','MainController@rezervacija4');
+    Route::post('/posalji3','MainController@makeBookingWithFetch');
     
 });
 
@@ -105,17 +105,17 @@ Route::prefix('/zakazi')->group(function()
 Route::prefix('/baza')->middleware('admin')->group(function()
 {
     
-    Route::get('/add','TipoviAutomobilaController@getDodaj');
-    Route::post('/posalji1','TipoviAutomobilaController@Dodaj');
-    Route::get('/change','TipoviAutomobilaController@getIzmeni');
-    Route::post('/posalji2','TipoviAutomobilaController@getFormIzmeni');
-    Route::post('/posalji3','TipoviAutomobilaController@izmeni');
+    Route::get('/model/getAdd','TipoviAutomobilaController@getAdd');
+    Route::post('/model/add','TipoviAutomobilaController@add');
+    Route::get('/model/getChange','TipoviAutomobilaController@getChange');
+    Route::post('/model/getFormChange','TipoviAutomobilaController@getFormChange');
+    Route::post('/model/change','TipoviAutomobilaController@change');
 
-    Route::get('/add2','CarController@getDodaj');
-    Route::post('/posalji4','CarController@dodaj');
-    Route::get('/change2','CarController@getIzmeni');
-    Route::post('/posalji5','CarController@getFormIzmeni');
-    Route::post('/posalji6','CarController@izmeni');
+    Route::get('/car/getAdd','CarController@getAdd');
+    Route::post('/car/add','CarController@add');
+    Route::get('/car/getChange','CarController@getChange');
+    Route::post('/car/getFormChange','CarController@getFormChange');
+    Route::post('/car/change','CarController@change');
 
     Route::get('/addImage1','AdminController@getFormImage');
     Route::post('/posaljiSliku','AdminController@uploadImage');

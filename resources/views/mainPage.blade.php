@@ -39,10 +39,10 @@
                     <div class="adminMeniCart">
                         <ul>
                             <li><a href="/admin">Admin</a></li>
-                            <li><a href="/baza/add">Dodaj model</a></li>
-                            <li><a href="/baza/change">Izmeni model i cenu</a></li>
-                            <li><a href="/baza/add2">Dodaj automobil</a></li>
-                            <li><a href="/baza/change2">Izmeni vozilo</a></li>
+                            <li><a href="/baza/model/getAdd">Dodaj model</a></li>
+                            <li><a href="/baza/model/getChange">Izmeni model i cenu</a></li>
+                            <li><a href="/baza/car/getAdd">Dodaj automobil</a></li>
+                            <li><a href="/baza/car/getChange">Izmeni vozilo</a></li>
                             <li><a href="/baza/addImage1">Uploaduj Sliku</a></li>
                         </ul>
                     </div>

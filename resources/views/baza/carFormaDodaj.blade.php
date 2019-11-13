@@ -1,7 +1,7 @@
 @extends('mainPage')
 @section('Page')
 
-<form class="formZakazivanje" method="POST" action="/baza/posalji4">
+<form class="formZakazivanje" method="POST" action="/baza/car/add">
     <div class="flexColumn">
         <div class="flexRow">
                 @csrf 

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class TipoviAutomobilaController extends Controller
 {
-    //
+    //depricated
     public function modeli1()
     {
         $models=TipoviAutomobilaModel::all();
@@ -25,13 +25,13 @@ class TipoviAutomobilaController extends Controller
     }
 
     //
-    public function getDodaj()
+    public function getAdd()
     {
         return view('baza.formaDodaj');
     }
 
     //
-    public function dodaj(Request $request)
+    public function add(Request $request)
     {
         $newModel=new TipoviAutomobilaModel;
         $newModel->Model=$request->Model;
@@ -84,14 +84,14 @@ class TipoviAutomobilaController extends Controller
     }
 
     //
-    public function getIzmeni()
+    public function getChange()
     {
         $models=TipoviAutomobilaModel::all();
         return view('baza.modelID',['models'=>$models]);
     }
 
     //
-    public function getFormIzmeni(Request $request)
+    public function getFormChange(Request $request)
     {
         $modelID=str_replace("_"," ",$request->Model);
         $model=TipoviAutomobilaModel::where('Model',$modelID)->firstOrFail();
@@ -101,7 +101,7 @@ class TipoviAutomobilaController extends Controller
         return view('baza.formaIzmeni',['model'=>$model,'cena_3'=>$cena_3,'cena_7'=>$cena_7,'cena_max'=>$cena_max]);
     }
 
-    public function izmeni(Request $request)
+    public function change(Request $request)
     {
         $model=str_replace("_"," ",$request->Model);
         $newModel=TipoviAutomobilaModel::where('Model',$model)->firstOrFail();

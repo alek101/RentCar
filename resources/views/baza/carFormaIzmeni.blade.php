@@ -5,7 +5,7 @@
     var_dump($car);
 @endphp --}}
 
-<form class="formZakazivanje" method="POST" action="/baza/posalji6">
+<form class="formZakazivanje" method="POST" action="/baza/car/change">
     <div class="flexColumn">
         <div class="flexRow">
                 @csrf 

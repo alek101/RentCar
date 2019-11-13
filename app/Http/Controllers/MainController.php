@@ -529,12 +529,14 @@ class MainController extends Controller
     }
 
     //
+    //depricated
     public function rezervacija1()
     {
         return view('rezervacija.rezervacija1');
     }
 
     //
+    //depricated
     public function rezervacija2(Request $request)
     {
         $dateStart=$request->dateStart;
@@ -560,6 +562,7 @@ class MainController extends Controller
     }
 
     //preko forme-izbaceno
+    //depricated
     public function rezervacija3(Request $request)
     {
         $dateStart=$request->dateStart;

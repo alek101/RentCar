@@ -7,7 +7,7 @@
     // var_dump($model->opis);
 @endphp --}}
 
-<form class="formZakazivanje" method="POST" action="/baza/posalji3">
+<form class="formZakazivanje" method="POST" action="/baza/model/change">
     <div class="flexColumn">
         <div class="flexRow">
                 @csrf 
