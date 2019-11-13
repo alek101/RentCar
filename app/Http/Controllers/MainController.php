@@ -246,23 +246,31 @@ class MainController extends Controller
         return $this->servis();
     }
 
-    //pomocna funkcij akoja radi servis
+    //pomocna funkcija koja radi servis->ovde verovatno treba transakcija
     function madeServis($id,$tip,$datum,$opis,$registracija)
         {
             $km=$this->getKM($id)[0]->km;
 
             if($tip=='mali')
             {
-                $this->insertServis($id,$datum,$km,'mali',$opis);
-                $this->setMaliServisKM($id,$km);
-                $this->changeCarServis($id);
+                DB::transaction(function() use($id,$tip,$datum,$opis,$registracija)
+                {
+                    $this->insertServis($id,$datum,$km,'mali',$opis);
+                    $this->setMaliServisKM($id,$km);
+                    $this->changeCarServis($id);
+                },5);
+                
             }
             if($tip=='veliki')
             {
-                $this->insertServis($id,$datum,$km,'mali',$opis);
-                $this->setMaliServisKM($id,$km);
-                $this->setVelikiServisKM($id,$km);
-                $this->changeCarServis($id);
+                DB::transaction(function() use($id,$tip,$datum,$opis,$registracija)
+                {
+                    $this->insertServis($id,$datum,$km,'mali',$opis);
+                    $this->setMaliServisKM($id,$km);
+                    $this->setVelikiServisKM($id,$km);
+                    $this->changeCarServis($id);
+                },5);
+                
             }
             if ($tip=='cancel')
             {
@@ -270,8 +278,12 @@ class MainController extends Controller
             }
             if($tip=='registracija')
             {
-                $this->setRegistracija($id,$registracija);
-                $this->changeCarServis($id);
+                DB::transaction(function() use($id,$registracija)
+                {
+                    $this->setRegistracija($id,$registracija);
+                    $this->changeCarServis($id);
+                },5);
+                
             }
         }
 

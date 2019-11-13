@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\TipoviAutomobilaModel;
 use App\CenovnikModel;
+use Illuminate\Support\Facades\DB;
 
 
 class TipoviAutomobilaController extends Controller
@@ -67,10 +68,17 @@ class TipoviAutomobilaController extends Controller
         }
 
         //treba transakcija
-        $newModel->saveOrFail();
-        $newCena1->saveOrFail();
-        $newCena2->saveOrFail();
-        $newCena3->saveOrFail();
+        DB::transaction(function() use($newModel,
+        $newCena1,
+        $newCena2,
+        $newCena3)
+        {
+            $newModel->saveOrFail();
+            $newCena1->saveOrFail();
+            $newCena2->saveOrFail();
+            $newCena3->saveOrFail();
+        },1);
+        
 
         return redirect('/auto/sviModeli');
     }
@@ -124,11 +132,17 @@ class TipoviAutomobilaController extends Controller
         }
 
         //treba transakcija
-        $newModel->saveOrFail();
-        $newCena1->saveOrFail();
-        $newCena2->saveOrFail();
-        $newCena3->saveOrFail();
-
+        DB::transaction(function() use ($newModel,
+        $newCena1,
+        $newCena2,
+        $newCena3)
+        {
+            $newModel->saveOrFail();
+            $newCena1->saveOrFail();
+            $newCena2->saveOrFail();
+            $newCena3->saveOrFail();
+        },1);
+        
         return redirect('/auto/sviModeli');
     }
 }
