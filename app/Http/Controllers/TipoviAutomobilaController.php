@@ -19,7 +19,8 @@ class TipoviAutomobilaController extends Controller
     public function modeli2()
     {
         $models=TipoviAutomobilaModel::all();
-        return view('klient.sviModeli', ['models'=>$models]);
+        $cenovnik=CenovnikModel::all();
+        return view('klient.sviModeli', ['models'=>$models,'cenovnik'=>$cenovnik]);
     }
 
     //

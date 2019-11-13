@@ -55,7 +55,12 @@
             <div>
                 Najbolja RentCar Agencija <br>
                 Adresa: Nepoznata BB <br>
-                Telefon: 011/xxx-xx-xx
+                
+            </div>
+
+            <div>
+                Telefon: 011/xxx-xx-xx <br>
+                Radno vreme: 6h-22h
             </div>
 
             <div>
