@@ -11,7 +11,7 @@
     <div class="container">
         <div class="header">
             <div class="links">
-                <a href="/">Pocetna</a>
+                <a href="/nama">O Nama</a>
                 <a href="/zakazi">Zakazi</a>
                 <a href="/klient/sviModeli">Svi Modeli</a>
             </div>
@@ -52,11 +52,13 @@
 
         <div class="footer">
             <div>
-                Završni rad: RentCar
+                Najbolja RentCar Agencija <br>
+                Adresa: Nepoznata BB <br>
+                Telefon: 011/xxx-xx-xx
             </div>
 
             <div>
-                Aleksandar Petrović
+                Aleksandar Petrović <br>
                 PHP grupa II
             </div>
         </div>

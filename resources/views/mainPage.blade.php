@@ -80,7 +80,7 @@
             </div>
 
             <div>
-                Aleksandar Petrović
+                Aleksandar Petrović <br>
                 PHP grupa II
             </div>
         </div>

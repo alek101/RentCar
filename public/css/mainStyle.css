@@ -50,7 +50,7 @@ body
     flex-direction: row;
     justify-content: space-between;
     background-color:var(--main-color);;
-    height: 50px;
+    height: 80px;
     font-size: 1.2em;
     position: absolute;
     bottom: 0px;
@@ -485,7 +485,7 @@ button:hover
     /* width: 100%; */
     margin: 20px auto;
     padding: 5px;
-    border-radius: 3%;
+    border-radius: 20px;
     
 }
 
@@ -619,4 +619,27 @@ p
 .dugmeRezervisi
 {
     box-shadow: 0 0 0 black;
+}
+
+.containerNama
+{
+    display: flex;
+}
+
+.slikaNama
+{
+    margin-right: 10px;
+    border-radius: 20px;
+}
+
+.slikaNama img
+{
+    border-radius: 20px;
+}
+
+.textNama
+{
+    text-align: justify;
+    padding: 0px 5px;
+    margin-right: 5px;
 }

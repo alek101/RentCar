@@ -992,4 +992,9 @@ class MainController extends Controller
 
         }
 
+        function nama()
+        {
+            return view('klient.nama');
+        }
+
 }

@@ -11,9 +11,14 @@
 |
 */
 
+use Illuminate\Support\Facades\Redirect;
+
 Route::get('/', function () {
-    return view('index');
+    // return view('index');
+    return Redirect('/zakazi');
 });
+
+Route::get('/nama','MainController@nama');
 
 Route::get('/glavna','MainController@kriticni')->middleware('login');
 

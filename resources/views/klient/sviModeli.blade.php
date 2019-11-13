@@ -1,7 +1,7 @@
 @extends('index')
 @section('PageF')
 
-<div class="margin_20"><label for="filter">Filter tabela: <input type="text" id="filter" class='filter'></label></div>
+<div class="margin_20"><label for="filter">Filter po nazivu: <input type="text" id="filter" class='filter'></label></div>
 
 <table>
     <tr>
@@ -10,7 +10,7 @@
         <th>Klasa</th>
         <th><img class='icon' src='{!! asset('/images/icons/solid--car-gears.svg') !!}' alt='Tip Menjaca: '></th>
         <th><img class='icon' src='{!! asset('/images/icons/solid--car-door.svg') !!}' alt='Broj Vrata: '></th>
-        <th><img class='icon' src='{!! asset('/images/icons/solid--car-seat.svg') !!}' alt='Broj Sedista: '></th>
+        <th><img class='icon' src='{!! asset('/images/icons/solid--car-seat.svg') !!}' alt='Broj Sedišta: '></th>
         <th><img class='icon' src='{!! asset('/images/icons/solid--big-bag.svg') !!}' alt='Broj Torbi: '></th>
     </tr>
 

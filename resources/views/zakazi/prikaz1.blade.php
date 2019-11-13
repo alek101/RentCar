@@ -1,19 +1,24 @@
 @extends('index')
 @section('PageF')
 
-<div class="flexRow linkA">
-    <a href="#" id="aForma">Forma</a>
-    <a href="#" id="aKartica">Ponude</a>
+<div>
+    <h1>Rezervišite vaš auto</h1>
+    <h3>Najbolja ponuda u gradu. Bez učešća, ista za sve vozače, osiguranje uključeno u cenu. Rezervišite odmah!</h3>
 </div>
 
+
+<div class="flexRow linkA">
+    <a href="#" id="aForma">1</a>
+    <a href="#" id="aKartica">2</a>
+</div>
 
 <div class="divForma">
     <div class="formZakazivanje form">
             <div class="flexColumn">
                 <div> @csrf </div>
                 <div class="flexRow">
-                    <label for="start">Datum pocetka <input type="date" name="dateStart" id="start" value=""> </label>
-                    <label for="end">Datum zavrsetka <input type="date" name="dateEnd" id="end" value="" ></label>
+                    <label for="start">Datum početka <input type="date" name="dateStart" id="start" value=""> </label>
+                    <label for="end">Datum završetka <input type="date" name="dateEnd" id="end" value="" ></label>
                 </div>
                 <div class="flexRow">
                 
@@ -24,7 +29,7 @@
                 <div>
                     <label for="comment"> Komentar <br><textarea name="comment" id="comment" cols="30" rows="10" placeholder="no comment"></textarea></label>
                 </div>
-                <div><button class='posalji'>Posalji uput</button></div>  
+                <div><button class='posalji'>Pošalji uput</button></div>  
             </div>
         </div>
     <div class="response hidden"></div>
@@ -182,14 +187,14 @@
                 let row2=makeElement('div',{className:'flexRow'});
                 let p3=makeElement('p',{text:`<img class='icon' src='{!! asset('/images/icons/solid--car-door.svg') !!}' alt='Broj Vrata: '> 
                 ${json.podaci[model].Broj_vrata}`});
-                let p4=makeElement('p',{text:`<img class='icon' src='{!! asset('/images/icons/solid--car-seat.svg') !!}' alt='Broj Sedista: '>
+                let p4=makeElement('p',{text:`<img class='icon' src='{!! asset('/images/icons/solid--car-seat.svg') !!}' alt='Broj Sedišta: '>
                 ${json.podaci[model].Broj_sedista}`});
                 let p5=makeElement('p',{text:`<img class='icon' src='{!! asset('/images/icons/solid--big-bag.svg') !!}' alt='Broj Torbi: '>
                 ${json.podaci[model].Broj_torbi}`});
                 row2.append(p3,p4,p5);
                 let cena=formatBroja(json.cene[model]);
                 let p6=makeElement('p',{text:`Cena: ${cena}`});
-                let button=makeElement('button',{text:'Rezervisi',className:'dugmeRezervisi'});
+                let button=makeElement('button',{text:'Rezerviši',className:'dugmeRezervisi'});
                     button.addEventListener('click',function(e)
                     {
                         let errors=[];
