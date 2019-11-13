@@ -12,9 +12,10 @@
             <label for="naziv">Naziv slike sa ekstenzijom:<input type="text" name="nazivSlike" id="naziv"></label>
         </div>
         <div><input type="submit" value="Posalji" id='dugme'></div> 
-        
+    </div>
 </form>
 
+<a href="https://www.animatedimages.org/cat-photographers-1425.htm"><img src="https://www.animatedimages.org/data/media/1425/animated-photographer-image-0028.jpg" border="0" alt="animated-photographer-image-0028" /></a>
 
 <script>
     document.querySelector('#slika').addEventListener('change',function(e)

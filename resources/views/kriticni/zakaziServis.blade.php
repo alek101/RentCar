@@ -14,6 +14,8 @@
 
 </form>
 
+<a href="https://www.animatedimages.org/cat-cars-67.htm"><img src="https://www.animatedimages.org/data/media/67/animated-car-image-0125.gif" border="0" alt="animated-car-image-0125" /></a>
+
 {{-- <iframe src="iframe" frameborder="0"></iframe> --}}
 
 {{-- <script src={{ URL::asset('js/jquery.js') }}></script> --}}

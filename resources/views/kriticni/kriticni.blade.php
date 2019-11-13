@@ -121,6 +121,8 @@
     @endforeach
 </table>
 
+<a href="https://www.animatedimages.org/cat-cars-67.htm"><img src="https://www.animatedimages.org/data/media/67/animated-car-image-0530.gif" border="0" alt="animated-car-image-0530" /></a>
+
 <script>
         // let sasija=document.querySelector('#id').value;
         // document.querySelector('.zakaziServis').addEventListener('click',function()

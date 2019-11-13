@@ -39,12 +39,12 @@
 
                 {{-- http://rentacarserbia.com/sr/strana/cenovnik --}}
                 
-               
+                <a href="https://www.animatedimages.org/cat-cars-67.htm"><img src="https://www.animatedimages.org/data/media/67/animated-car-image-0035.gif" border="0" alt="animated-car-image-0035" /></a>
 
-                <img src="{!! asset('images/citroen-c3-1-4-hdi.jpg') !!}" alt="nema">
+                {{-- <img src="{!! asset('images/citroen-c3-1-4-hdi.jpg') !!}" alt="nema">
                 <img src="{!! asset('images/peugeot-208-1-4-hdi.jpg') !!}" alt="nema">
                 <img src="{!! asset('images/peugeot-308-1-6-hdi.jpg') !!}" alt="nema">
-                <img src="{!! asset('images/seat-ibiza-1-2-tdi.jpg') !!}" alt="nema">
+                <img src="{!! asset('images/seat-ibiza-1-2-tdi.jpg') !!}" alt="nema"> --}}
                
                 
             @show
