@@ -10,6 +10,12 @@
 <div class="flexRow linkA">
     <a href="#" id="aForma">1</a>
     <a href="#" id="aKartica">2</a>
+    <a href="#" id="filterKartica">filter</a>
+</div>
+
+<div class="meniFilter flexRow cardDisapear">
+    <label for="minCena">Minimalna Cena <input type="number" name="minCena" id="minCena"></label>
+    <label for="maxCena">Maksimalna Cena <input type="number" name="maxCena" id="maxCena"></label>
 </div>
 
 <div class="divForma">
@@ -70,6 +76,44 @@
         showKartice();
     })
 
+    document.querySelector('#filterKartica').addEventListener('click',function(e)
+    {
+        e.preventDefault();
+        // document.querySelector('.meniFilter').classList.toggle('hidden');
+        document.querySelector('.meniFilter').classList.toggle('cardDisapear');
+    });
+
+    function filtirajPoCeni(min,max)
+    {
+        console.log('radi funkcija');
+        min=document.querySelector('#minCena').value || 0;
+        max=document.querySelector('#maxCena').value || Infinity;
+
+        let pCena=[...document.querySelectorAll('.cenaOpisCard')];
+
+        pCena.map(function(elCena)
+        {
+            let cenaIznos=parseFloat(elCena.getAttribute('data-cena'));
+            if(cenaIznos>=min && cenaIznos<=max)
+            {
+                elCena.parentElement.parentElement.classList.remove('cardDisapear');
+            }
+            else
+            {
+                elCena.parentElement.parentElement.classList.add('cardDisapear');
+            }
+        });
+    }
+    
+    document.querySelector('#minCena').addEventListener('change',function()
+    {
+        filtirajPoCeni();
+    });
+
+    document.querySelector('#maxCena').addEventListener('change',function()
+    {
+        filtirajPoCeni();
+    });
     
     //ovo je za rezervacije
 
@@ -205,7 +249,8 @@
                 ${json.podaci[model].Broj_torbi}`});
                 row2.append(p3,p4,p5);
                 let cena=formatBroja(json.cene[model]);
-                let p6=makeElement('p',{text:`Cena: ${cena}`});
+                let p6=makeElement('p',{text:`Cena: ${cena}`,className:'cenaOpisCard'});
+                p6.setAttribute('data-cena',cena);
                 let button=makeElement('button',{text:'Rezerviši',className:'dugmeRezervisi'});
                     button.addEventListener('click',function(e)
                     {
