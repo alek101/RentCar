@@ -18,7 +18,7 @@ Route::get('/', function () {
     return Redirect('/zakazi');
 });
 
-Route::get('/nama','MainController@nama');
+Route::get('/nama','FrontPageController@nama');
 
 Route::get('/glavna','CarInfoController@kriticni')->middleware('login');
 
@@ -64,11 +64,12 @@ Route::prefix('/auto')->middleware('login')->group(function()
 
 Route::prefix('/rezervacijeInfo')->middleware('login')->group(function()
 {
-    Route::get('/','MainController@rezervacijeInfo'); //buduce rezervacije-nepotrebno
+    // Route::get('/','MainController@rezervacijeInfo'); //buduce rezervacije-nepotrebno
+    Route::get('/','ReservationController@allReservations');
     Route::post('/allReservationForm','ReservationController@allReservationForm');
     Route::get('/all','ReservationController@allReservations');
     Route::post('/extendReservation','ReservationController@extendReservation');
-    Route::get('/all/{num}','MainController@allReservations'); //ne koristi se
+    Route::get('/all/{num}','ReservationController@allReservations'); //ne koristi se
     Route::get('/cancelReservation/{id}','ReservationController@cancelReservation');
     Route::get('/extendForm/{id}','ReservationController@getExtendForm');
 });

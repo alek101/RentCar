@@ -31,7 +31,7 @@
                             {{-- <li><a href="/rezervacija">Rezervisi</a></li> --}}
                             <li><a href="/zakazi" target="_blank">Rezervisi</a></li>
                             <li><a href="/rezervacijeInfo/all">Sve Rezervacije</a></li>
-                            <li><a href="/rezervacijeInfo">Buduce Rezervacije</a></li>
+                            {{-- <li><a href="/rezervacijeInfo">Buduce Rezervacije</a></li> --}}
                         </ul>
                     </div>
                  </div>   
