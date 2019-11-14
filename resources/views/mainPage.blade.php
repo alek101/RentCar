@@ -96,9 +96,26 @@
         try {
             if(document.querySelector('#filter')!=null)
             {
+                let storedWord=sessionStorage.getItem('filterTabela');
+                if(storedWord!=null)
+                {
+                    document.querySelector('#filter').value=storedWord;
+                    search();
+                }
                 document.querySelector('#filter').addEventListener('change',function(e)
                 {
-                    let word=document.querySelector('#filter').value.toLowerCase();
+                    search();
+                })
+            }
+            
+        } catch (error) {
+            console.log("Smisli nesto za: "+error);
+        }
+
+        function search()
+        {
+            let word=document.querySelector('#filter').value.toLowerCase();
+                    sessionStorage.setItem('filterTabela',word);
                     let trNiz=[...document.querySelectorAll('tr')];
                     for(tr of trNiz)
                     {
@@ -126,11 +143,6 @@
                             tr.classList.add('disapear');
                         }
                     }
-                })
-            }
-            
-        } catch (error) {
-            console.log("Smisli nesto za: "+error);
         }
         
     </script>
