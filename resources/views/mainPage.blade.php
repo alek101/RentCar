@@ -144,6 +144,21 @@
                         }
                     }
         }
+
+        //za hamburger
+        // window.addEventListener('scroll', function(){
+        //     console.log('radi scroll');
+        //     let st = parseInt(document.querySelector('.header').offsetTop);
+        //     let pt = parseInt(document.documentElement.scrollTop || document.body.scrollTop);
+        //     if(pt>=st)
+        //     {
+        //         console.log('scroll opcija 1');
+        //     }
+        //     else
+        //     {
+        //         console.log('scroll opcija 2');
+        //     }
+        // })
         
     </script>
 </body>
