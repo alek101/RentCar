@@ -1,7 +1,7 @@
 @extends('mainPage')
 @section('Page')
 
-<form method="POST" action="/rezervacijeInfo/extend" class="sveRez">
+<form method="POST" action="/rezervacijeInfo/extendReservation" class="sveRez">
     <div class="flexColumn">
         <div>@csrf</div>
         <div class="flexRow">

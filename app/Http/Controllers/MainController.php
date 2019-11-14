@@ -677,6 +677,7 @@ class MainController extends Controller
     //INFO rezervacije
 
     //sve buduce rezervacije
+    //depricated
     public function futureReservations()
     {
         return DB::select("SELECT
@@ -714,22 +715,117 @@ class MainController extends Controller
             `ID_rezervacije`=? and CURRENT_DATE()<=`Datum_pocetka`+3",[$id]);
     }
 
-    //
+    //from reservation meni
     public function cancelReservation($id)
     {
         $info=$this->returnInformation($id);
         $this->cancelFutureReservation($id);
         $this->sendMeil($info[0],'cancel');
-        return redirect('/rezervacijeInfo');
+        return redirect('/rezervacijeInfo/all');
     }
 
-    //
+    //from car meni
     public function cancelReservationA($id)
     {
         $info=$this->returnInformation($id);
         $this->cancelFutureReservation($id);
         $this->sendMeil($info[0],'cancel');
         return redirect('/auto/info/'.$info[0]->car_id);
+    }
+
+    //
+    public function allReservations($num=50)
+    {
+        $niz=$this->getAllReservations($num);  
+        return view('rezervacijeInfo.sve',['niz'=>$niz]);
+    }
+
+    //forma iz rezervacija
+    public function allReservationForm(Request $request)
+    {
+        if($request->order=="DESC")
+        {
+            if(isset($request->num))
+            {
+                $niz=$this->getAllReservations($request->num);  
+                return view('rezervacijeInfo.sve',['niz'=>$niz]);
+            }
+            
+            if(isset($request->dateStart) && isset($request->dateEnd))
+            {
+                $niz=$this->getReservationsDate($request->dateStart,$request->dateEnd);  
+                return view('rezervacijeInfo.sve',['niz'=>$niz]);
+            }
+
+            if(isset($request->dateStart) && !isset($request->dateEnd))
+            {
+                $dateEnd=date('Y-m-d', strtotime($request->dateStart." + 365 days"));
+                $niz=$this->getReservationsDate($request->dateStart,$dateEnd);  
+                return view('rezervacijeInfo.sve',['niz'=>$niz]);
+            }
+            
+            if(!isset($request->dateStart) && isset($request->dateEnd))
+            {
+                $dateStart=date('Y-m-d', strtotime($request->dateEnd." - 365 days"));
+                $niz=$this->getReservationsDate($dateStart,$request->dateEnd);  
+                return view('rezervacijeInfo.sve',['niz'=>$niz]);
+            }
+        }
+
+        if($request->order=="ASC")
+        {
+            if(isset($request->num))
+            {
+                $niz=$this->getAllReservationsASC($request->num);  
+                return view('rezervacijeInfo.sve',['niz'=>$niz]);
+            }
+            
+            if(isset($request->dateStart) && isset($request->dateEnd))
+            {
+                $niz=$this->getReservationsDateASC($request->dateStart,$request->dateEnd);  
+                return view('rezervacijeInfo.sve',['niz'=>$niz]);
+            }
+
+            if(isset($request->dateStart) && !isset($request->dateEnd))
+            {
+                $dateEnd=date('Y-m-d', strtotime($request->dateStart." + 365 days"));
+                $niz=$this->getReservationsDateASC($request->dateStart,$dateEnd);  
+                return view('rezervacijeInfo.sve',['niz'=>$niz]);
+            }
+            
+            if(!isset($request->dateStart) && isset($request->dateEnd))
+            {
+                $dateStart=date('Y-m-d', strtotime($request->dateEnd." - 365 days"));
+                $niz=$this->getReservationsDateASC($dateStart,$request->dateEnd);  
+                return view('rezervacijeInfo.sve',['niz'=>$niz]);
+            }
+        }
+            
+
+        return $this->allReservations();
+    }
+
+    //spisak rezervacija u vremenskom okviru
+    public function getReservationsDate($dateStart,$dateEnd)
+    {
+        return DB::select(
+            "SELECT
+            R.`ID_rezervacije` as 'id',
+            R.`Ime_prezime_kupca` as 'ime',
+            R.`Email` as 'meil',
+            R.`Broj_telefona` as 'telefon',
+            A.`Broj_registarskih_tablica` as 'tablice',
+            A.`Model` as 'model',
+            R.`Datum_pocetka` as 'start',
+            R.`Datum_zavrsetka` as 'finish',
+            R.`Cena` as 'cena',
+            R.`Napomena` as 'opis'
+        FROM
+            `rezervacija` as R
+        join `automobili` as A on R.ID_vozila=A.Broj_sasije
+        where ((R.`Datum_pocetka` >=? and R.`Datum_pocetka` <=?) and (R.`Datum_zavrsetka` >=? and R.`Datum_zavrsetka` <=?))
+        order by `Datum_pocetka` DESC
+        ",[$dateStart,$dateEnd,$dateStart,$dateEnd]);   
     }
 
     //
@@ -754,53 +850,8 @@ class MainController extends Controller
         LIMIT ?",[$num]);   
     }
 
-    //
-    public function rezervacijeSve($num=50)
-    {
-        $niz=$this->getAllReservations($num);  
-        return view('rezervacijeInfo.sve',['niz'=>$niz]);
-    }
-
-    //
-    public function rezervacijeSveForm(Request $request)
-    {
-        if(isset($request->num))
-        {
-            $niz=$this->getAllReservations($request->num);  
-            return view('rezervacijeInfo.sve',['niz'=>$niz]);
-        }
-        
-        if(isset($request->dateStart) && isset($request->dateEnd))
-        {
-            $niz=$this->getReservationsDate($request->dateStart,$request->dateEnd);  
-            return view('rezervacijeInfo.sve',['niz'=>$niz]);
-        }
-
-        if(isset($request->id))
-        {
-            $niz=$this->getReservationsID($request->id);
-            return view('rezervacijeInfo.sve',['niz'=>$niz]);
-        }
-
-        if(isset($request->dateStart) && !isset($request->dateEnd))
-        {
-            $dateEnd=date('Y-m-d', strtotime($request->dateStart." + 365 days"));
-            $niz=$this->getReservationsDate($request->dateStart,$dateEnd);  
-            return view('rezervacijeInfo.sve',['niz'=>$niz]);
-        }
-        
-        if(!isset($request->dateStart) && isset($request->dateEnd))
-        {
-            $dateStart=date('Y-m-d', strtotime($request->dateEnd." - 365 days"));
-            $niz=$this->getReservationsDate($dateStart,$request->dateEnd);  
-            return view('rezervacijeInfo.sve',['niz'=>$niz]);
-        }
-
-        return $this->rezervacijeSve();
-    }
-
     //spisak rezervacija u vremenskom okviru
-    public function getReservationsDate($dateStart,$dateEnd)
+    public function getReservationsDateASC($dateStart,$dateEnd)
     {
         return DB::select(
             "SELECT
@@ -818,8 +869,30 @@ class MainController extends Controller
             `rezervacija` as R
         join `automobili` as A on R.ID_vozila=A.Broj_sasije
         where ((R.`Datum_pocetka` >=? and R.`Datum_pocetka` <=?) and (R.`Datum_zavrsetka` >=? and R.`Datum_zavrsetka` <=?))
-        order by `Datum_pocetka` DESC
+        order by `Datum_pocetka` ASC
         ",[$dateStart,$dateEnd,$dateStart,$dateEnd]);   
+    }
+
+    //
+    public function getAllReservationsASC($num)
+    {
+        return DB::select(
+            "SELECT
+            R.`ID_rezervacije` as 'id',
+            R.`Ime_prezime_kupca` as 'ime',
+            R.`Email` as 'meil',
+            R.`Broj_telefona` as 'telefon',
+            A.`Broj_registarskih_tablica` as 'tablice',
+            A.`Model` as 'model',
+            R.`Datum_pocetka` as 'start',
+            R.`Datum_zavrsetka` as 'finish',
+            R.`Cena` as 'cena',
+            R.`Napomena` as 'opis'
+        FROM
+            `rezervacija` as R
+        join `automobili` as A on R.ID_vozila=A.Broj_sasije
+        order by `Datum_pocetka` ASC
+        LIMIT ?",[$num]);   
     }
 
     //
@@ -923,8 +996,10 @@ class MainController extends Controller
     }
 
     //produzenje rezervacije
-    public function extendReservation($id,$brojDana)
+    public function extendReservation(Request $request)
     {
+        $id=$request->id;
+        $brojDana=$request->BrojDana;
         $rezervacija=$this->getReservationsID($id)[0];
         $dateStart=$rezervacija->start;
         $dateEnd=$rezervacija->finish;
@@ -984,26 +1059,7 @@ class MainController extends Controller
                 $this->sendMeil($info,'shortend');
                 return ("Rezervacija $id je skracena do $newDateEnd. Nova cena je $newCost.");
         }
-        //rezervacij je u toku, ali je skracivanje manje od ukupnog preostalog vremena
-        // elseif($test<=0 and $test2>0 and $trajanjeDoKraja>abs($brojDana))
-        // {
-        //     $id_auto=$rezervacija->id_car;
-        //     $model=$rezervacija->model;
-        //     $newDateEnd=date('Y-m-d', strtotime($dateEnd." - ".abs($brojDana)." days"));
-        //     $newCost=$this->totalCost($model,$dateStart,$newDateEnd);
-        //         DB::update(
-        //             "
-        //             UPDATE `rezervacija` 
-        //             SET `Datum_zavrsetka` = ?, 
-        //             `Cena`=? 
-        //             WHERE `rezervacija`.`ID_rezervacije` = ?
-        //             ",[$newDateEnd,$newCost,$id]
-        //         );
-                
-        //         $info=$this->returnInformation($id)[0];
-        //         $this->sendMeil($info,'shortend');
-        //         return ("Rezervacija $id je skracena do $newDateEnd. Nova cena je $newCost.");
-        // }
+        
         else
         {
             return ("Broj dana nije pravilan!");
@@ -1015,12 +1071,6 @@ class MainController extends Controller
     public function getExtendForm($id)
     {
         return view('rezervacijeInfo.extendForm',['id'=>$id]);
-    }
-
-    //
-    public function extend(Request $request)
-    {
-        return $this->extendReservation($request->id,$request->brojDana);
     }
 
     //Funkcija koja salje mejl kupcu-trenutno je iskljucena da ne bi bagovala

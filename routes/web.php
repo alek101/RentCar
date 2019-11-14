@@ -62,15 +62,14 @@ Route::prefix('/rezervacija')->middleware('login')->group(function()
     
 });
 
-//ovo ne diram, jedva ga namestih
 Route::prefix('/rezervacijeInfo')->middleware('login')->group(function()
 {
-    Route::get('/','MainController@rezervacijeInfo');
-    Route::post('forma1','MainController@rezervacijeSveForm');
-    Route::get('/sve','MainController@rezervacijeSve');
-    Route::post('/extend','MainController@extend');
-    Route::get('/sve/{num}','MainController@rezervacijeSve');
-    Route::get('/cancel/{id}','MainController@cancelReservation');
+    Route::get('/','MainController@rezervacijeInfo'); //buduce rezervacije-nepotrebno
+    Route::post('/allReservationForm','MainController@allReservationForm');
+    Route::get('/all','MainController@allReservations');
+    Route::post('/extendReservation','MainController@extendReservation');
+    Route::get('/all/{num}','MainController@allReservations'); //ne koristi se
+    Route::get('/cancelReservation/{id}','MainController@cancelReservation');
     Route::get('/extendForm/{id}','MainController@getExtendForm');
 });
 

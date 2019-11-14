@@ -72,7 +72,7 @@
                     $auto->opis
                     . "</td>"
     
-                    ."<td><button class='obrisi' data-link='/rezervacijeInfo/cancel/$auto->id'>Otkazi</button></td>"
+                    ."<td><button class='obrisi' data-link='/rezervacijeInfo/cancelReservation/$auto->id'>Otkazi</button></td>"
     
              . "</tr>";
             !!}

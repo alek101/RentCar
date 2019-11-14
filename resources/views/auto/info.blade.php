@@ -180,6 +180,7 @@
             <th>Datum zavrsetka</th>
             <th>Cena</th>
             <th>Opis</th>
+            <th>Produži/Skrati</th>
             <th>Otkazi</th>
         </tr>
     
@@ -220,8 +221,10 @@
                     "<td>" .
                     $rez->opis
                     . "</td>"
+
+                    ."<td><button class='produzi' data-link='/rezervacijeInfo/extendForm/$rez->id'>Izmeni</button></td>"
     
-                    ."<td><button class='obrisi' data-link='/auto/cancel/".$rez->id."'>Otkazi</button></td>"
+                    ."<td><button class='obrisi' data-link='/auto/cancelReservation/".$rez->id."'>Otkazi</button></td>"
     
              . "</tr>";
             !!} 
@@ -234,6 +237,12 @@
         {
             window.open("/kriticni/"+sasija);
         })
+
+        let butoniProduzi=[...document.querySelectorAll('.produzi')];
+        butoniProduzi.map(b=>b.addEventListener('click', function()
+        {
+            window.open(b.getAttribute('data-link'));
+        }));
 
         let butoniObrisi=[...document.querySelectorAll('.obrisi')];
         butoniObrisi.map(b=>b.addEventListener('click', function()
