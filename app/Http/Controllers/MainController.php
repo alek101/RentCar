@@ -705,7 +705,7 @@ class MainController extends Controller
         return view('rezervacijeInfo.buduce',['niz'=>$niz]);
     }
 
-    //
+    //otkazivanje rezervacije u bazi
     public function cancelFutureReservation($id)
     {
         DB::delete("DELETE
