@@ -170,6 +170,8 @@
 
     <h3>Buduce Rezervacije</h3>
 
+    <button class="dugme" id="addFilterReservation" data-tablice={!! $auto->tablica !!}>Dodatni Filter</button>
+
     <table>
         <tr>
             <th>ID rezervacije</th>
@@ -243,6 +245,14 @@
         {
             window.open(b.getAttribute('data-link'));
         }));
+
+        //ubacujemo ime tablica u filter i idemo na stranicu sa rezervacijama
+        document.querySelector('#addFilterReservation').addEventListener('click',function(e)
+        {
+            let tablice=e.target.getAttribute('data-tablice');
+            sessionStorage.setItem('filterTabela',tablice);
+            window.open('/rezervacijeInfo/all');
+        });
 
         let butoniObrisi=[...document.querySelectorAll('.obrisi')];
         butoniObrisi.map(b=>b.addEventListener('click', function()
