@@ -40,7 +40,7 @@
                 }
             }
     
-            fetch('/rezervacijeInfo/extend',opcije)
+            fetch('/rezervacijeInfo/extendReservation',opcije)
                 .then(resp=>resp.text())
                 .then(txt=>ispisi(txt));
         })

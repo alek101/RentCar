@@ -698,7 +698,7 @@ class MainController extends Controller
         order by `Datum_pocetka` ASC",[]);   
     }
 
-    //
+    //deprecated
     public function rezervacijeInfo()
     {
         $niz=$this->futureReservations();  
@@ -736,7 +736,7 @@ class MainController extends Controller
     //
     public function allReservations($num=50)
     {
-        $niz=$this->getAllReservations($num);  
+        $niz=$this->getAllReservationsDESC($num);  
         return view('rezervacijeInfo.sve',['niz'=>$niz]);
     }
 
@@ -747,27 +747,27 @@ class MainController extends Controller
         {
             if(isset($request->num))
             {
-                $niz=$this->getAllReservations($request->num);  
+                $niz=$this->getAllReservationsDESC($request->num);  
                 return view('rezervacijeInfo.sve',['niz'=>$niz]);
             }
             
             if(isset($request->dateStart) && isset($request->dateEnd))
             {
-                $niz=$this->getReservationsDate($request->dateStart,$request->dateEnd);  
+                $niz=$this->getReservationsDateDESC($request->dateStart,$request->dateEnd);  
                 return view('rezervacijeInfo.sve',['niz'=>$niz]);
             }
 
             if(isset($request->dateStart) && !isset($request->dateEnd))
             {
                 $dateEnd=date('Y-m-d', strtotime($request->dateStart." + 365 days"));
-                $niz=$this->getReservationsDate($request->dateStart,$dateEnd);  
+                $niz=$this->getReservationsDateDESC($request->dateStart,$dateEnd);  
                 return view('rezervacijeInfo.sve',['niz'=>$niz]);
             }
             
             if(!isset($request->dateStart) && isset($request->dateEnd))
             {
                 $dateStart=date('Y-m-d', strtotime($request->dateEnd." - 365 days"));
-                $niz=$this->getReservationsDate($dateStart,$request->dateEnd);  
+                $niz=$this->getReservationsDateDESC($dateStart,$request->dateEnd);  
                 return view('rezervacijeInfo.sve',['niz'=>$niz]);
             }
         }
@@ -806,7 +806,7 @@ class MainController extends Controller
     }
 
     //spisak rezervacija u vremenskom okviru
-    public function getReservationsDate($dateStart,$dateEnd)
+    public function getReservationsDateDESC($dateStart,$dateEnd)
     {
         return DB::select(
             "SELECT
@@ -829,7 +829,7 @@ class MainController extends Controller
     }
 
     //
-    public function getAllReservations($num)
+    public function getAllReservationsDESC($num)
     {
         return DB::select(
             "SELECT
@@ -999,10 +999,10 @@ class MainController extends Controller
     public function extendReservation(Request $request)
     {
         $id=$request->id;
-        $brojDana=$request->BrojDana;
-        $rezervacija=$this->getReservationsID($id)[0];
-        $dateStart=$rezervacija->start;
-        $dateEnd=$rezervacija->finish;
+        $brojDana=$request->brojDana;
+        $rezervacija=$this->returnInformation($id)[0];
+        $dateStart=$rezervacija->dateStart;
+        $dateEnd=$rezervacija->dateEnd;
         $trajanje = (strtotime($dateEnd)-strtotime($dateStart))/24/60/60;
         $test=strtotime($dateStart) - strtotime(date("Y-m-d"));
 
@@ -1014,7 +1014,7 @@ class MainController extends Controller
         
         if($brojDana>0)
         {
-            $id_auto=$rezervacija->id_car;
+            $id_auto=$rezervacija->car_id;
             $model=$rezervacija->model;
             $newDateStart=date('Y-m-d', strtotime($dateEnd." + 1 days"));
             $newDateEnd=date('Y-m-d', strtotime($dateEnd." + ".$brojDana." days"));
@@ -1042,7 +1042,7 @@ class MainController extends Controller
         //jos uvek nije pocela i skracenje je manje od trajanja ili rezervacij je u toku, ali je skracivanje manje od ukupnog preostalog vremena
         elseif(($test>0 and $trajanje>abs($brojDana)) or ($test<=0 and $test2>0 and $trajanjeDoKraja>abs($brojDana)))
         {
-            $id_auto=$rezervacija->id_car;
+            $id_auto=$rezervacija->car_id;
             $model=$rezervacija->model;
             $newDateEnd=date('Y-m-d', strtotime($dateEnd." - ".abs($brojDana)." days"));
             $newCost=$this->totalCost($model,$dateStart,$newDateEnd);
