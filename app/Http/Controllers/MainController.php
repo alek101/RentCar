@@ -50,7 +50,7 @@ class MainController extends Controller
         if($brojDana>=0)
         {
         $dateStart=$this->findNextFreeDate($id,$brojDana);
-        $dateEnd=$dateEnd=date('Y-m-d', strtotime($dateStart." + $brojDana days"));
+        $dateEnd=date('Y-m-d', strtotime($dateStart." + $brojDana days"));
 
         return view('kriticni.zakaziServis2',["id"=>$id,"dateStart"=>$dateStart,"dateEnd"=>$dateEnd]);
         }
@@ -895,7 +895,7 @@ class MainController extends Controller
         LIMIT ?",[$num]);   
     }
 
-    //
+    //depricated
     public function getReservationsID($id)
     {
         return DB::select(
@@ -1119,5 +1119,4 @@ class MainController extends Controller
         {
             return view('klient.nama');
         }
-
 }

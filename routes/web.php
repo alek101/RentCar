@@ -20,36 +20,36 @@ Route::get('/', function () {
 
 Route::get('/nama','MainController@nama');
 
-Route::get('/glavna','MainController@kriticni')->middleware('login');
+Route::get('/glavna','CarInfoController@kriticni')->middleware('login');
 
 Route::prefix('/kriticni')->middleware('login')->group(function()
 {
-    Route::get('/','MainController@kriticni');
-    Route::post('/findServiseDate','MainController@findServiseDate');
-    Route::post('/sheduleServise','MainController@sheduleServise');
-    Route::get('/initiateServis/{id}','MainController@initiateServis');
+    Route::get('/','CarInfoController@kriticni');
+    Route::post('/findServiseDate','CarInfoController@findServiseDate');
+    Route::post('/sheduleServise','CarInfoController@sheduleServise');
+    Route::get('/initiateServis/{id}','CarInfoController@initiateServis');
 });
 
 Route::prefix('/servis')->middleware('login')->group(function()
 {
-    Route::get('/','MainController@servis');
-    Route::post('/endServis','MainController@endServis');
-    Route::get('/servisCar/{id}','MainController@servisCar');
+    Route::get('/','ServiseController@servis');
+    Route::post('/endServis','ServiseController@endServis');
+    Route::get('/servisCar/{id}','ServiseController@servisCar');
 });
 
 Route::prefix('/prijem')->middleware('login')->group(function()
 {
-    Route::get('/','MainController@prijem');
-    Route::post('/izmeniKM','MainController@izmeniKM');
+    Route::get('/','ServiseController@prijem');
+    Route::post('/izmeniKM','ServiseController@izmeniKM');
     
 });
 
 Route::prefix('/auto')->middleware('login')->group(function()
 {
-    Route::get('/','MainController@auto');
+    Route::get('/','CarInfoController@auto');
     Route::get('/sviModeli','TipoviAutomobilaController@modeli1');
-    Route::get('/info/{id}','MainController@autoInfo');
-    Route::get('/cancel/{id}','MainController@cancelReservationA');
+    Route::get('/info/{id}','CarInfoController@autoInfo');
+    Route::get('/cancelReservation/{id}','ReservationController@cancelReservationA');
 });
 
 //depricated
@@ -65,12 +65,12 @@ Route::prefix('/auto')->middleware('login')->group(function()
 Route::prefix('/rezervacijeInfo')->middleware('login')->group(function()
 {
     Route::get('/','MainController@rezervacijeInfo'); //buduce rezervacije-nepotrebno
-    Route::post('/allReservationForm','MainController@allReservationForm');
-    Route::get('/all','MainController@allReservations');
-    Route::post('/extendReservation','MainController@extendReservation');
+    Route::post('/allReservationForm','ReservationController@allReservationForm');
+    Route::get('/all','ReservationController@allReservations');
+    Route::post('/extendReservation','ReservationController@extendReservation');
     Route::get('/all/{num}','MainController@allReservations'); //ne koristi se
-    Route::get('/cancelReservation/{id}','MainController@cancelReservation');
-    Route::get('/extendForm/{id}','MainController@getExtendForm');
+    Route::get('/cancelReservation/{id}','ReservationController@cancelReservation');
+    Route::get('/extendForm/{id}','ReservationController@getExtendForm');
 });
 
 Auth::routes();
@@ -95,9 +95,9 @@ Route::prefix('/admin')->middleware('admin')->group(function()
 
 Route::prefix('/zakazi')->group(function()
 {
-    Route::get('/','MainController@zakaziPrikaz1');
-    Route::post('/makeJSONforBooking','MainController@makeJSONforBooking');
-    Route::post('/makeBookingWithFetch','MainController@makeBookingWithFetch');
+    Route::get('/','ReservationController@zakaziPrikaz1');
+    Route::post('/makeJSONforBooking','ReservationController@makeJSONforBooking');
+    Route::post('/makeBookingWithFetch','ReservationController@makeBookingWithFetch');
 });
 
 Route::prefix('/baza')->middleware('admin')->group(function()
