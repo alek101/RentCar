@@ -44,7 +44,13 @@
                         @endauth 
                         "
                         required></label>
-                    <label for="telefon" class="w33">Telefon <input type="number" name="telefon" id="telefon" value="000"></label>
+                    <label for="telefon" class="w33">Telefon <input type="text" name="telefon" id="telefon" value="
+                        @auth
+                        {{ Auth::user()->phone }}
+                        @else
+                        '000000000'
+                        @endauth 
+                        "></label>
                 </div>
                 <div>
                     <label for="comment"> Komentar <br><textarea name="comment" id="comment" cols="30" rows="10" placeholder="no comment"></textarea></label>
@@ -138,6 +144,7 @@
     let dateEndInput=document.querySelector('#end');
     let imeInput=document.querySelector('#ime');
     let emailInput=document.querySelector('#email');
+    let telefonInput=document.querySelector('#telefon')
     let danas=new Date();
 
 
@@ -163,7 +170,7 @@
                 dateStartInput.classList.add('errorBorder');
             }
 
-            if(!dateStart=="" && !danas>=createDateDayFoward(dateStart))
+            if(dateStart!="" && danas<createDateDayFoward(dateStart))
             {
                 dateStartInput.classList.remove('errorBorder');
             }
@@ -282,7 +289,7 @@
                             dateStartInput.classList.add('errorBorder');
                         }
 
-                        if(!dateStart=="" && !danas>=createDateDayFoward(dateStart))
+                        if(dateStart!="" && danas<createDateDayFoward(dateStart))
                         {
                             dateStartInput.classList.remove('errorBorder');
                         }
@@ -339,8 +346,44 @@
                             emailInput.classList.remove('errorBorder'); 
                         }
                          
+                        telefon=telefonInput.value;
+                        console.log('telefon',telefon);
+                        if(telefon=="")
+                        {
+                            errors.push('Telefon nije validan!'); 
+                            telefonInput.classList.add('errorBorder'); 
 
-                        telefon=document.querySelector('#telefon').value || 000;
+                        }
+                        else
+                        {
+                            telefonInput.classList.remove('errorBorder'); 
+                        }
+
+                        telefon-parseInt(telefon);
+                        console.log('isNan',isNaN(telefon));
+                        if(isNaN(telefon))
+                        {
+                            errors.push('Telefon mora da bude broj!'); 
+                            telefonInput.classList.add('errorBorder'); 
+
+                        }
+                        else
+                        {
+                            telefonInput.classList.remove('errorBorder'); 
+                        }
+
+                        if(telefon<=9999999)
+                        {
+                            errors.push('Telefon mora da ima 8 cifara!'); 
+                            telefonInput.classList.add('errorBorder'); 
+
+                        }
+                        else
+                        {
+                            telefonInput.classList.remove('errorBorder'); 
+                        }
+
+
                         comment=document.querySelector('#comment').value || 'no comment';
                 
                         if (errors.length==0)
