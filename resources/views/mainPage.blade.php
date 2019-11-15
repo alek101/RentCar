@@ -35,19 +35,24 @@
                             {{-- <li><a href="/rezervacijeInfo">Buduce Rezervacije</a></li> --}}
                         </ul>
                     </div>
-                 </div>   
-                <div class="adminMeni">Admin
-                    <div class="adminMeniCart">
-                        <ul>
-                            <li><a href="/admin">Admin</a></li>
-                            <li><a href="/baza/model/getAdd">Dodaj model</a></li>
-                            <li><a href="/baza/model/getChange">Izmeni model i cenu</a></li>
-                            <li><a href="/baza/car/getAdd">Dodaj automobil</a></li>
-                            <li><a href="/baza/car/getChange">Izmeni vozilo</a></li>
-                            <li><a href="/baza/addImage1">Uploaduj Sliku</a></li>
-                        </ul>
+                 </div>  
+                 @auth
+                   @if (Auth::user()->role>=10)
+                    <div class="adminMeni">Admin
+                        <div class="adminMeniCart">
+                            <ul>
+                                <li><a href="/admin">Admin</a></li>
+                                <li><a href="/baza/model/getAdd">Dodaj model</a></li>
+                                <li><a href="/baza/model/getChange">Izmeni model i cenu</a></li>
+                                <li><a href="/baza/car/getAdd">Dodaj automobil</a></li>
+                                <li><a href="/baza/car/getChange">Izmeni vozilo</a></li>
+                                <li><a href="/baza/addImage1">Uploaduj Sliku</a></li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
+                   @endif 
+                @endauth 
+                
             </div>
 
             <div class="login">

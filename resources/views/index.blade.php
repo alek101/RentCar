@@ -14,7 +14,12 @@
                 <a href="/nama">O Nama</a>
                 <a href="/zakazi">Zakazi</a>
                 <a href="/klient/sviModeli">Svi Modeli</a>
-                <a href="/kriticni">Admin Panel</a>
+                @auth
+                   @if (Auth::user()->role>=1)
+                       <a href="/kriticni">Admin Panel</a>
+                   @endif 
+                @endauth
+                
             </div>
 
             <div class="login">
