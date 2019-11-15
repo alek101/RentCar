@@ -6,11 +6,17 @@
 @endphp
 
 <form method="POST" action="/kriticni/findServiseDate">
-    @csrf
+    <div class="flexRow">@csrf</div>
+    <div class="flexRow">
+        <label for="id"> Broj Sasije <input type="text" name='id' value="<?=$id?>" id="id"></label>
+        <label for="brojDana"> Broj Dana <input type="number" name="brojDana" id="brojDana" value="1"></label>
+    </div>
+    <div class="flexRow"><input type="submit" value="Posalji" id="dugme"></div>
+    
     {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}" id='token'> --}}
-    Broj Sasije <input type="text" name='id' value="<?=$id?>" id="id">
-    Broj Dana <input type="number" name="brojDana" id="brojDana" value="1">
-    <input type="submit" value="Posalji" id="dugme">
+   
+   
+    
 
 </form>
 

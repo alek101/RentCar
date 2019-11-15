@@ -6,13 +6,15 @@
 @endphp --}}
 
 <form method="POST" action="/admin/change">
-    @csrf
+    
     {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}" id='token'> --}}
-    <input type="number" name='id' id='id' value={{ $users->id }} hidden>
-    Name <input type="text" name="name" id="name" value="{{ $users->name }}" readonly>
-    Email <input type="email" name="meil" id="meil" value="{{ $users->email }}" readonly>
-    Role    <input type="number" name="role" id="role" value="{{ $users->role }}">
-    <input type="submit" value="Promeni" id="dugme">
-
+    <div class="flexRow">@csrf</div>
+    <div class="flexRow"><input type="number" name='id' id='id' value={{ $users->id }} hidden></div>
+    <div class="flexRow">
+        <label for="name" class="w33">Name <input type="text" name="name" id="name" value="{{ $users->name }}" readonly></label>
+        <label for="meil" class="w33">Email <input type="email" name="meil" id="meil" value="{{ $users->email }}" readonly></label>
+        <label for="role" class="w33">Role    <input type="number" name="role" id="role" value="{{ $users->role }}"></label>
+    </div>
+    <div class="flexRow"><input type="submit" value="Promeni" id="dugme"></div>
 </form>
 @endsection

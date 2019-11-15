@@ -23,14 +23,14 @@
             <div class="flexColumn">
                 <div> @csrf </div>
                 <div class="flexRow">
-                    <label for="start">Datum početka <input type="date" name="dateStart" id="start" value=""> </label>
-                    <label for="end">Datum završetka <input type="date" name="dateEnd" id="end" value="" ></label>
+                    <label for="start" class="w50">Datum početka <input type="date" name="dateStart" id="start" value=""> </label>
+                    <label for="end" class="w50">Datum završetka <input type="date" name="dateEnd" id="end" value="" ></label>
                 </div>
                 <div class="flexRow">
                 
-                    <label for="ime"> Ime <input type="text" name="ime" id="ime" required></label>
-                    <label for="email">Email <input type="email" name="email" id="email" required></label>
-                    <label for="telefon">Telefon <input type="number" name="telefon" id="telefon" placeholder="000"></label>
+                    <label for="ime" class="w33"> Ime <input type="text" name="ime" id="ime" required></label>
+                    <label for="email" class="w33">Email <input type="email" name="email" id="email" required></label>
+                    <label for="telefon" class="w33">Telefon <input type="number" name="telefon" id="telefon" placeholder="000"></label>
                 </div>
                 <div>
                     <label for="comment"> Komentar <br><textarea name="comment" id="comment" cols="30" rows="10" placeholder="no comment"></textarea></label>

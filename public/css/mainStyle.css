@@ -2,6 +2,7 @@
 /* @import url('https://fonts.googleapis.com/css?family=Maven+Pro:400,700&display=swap'); */
 /* @import url('https://fonts.googleapis.com/css?family=Russo+One&display=swap'); */
 @import url('https://fonts.googleapis.com/css?family=Hammersmith+One&display=swap');
+/* @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700&display=swap'); */
 
 :root
 {
@@ -24,6 +25,7 @@ html
     /* font-family: 'Maven Pro', sans-serif; */
     /* font-family: 'Russo One', sans-serif; */
     font-family: 'Hammersmith One', sans-serif;
+    /* font-family: 'Nanum Gothic', sans-serif; */
 }
 
 body
@@ -66,7 +68,7 @@ body
     /* background-image: linear-gradient(lightblue,rgb(85, 85, 114)); */
     position: relative;
     height: 100%;
-    max-width: 1400px;
+    max-width: 2000px;
     margin: 0 auto;
     
 }
@@ -334,6 +336,7 @@ button,#dugme
 #dugme
 {
     padding: 20px 30px;
+    max-width: 400px;
 }
 
 #dugme2
@@ -441,7 +444,7 @@ button:hover
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin: 5px;
+    margin: 5px auto;
     flex-wrap: wrap;
 }
 
@@ -481,22 +484,22 @@ button:hover
 .formZakazivanje
 {
     background-color: var(--main-color);
-    max-width: 1400px;
+    max-width: 2000px;
     /* width: 100%; */
     margin: 20px auto;
     padding: 5px;
-    border-radius: 20px;
+    border-radius: 6px;
     
 }
 
 textarea
 {
-    width: 50%;
+    width: 90%;
 }
 
 .formAddKM
 {
-    max-width: 400px;
+    max-width: 500px;
     margin: 20px auto;
     border: 1px solid black;
     border-radius: 6px;
@@ -552,7 +555,8 @@ textarea
 
 label
 {
-    margin: 5px;
+    padding: 5px;
+    min-width: 250px;
 }
 
 .modelCardName
@@ -576,7 +580,11 @@ label
 
 input
 {
-    border-radius: 8px;
+    min-width: 240px;
+    max-width: 400px;
+    width: 100%;
+    border: 1px solid black;
+    text-align: center;
 }
 
 .linkA a
@@ -648,4 +656,25 @@ p
     text-align: justify;
     padding: 0px 5px;
     margin-right: 5px;
+}
+
+.w33
+{
+    width: 33.3%;
+}
+
+.w50
+{
+    width: 50%;
+}
+
+.w100
+{
+    width: 100%;
+}
+
+#filter
+{
+    min-width: 200px;
+    max-width: 300px;
 }
