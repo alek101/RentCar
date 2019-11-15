@@ -584,7 +584,7 @@ input
     max-width: 400px;
     width: 100%;
     border: 1px solid black;
-    text-align: center;
+    padding: 2px;
 }
 
 .linkA a

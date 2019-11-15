@@ -28,9 +28,23 @@
                 </div>
                 <div class="flexRow">
                 
-                    <label for="ime" class="w33"> Ime <input type="text" name="ime" id="ime" required></label>
-                    <label for="email" class="w33">Email <input type="email" name="email" id="email" required></label>
-                    <label for="telefon" class="w33">Telefon <input type="number" name="telefon" id="telefon" placeholder="000"></label>
+                    <label for="ime" class="w33"> Ime <input type="text" name="ime" id="ime" value="
+                        @auth
+                            {{ trim(Auth::user()->name) }}
+                        @else
+                            ''
+                        @endauth 
+                        "
+                        required></label>
+                    <label for="email" class="w33">Email <input type="email" name="email" id="email" value="
+                        @auth
+                            {{ Auth::user()->email }}
+                        @else
+                            ''
+                        @endauth 
+                        "
+                        required></label>
+                    <label for="telefon" class="w33">Telefon <input type="number" name="telefon" id="telefon" value="000"></label>
                 </div>
                 <div>
                     <label for="comment"> Komentar <br><textarea name="comment" id="comment" cols="30" rows="10" placeholder="no comment"></textarea></label>
@@ -136,16 +150,11 @@
             let dateStart,dateEnd,model,ime,telefon,email,comment;
 
             
-
             dateStart=dateStartInput.value;
             if(dateStart=="")
             {
                 errors.push('Mora da postoji pocetni datum!');
                 dateStartInput.classList.add('errorBorder');
-            }
-            else
-            {
-                dateStartInput.classList.remove('errorBorder');
             }
 
             if(danas>=createDateDayFoward(dateStart))
@@ -153,7 +162,8 @@
                 errors.push('Ne mozete da rezervisete proslost!');
                 dateStartInput.classList.add('errorBorder');
             }
-            else
+
+            if(!dateStart=="" && !danas>=createDateDayFoward(dateStart))
             {
                 dateStartInput.classList.remove('errorBorder');
             }
@@ -210,7 +220,6 @@
 
         function ispisi(json)
         {
-            
             modelsWraper.innerHTML="";
             console.log("json koji je stigao: ",json);
             //proveravamo da li je json ,,prazan"
@@ -266,22 +275,18 @@
                             errors.push('Mora da postoji pocetni datum!');
                             dateStartInput.classList.add('errorBorder');
                         }
-                        else
-                        {
-                            dateStartInput.classList.remove('errorBorder');
-                        }
 
                         if(danas>=createDateDayFoward(dateStart))
                         {
                             errors.push('Ne mozete da rezervisete proslost!');
                             dateStartInput.classList.add('errorBorder');
                         }
-                        else
+
+                        if(!dateStart=="" && !danas>=createDateDayFoward(dateStart))
                         {
                             dateStartInput.classList.remove('errorBorder');
                         }
                         
-
                         dateEnd=dateEndInput.value;
                         if(dateEnd=="")
                         {

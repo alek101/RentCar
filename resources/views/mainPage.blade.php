@@ -7,6 +7,7 @@
     <title>RentCar</title>
     
     <link rel="stylesheet" href="{{ url('/css/mainStyle.css') }}">
+    
     <style>
         .container::before 
         {
@@ -53,7 +54,7 @@
                     @if (Route::has('login'))
                     <div class="top-right links">
                         @auth
-                            <a href="{{ url('/home') }}">Home</a>
+                            <a href="{{ url('/home') }}">{{ Auth::user()->name }}</a>
                         @else
                             <a href="{{ route('login') }}">Login</a>
 
