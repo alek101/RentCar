@@ -17,10 +17,18 @@
     <div class="flexColumn">
         <div>@csrf</div>
         <div class="flexRow">
+            <label for="selector">
+                Kriterijum: <br>
+                <select name="selector" id="selector">
+                    <option value="broj">Po Broju Unosa</option>
+                    <option value="datum">Po Datumu</option>
+                </select>
+            </label>
+        </div>
+        <div class="flexRow brUnos">
             <label for="num">Broj Zadnjih Unosa <br> <input type="number" name="num" id="num"></label>
         </div>
-        <div class="flexRow">Ili</div>
-        <div class="flexRow">
+        <div class="flexRow sDate cardDisapear">
             <label for="start">Pocetni datum <input type="date" name="dateStart" id="start"></label>
             <label for="end">Krajnji datum <input type="date" name="dateEnd" id="end"></label>
         </div>
@@ -33,7 +41,7 @@
                 </select>
             </label>
         </div>
-        <div><input type="submit" value="Posalji" id="dugme"> </div>
+        <div><input type="submit" value="Pošalji" id="dugme"> </div>
     </div>
 </form>
 
@@ -113,12 +121,32 @@
     </table>
 
     <script>
+        //menjanje forme
+        let selector=document.querySelector('#selector');
+        selector.addEventListener('change',function()
+        {
+            let val=selector.value;
+
+            if(val=="broj")
+            {
+                document.querySelector('.brUnos').classList.remove('cardDisapear');
+                document.querySelector('.sDate').classList.add('cardDisapear');
+            }
+
+            if(val=="datum")
+            {
+                document.querySelector('.brUnos').classList.add('cardDisapear');
+                document.querySelector('.sDate').classList.remove('cardDisapear');
+            }
+        })
+        //produzenje rezervacije ili skracenje
         let butoniProduzi=[...document.querySelectorAll('.produzi')];
         butoniProduzi.map(b=>b.addEventListener('click', function()
         {
             window.open(b.getAttribute('data-link'));
         }));
 
+        //otkazivanje registracije
         let butoniObrisi=[...document.querySelectorAll('.obrisi')];
         butoniObrisi.map(b=>b.addEventListener('click', function()
         {
