@@ -87,7 +87,7 @@ class TipoviAutomobilaController extends Controller
         },1);
         
 
-        return redirect('/auto/sviModeli');
+        return redirect('/klient/sviModeli');
     }
 
     //
@@ -150,6 +150,6 @@ class TipoviAutomobilaController extends Controller
             $newCena3->saveOrFail();
         },1);
         
-        return redirect('/auto/sviModeli');
+        return redirect('/klient/sviModeli');
     }
 }
