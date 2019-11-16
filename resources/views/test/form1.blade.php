@@ -39,13 +39,45 @@
         {
             for(red of json)
             {
-                console.log(red);
                 let l=JSON.stringify(red);
                 let p=document.createElement('p');
                 p.append(l);
                 div.append(p);
             }
         }
+
+        window.addEventListener('click',function(e)
+        {
+            console.log(e);
+        })
+
+        window.addEventListener('scroll',function(e)
+        {
+            console.log(e);
+        })
+
+        let mouse=false;
+
+        window.addEventListener('mousedown', function(e)
+        {
+            mouse=true;
+            console.log(mouse);
+        })
+
+        window.addEventListener('mouseup', function(e)
+        {
+            mouse=false;
+            console.log(mouse);
+        })
+
+        window.addEventListener('mousemove',function(e)
+        {
+            if(mouse)
+            {
+              console.log(event);   
+            }
+            
+        })
     
     </script>
 @endsection

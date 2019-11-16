@@ -88,11 +88,11 @@ Route::prefix('/admin')->middleware('admin')->group(function()
 });
 
 //ovo je nebitno
-// Route::prefix('/test')->group(function()
-// {
-//     Route::get('/','MainController@test1');
-//     Route::get('/posalji1','MainController@test2');
-// });
+Route::prefix('/test')->group(function()
+{
+    Route::get('/','MainController@test1');
+    Route::get('/posalji1','MainController@test2');
+});
 
 Route::prefix('/zakazi')->group(function()
 {

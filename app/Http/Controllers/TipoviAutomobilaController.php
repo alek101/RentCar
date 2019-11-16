@@ -72,6 +72,7 @@ class TipoviAutomobilaController extends Controller
         $newCena3->cena_po_danu=$request->cena_max;    
         }
 
+        //prebacivanje slike move(putanja, ime)
         $request->slika->move(public_path('images'), $imeSlike);
 
         //treba transakcija
