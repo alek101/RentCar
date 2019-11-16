@@ -55,6 +55,26 @@ class AdminController extends Controller
     }
 
     //
+    public function changeUser()
+    {
+        return view('klient.changeUser');
+    }
+
+    //
+    public function madeChangeUser(Request $request)
+    {
+        $id=$request->id;
+        $user=UserModel::findOrFail($id);
+
+        $user->name=$request->name;
+        $user->email=$request->email;
+        $user->phone=$request->phone;
+
+        $user->saveOrFail();
+        return redirect('/home');
+    }
+
+    //
     public function delete($id)
     {
         $user=UserModel::findOrFail($id);
@@ -111,5 +131,7 @@ class AdminController extends Controller
     //         ->with('success','You have successfully upload image.')
     //         ->with('image',$imageName);
     // }
+
+    
 
 }

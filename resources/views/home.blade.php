@@ -18,7 +18,13 @@
                     <br>
                     <a href="/">Povratak na glavnu stranicu</a>
                     <br>
-                    <a href="/glavna">Idi na admin stranicu</a>
+                    @if (Auth::user()->role>=10)
+                        <a href="/glavna">Idi na admin stranicu</a>
+                        <br>
+                    @endif
+                    
+                    <a href="/izmeniPodatkeUser">Promeni podatke</a>
+                
                 </div>
             </div>
         </div>

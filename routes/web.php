@@ -20,6 +20,9 @@ Route::get('/', function () {
 
 Route::get('/nama','FrontPageController@nama');
 
+Route::get('/izmeniPodatkeUser','AdminController@changeUser')->middleware('auth');
+Route::post('/madeChangeUser','AdminController@madeChangeUser')->middleware('auth');
+
 Route::get('/glavna','CarInfoController@kriticni')->middleware('login');
 
 Route::prefix('/kriticni')->middleware('login')->group(function()
