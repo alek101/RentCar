@@ -5,8 +5,8 @@
     <div class="flexColumn">
         <div>@csrf</div>
         <div class="flexRow">
-            <label for="rez_id">ID Rezervacije <input type="num" name="rez_id" id="rez_id" value="{{ $id }}" readonly></label>
-            <label for="brojDana">Broj dana <input type="num" name="brojDana" id="brojDana"></label>
+            <label for="rez_id">ID Rezervacije <input type="num" name="rez_id" id="rez_id" value="{{ $id }}" readonly required></label>
+            <label for="brojDana">Broj dana <input type="num" name="brojDana" id="brojDana" required></label>
         </div>
         <div><input type="submit" value="Posalji" id="dugme"> </div>
     </div>

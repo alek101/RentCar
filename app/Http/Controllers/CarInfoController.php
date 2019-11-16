@@ -47,7 +47,7 @@ class CarInfoController extends Controller
     {
         $id=$request->id;
         $brojDana=$request->brojDana;
-        if($brojDana>=0)
+        if($brojDana>0)
         {
         $dateStart=$this->findNextFreeDate($id,$brojDana);
         $dateEnd=date('Y-m-d', strtotime($dateStart." + $brojDana days"));
@@ -71,9 +71,12 @@ class CarInfoController extends Controller
         
         if($check)
         {
-        //transakcija 
-        $this->changeCarServis($id);
-        $this->insertReservation($id,'ADMIN','ADMIN','ADMIN',$dateStart,$dateEnd,'SERVIS',0);
+         DB::transaction(function() use($id,$dateStart,$dateEnd)
+         {
+                $this->changeCarServis($id);
+                $this->insertReservation($id,'ADMIN','ADMIN','ADMIN',$dateStart,$dateEnd,'SERVIS',0);
+         },5);
+        
         return $this->kriticni();
         //end transakcija
         }
@@ -107,7 +110,6 @@ class CarInfoController extends Controller
         if($brojDana>=1)
         {
             $check=false;
-            $brojDana=$brojDana-1;
             $trenutniDatum=date("Y-m-d");
             $dateStart=$trenutniDatum;
             $dateEnd=date('Y-m-d', strtotime($dateStart." + $brojDana days"));
@@ -152,9 +154,9 @@ class CarInfoController extends Controller
                 A.Broj_sasije=? and A.Aktivan=1
                 and
                 ((
-                    ? >= R.Datum_pocetka AND ? <= R.Datum_zavrsetka
+                    ? >= R.Datum_pocetka AND ? < R.Datum_zavrsetka
                 ) OR(
-                    ? >= R.Datum_pocetka AND ? <= R.Datum_zavrsetka
+                    ? > R.Datum_pocetka AND ? <= R.Datum_zavrsetka
                 ))',[$id,$dateStart,$dateStart,$dateEnd,$dateEnd]
             );
 

@@ -10,7 +10,7 @@
     </div>
     <div class="flexRow">
         <label for="t">Broj Tablica <input type="text" name="tablica" id="t" value=""></label>
-        <label for="km">Dodaj KM <input type="number" name="km" id="km" value=""></label>
+        <label for="km">Dodaj KM <input type="number" name="km" id="km" value="" required></label>
     </div>
     
     <div class="flexRow">

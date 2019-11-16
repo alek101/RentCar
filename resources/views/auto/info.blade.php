@@ -108,8 +108,8 @@
     <h3>Dodaj kilometrazu</h3>
 <form method="POST" action="/prijem/izmeniKM" class="formAddKM">
     @csrf
-    <input type="text" name='id' value="<?=$auto->sasija?>" id="id" hidden>
-    Dodaj KM <input type="number" name="km" id="km" value="">
+    <input type="text" name='id' value="<?=$auto->sasija?>" id="id" hidden required>
+    Dodaj KM <input type="number" name="km" id="km" value="" required>
     <input type="submit" value="Dodaj" id="dugme2">
 
 </form>
@@ -237,7 +237,7 @@
         let sasija=document.querySelector('#id').value;
         document.querySelector('.zakaziServis').addEventListener('click',function()
         {
-            window.open("/kriticni/"+sasija);
+            window.open("/kriticni/initiateServis/"+sasija);
         })
 
         let butoniProduzi=[...document.querySelectorAll('.produzi')];

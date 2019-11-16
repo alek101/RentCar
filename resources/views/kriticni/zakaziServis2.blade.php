@@ -12,9 +12,11 @@
     {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}" id='token'> --}}
     <div class="flexRow">@csrf</div>
     <div class="flexRow">
-        <label for="id" class="w33">Broj Sasije <input type="text" name='id' value="<?=$id?>" id="id"></label>
-        <label for="start" class="w33">Pocetak <input type="date" name="dateStart" id="start" value="{{ $dateStart }}"></label>
-        <label for="end" class="w33">Zavrsetak <input type="date" name="dateEnd" id="end" value="{{$dateEnd}}"></label>
+        <label for="id" class="w100">Broj Sasije <input type="text" name='id' value="<?=$id?>" id="id" required></label>
+    </div>
+    <div class="flexRow">
+        <label for="start" class="w503">Pocetak <input type="date" name="dateStart" id="start" value="{{ $dateStart }}" required></label>
+        <label for="end" class="w503">Zavrsetak <input type="date" name="dateEnd" id="end" value="{{$dateEnd}}" required></label>
     </div>
     <div class="flexRow"><input type="submit" value="Posalji" id="dugme"></div>
 </form>
