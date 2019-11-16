@@ -457,20 +457,20 @@ class ReservationController extends Controller
             //vadimo sve rezervacije za auto u vremnskom periodu, ako neka postoji, auto nije slobodan
             $niz=DB::select(
                 'SELECT
-                A.Broj_sasije AS "id"
-            FROM
-                `automobili` AS A
-            LEFT JOIN `rezervacija` AS R
-            ON
-                A.Broj_sasije = R.ID_vozila
-            WHERE
-                A.Broj_sasije=? and A.Aktivan=1
-                and
-                ((
-                    ? >= R.Datum_pocetka AND ? <= R.Datum_zavrsetka
-                ) OR(
-                    ? >= R.Datum_pocetka AND ? <= R.Datum_zavrsetka
-                ))',[$id,$dateStart,$dateStart,$dateEnd,$dateEnd]
+                    *
+                FROM
+                    `automobili` AS A
+                LEFT JOIN `rezervacija` AS R
+                ON
+                    A.Broj_sasije = R.ID_vozila
+                WHERE
+                    A.Broj_sasije=? and A.Aktivan=1
+                    and
+                    ((
+                        ? >= R.Datum_pocetka AND ? < R.Datum_zavrsetka
+                    ) OR(
+                        ? > R.Datum_pocetka AND ? <= R.Datum_zavrsetka
+                    ))',[$id,$dateStart,$dateStart,$dateEnd,$dateEnd]
             );
 
             if(count($niz)==0)
