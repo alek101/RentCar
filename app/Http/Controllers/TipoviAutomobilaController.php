@@ -33,9 +33,14 @@ class TipoviAutomobilaController extends Controller
     //
     public function add(Request $request)
     {
+        $request->validate([
+            'slika' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
         $newModel=new TipoviAutomobilaModel;
         $newModel->Model=$request->Model;
-        $newModel->slika='/images/'.str_replace("_"," ",$request->slika);
+        $imeSlike=str_replace("_"," ",$request->slikaIme);
+        $newModel->slika='/images/'.$imeSlike;
         $newModel->Klasa=$request->Klasa;
         $newModel->Tip_menjaca=$request->Tip_menjaca;
         $newModel->Broj_sedista=$request->Broj_sedista;
@@ -66,6 +71,8 @@ class TipoviAutomobilaController extends Controller
         {
         $newCena3->cena_po_danu=$request->cena_max;    
         }
+
+        $request->slika->move(public_path('images'), $imeSlike);
 
         //treba transakcija
         DB::transaction(function() use($newModel,
@@ -105,7 +112,7 @@ class TipoviAutomobilaController extends Controller
     {
         $model=str_replace("_"," ",$request->Model);
         $newModel=TipoviAutomobilaModel::where('Model',$model)->firstOrFail();
-        $newModel->slika='/images/'.str_replace("_"," ",$request->slika);
+        $newModel->slika='/images/'.str_replace("_"," ",$request->slikaIme);
         $newModel->Klasa=$request->Klasa;
         $newModel->Tip_menjaca=$request->Tip_menjaca;
         $newModel->Broj_sedista=$request->Broj_sedista;

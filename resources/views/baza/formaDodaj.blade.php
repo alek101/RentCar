@@ -1,14 +1,15 @@
 @extends('mainPage')
 @section('Page')
 
-<form class="formZakazivanje" method="POST" action="/baza/model/add">
+<form class="formZakazivanje" method="POST" enctype="multipart/form-data" action="/baza/model/add">
     <div class="flexColumn">
         <div class="flexRow">
                 @csrf 
         </div>
         <div class="flexRow">
             <label for="Model">Model Automobila<input type="text" name="Model" id="Model" required></label>
-            <label for="slika">Ime slike<input type="text" name="slika" id="slika" required></label>
+            <label for="slika">Slika: <input type="file" name="slika" id="slika"></label>
+            <label for="slikaIme">Ime slike<input type="text" name="slikaIme" id="slikaIme" required></label>
         </div>
         <div class="flexRow">
             <label for="Klasa">
@@ -46,11 +47,21 @@
 </form>
 
 <script>
+    //
     let nameImage=sessionStorage.getItem('nameImage');
     if(nameImage!=null)
     {
-        document.querySelector('#slika').value=nameImage;
+        document.querySelector('#slikaIme').value=nameImage;
     }
+
+    //da izvadi ime slike iz fajla
+    document.querySelector('#slika').addEventListener('change',function(e)
+    {
+        let nameImage=document.querySelector('#slika').value.slice(12);
+        document.querySelector('#slikaIme').value=nameImage;
+        sessionStorage.setItem('nameImage',nameImage);
+    })
+
 
 </script>
 
