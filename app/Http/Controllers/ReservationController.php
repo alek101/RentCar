@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\TipoviAutomobilaModel;
+use App\AutomobiliModel;
 
 class ReservationController extends Controller
 {
@@ -271,7 +272,18 @@ class ReservationController extends Controller
     {
         $info=$this->returnInformation($id);
         $this->cancelFutureReservation($id);
-        $this->sendMeil($info[0],'cancel');
+        if($info[0]->opis=='SERVIS')
+        {
+            //ako ukidamo servis, izbaci auto iz spiska onih koji su na servisu
+            $auto=AutomobiliModel::where('Broj_sasije',$info[0]->car_id)->firstOrFail();
+            $auto->Servis=0;
+            $auto->save();
+        }
+        else
+        {
+          $this->sendMeil($info[0],'cancel');  
+        }
+        
         return redirect('/rezervacijeInfo/all');
     }
 
@@ -280,7 +292,17 @@ class ReservationController extends Controller
     {
         $info=$this->returnInformation($id);
         $this->cancelFutureReservation($id);
-        $this->sendMeil($info[0],'cancel');
+        if($info[0]->opis=='SERVIS')
+        {
+            //ako ukidamo servis, izbaci auto iz spiska onih koji su na servisu
+            $auto=AutomobiliModel::where('Broj_sasije',$info[0]->car_id)->firstOrFail();
+            $auto->Servis=0;
+            $auto->save();
+        }
+        else
+        {
+          $this->sendMeil($info[0],'cancel');  
+        }
         return redirect('/auto/info/'.$info[0]->car_id);
     }
 
@@ -501,7 +523,8 @@ class ReservationController extends Controller
         `Broj_registarskih_tablica` as 'tablice',
         `Model` as 'model',
         `Cena` as 'cena',
-        A.Broj_sasije as 'car_id'
+        A.Broj_sasije as 'car_id',
+        `Napomena` as 'opis'
         FROM
             `rezervacija` AS R
         JOIN `automobili` AS A

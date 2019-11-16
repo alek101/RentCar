@@ -16,7 +16,7 @@
                             <option value="mali">Mali</option>
                             <option value="veliki">Veliki</option>
                             <option value="registracija">Registracija</option>
-                            <option value="cancel">Otkazi</option>
+                            {{-- <option value="cancel">Otkazi</option> --}}
                     </select>
             </label>
         </div>

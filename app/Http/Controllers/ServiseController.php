@@ -59,7 +59,7 @@ class ServiseController extends Controller
         return $this->servis();
     }
 
-    //pomocna funkcija koja radi servis->ovde verovatno treba transakcija
+    //pomocna funkcija koja radi servis
     function madeServis($id,$tip,$datum,$opis,$registracija)
     {
         $km=$this->getKM($id)[0]->km;

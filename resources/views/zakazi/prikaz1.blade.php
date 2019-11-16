@@ -385,6 +385,11 @@
 
 
                         comment=document.querySelector('#comment').value || 'no comment';
+
+                        if(comment=="SERVIS")
+                        {
+                            comment+="_kupac";
+                        }
                 
                         if (errors.length==0)
                         {
