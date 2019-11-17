@@ -105,9 +105,9 @@ class MainController extends Controller
                 A.Broj_sasije=? and A.Aktivan=1
                 and
                 ((
-                    ? >= R.Datum_pocetka AND ? <= R.Datum_zavrsetka
+                    ? >= R.Datum_pocetka AND ? < R.Datum_zavrsetka
                 ) OR(
-                    ? >= R.Datum_pocetka AND ? <= R.Datum_zavrsetka
+                    ? > R.Datum_pocetka AND ? <= R.Datum_zavrsetka
                 ))',[$id,$dateStart,$dateStart,$dateEnd,$dateEnd]
             );
 
