@@ -7,19 +7,19 @@
 
 <table>
     <tr>
-        <th>Broj Sasije</th>
-        <th>Broj Saobracajne</th>
-        <th>BrojTablica</th>
+        <th>Broj Šasije</th>
+        <th>Broj Saobraćajne</th>
+        <th>Broj Tablica</th>
         <th>Model</th>
-        <th>Godiste</th>
-        <th>Kilometraza</th>
+        <th>Godište</th>
+        <th>Kilometraža</th>
         <th>Datum Registracije</th>
         <th>Radjen Mali</th>
         <th>Radjen Veliki</th>
         <th>Isticanje registracije</th>
         <th>Predjeno od Malog</th>
         <th>Predjeno od Velikog</th>
-        <th>Zakazi Servis</th>
+        <th>Zakaži Servis</th>
     </tr>
 
     <tr>

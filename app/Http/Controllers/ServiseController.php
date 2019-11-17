@@ -174,7 +174,7 @@ class ServiseController extends Controller
         ",[$newDate,$id]);
     }
 
-    //
+    //dodaje kilometrazu
     public function addKM($id,$km)
     {
         $predjena=$this->getKM($id)[0]->km;
@@ -193,7 +193,7 @@ class ServiseController extends Controller
         `Broj_sasije`=?",[$id]);
     }
     
-    //function
+    //
     public function setKM($id,$km)
     {
         DB::update("
@@ -218,6 +218,7 @@ class ServiseController extends Controller
         )[0]->id;
     }
 
+    //servis je stvka u tabeli automobili koja pokazuje da li je auto na servisu
     //
     function getServis($id)
         {

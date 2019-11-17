@@ -12,19 +12,19 @@
 <h3>Osnonvne Informacije</h3>
 <table>
         <tr>
-            <th>Broj Sasije</th>
-            <th>Broj Saobracajne</th>
-            <th>BrojTablica</th>
+            <th>Broj Šasije</th>
+            <th>Broj Saobraćajne</th>
+            <th>Broj Tablica</th>
             <th>Model</th>
-            <th>Godiste</th>
-            <th>Kilometraza</th>
+            <th>Godište</th>
+            <th>Kilometraža</th>
             <th>Datum Registracije</th>
             <th>Radjen Mali</th>
             <th>Radjen Veliki</th>
             <th>Isticanje registracije</th>
             <th>Predjeno od Malog</th>
             <th>Predjeno od Velikog</th>
-            <th>Zakazi Servis</th>
+            <th>Zakaži Servis</th>
            
         </tr>
     
@@ -105,7 +105,7 @@
         
     </table>
 
-    <h3>Dodaj kilometrazu</h3>
+    <h3>Dodaj kilometražu</h3>
 <form method="POST" action="/prijem/izmeniKM" class="formAddKM">
     @csrf
     <input type="text" name='id' value="<?=$auto->sasija?>" id="id" hidden required>
@@ -124,14 +124,14 @@
 
 
 
-<h3>Servisna knjizica</h3>
+<h3>Servisna knjižica</h3>
 
 <table>
         <tr>
             
             <th>Datum</th>
             <th>Tip Servisa</th>
-            <th>Kilometraza</th>
+            <th>Kilometraža</th>
             <th>Opis</th>
         </tr>
     
@@ -168,7 +168,7 @@
         @endforeach
     </table>
 
-    <h3>Buduce Rezervacije</h3>
+    <h3>Buduće Rezervacije</h3>
 
     <button class="dugme" id="addFilterReservation" data-tablice={!! $auto->tablica !!}>Dodatni Filter</button>
 
@@ -178,12 +178,12 @@
             <th>Ime</th>
             <th>Mejl</th>
             <th>Telefon</th>
-            <th>Datum pocetka</th>
-            <th>Datum zavrsetka</th>
+            <th>Datum početka</th>
+            <th>Datum završetka</th>
             <th>Cena</th>
             <th>Opis</th>
             <th>Produži/Skrati</th>
-            <th>Otkazi</th>
+            <th>Otkaži</th>
         </tr>
     
         

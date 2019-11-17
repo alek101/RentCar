@@ -12,8 +12,8 @@
         <th></th>
         <th>Naziv</th>
         <th>Klasa</th>
-        <th>Tip Menjaca</th>
-        <th>Broj Sedista</th>
+        <th>Tip Menjača</th>
+        <th>Broj Sedišta</th>
         <th>Broj Vrata</th>
         <th>Broj Torbi</th>
     </tr>

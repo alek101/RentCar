@@ -17,6 +17,7 @@ class TipoviAutomobilaController extends Controller
         return view('auto.modeli', ['models'=>$models]);
     }
 
+    //vraca podatke za spisak modela
     public function modeli2()
     {
         $models=TipoviAutomobilaModel::all();
@@ -24,13 +25,13 @@ class TipoviAutomobilaController extends Controller
         return view('klient.sviModeli', ['models'=>$models,'cenovnik'=>$cenovnik]);
     }
 
-    //
+    //stranica za dodavanje tipa
     public function getAdd()
     {
         return view('baza.formaDodaj');
     }
 
-    //
+    //funkcija za dodavanje novog modela
     public function add(Request $request)
     {
         $request->validate([
@@ -91,14 +92,14 @@ class TipoviAutomobilaController extends Controller
         return redirect('/klient/sviModeli');
     }
 
-    //
+    //forma u kojoj se odlucuje koji ce se model menjati
     public function getChange()
     {
         $models=TipoviAutomobilaModel::all();
         return view('baza.modelID',['models'=>$models]);
     }
 
-    //
+    //forma koja sluzi za izmenu modela
     public function getFormChange(Request $request)
     {
         $modelID=str_replace("_"," ",$request->Model);
@@ -109,10 +110,12 @@ class TipoviAutomobilaController extends Controller
         return view('baza.formaIzmeni',['model'=>$model,'cena_3'=>$cena_3,'cena_7'=>$cena_7,'cena_max'=>$cena_max]);
     }
 
+    //funkcija koja menja model
     public function change(Request $request)
     {
         $model=str_replace("_"," ",$request->Model);
         $newModel=TipoviAutomobilaModel::where('Model',$model)->firstOrFail();
+
         $newModel->slika='/images/'.str_replace("_"," ",$request->slikaIme);
         $newModel->Klasa=$request->Klasa;
         $newModel->Tip_menjaca=$request->Tip_menjaca;

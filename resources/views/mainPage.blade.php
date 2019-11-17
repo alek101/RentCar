@@ -23,15 +23,15 @@
                 <div class="meni">Meni
                     <div class="meniCart">
                         <ul>
-                            <li><a href="/kriticni">Kriticni</a></li>
+                            <li><a href="/kriticni">Kritični</a></li>
                             <li><a href="/servis">Servis</a></li>
                             <li><a href="/prijem">Dodaj km</a></li>
                             <li><a href="/auto">Spisak automobila</a></li>
                             {{-- <li><a href="/auto/sviModeli">Spisak Modela</a></li> --}}
-                            <li><a href="/klient/sviModeli">Spisak Modela</a></li>
+                            <li><a href="/klient/sviModeli">Spisak modela</a></li>
                             {{-- <li><a href="/rezervacija">Rezervisi</a></li> --}}
-                            <li><a href="/zakazi" target="_blank">Rezervisi</a></li>
-                            <li><a href="/rezervacijeInfo/all">Sve Rezervacije</a></li>
+                            <li><a href="/zakazi" target="_blank">rezerviši</a></li>
+                            <li><a href="/rezervacijeInfo/all">Sve rezervacije</a></li>
                             {{-- <li><a href="/rezervacijeInfo">Buduce Rezervacije</a></li> --}}
                         </ul>
                     </div>
@@ -41,7 +41,7 @@
                     <div class="adminMeni">Admin
                         <div class="adminMeniCart">
                             <ul>
-                                <li><a href="/admin">Admin</a></li>
+                                <li><a href="/admin">Spisak korisnika</a></li>
                                 <li><a href="/baza/model/getAdd">Dodaj model</a></li>
                                 <li><a href="/baza/model/getChange">Izmeni model i cenu</a></li>
                                 <li><a href="/baza/car/getAdd">Dodaj automobil</a></li>

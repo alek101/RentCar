@@ -12,7 +12,7 @@
         <div class="header">
             <div class="links">
                 <a href="/nama">O Nama</a>
-                <a href="/zakazi">Zakazi</a>
+                <a href="/zakazi">Zakaži</a>
                 <a href="/klient/sviModeli">Svi Modeli</a>
                 @auth
                    @if (Auth::user()->role>=1)

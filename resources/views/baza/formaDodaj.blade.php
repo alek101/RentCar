@@ -22,7 +22,7 @@
                 </select>
             </label>
             <label for="Tip_menjaca">
-                Tip menjaca
+                Tip menjača
                 <select name="Tip_menjaca" id="Tip_menjaca">
                     <option value="manuelni">manuelni</option>
                     <option value="automatski">automatski</option>
@@ -30,7 +30,7 @@
             </label>
         </div>
         <div class="flexRow">
-            <label for="Broj_sedista">Broj Sedista<input type="number" name="Broj_sedista" id="Broj_sedista" required></label>
+            <label for="Broj_sedista">Broj Sedišta<input type="number" name="Broj_sedista" id="Broj_sedista" required></label>
             <label for="Broj_vrata">Broj Vrata<input type="number" name="Broj_vrata" id="Broj_vrata" required></label>
             <label for="Broj_torbi">Broj Torbi<input type="number" name="Broj_torbi" id="Broj_torbi" required></label>
         </div>

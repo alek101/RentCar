@@ -11,7 +11,7 @@
 
 <h3>Sve Rezervacije</h3>
 
-<p>Ukoliko filter nije aktivan, prikazace se poslednjih 50 unosa.</p>
+<p>Ukoliko filter nije aktivan, prikazaće se poslednjih 50 unosa.</p>
 
 <form method="POST" action="/rezervacijeInfo/allReservationForm" class="sveRez">
     <div class="flexColumn">
@@ -29,15 +29,15 @@
             <label for="num">Broj Zadnjih Unosa <br> <input type="number" name="num" id="num"></label>
         </div>
         <div class="flexRow sDate cardDisapear">
-            <label for="start">Pocetni datum <input type="date" name="dateStart" id="start"></label>
+            <label for="start">Početni datum <input type="date" name="dateStart" id="start"></label>
             <label for="end">Krajnji datum <input type="date" name="dateEnd" id="end"></label>
         </div>
         <div class="flexRow">
             <label for="order">
-                Za opadajuce/rastuce vreme: <br>
+                Za opadajuće/rastuće vreme: <br>
                 <select name="order" id="order">
-                    <option value="DESC">Opadajuce</option>
-                    <option value="ASC">Rastuce</option>
+                    <option value="DESC">Opadajuće</option>
+                    <option value="ASC">Rastuće</option>
                 </select>
             </label>
         </div>
@@ -57,12 +57,12 @@
             <th>Telefon</th>
             <th>Tablice</th>
             <th>Model</th>
-            <th>Datum pocetka</th>
-            <th>Datum zavrsetka</th>
+            <th>Datum početka</th>
+            <th>Datum završetka</th>
             <th>Cena</th>
             <th>Opis</th>
             <th>Produži/Skrati</th>
-            <th>Otkazi</th>
+            <th>Otkaži</th>
         </tr>
     
         

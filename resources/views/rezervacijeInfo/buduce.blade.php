@@ -9,7 +9,7 @@
 
 <div class="prazan"></div>
 
-<h3>Buduce Rezervacije</h3>
+<h3>Buduće Rezervacije</h3>
 
 <table>
         <tr>
@@ -19,8 +19,8 @@
             <th>Telefon</th>
             <th>Tablice</th>
             <th>Model</th>
-            <th>Datum pocetka</th>
-            <th>Datum zavrsetka</th>
+            <th>Datum početka</th>
+            <th>Datum završetka</th>
             <th>Cena</th>
             <th>Opis</th>
             <th>Otkazi</th>

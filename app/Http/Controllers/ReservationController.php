@@ -133,6 +133,12 @@ class ReservationController extends Controller
         $email=$request->email;
         $comment=$request->comment;
 
+        //SERVIS je rezervisana rec
+        if($comment==="SERVIS")
+        {
+            $comment.="_korisnik";
+        }
+
         
         $cena=$this->totalCost($model,$dateStart,$dateEnd);
         

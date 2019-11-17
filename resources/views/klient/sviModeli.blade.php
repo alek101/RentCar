@@ -95,7 +95,7 @@
     @endforeach
 </table>
 
-<h4>* Cene su na dan u zavisnosti od duzine rezervacije.</h4>
+<h4>* Cene su po danu u zavisnosti od dužine rezervacije.</h4>
 
 
 @endsection

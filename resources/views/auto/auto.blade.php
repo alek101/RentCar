@@ -5,12 +5,12 @@
 
 <table>
         <tr>
-            <th>Broj Sasije</th>
-            <th>Broj Saobracajne</th>
+            <th>Broj Šasije</th>
+            <th>Broj Saobraćajne</th>
             <th>BrojTablica</th>
             <th>Model</th>
-            <th>Godiste</th>
-            <th>Kilometraza</th>
+            <th>Godište</th>
+            <th>Kilometraža</th>
             <th>Datum Registracije</th>
             <th>Radjen Mali</th>
             <th>Radjen Veliki</th>
