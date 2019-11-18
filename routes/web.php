@@ -48,7 +48,6 @@ Route::prefix('/prijem')->middleware('login')->group(function()
 Route::prefix('/auto')->middleware('login')->group(function()
 {
     Route::get('/','CarInfoController@auto');
-    Route::get('/sviModeli','TipoviAutomobilaController@modeliSvi');
     Route::get('/info/{id}','CarInfoController@autoInfo');
     Route::get('/cancelReservation/{id}','ReservationController@cancelReservationA');
 });
@@ -82,8 +81,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::prefix('/admin')->middleware('admin')->group(function()
 {
     Route::get('/','AdminController@home');
+    Route::get('/sviModeli','TipoviAutomobilaController@modeliSvi');
     Route::get('/roleChange/{id}','AdminController@formaRole');
     Route::post('/change','AdminController@change');
+    Route::get('/unactiveAuto','CarInfoController@unactiveAuto');
     Route::get('/delete/{id}','AdminController@delete');
     
 });

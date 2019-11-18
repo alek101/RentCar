@@ -103,7 +103,7 @@ class TipoviAutomobilaController extends Controller
         },1);
         
 
-        return redirect('/klient/sviModeli');
+        return redirect('/admin/sviModeli');
     }
 
     //forma u kojoj se odlucuje koji ce se model menjati
@@ -168,6 +168,6 @@ class TipoviAutomobilaController extends Controller
             $newCena3->saveOrFail();
         },1);
         
-        return redirect('/klient/sviModeli');
+        return redirect('/admin/sviModeli');
     }
 }

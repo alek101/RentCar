@@ -93,6 +93,13 @@ class CarInfoController extends Controller
         return view('auto.auto',['niz'=>$niz]);
     }
 
+    //Strana za neaktivne automobile
+    public function unactiveAuto()
+    {
+        $niz=$this->getAllCars(0);
+        return view('admin.unactiveAuto',['niz'=>$niz]);
+    }
+
     //informacije o jednom autu
     public function autoInfo($id)
     {
@@ -223,7 +230,7 @@ class CarInfoController extends Controller
     }
 
     //vraca sve automobile
-    public function getAllCars()
+    public function getAllCars($aktivan=1)
     {
         return DB::select("SELECT
         `Broj_sasije` as 'sasija',
@@ -241,8 +248,8 @@ class CarInfoController extends Controller
     FROM
         `automobili`
     WHERE
-        `Aktivan`=1
-    ",[]);
+        `Aktivan`=?
+    ",[$aktivan]);
     }
 
     //vraca podatke o jednom automobilu

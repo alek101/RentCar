@@ -54,18 +54,21 @@ Osim svih stvari koje mogu da urade i predhodne kategorije:
 9. Može da otkaže servis.
 10. Može da otkaže rezervacije koje nisu još započele (ukoliko nije prošlo 3 dana).
 11. Ima pristup filteru za tabele, i filteru za rezervacije. 
-12. Ima pristup širem spisku modela, koji uključuju i one koji nisu aktivni (koji nemaju nijedan aktivan automobil).
+
 
 -Adminstrator (role 10-99)
 
 Osim svih stvari koje mogu da urade i predhodne kategorije:
 
-1. Ima pristup spisku svim korisnicima.
-2. Može da postavlja uloge korisnicima (osim uloge Super Administratora). 
-3. Može da dodaje i modifikuje modele u potpunosti.
-4. Može da dodaje i modfikuje automobile u potpunosti, uključujući da ih deaktivira.
-5. Može da dodaje slike na serveru (kako bi se zamenile slike modela). 
-6. Može da obriše korisnika.
+1. Ima pristup posebnom delu menija.
+2. Ima pristup spisku svim korisnicima.
+3. Može da postavlja uloge korisnicima (osim uloge Super Administratora).
+4. Može da obriše korisnika.
+5. Ima pristup spisku neaktivnih automobila.  
+6. Može da dodaje i modifikuje modele u potpunosti.
+7. Može da dodaje i modfikuje automobile u potpunosti, uključujući da ih deaktivira.
+8. Može da dodaje slike na serveru (kako bi se zamenile slike modela). 
+9. Ima pristup širem spisku modela, koji uključuju i one koji nisu aktivni (koji nemaju nijedan aktivan automobil).
 
 -Super Adminstrator (role 100)
 
