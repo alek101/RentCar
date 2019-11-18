@@ -90,7 +90,6 @@
     function upisi(text)
     {
         console.log('opis_upis',opis);
-        // opis.innerHTML+=text;
         opis.value+=text;
     }
 
@@ -100,7 +99,6 @@
         //prima tekst
         let text=opis.value;
         //brise iz html-a
-        // opis.innerHTML="";
         opis.value="";
         //izbacuje visak iz teksta i pravi niz od ostatka
         text=text.split(cut);
