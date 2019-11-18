@@ -18,8 +18,6 @@ Route::get('/', function () {
     return Redirect('/zakazi');
 });
 
-Route::get('/nama','FrontPageController@nama');
-
 Route::get('/izmeniPodatkeUser','AdminController@changeUser')->middleware('auth');
 Route::post('/madeChangeUser','AdminController@madeChangeUser')->middleware('auth');
 
@@ -50,7 +48,7 @@ Route::prefix('/prijem')->middleware('login')->group(function()
 Route::prefix('/auto')->middleware('login')->group(function()
 {
     Route::get('/','CarInfoController@auto');
-    Route::get('/sviModeli','TipoviAutomobilaController@modeli1');
+    Route::get('/sviModeli','TipoviAutomobilaController@modeliSvi');
     Route::get('/info/{id}','CarInfoController@autoInfo');
     Route::get('/cancelReservation/{id}','ReservationController@cancelReservationA');
 });
@@ -126,7 +124,8 @@ Route::prefix('/baza')->middleware('admin')->group(function()
 
 Route::prefix('/klient')->group(function()
 {
-    Route::get('/sviModeli','TipoviAutomobilaController@modeli2');
+    Route::get('/sviModeli','TipoviAutomobilaController@modeliAktivni');
+    Route::get('/nama','FrontPageController@nama');
 });
 
 

@@ -11,7 +11,7 @@
     <div class="container">
         <div class="header">
             <div class="links">
-                <a href="/nama">O Nama</a>
+                <a href="/klient/nama">O Nama</a>
                 <a href="/zakazi">Zakaži</a>
                 <a href="/klient/sviModeli">Svi Modeli</a>
                 @auth

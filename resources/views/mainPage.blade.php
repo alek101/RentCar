@@ -27,8 +27,8 @@
                             <li><a href="/servis">Servis</a></li>
                             <li><a href="/prijem">Dodaj km</a></li>
                             <li><a href="/auto">Spisak automobila</a></li>
-                            {{-- <li><a href="/auto/sviModeli">Spisak Modela</a></li> --}}
-                            <li><a href="/klient/sviModeli">Spisak modela</a></li>
+                            <li><a href="/auto/sviModeli">Spisak Modela</a></li>
+                            {{-- <li><a href="/klient/sviModeli">Spisak modela</a></li> --}}
                             {{-- <li><a href="/rezervacija">Rezervisi</a></li> --}}
                             <li><a href="/zakazi" target="_blank">Rezerviši</a></li>
                             <li><a href="/rezervacijeInfo/all">Sve rezervacije</a></li>

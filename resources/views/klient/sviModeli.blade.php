@@ -95,7 +95,8 @@
         @endforeach
     </table>
 
-    <h4 class="white">* Cene su po danu u zavisnosti od dužine rezervacije.</h4>
+    <h4 class='white'>* Cene su po danu u zavisnosti od dužine rezervacije.</h4>
+    
 </section>
 
 @endsection

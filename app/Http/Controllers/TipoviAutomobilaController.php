@@ -5,22 +5,36 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\TipoviAutomobilaModel;
 use App\CenovnikModel;
+use App\AutomobiliModel;
 use Illuminate\Support\Facades\DB;
 
 
 class TipoviAutomobilaController extends Controller
 {
-    //depricated
-    public function modeli1()
+    //spisak modela
+    public function modeliSvi()
     {
         $models=TipoviAutomobilaModel::all();
-        return view('auto.modeli', ['models'=>$models]);
+        $cenovnik=CenovnikModel::all();
+        return view('auto.modeli', ['models'=>$models,'cenovnik'=>$cenovnik]);
     }
 
-    //vraca podatke za spisak modela
-    public function modeli2()
+    //vraca podatke za spisak modela za koji postoji barem jedan aktivan automobil
+    public function modeliAktivni()
     {
-        $models=TipoviAutomobilaModel::all();
+        $models=[];
+        $cars=AutomobiliModel::where('Aktivan',1)->get();
+        $modelsBook=TipoviAutomobilaModel::all();
+        forEach($modelsBook as $singleModel)
+        {
+            forEach($cars as $car)
+            {
+                if($singleModel->Model===$car->Model)
+                {
+                    array_push($models,$singleModel);
+                }
+            }
+        }
         $cenovnik=CenovnikModel::all();
         return view('klient.sviModeli', ['models'=>$models,'cenovnik'=>$cenovnik]);
     }

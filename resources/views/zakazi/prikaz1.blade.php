@@ -70,9 +70,10 @@
     </div>
 </section>
 
-<section class="dodaci">
+{{-- Ova sekcija je predvidjena za nesto, na primer komentare ili ponude --}}
+{{-- <section class="dodaci">
 
-</section>
+</section> --}}
 
 
 <script>

@@ -99,7 +99,7 @@ body
 
 .container::after
 {
-    content:"";
+    content:'';
     display: block;
     height: 80px;
 }
@@ -120,6 +120,13 @@ body
 {
     background-image: url('../images/blue-and-white-milky-way-3214110.jpg');
     min-height: 100vh; 
+}
+
+.dodaci::after
+{
+    content:'';
+    display: block;
+    height: 80px;
 }
 
 a 
@@ -378,6 +385,12 @@ button,#dugme
     padding: 10px 15px;
 }
 
+.dugmeRezervisi
+{
+    box-shadow: 0 0 0 black;
+}
+
+
 button:hover
 {
     cursor: pointer;
@@ -410,6 +423,12 @@ button:hover
     transform: translate(2px,2px);
     border-top: 3px solid var(--compl-color-2);
     border-left: 3px solid var(--compl-color-2);
+}
+
+.dugmeRezervisi:hover
+{
+    transform: translate(0px,0px);
+    border: 2px solid black;
 }
 
 .hidden
@@ -565,7 +584,7 @@ textarea
     flex-direction: row;
     margin: 20px;
     background-color: var(--main-color);
-    padding: 0px 2px 2px 0px;
+    /* padding: 0px 2px 2px 0px; */
     box-shadow: 2px 5px 10px rgba(0,0,0,0.5);
     transition: 0.2s;
 
@@ -666,33 +685,35 @@ p
     margin: 2px;
 }
 
-.dugmeRezervisi
-{
-    box-shadow: 0 0 0 black;
-}
-
 .containerNama
 {
     display: flex;
     color: white;
+    justify-content: space-between;
+    flex-wrap: wrap-reverse;
+    padding: 5px 25px;
 }
 
 .slikaNama
 {
     margin-right: 10px;
     border-radius: 20px;
+    width: 35%;
+    min-width: 500px;
 }
 
 .slikaNama img
 {
     border-radius: 20px;
+    width: 100%;
 }
 
 .textNama
 {
     text-align: justify;
     padding: 0px 5px;
-    margin-right: 5px;
+    margin-bottom:20px;
+    width: 60%;
 }
 
 .w33
