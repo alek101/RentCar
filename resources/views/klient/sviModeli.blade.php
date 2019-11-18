@@ -4,98 +4,98 @@
 {{-- @php
     var_dump($cenovnik);
 @endphp --}}
+<section class="dodaci">
+    <div class="filter_modeli"><label for="filter" class="white">Filter po nazivu: <input type="text" id="filter" class='filter'></label></div>
 
-<div class="margin_20"><label for="filter">Filter po nazivu: <input type="text" id="filter" class='filter'></label></div>
+    <table>
+        <tr>
+            <th></th>
+            <th>Naziv</th>
+            <th>Klasa</th>
+            <th><img class='icon' src='{!! asset('/images/icons/solid--car-gears.svg') !!}' alt='Tip Menjaca: '></th>
+            <th><img class='icon' src='{!! asset('/images/icons/solid--car-door.svg') !!}' alt='Broj Vrata: '></th>
+            <th><img class='icon' src='{!! asset('/images/icons/solid--car-seat.svg') !!}' alt='Broj Sedišta: '></th>
+            <th><img class='icon' src='{!! asset('/images/icons/solid--big-bag.svg') !!}' alt='Broj Torbi: '></th>
+            <th>Cena 1-3</th>
+            <th>Cena 4-7</th>
+            <th>Cena 8+*</th>
+        </tr>
 
-<table>
-    <tr>
-        <th></th>
-        <th>Naziv</th>
-        <th>Klasa</th>
-        <th><img class='icon' src='{!! asset('/images/icons/solid--car-gears.svg') !!}' alt='Tip Menjaca: '></th>
-        <th><img class='icon' src='{!! asset('/images/icons/solid--car-door.svg') !!}' alt='Broj Vrata: '></th>
-        <th><img class='icon' src='{!! asset('/images/icons/solid--car-seat.svg') !!}' alt='Broj Sedišta: '></th>
-        <th><img class='icon' src='{!! asset('/images/icons/solid--big-bag.svg') !!}' alt='Broj Torbi: '></th>
-        <th>Cena 1-3</th>
-        <th>Cena 4-7</th>
-        <th>Cena 8+*</th>
-    </tr>
+        @foreach ($models as $model)
 
-    @foreach ($models as $model)
-
-        <?php
-            foreach($cenovnik as $item)
-            {
-                if($model->Model == $item->Model)
+            <?php
+                foreach($cenovnik as $item)
                 {
-                    if($item->Max_broj_dana==3)
+                    if($model->Model == $item->Model)
                     {
-                        $cena_3=$item->cena_po_danu;  
-                    }
+                        if($item->Max_broj_dana==3)
+                        {
+                            $cena_3=$item->cena_po_danu;  
+                        }
 
-                    if($item->Max_broj_dana==7)
-                    {
-                        $cena_7=$item->cena_po_danu; 
-                    }
+                        if($item->Max_broj_dana==7)
+                        {
+                            $cena_7=$item->cena_po_danu; 
+                        }
 
-                    if($item->Max_broj_dana==12700)
-                    {
-                        $cena_max=$item->cena_po_danu;  
+                        if($item->Max_broj_dana==12700)
+                        {
+                            $cena_max=$item->cena_po_danu;  
+                        }
                     }
                 }
-            }
-        ?>
+            ?>
 
-        {!! 
-        "<tr>" .
-
-            "<td>" .
-                "<img src=".($model->slika)." alt='Nema Slike'>"
-                
-                . "</td>".
+            {!! 
+            "<tr>" .
 
                 "<td>" .
-                $model->Model
-                . "</td>".
+                    "<img src=".($model->slika)." alt='Nema Slike'>"
+                    
+                    . "</td>".
 
-                "<td>" .
-                $model->Klasa
-                . "</td>".
+                    "<td>" .
+                    $model->Model
+                    . "</td>".
 
-                "<td>" .
-                $model->Tip_menjaca
-                . "</td>".
+                    "<td>" .
+                    $model->Klasa
+                    . "</td>".
 
-                "<td>" .
-                $model->Broj_sedista
-                . "</td>".
+                    "<td>" .
+                    $model->Tip_menjaca
+                    . "</td>".
 
-                "<td>" .
-                    $model->Broj_vrata
-                . "</td>".
+                    "<td>" .
+                    $model->Broj_sedista
+                    . "</td>".
 
-                "<td>" .
-                    $model->Broj_torbi
-                . "</td>".
+                    "<td>" .
+                        $model->Broj_vrata
+                    . "</td>".
 
-                "<td>" .
-                    $cena_3
-                . "</td>".
+                    "<td>" .
+                        $model->Broj_torbi
+                    . "</td>".
 
-                "<td>" .
-                    $cena_7
-                . "</td>".
+                    "<td>" .
+                        $cena_3
+                    . "</td>".
 
-                "<td>" .
-                    $cena_max
-                . "</td>".
+                    "<td>" .
+                        $cena_7
+                    . "</td>".
 
-            "</tr>";
-        !!}            
-    @endforeach
-</table>
+                    "<td>" .
+                        $cena_max
+                    . "</td>".
 
-<h4>* Cene su po danu u zavisnosti od dužine rezervacije.</h4>
+                "</tr>";
+            !!}            
+        @endforeach
+    </table>
 
+    <h4 class="white">* Cene su po danu u zavisnosti od dužine rezervacije.</h4>
+</section>
 
 @endsection

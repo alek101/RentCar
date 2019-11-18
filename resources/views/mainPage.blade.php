@@ -30,7 +30,7 @@
                             {{-- <li><a href="/auto/sviModeli">Spisak Modela</a></li> --}}
                             <li><a href="/klient/sviModeli">Spisak modela</a></li>
                             {{-- <li><a href="/rezervacija">Rezervisi</a></li> --}}
-                            <li><a href="/zakazi" target="_blank">rezerviši</a></li>
+                            <li><a href="/zakazi" target="_blank">Rezerviši</a></li>
                             <li><a href="/rezervacijeInfo/all">Sve rezervacije</a></li>
                             {{-- <li><a href="/rezervacijeInfo">Buduce Rezervacije</a></li> --}}
                         </ul>

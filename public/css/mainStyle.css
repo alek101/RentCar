@@ -79,10 +79,12 @@ body
     height: 100%;
     max-width: 2000px;
     margin: 0 auto;
+    overflow: hidden;
     
 }
 
-.container::before {
+.container::before 
+{
     content: "";
     background-image: linear-gradient(var(--compl-color),var(--compl-color-2));
     background-image: url('../images/white-pattern-wallpaper.png');
@@ -95,11 +97,30 @@ body
     z-index: -1000;
 }
 
-.container::after {
-    content: '';
+.container::after
+{
+    content:"";
     display: block;
-    height: 50px; /* Set same as footer's height */
-    }
+    height: 80px;
+}
+
+.rezervacija
+{
+    background-image: url('../images/high-angle-view-of-cityscape-against-cloudy-sky-313782.jpg');
+    min-height: 90vh;
+}
+
+.velikiTekst
+{
+    padding: 10px;
+    color: rgb(224, 216, 201);
+}
+
+.dodaci
+{
+    background-image: url('../images/blue-and-white-milky-way-3214110.jpg');
+    min-height: 100vh; 
+}
 
 a 
 {
@@ -250,7 +271,8 @@ li:hover
 .glavna
 {
     width: 100%;
-    height: 80vh;
+    /* height: 82.9vh; */
+    height: 90vh;
     text-align: center;
     overflow-y: scroll;
 }
@@ -262,6 +284,7 @@ table
     border-collapse: collapse;
     max-width: 1280px;
     box-shadow: 4px 4px 10px rgba(0,0,0,0.5);
+    margin: 20px auto;
 }
 
 tr
@@ -311,7 +334,8 @@ table a:active
 
 h1,h2,h3,h4,h5,h6
 {
-    margin: 20px auto;
+    margin: 0px auto 20px auto;
+    padding: 5px;
 }
 
 form, .forma
@@ -605,14 +629,16 @@ input
 
 .linkA a:link 
 {
-color: var(--main-color);
+/* color: var(--main-color); */
+color:white;
 font-weight: bold;
 }
 
 /* visited link */
 .linkA a:visited 
 {
-color: var(--main-color);
+/* color: var(--main-color); */
+color: white;
 font-weight: bold;
 }
 
@@ -648,6 +674,7 @@ p
 .containerNama
 {
     display: flex;
+    color: white;
 }
 
 .slikaNama
@@ -694,4 +721,15 @@ p
     width: auto;
     min-width: 100px;
     padding: 0px;
+}
+
+.white
+{
+    color: white;
+}
+
+.filter_modeli
+{
+    padding: 5px;
+    margin-bottom: 20px;
 }
