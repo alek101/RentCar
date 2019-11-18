@@ -5,23 +5,43 @@
 
  Tema projekta je uprošćeni primer jedne RentCar agencije. Agencija za koju je radjen sajt, ima jednu jedinstvenu lokaciju za izdavanje i vraćanje automobila, ne daje posne opcije preko sajta i sve novčane transakcije se vrše na licu mesta. Ovaj projekat ima isključivu školsku svrhu i nije predvidjen za stvarne aplikacije. 
 
+Opis tehnologija
+
+Najveći deo rada je uradjen uz pomoć Laravel-a, koji je framework PHP-a. Sav HTML je upisan u Laravel-ov blade. Stranice su uniformisane i imaju header i footer. Većina formi direktno pozivaju controler preko ruta i vode do preodredjene stranice. Deo poziva ka bazi je uradjen uz pomoć DB modela, preko raw SQL-a, a drugi deo preko Laravel Eloquent-a sa posebnim modelom za svaku tabelu. Upotrebljene su i transakcije. Login je izveden preko Laravel-ovih igradjenih metoda, a ovlašćenja za različite tipove korisnika, su regulisana preko middlewere-a koji su prikačeni na rute. 
+Front end deo za rezervacije je uradjen uz pomoć vanile Java Script-a, koji preko fetch API-ja poziva server, i onda dinamički pravi kartice sa automobilima. Forma koja produžava rezervacije takodje koristi fetch API. JS je korišćen za filter tabela, za ,,Da li ste sigurni" modul, i za druge pogodne operacije. U CSS-u je uglavnom korišćena Flex tehnologija. Animacije i padajući meniji su takodje uradjene preko CSS-a.  
+Kao tekt editor je korišćen Visual Studio Code sa sledećim ekstenzijama: PHP Intelphense, PHP IntelliSense, Laravel Blade Snippets, Laravl Blade Spacer...
+
 Opis Baze
 
-Baza se sastoji od 9 tabela, od kojih su 4 deo Laravel-ovog Login-a, i 3 od njih nisu modifikovane ni na jedan način.
+Baza se sastoji od 9 tabela, od kojih su 4 deo Laravel-ovog Login-a, i 3 od njih nisu modifikovane ni na jedan način. Tabele koje nisu deo Laravel-ovog logina su napravljanje uz pomoć phpmyadmin-a.
 
--U tabeli model su opisani tipovi automobila.
--U tabeli cenovnik su opisane cene za svaki tip automobila pojedinačno.
--U tabeli automobli su upisani pojedinačni automobili sa svojim podacima.
--U tabeli rezervacije su upisane rezervacije automobila kako za mušterije tako i za potrebe servisiranja.
--U tabeli servisna knjiyica se cuvaju podaci o servisiranju automobila. 
+-U tabeli model su opisani tipovi (modeli) automobila [ime modela, klasa, tip menjača, broj sedišta, broj vrata, broj torbi, slika].
+-U tabeli cenovnik su opisane cene za svaki tip automobila pojedinačno [ID, model, maksimalni broj dana, cena po danu].
+-U tabeli automobli su upisani pojedinačni automobili sa svojim podacima [broj šasije, broj saobraćajne dozvole, broj registarskih tablica, model, godina proizvodnje, predjena kilometraža, datum važenja registracije, kilometraža na kojoj su radjeni mali i veliki servis, da li je aktivan, da li je na servisu].
+-U tabeli rezervacije su upisane rezervacije automobila kako za mušterije tako i za potrebe servisiranja [ID rezervacije, ID vozila, Ime kupca, email, broj telefona, datum početka, datum završetka, cena, napomena].
+-U tabeli servisna knjižica se čuvaju podaci o servisiranju automobila [ID, ID automobila, datum, kilometraža, tip servisa, opis]. 
+-U tabeli users su dodati telefon i role. 
+
+Opis Kontrolora
+
+ReservationController je zadužen za kreiranje i modifokovanje rezervacija, otkazivanje rezervacija, kao i za njihovo prikazivanje.
+CarInfoController je zadužen za praćenje kritičnih automobila (onima kojima treba servis), zakazivanje servisa, i za pravljenje stranica sa spiskom automobila.
+ServiseController je zadužen za stranice o servisu, i vodjenje servisne knjižice. 
+AdminController je zadužen za odredjivanje uloga korisnicima, za brisanje korisnika, i dodatno dodavanje slika. 
+TipoviAutomobilaVontroller je zadužen za dodavanje i izmenu tipova (modela) automobila za adminstratore, gde je uključeno i kreiranje cenovnika.
+CarController je zadužen za dodavanje i izmenu automobila za administratore. 
+FrontPageController je zadužen za pozivanje front end stranica koje nemaju veze sa bazom. 
+Laravel takodje ima više sopstvenih ugradjenih controllera. 
 
 Tipovi korisnika
 
 1. Neregitrovani korisnik,
 2. Registrovani korisnik,
 3. Zaposleni,
-4. Administrator
+4. Administrator,
 5. Super Administrator. 
+
+Ovlašćenja tipova korisnika su ograničena Laravelovim ugradjenim funkcijama i middleware metodom koja je dodatno definisana. 
 
 Funkcionalnosti sajta
 
@@ -54,7 +74,7 @@ Osim svih stvari koje mogu da urade i predhodne kategorije:
 9. Može da otkaže servis.
 10. Može da otkaže rezervacije koje nisu još započele (ukoliko nije prošlo 3 dana).
 11. Ima pristup filteru za tabele, i filteru za rezervacije. 
-
+12. Može da produži ili skrati rezervaciju. 
 
 -Adminstrator (role 10-99)
 

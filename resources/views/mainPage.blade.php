@@ -27,7 +27,7 @@
                             <li><a href="/servis">Servis</a></li>
                             <li><a href="/prijem">Dodaj km</a></li>
                             <li><a href="/auto">Spisak automobila</a></li>
-                            <li><a href="/klient/sviModeli">Spisak modela</a></li>
+                            <li><a href="/klient/sviModeli">Spisak aktivnih modela</a></li>
                             {{-- <li><a href="/rezervacija">Rezervisi</a></li> --}}
                             <li><a href="/zakazi" target="_blank">Rezerviši</a></li>
                             <li><a href="/rezervacijeInfo/all">Sve rezervacije</a></li>
@@ -42,7 +42,7 @@
                             <ul>
                                 <li><a href="/admin">Spisak korisnika</a></li>
                                 <li><a href="/admin/unactiveAuto">Spisak neaktivnih automobila</a></li>
-                                <li><a href="/admin/sviModeli">Spisak Modela</a></li>
+                                <li><a href="/admin/sviModeli">Spisak svih modela</a></li>
                                 <li><a href="/baza/model/getAdd">Dodaj model</a></li>
                                 <li><a href="/baza/model/getChange">Izmeni model i cenu</a></li>
                                 <li><a href="/baza/car/getAdd">Dodaj automobil</a></li>
