@@ -284,6 +284,14 @@ li:hover
     overflow-y: scroll;
 }
 
+.glavna::after
+{
+    content:'';
+    display: block;
+    height: 80px;
+}
+
+
 table
 {
     border: 2px solid black;
