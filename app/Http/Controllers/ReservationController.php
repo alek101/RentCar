@@ -11,8 +11,6 @@ use App\HTTP\Resources\ReservationResource;
 
 class ReservationController extends Controller
 {
-    //Funkcije koje vracaju stranice ili rade sa JSON-om
-
     //pravi glavnu stranicu za rezervacije
     public function zakaziPrikaz1()
     {
@@ -30,7 +28,7 @@ class ReservationController extends Controller
 
         if($diff>0)
         {
-            $cars=$this->aveilibleCars($dateStart,$dateEnd);
+            $cars=ReservationResource::aveilibleCars($dateStart,$dateEnd);
             $models=array_keys($cars);
             $readyModels=[];
             $cene=[];
@@ -79,7 +77,7 @@ class ReservationController extends Controller
         
         if($cena>0 )
         {
-            $cars=$this->aveilibleCars($dateStart,$dateEnd);
+            $cars=ReservationResource::aveilibleCars($dateStart,$dateEnd);
             $broj=rand(0,count($cars[$model])-1);
             $izabranAutoID=$cars[$model][$broj];
             if(PomFunkResource::freeCar($izabranAutoID,$dateStart,$dateEnd))
@@ -233,8 +231,6 @@ class ReservationController extends Controller
         }
     }
 
-    //Pomocne funkcije I reda
-
     //from reservation meni
     public function cancelReservation($id)
     {
@@ -272,28 +268,5 @@ class ReservationController extends Controller
           ReservationResource::sendMeil($info,'cancel');  
         }
         return redirect('/auto/info/'.$info->car_id);
-    }
-
-    //svi automobili koji smeju da se rezervisu
-    public function aveilibleCars($dateStart,$dateEnd)
-    {
-        $automobili=PomFunkResource::getAllCars();
-        $rezultat=[];
-        foreach($automobili as $auto)
-        {
-            if(PomFunkResource::freeCar($auto->sasija,$dateStart,$dateEnd) and ReservationResource::checkExparationReg($auto->sasija,$dateEnd))
-            {
-                $model=$auto->model;
-                if(!isset($rezultat[$model]))
-                {
-                    $rezultat[$model]=[$auto->sasija];
-                }
-                else
-                {
-                    array_push($rezultat[$model],$auto->sasija);
-                }
-            }
-        }
-        return $rezultat;
     }
 }

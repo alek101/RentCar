@@ -18,6 +18,33 @@ class CarInfoResource extends JsonResource
         return parent::toArray($request);
     }
 
+    //pomocna funkcija koja daje sledeci slobodan datum
+    public static function findNextFreeDate($id,$brojDana)
+    {
+        if($brojDana>=1)
+        {
+            $check=false;
+            $trenutniDatum=date("Y-m-d");
+            $dateStart=$trenutniDatum;
+            $dateEnd=date('Y-m-d', strtotime($dateStart." + $brojDana days"));
+            $brojac=0;
+            while($check==false and $brojac<1000)
+            {
+                if(PomFunkResource::freeCar($id,$dateStart,$dateEnd))
+                {
+                    $check=true;
+                }
+                else
+                {
+                    $dateStart=date('Y-m-d', strtotime($dateStart." + 1 days"));
+                    $dateEnd=date('Y-m-d', strtotime($dateEnd." + 1 days"));
+                    $brojac++;
+                }
+            }
+            return $dateStart;
+        }
+    }
+
     //vraca podatke o jednom automobilu
     public static function getOneCar($id)
     {

@@ -8,7 +8,7 @@ use App\AutomobiliModel;
 
 class CarController extends Controller
 {
-    //fomra u kojoj se odredjuje kog modela ce biti novi automobil
+    //forma u kojoj se odredjuje kog modela ce biti novi automobil
     public function getAdd()
     {
         $models=TipoviAutomobilaModel::all();

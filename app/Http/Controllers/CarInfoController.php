@@ -9,8 +9,6 @@ use App\HTTP\Resources\CarInfoResource;
 
 class CarInfoController extends Controller
 {
-    //funkcije koje vracaju stranice
-
     //Daje automobile koji moraju uskoro da imaju servis
     public function kriticni()
     {
@@ -31,7 +29,7 @@ class CarInfoController extends Controller
         $brojDana=$request->brojDana;
         if($brojDana>0)
         {
-        $dateStart=$this->findNextFreeDate($id,$brojDana);
+        $dateStart=CarInfoResource::findNextFreeDate($id,$brojDana);
         $dateEnd=date('Y-m-d', strtotime($dateStart." + $brojDana days"));
 
         return view('kriticni.zakaziServis2',["id"=>$id,"dateStart"=>$dateStart,"dateEnd"=>$dateEnd]);
@@ -87,34 +85,5 @@ class CarInfoController extends Controller
         $knjizica=CarInfoResource::servisnaKnjizica($id);
         $niz=CarInfoResource::getFutureReservationCar($id);
         return view('auto.info',['auto'=>$auto[0],'knjizica'=>$knjizica, 'niz'=>$niz]);
-    }
-
-    //pomocne funkcije I reda
-
-    //pomocna funkcija koja daje sledeci slobodan datum
-    public function findNextFreeDate($id,$brojDana)
-    {
-        if($brojDana>=1)
-        {
-            $check=false;
-            $trenutniDatum=date("Y-m-d");
-            $dateStart=$trenutniDatum;
-            $dateEnd=date('Y-m-d', strtotime($dateStart." + $brojDana days"));
-            $brojac=0;
-            while($check==false and $brojac<1000)
-            {
-                if(PomFunkResource::freeCar($id,$dateStart,$dateEnd))
-                {
-                    $check=true;
-                }
-                else
-                {
-                    $dateStart=date('Y-m-d', strtotime($dateStart." + 1 days"));
-                    $dateEnd=date('Y-m-d', strtotime($dateEnd." + 1 days"));
-                    $brojac++;
-                }
-            }
-            return $dateStart;
-        }
     }
 }

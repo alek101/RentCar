@@ -18,7 +18,30 @@ class ReservationResource extends JsonResource
         return parent::toArray($request);
     }
 
-    //spisak rezervacija u vremenskom okviru
+    //svi automobili koji smeju da se rezervisu
+    public static function aveilibleCars($dateStart,$dateEnd)
+    {
+        $automobili=PomFunkResource::getAllCars();
+        $rezultat=[];
+        foreach($automobili as $auto)
+        {
+            if(PomFunkResource::freeCar($auto->sasija,$dateStart,$dateEnd) and ReservationResource::checkExparationReg($auto->sasija,$dateEnd))
+            {
+                $model=$auto->model;
+                if(!isset($rezultat[$model]))
+                {
+                    $rezultat[$model]=[$auto->sasija];
+                }
+                else
+                {
+                    array_push($rezultat[$model],$auto->sasija);
+                }
+            }
+        }
+        return $rezultat;
+    }
+
+    //spisak rezervacija u vremenskom okviru opadajuce
     public static function getReservationsDateDESC($dateStart,$dateEnd)
     {
         return DB::select(
@@ -41,7 +64,7 @@ class ReservationResource extends JsonResource
         ",[$dateStart,$dateEnd,$dateStart,$dateEnd]);   
     }
 
-    //
+    //spisak rezervacija po broju opadajuce
     public static function getAllReservationsDESC($num)
     {
         return DB::select(
@@ -63,7 +86,7 @@ class ReservationResource extends JsonResource
         LIMIT ?",[$num]);   
     }
 
-    //spisak rezervacija u vremenskom okviru
+    //spisak rezervacija u vremenskom okviru rastuce
     public static function getReservationsDateASC($dateStart,$dateEnd)
     {
         return DB::select(
@@ -86,7 +109,7 @@ class ReservationResource extends JsonResource
         ",[$dateStart,$dateEnd,$dateStart,$dateEnd]);   
     }
 
-    //
+    //spisak rezervacija po broju rastuce
     public static function getAllReservationsASC($num)
     {
         return DB::select(

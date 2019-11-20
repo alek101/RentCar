@@ -87,14 +87,12 @@ class AdminController extends Controller
     }
 
     //funkcija koja vraca stranicu za upload slike
-    //depricated
     public function getFormImage()
     {
         return view('baza.formImage');
     }
 
     //funkcije za upload slike
-    //depricated
     public function uploadImage(Request $request)
     {
         //proverava da li je name::image slika

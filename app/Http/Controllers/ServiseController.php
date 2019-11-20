@@ -9,8 +9,6 @@ use App\HTTP\Resources\ServiseResource;
 
 class ServiseController extends Controller
 {
-    //funkcije koje vracaju stranice
-
     //automobili na servisu
     public function servis()
     {
@@ -30,8 +28,6 @@ class ServiseController extends Controller
     {
         return view('prijem.prijem');
     }
-
-    //Pomocne funkcije I reda
 
     //funkcija koja prima podatke za zavrsetak servisa
     public function endServis(Request $request)
