@@ -99,7 +99,7 @@ function obrisiSaKarticom()
             {
                 if(input.value==rand)
                 {
-                   window.open(link); 
+                   window.open(link,'_self'); 
                 }
                 e.target.parentElement.parentElement.remove();
             })
@@ -137,7 +137,7 @@ function produziRezervaciju()
     let butoniProduzi=[...document.querySelectorAll('.produzi')];
         butoniProduzi.map(b=>b.addEventListener('click', function()
         {
-            window.open(b.getAttribute('data-link'));
+            window.open(b.getAttribute('data-link'),'_self');
     }));
 }
 
@@ -151,7 +151,7 @@ try
         dugmici.map(c=>c.addEventListener('click',function(e)
         {
             let sasija=e.target.getAttribute("date-sasija");
-            window.open("/kriticni/initiateServis/"+sasija);
+            window.open("/kriticni/initiateServis/"+sasija,'_self');
         }))
     }
 } 
