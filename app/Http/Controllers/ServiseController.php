@@ -71,7 +71,7 @@ class ServiseController extends Controller
             {
                 $this->insertServis($id,$datum,$km,'mali',$opis);
                 $this->setMaliServisKM($id,$km);
-                $this->changeCarServis($id);
+                PomFunkResource::changeCarServis($id);
             },5);
             
         }
@@ -82,20 +82,20 @@ class ServiseController extends Controller
                 $this->insertServis($id,$datum,$km,'mali',$opis);
                 $this->setMaliServisKM($id,$km);
                 $this->setVelikiServisKM($id,$km);
-                $this->changeCarServis($id);
+                PomFunkResource::changeCarServis($id);
             },5);
             
         }
-        if ($tip=='cancel')
-        {
-            $this->changeCarServis($id);
-        }
+        // if ($tip=='cancel')
+        // {
+        //     PomFunkResource::changeCarServis($id);
+        // }
         if($tip=='registracija')
         {
             DB::transaction(function() use($id,$registracija)
             {
                 $this->setRegistracija($id,$registracija);
-                $this->changeCarServis($id);
+                PomFunkResource::changeCarServis($id);
             },5);
         }
     }
@@ -117,21 +117,6 @@ class ServiseController extends Controller
             $id=$this->getID($tablica);
             $this->addKM($id,$km);
             return $this->prijem();
-        }
-    }
-
-    //Menja stanje servisa, 0 nije na servisu, 1 da jeste na servisu
-    function changeCarServis($id)
-    {
-        $val=$this->getServis($id)[0]->Servis;
-
-        if($val==0)
-        {
-            $this->setServis($id,1);
-        }
-        else
-        {
-            $this->setServis($id,0);
         }
     }
 
@@ -217,29 +202,6 @@ class ServiseController extends Controller
                 `Broj_registarskih_tablica`=?
             ",[$tablica]
         )[0]->id;
-    }
-
-    //servis je stvka u tabeli automobili koja pokazuje da li je auto na servisu
-    //
-    function getServis($id)
-        {
-            return DB::select("SELECT
-            `Servis`
-        FROM
-            `automobili`
-        WHERE
-            `Broj_sasije`=?",[$id]);
-        }
-
-    //
-    function setServis($id,$val)
-    {
-        DB::update("UPDATE
-        `automobili`
-    SET
-        `Servis` = ?
-    WHERE
-        `Broj_sasije`=?",[$val,$id]);
     }
 
 }

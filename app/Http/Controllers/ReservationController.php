@@ -156,7 +156,7 @@ class ReservationController extends Controller
             {
                 $info=$this->returnInformation($idRezervacije);
                 $this->sendMeil($info[0],'new');
-                return json_encode($info[0]); 
+                return json_encode($info); 
             }
             else
             {
@@ -282,7 +282,7 @@ class ReservationController extends Controller
         if($info[0]->opis=='SERVIS')
         {
             //ako ukidamo servis, izbaci auto iz spiska onih koji su na servisu
-            $auto=AutomobiliModel::where('Broj_sasije',$info[0]->car_id)->firstOrFail();
+            $auto=AutomobiliModel::where('Broj_sasije',$info->car_id)->firstOrFail();
             $auto->Servis=0;
             $auto->save();
         }
@@ -302,7 +302,7 @@ class ReservationController extends Controller
         if($info[0]->opis=='SERVIS')
         {
             //ako ukidamo servis, izbaci auto iz spiska onih koji su na servisu
-            $auto=AutomobiliModel::where('Broj_sasije',$info[0]->car_id)->firstOrFail();
+            $auto=AutomobiliModel::where('Broj_sasije',$info->car_id)->firstOrFail();
             $auto->Servis=0;
             $auto->save();
         }
@@ -318,7 +318,7 @@ class ReservationController extends Controller
     {
         $id=$request->id;
         $brojDana=$request->brojDana;
-        $rezervacija=$this->returnInformation($id)[0];
+        $rezervacija=$this->returnInformation($id);
         $dateStart=$rezervacija->dateStart;
         $dateEnd=$rezervacija->dateEnd;
         $trajanje = (strtotime($dateEnd)-strtotime($dateStart))/24/60/60;
@@ -348,7 +348,7 @@ class ReservationController extends Controller
                     ",[$newDateEnd,$newCost,$id]
                 );
                 
-                $info=$this->returnInformation($id)[0];
+                $info=$this->returnInformation($id);
                 $this->sendMeil($info,'extend');
                 return ("Rezervacija $id je produzena do $newDateEnd. Nova cena je $newCost.");
             }
@@ -373,7 +373,7 @@ class ReservationController extends Controller
                     ",[$newDateEnd,$newCost,$id]
                 );
                 
-                $info=$this->returnInformation($id)[0];
+                $info=$this->returnInformation($id);
                 $this->sendMeil($info,'shortend');
                 return ("Rezervacija $id je skracena do $newDateEnd. Nova cena je $newCost.");
         }
@@ -388,7 +388,7 @@ class ReservationController extends Controller
     //svi automobili koji smeju da se rezervisu
     public function aveilibleCars($dateStart,$dateEnd)
     {
-        $automobili=$this->getAllCars();
+        $automobili=PomFunkResource::getAllCars();
         $rezultat=[];
         foreach($automobili as $auto)
         {
@@ -430,29 +430,6 @@ class ReservationController extends Controller
 
     //Pomocne funkcije II reda
 
-    //vraca sve automobile
-    public function getAllCars()
-    {
-        return DB::select("SELECT
-        `Broj_sasije` as 'sasija',
-        `Broj_saobracajne_dozvole` as 'saobracajna',
-        `Broj_registarskih_tablica` as 'tablica',
-        `Model` as 'model',
-        `Godina_proizvodnje` as 'godiste',
-        `Predjena_km` as 'kilometraza',
-        `Datum_vazenja_registracije` as 'registracija',
-        `Radjen_mali_servis_km` as 'mali_servis',
-        `Radjen_veliki_servis_km` as 'veliki_servis',
-        DATEDIFF(`Datum_vazenja_registracije`,CURRENT_DATE()) as 'isticanje_registracije',
-        `Predjena_km`-`Radjen_mali_servis_km` as 'predjeno_km_mali',
-        `Predjena_km`-`Radjen_veliki_servis_km` as 'predjeno_km_veliki'
-    FROM
-        `automobili`
-    WHERE
-        `Aktivan`=1
-    ",[]);
-    }
-
     //pomocna funkcija koja proverava da li auto sme da se rezervise
     public function checkExparationReg($id,$dateEnd,$crit_time=3)
     {
@@ -477,7 +454,7 @@ class ReservationController extends Controller
     //informacije o rezervaciji
     public function returnInformation($idRezervacije)
     {
-        return DB::select(
+        $pom=DB::select(
         "SELECT
         `ID_rezervacije` as 'id_rez',
         `Ime_prezime_kupca` as 'ime',
@@ -497,6 +474,7 @@ class ReservationController extends Controller
             R.ID_vozila = A.Broj_sasije
         WHERE
             `ID_rezervacije` = ?",[$idRezervacije]);
+            return $pom[0];
     }
 
     //otkazivanje rezervacije u bazi

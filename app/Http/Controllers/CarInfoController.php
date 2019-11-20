@@ -72,7 +72,7 @@ class CarInfoController extends Controller
         {
          DB::transaction(function() use($id,$dateStart,$dateEnd)
          {
-                $this->changeCarServis($id);
+                PomFunkResource::changeCarServis($id);
                 PomFunkResource::insertReservation($id,'ADMIN','ADMIN','ADMIN',$dateStart,$dateEnd,'SERVIS',0);
          },5);
         
@@ -88,14 +88,14 @@ class CarInfoController extends Controller
     //Strana za sve automobile
     public function auto()
     {
-        $niz=$this->getAllCars();
+        $niz=PomFunkResource::getAllCars();
         return view('auto.auto',['niz'=>$niz]);
     }
 
     //Strana za neaktivne automobile
     public function unactiveAuto()
     {
-        $niz=$this->getAllCars(0);
+        $niz=PomFunkResource::getAllCars(0);
         return view('admin.unactiveAuto',['niz'=>$niz]);
     }
 
@@ -138,66 +138,6 @@ class CarInfoController extends Controller
     }
 
     //Pomocne funkcije II reda
-
-    //Menja stanje servisa, 0 nije na servisu, 1 da jeste na servisu
-    function changeCarServis($id)
-    {
-        $val=$this->getServis($id)[0]->Servis;
-
-        if($val==0)
-        {
-            $this->setServis($id,1);
-        }
-        else
-        {
-            $this->setServis($id,0);
-        }
-    }
-
-    //
-    function getServis($id)
-        {
-            return DB::select("SELECT
-            `Servis`
-        FROM
-            `automobili`
-        WHERE
-            `Broj_sasije`=?",[$id]);
-        }
-
-    //
-    function setServis($id,$val)
-    {
-        DB::update("UPDATE
-        `automobili`
-    SET
-        `Servis` = ?
-    WHERE
-        `Broj_sasije`=?",[$val,$id]);
-    }
-
-    //vraca sve automobile
-    public function getAllCars($aktivan=1)
-    {
-        return DB::select("SELECT
-        `Broj_sasije` as 'sasija',
-        `Broj_saobracajne_dozvole` as 'saobracajna',
-        `Broj_registarskih_tablica` as 'tablica',
-        `Model` as 'model',
-        `Godina_proizvodnje` as 'godiste',
-        `Predjena_km` as 'kilometraza',
-        `Datum_vazenja_registracije` as 'registracija',
-        `Radjen_mali_servis_km` as 'mali_servis',
-        `Radjen_veliki_servis_km` as 'veliki_servis',
-        DATEDIFF(`Datum_vazenja_registracije`,CURRENT_DATE()) as 'isticanje_registracije',
-        `Predjena_km`-`Radjen_mali_servis_km` as 'predjeno_km_mali',
-        `Predjena_km`-`Radjen_veliki_servis_km` as 'predjeno_km_veliki'
-    FROM
-        `automobili`
-    WHERE
-        `Aktivan`=?
-    ",[$aktivan]);
-    }
 
     //vraca podatke o jednom automobilu
     function getOneCar($id)
