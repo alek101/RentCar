@@ -29,53 +29,70 @@
     
         
     
-        @foreach ($niz as $auto)
+        @foreach ($niz as $rez)
             {!! 
             "<tr>" .
     
                 "<td>" .
-                    $auto->id
+                    $rez->id
                     . "</td>".
 
                     "<td>" .
-                    $auto->ime
+                    $rez->ime
                     . "</td>".
     
                     "<td>" .
-                    $auto->meil
+                    $rez->meil
                     . "</td>".
     
                     "<td>" .
-                    $auto->telefon
+                    $rez->telefon
                     . "</td>".
     
                     "<td>" .
-                    $auto->tablice
+                    $rez->tablice
                     . "</td>".
     
                     "<td>" .
-                    $auto->model
-                    . "</td>".
-    
+                    $rez->model
+                    . "</td>";
+            !!}
+            @if ($rez->start==date('Y-m-d'))
+                {!! 
+                    "<td class='date bckRed'>" .
+                    $rez->start
+                    . "</td>";
+                !!}
+            @else
+                {!! "<td class='date'>" .
+                    $rez->start
+                    . "</td>";
+                !!}
+            @endif
+            @if ($rez->finish==date('Y-m-d'))
+                {!! 
+                    "<td class='date bckRed'>" .
+                    $rez->finish
+                    . "</td>";
+                !!}
+            @else
+                {!! "<td class='date'>" .
+                    $rez->finish
+                    . "</td>";
+                !!}
+            @endif  
+            {!! 
                     "<td>" .
-                    $auto->start
-                    . "</td>".
-    
-                    "<td>" .
-                    $auto->finish
-                    . "</td>".
-    
-                    "<td>" .
-                    $auto->cena
+                    $rez->cena
                     . "</td>".
 
                     "<td>" .
-                    $auto->opis
+                    $rez->opis
                     . "</td>"
     
-                    ."<td><button class='produzi' data-link='/rezervacijeInfo/extendForm/$auto->id'>Izmeni</button></td>"
+                    ."<td><button class='produzi' data-link='/rezervacijeInfo/extendForm/$rez->id'>Izmeni</button></td>"
 
-                    ."<td><button class='obrisi' data-link='/rezervacijeInfo/cancelReservation/$auto->id'>Otkaži</button></td>"
+                    ."<td><button class='obrisi' data-link='/rezervacijeInfo/cancelReservation/$rez->id'>Otkaži</button></td>"
     
              . "</tr>";
             !!}

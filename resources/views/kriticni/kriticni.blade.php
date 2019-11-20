@@ -67,7 +67,7 @@
                 $auto->kilometraza
                 . "</td>".
 
-                "<td>" .
+                "<td class='date'>" .
                 $auto->registracija
                 . "</td>".
 
@@ -110,8 +110,6 @@
                 $auto->predjeno_km_veliki
                 . "</td>"; !!}
             @endif
-                {{-- {!! "<td> <a href='/kriticni/".$auto->sasija."'>Zakazi Servis</td>"
-                    . "</tr>"; !!} --}}
                  {!! "<td>
                         <button class='zakaziServis' date-sasija=".$auto->sasija.">Servis</button>
                      </td></tr>"; !!}

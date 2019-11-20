@@ -147,7 +147,7 @@
             {!! 
             "<tr>" .
     
-                "<td>" .
+                "<td class='date'>" .
                     $unos->datum
                     . "</td>".
     
@@ -206,16 +206,34 @@
     
                     "<td>" .
                     $rez->telefon
-                    . "</td>".
-    
-                    "<td>" .
+                    . "</td>";
+
+                    !!}
+            @if ($rez->start==date('Y-m-d'))
+                {!! 
+                    "<td class='date bckRed'>" .
                     $rez->start
-                    . "</td>".
-    
-                    "<td>" .
+                    . "</td>";
+                !!}
+            @else
+                {!! "<td class='date'>" .
+                    $rez->start
+                    . "</td>";
+                !!}
+            @endif
+            @if ($rez->finish==date('Y-m-d'))
+                {!! 
+                    "<td class='date bckRed'>" .
                     $rez->finish
-                    . "</td>".
-    
+                    . "</td>";
+                !!}
+            @else
+                {!! "<td class='date'>" .
+                    $rez->finish
+                    . "</td>";
+                !!}
+            @endif  
+            {!! 
                     "<td>" .
                     $rez->cena
                     . "</td>".

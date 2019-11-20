@@ -787,3 +787,8 @@ p
     width: auto;
     padding: 7px;
 }
+
+.date
+{
+    min-width: 105px;
+}

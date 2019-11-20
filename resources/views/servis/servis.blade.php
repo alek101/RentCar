@@ -64,7 +64,7 @@
                     $auto->kilometraza
                     . "</td>".
     
-                    "<td>" .
+                    "<td class='date'>" .
                     $auto->registracija
                     . "</td>".
     
