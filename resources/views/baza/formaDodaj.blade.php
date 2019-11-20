@@ -46,23 +46,4 @@
     </div>
 </form>
 
-<script>
-    //vadi ime slike iy session storaga i upisuje u polje
-    let nameImage=sessionStorage.getItem('nameImage');
-    if(nameImage!=null)
-    {
-        document.querySelector('#slikaIme').value=nameImage;
-    }
-
-    //da izvadi ime slike iz fajla i upise ga na mesto i u session storage
-    document.querySelector('#slika').addEventListener('change',function(e)
-    {
-        let nameImage=document.querySelector('#slika').value.slice(12);
-        document.querySelector('#slikaIme').value=nameImage;
-        sessionStorage.setItem('nameImage',nameImage);
-    })
-
-
-</script>
-
 @endsection

@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>RentCar</title>
     <link rel="stylesheet" href="{{ url('/css/mainStyle.css') }}">
+    <script src={{ asset('/js/mainJS.js') }} defer></script>
 </head>
 <body>
     <div class="container">
@@ -76,63 +77,7 @@
         
     </div>
 
-    <script>
-        
-            //filter
-        
-            try {
-            if(document.querySelector('#filter')!=null)
-            {
-                let storedWord=sessionStorage.getItem('filterTabela');
-                if(storedWord!=null)
-                {
-                    document.querySelector('#filter').value=storedWord;
-                    search();
-                }
-                document.querySelector('#filter').addEventListener('change',function(e)
-                {
-                    search();
-                })
-            }
-            
-        } catch (error) {
-            console.log("Smisli nesto za: "+error);
-        }
-
-        function search()
-        {
-            let word=document.querySelector('#filter').value.toLowerCase();
-                    sessionStorage.setItem('filterTabela',word);
-                    let trNiz=[...document.querySelectorAll('tr')];
-                    for(tr of trNiz)
-                    {
-                        let array=[...tr.childNodes];
-                        let c1=false; let c2=false;
-                        array.map(function(c)
-                        {
-                            if(c.tagName=='TD')
-                            {
-                                c1=true;
-                            }
-
-                            if(typeof(c.innerHTML)==='string' && c.innerHTML.toLowerCase().includes(word))
-                            {
-                                c2=true;
-                            }
-                        })
-                        
-                        if(c1 && c2)
-                        {
-                            tr.classList.remove('disapear');
-                        }
-                        else if(c1 && !c2)
-                        {
-                            tr.classList.add('disapear');
-                        }
-                    }
-        }
-            
-        </script>
+    
     
 </body>
 </html>

@@ -17,16 +17,5 @@
 
 <a href="https://www.animatedimages.org/cat-photographers-1425.htm"><img src="https://www.animatedimages.org/data/media/1425/animated-photographer-image-0028.jpg" border="0" alt="animated-photographer-image-0028" /></a>
 
-<script>
-    document.querySelector('#slika').addEventListener('change',function(e)
-    {
-        let nameImage=document.querySelector('#slika').value.slice(12);
-        document.querySelector('#naziv').value=nameImage;
-        sessionStorage.setItem('nameImage',nameImage);
-    })
-
-</script>
-
-
 
 @endsection

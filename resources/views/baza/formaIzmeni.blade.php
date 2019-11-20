@@ -70,13 +70,4 @@
     </div>
 </form>
 
-<script>
-    //vadi ime slike iy session storaga i upisuje u polje
-    let nameImage=sessionStorage.getItem('nameImage');
-    if(nameImage!=null)
-    {
-        document.querySelector('#slikaIme').value=nameImage;
-    }
-
-</script>
 @endsection
