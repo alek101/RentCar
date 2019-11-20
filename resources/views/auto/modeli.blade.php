@@ -16,9 +16,9 @@
             <th><img class='icon' src='{!! asset('/images/icons/solid--car-door.svg') !!}' alt='Broj Vrata: '></th>
             <th><img class='icon' src='{!! asset('/images/icons/solid--car-seat.svg') !!}' alt='Broj Sedišta: '></th>
             <th><img class='icon' src='{!! asset('/images/icons/solid--big-bag.svg') !!}' alt='Broj Torbi: '></th>
-            <th>Cena 1-3</th>
-            <th>Cena 4-7</th>
-            <th>Cena 8+*</th>
+            <th class='cenaZvezdica'>Cena 1-3*</th>
+            <th class='cenaZvezdica'>Cena 4-7*</th>
+            <th class='cenaZvezdica'>Cena 8+*</th>
         </tr>
 
         @foreach ($models as $model)
@@ -94,7 +94,5 @@
             !!}            
         @endforeach
     </table>
-
-    <h4>* Cene su po danu u zavisnosti od dužine rezervacije.</h4>
 
 @endsection
