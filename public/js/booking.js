@@ -85,14 +85,14 @@
          let pic=makeElement('img',{src:json.podaci[model].slika,alt:'nema',className:'slicica'});
          let dm=makeElement('div',{text:null,className:"opis"});
              let p1=makeElement('p',{text:model,className:"modelCardName"});
-             let p2=makeElement('p',{text:`<img class='icon' src='{!! asset('/images/icons/solid--car-gears.svg') !!}' alt='Tip Menjaca: '>
+             let p2=makeElement('p',{text:`<img class='icon' src='/images/icons/solid--car-gears.svg' alt='Tip Menjaca: '>
               ${json.podaci[model].Tip_menjaca}`});
              let row2=makeElement('div',{className:'flexRow'});
-             let p3=makeElement('p',{text:`<img class='icon' src='{!! asset('/images/icons/solid--car-door.svg') !!}' alt='Broj Vrata: '> 
+             let p3=makeElement('p',{text:`<img class='icon' src='/images/icons/solid--car-door.svg' alt='Broj Vrata: '> 
              ${json.podaci[model].Broj_vrata}`});
-             let p4=makeElement('p',{text:`<img class='icon' src='{!! asset('/images/icons/solid--car-seat.svg') !!}' alt='Broj Sedišta: '>
+             let p4=makeElement('p',{text:`<img class='icon' src='/images/icons/solid--car-seat.svg' alt='Broj Sedišta: '>
              ${json.podaci[model].Broj_sedista}`});
-             let p5=makeElement('p',{text:`<img class='icon' src='{!! asset('/images/icons/solid--big-bag.svg') !!}' alt='Broj Torbi: '>
+             let p5=makeElement('p',{text:`<img class='icon' src='/images/icons/solid--big-bag.svg' alt='Broj Torbi: '>
              ${json.podaci[model].Broj_torbi}`});
              row2.append(p3,p4,p5);
              let cena=formatBroja(json.cene[model]);
@@ -286,6 +286,7 @@
      {
          console.log(errors);
          
+         modelsWraper.innerHTML="";
          responseDiv.innerHTML="";
          responseDiv.classList.remove('hidden');
          responseDiv2.innerHTML="";
