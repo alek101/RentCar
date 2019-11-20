@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\HTTP\Resources\PomFunkResource;
 
 class CarInfoController extends Controller
 {
@@ -66,15 +67,13 @@ class CarInfoController extends Controller
         $id=$request->id;
         $dateStart=$request->dateStart;
         $dateEnd=$request->dateEnd;
-
-        $check=$this->freeCar($id,$dateStart,$dateEnd);
         
-        if($check)
+        if(PomFunkResource::freeCar($id,$dateStart,$dateEnd))
         {
          DB::transaction(function() use($id,$dateStart,$dateEnd)
          {
                 $this->changeCarServis($id);
-                $this->insertReservation($id,'ADMIN','ADMIN','ADMIN',$dateStart,$dateEnd,'SERVIS',0);
+                PomFunkResource::insertReservation($id,'ADMIN','ADMIN','ADMIN',$dateStart,$dateEnd,'SERVIS',0);
          },5);
         
         return $this->kriticni();
@@ -123,7 +122,7 @@ class CarInfoController extends Controller
             $brojac=0;
             while($check==false and $brojac<1000)
             {
-                if($this->freeCar($id,$dateStart,$dateEnd))
+                if(PomFunkResource::freeCar($id,$dateStart,$dateEnd))
                 {
                     $check=true;
                 }
@@ -139,48 +138,6 @@ class CarInfoController extends Controller
     }
 
     //Pomocne funkcije II reda
-
-    //pomocna fun koja daje da li je auto slobodan tog datuma ili ne
-    public function freeCar($id,$dateStart,$dateEnd)
-    {
-        //proveravamo da li pravimo rezervaciju u proslosti
-        $trenutni=date('Y-m-d');
-        $check=strtotime($dateEnd) - strtotime($trenutni);
-        if($check>0)
-        {
-            //vadimo sve rezervacije za auto u vremnskom periodu, ako neka postoji, auto nije slobodan
-            $niz=DB::select(
-                'SELECT
-                    *
-                FROM
-                    `automobili` AS A
-                LEFT JOIN `rezervacija` AS R
-                ON
-                    A.Broj_sasije = R.ID_vozila
-                WHERE
-                    A.Broj_sasije=? and A.Aktivan=1
-                    and
-                    ((
-                        ? >= R.Datum_pocetka AND ? < R.Datum_zavrsetka
-                    ) OR(
-                        ? > R.Datum_pocetka AND ? <= R.Datum_zavrsetka
-                    ))',[$id,$dateStart,$dateStart,$dateEnd,$dateEnd]
-            );
-
-            if(count($niz)==0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                };
-        }
-        else
-        {
-            return false;
-        }  
-    }
 
     //Menja stanje servisa, 0 nije na servisu, 1 da jeste na servisu
     function changeCarServis($id)
@@ -217,16 +174,6 @@ class CarInfoController extends Controller
         `Servis` = ?
     WHERE
         `Broj_sasije`=?",[$val,$id]);
-    }
-
-    //Pravljenje rezervacije
-    public function insertReservation($idVozila,$ime,$email,$telefon,$dateStart,$dateEnd,$comment,$cena)
-    {
-            //NEED TO ADD: check if registration is stile valid, limit future reservation for the next 14 days
-            DB::insert(
-            "INSERT INTO `rezervacija`(`ID_vozila`, `Ime_prezime_kupca`, `Email`, `Broj_telefona`, `Datum_pocetka`, `Datum_zavrsetka`, `Cena`, `Aktivna`, `Napomena`) 
-            VALUES (?,?,?,?,?,?,?,1,?)",[$idVozila,$ime,$email,$telefon,$dateStart,$dateEnd,$cena,$comment]);
-            return DB::getPdo()->lastInsertId();
     }
 
     //vraca sve automobile

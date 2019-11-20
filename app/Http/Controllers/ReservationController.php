@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\TipoviAutomobilaModel;
 use App\AutomobiliModel;
+use App\HTTP\Resources\PomFunkResource;
 
 class ReservationController extends Controller
 {
@@ -147,9 +148,9 @@ class ReservationController extends Controller
             $cars=$this->aveilibleCars($dateStart,$dateEnd);
             $broj=rand(0,count($cars[$model])-1);
             $izabranAutoID=$cars[$model][$broj];
-            if($this->freeCar($izabranAutoID,$dateStart,$dateEnd))
+            if(PomFunkResource::freeCar($izabranAutoID,$dateStart,$dateEnd))
             {
-                $idRezervacije=$this->insertReservation($izabranAutoID,$ime,$email,$telefon,$dateStart,$dateEnd,$comment,$cena);
+                $idRezervacije=PomFunkResource::insertReservation($izabranAutoID,$ime,$email,$telefon,$dateStart,$dateEnd,$comment,$cena);
             }
             if(isset($idRezervacije) and $idRezervacije > 0)
             {
@@ -335,7 +336,7 @@ class ReservationController extends Controller
             $model=$rezervacija->model;
             $newDateStart=date('Y-m-d', strtotime($dateEnd." + 1 days"));
             $newDateEnd=date('Y-m-d', strtotime($dateEnd." + ".$brojDana." days"));
-            if($this->freeCar($id_auto,$newDateStart,$newDateEnd) and $this->checkExparationReg($id_auto,$newDateEnd))
+            if(PomFunkResource::freeCar($id_auto,$newDateStart,$newDateEnd) and $this->checkExparationReg($id_auto,$newDateEnd))
             {
                 $newCost=$this->totalCost($model,$dateStart,$newDateEnd);
                 DB::update(
@@ -391,7 +392,7 @@ class ReservationController extends Controller
         $rezultat=[];
         foreach($automobili as $auto)
         {
-            if($this->freeCar($auto->sasija,$dateStart,$dateEnd) and $this->checkExparationReg($auto->sasija,$dateEnd))
+            if(PomFunkResource::freeCar($auto->sasija,$dateStart,$dateEnd) and $this->checkExparationReg($auto->sasija,$dateEnd))
             {
                 $model=$auto->model;
                 if(!isset($rezultat[$model]))
@@ -452,48 +453,6 @@ class ReservationController extends Controller
     ",[]);
     }
 
-    //pomocna fun koja daje da li je auto slobodan tog datuma ili ne
-    public function freeCar($id,$dateStart,$dateEnd)
-    {
-        //proveravamo da li pravimo rezervaciju u proslosti
-        $trenutni=date('Y-m-d');
-        $check=strtotime($dateEnd) - strtotime($trenutni);
-        if($check>0)
-        {
-            //vadimo sve rezervacije za auto u vremnskom periodu, ako neka postoji, auto nije slobodan
-            $niz=DB::select(
-                'SELECT
-                    *
-                FROM
-                    `automobili` AS A
-                LEFT JOIN `rezervacija` AS R
-                ON
-                    A.Broj_sasije = R.ID_vozila
-                WHERE
-                    A.Broj_sasije=? and A.Aktivan=1
-                    and
-                    ((
-                        ? >= R.Datum_pocetka AND ? < R.Datum_zavrsetka
-                    ) OR(
-                        ? > R.Datum_pocetka AND ? <= R.Datum_zavrsetka
-                    ))',[$id,$dateStart,$dateStart,$dateEnd,$dateEnd]
-            );
-
-            if(count($niz)==0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                };
-        }
-        else
-        {
-            return false;
-        }
-    }
-
     //pomocna funkcija koja proverava da li auto sme da se rezervise
     public function checkExparationReg($id,$dateEnd,$crit_time=3)
     {
@@ -538,16 +497,6 @@ class ReservationController extends Controller
             R.ID_vozila = A.Broj_sasije
         WHERE
             `ID_rezervacije` = ?",[$idRezervacije]);
-    }
-
-    //Pravljenje rezervacije
-    public function insertReservation($idVozila,$ime,$email,$telefon,$dateStart,$dateEnd,$comment,$cena)
-    {
-            //NEED TO ADD: check if registration is stile valid, limit future reservation for the next 14 days
-            DB::insert(
-            "INSERT INTO `rezervacija`(`ID_vozila`, `Ime_prezime_kupca`, `Email`, `Broj_telefona`, `Datum_pocetka`, `Datum_zavrsetka`, `Cena`, `Aktivna`, `Napomena`) 
-            VALUES (?,?,?,?,?,?,?,1,?)",[$idVozila,$ime,$email,$telefon,$dateStart,$dateEnd,$cena,$comment]);
-            return DB::getPdo()->lastInsertId();
     }
 
     //otkazivanje rezervacije u bazi
