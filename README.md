@@ -24,9 +24,10 @@ Baza se sastoji od 9 tabela, od kojih su 4 deo Laravel-ovog Login-a, i 3 od njih
 
 Opis Kontrolora
 
-ReservationController je zadužen za kreiranje i modifokovanje rezervacija, otkazivanje rezervacija, kao i za njihovo prikazivanje.
+ReservationController je zadužen za modifokovanje rezervacija (produženje ili skraćenje), otkazivanje rezervacija, kao i za njihovo prikazivanje po više kriterijuma.
 CarInfoController je zadužen za praćenje kritičnih automobila (onima kojima treba servis), zakazivanje servisa, i za pravljenje stranica sa spiskom automobila.
 ServiseController je zadužen za stranice o servisu, i vodjenje servisne knjižice. 
+BookingController je zadužen za kreiranje rezervacije sa FE strane. 
 AdminController je zadužen za odredjivanje uloga korisnicima, za brisanje korisnika, i dodatno dodavanje slika. 
 TipoviAutomobilaVontroller je zadužen za dodavanje i izmenu tipova (modela) automobila za adminstratore, gde je uključeno i kreiranje cenovnika.
 CarController je zadužen za dodavanje i izmenu automobila za administratore. 

@@ -49,7 +49,7 @@ Route::prefix('/auto')->middleware('login')->group(function()
 {
     Route::get('/','CarInfoController@auto');
     Route::get('/info/{id}','CarInfoController@autoInfo');
-    Route::get('/cancelReservation/{id}','ReservationController@cancelReservationA');
+    Route::get('/cancelReservation/{id}','ReservationController@cancelReservation');
 });
 
 //depricated
@@ -70,7 +70,6 @@ Route::prefix('/rezervacijeInfo')->middleware('login')->group(function()
     Route::get('/all','ReservationController@defaultReservations');
     Route::get('/now','ReservationController@getReservationsNow');
     Route::post('/extendReservation','ReservationController@extendReservation');
-    // Route::get('/all/{num}','ReservationController@allReservations'); //ne koristi se
     Route::get('/cancelReservation/{id}','ReservationController@cancelReservation');
     Route::get('/extendForm/{id}','ReservationController@getExtendForm');
 });
@@ -99,9 +98,9 @@ Route::prefix('/test')->group(function()
 
 Route::prefix('/zakazi')->group(function()
 {
-    Route::get('/','ReservationController@zakaziPrikaz1');
-    Route::post('/makeJSONforBooking','ReservationController@makeJSONforBooking');
-    Route::post('/makeBookingWithFetch','ReservationController@makeBookingWithFetch');
+    Route::get('/','BookingController@zakaziPrikaz1');
+    Route::post('/makeJSONforBooking','BookingController@makeJSONforBooking');
+    Route::post('/makeBookingWithFetch','BookingController@makeBookingWithFetch');
 });
 
 Route::prefix('/baza')->middleware('admin')->group(function()
