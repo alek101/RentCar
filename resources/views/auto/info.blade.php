@@ -257,7 +257,7 @@
         {
             let tablice=e.target.getAttribute('data-tablice');
             sessionStorage.setItem('filterTabela',tablice);
-            window.open('/rezervacijeInfo/all');
+            window.open('/rezervacijeInfo/all','_self');
         });
 
     </script>
