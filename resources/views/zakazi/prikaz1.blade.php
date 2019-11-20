@@ -75,7 +75,7 @@
 
 </section> --}}
 
-{{-- <script src="{{ asset('/js/biblioteka.js') }}"></script> --}}
+<script src="{{ asset('/js/biblioteka.js') }}"></script>
 <script src="{{ asset('/js/bookingPage.js') }}"></script>
 <script src="{{ asset('/js/booking.js') }}"></script>
 

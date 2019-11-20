@@ -1,5 +1,6 @@
  //ovo je za rezervacije
 
+ //selektori
  let modelsWraper=document.querySelector('.modelsWraper');
  let responseDiv=document.querySelector('.response');
  let responseDiv2=document.querySelector('.response2');
@@ -72,7 +73,7 @@
          else
          {
              let r="Nije pronadjen nijedan automobil koji moze da se rezervise u vremnskom periodu!";
-             let dd=makeElement('div',{text:r,className:'response2'});
+             let dd=pf.makeElement('div',{text:r,className:'response2'});
              modelsWraper.append(dd);
          }
          
@@ -81,24 +82,25 @@
      
      function madeCard(model,json)
      {
-         let d=makeElement('div',{text:null,className:"card"});
-         let pic=makeElement('img',{src:json.podaci[model].slika,alt:'nema',className:'slicica'});
-         let dm=makeElement('div',{text:null,className:"opis"});
-             let p1=makeElement('p',{text:model,className:"modelCardName"});
-             let p2=makeElement('p',{text:`<img class='icon' src='/images/icons/solid--car-gears.svg' alt='Tip Menjaca: '>
+         let d=pf.makeElement('div',{text:null,className:"card"});
+         let pic=pf.makeElement('img',{src:json.podaci[model].slika,alt:'nema',className:'slicica'});
+         let dm=pf.makeElement('div',{text:null,className:"opis"});
+             let p1=pf.makeElement('p',{text:model,className:"modelCardName"});
+             //posto je sada ovo cista js funkcija, i ne zove se iz blade-a, src se pise normalno, a ne kao {{ asset() }}
+             let p2=pf.makeElement('p',{text:`<img class='icon' src='/images/icons/solid--car-gears.svg' alt='Tip Menjaca: '>
               ${json.podaci[model].Tip_menjaca}`});
-             let row2=makeElement('div',{className:'flexRow'});
-             let p3=makeElement('p',{text:`<img class='icon' src='/images/icons/solid--car-door.svg' alt='Broj Vrata: '> 
+             let row2=pf.makeElement('div',{className:'flexRow'});
+             let p3=pf.makeElement('p',{text:`<img class='icon' src='/images/icons/solid--car-door.svg' alt='Broj Vrata: '> 
              ${json.podaci[model].Broj_vrata}`});
-             let p4=makeElement('p',{text:`<img class='icon' src='/images/icons/solid--car-seat.svg' alt='Broj Sedišta: '>
+             let p4=pf.makeElement('p',{text:`<img class='icon' src='/images/icons/solid--car-seat.svg' alt='Broj Sedišta: '>
              ${json.podaci[model].Broj_sedista}`});
-             let p5=makeElement('p',{text:`<img class='icon' src='/images/icons/solid--big-bag.svg' alt='Broj Torbi: '>
+             let p5=pf.makeElement('p',{text:`<img class='icon' src='/images/icons/solid--big-bag.svg' alt='Broj Torbi: '>
              ${json.podaci[model].Broj_torbi}`});
              row2.append(p3,p4,p5);
-             let cena=formatBroja(json.cene[model]);
-             let p6=makeElement('p',{text:`Cena: ${cena}`,className:'cenaOpisCard'});
+             let cena=pf.formatBroja(json.cene[model]);
+             let p6=pf.makeElement('p',{text:`Cena: ${cena}`,className:'cenaOpisCard'});
              p6.setAttribute('data-cena',cena);
-             let button=makeElement('button',{text:'Rezerviši',className:'dugmeRezervisi'});
+             let button=pf.makeElement('button',{text:'Rezerviši',className:'dugmeRezervisi'});
                  button.addEventListener('click',function(e)
                  {
                      let errors=[];
@@ -174,13 +176,13 @@
             dateStartInput.classList.add('errorBorder');
         }
 
-        if(danas>=createDateDayFoward(dateStart))
+        if(danas>=pf.createDateDayFoward(dateStart))
         {
             errors.push('Ne mozete da rezervisete proslost!');
             dateStartInput.classList.add('errorBorder');
         }
 
-        if(dateStart!="" && danas<createDateDayFoward(dateStart))
+        if(dateStart!="" && danas<pf.createDateDayFoward(dateStart))
         {
             dateStartInput.classList.remove('errorBorder');
         }
@@ -195,7 +197,7 @@
             dateEndInput.classList.remove('errorBorder');
         }
 
-        if(createDate(dateStart)>=createDate(dateEnd))
+        if(pf.createDate(dateStart)>=pf.createDate(dateEnd))
         {
             errors.push('Krajnji datum mora da bude veci od pocetnog'); 
             dateStartInput.classList.add('errorBorder');
@@ -229,7 +231,7 @@
             emailInput.classList.remove('errorBorder'); 
         }
          
-        if(!validateEmail(email))
+        if(!pf.validateEmail(email))
         {
            errors.push('Email nije validan!'); 
            emailInput.classList.add('errorBorder'); 
@@ -296,8 +298,8 @@
 
          for(let error of errors)
          {
-             let p=makeElement('p',{text:error,className:"errorP"});
-             let p2=makeElement('p',{text:error,className:"errorP"});
+             let p=pf.makeElement('p',{text:error,className:"errorP"});
+             let p2=pf.makeElement('p',{text:error,className:"errorP"});
              fr.append(p);
              fr2.append(p2);
          }
@@ -305,48 +307,6 @@
          responseDiv2.append(fr2);
          showForma();
      }
-
-     function makeElement(type="div",settings={
-     text: "",
-     className:"",
-     src:"",
-     alt:"There is no Picture aveilable",
-     width:0,
-     height:0,
-     href:"",
-     })
-     {
-
-         settings.text=settings.text || "";
-         settings.className=settings.className || "";
-         settings.src=settings.src || "";
-         settings.alt=settings.alt || "There is no Picture aveilable";
-         settings.href=settings.href || "";
-     let element=document.createElement(type);
-         element.className=settings.className;
-     switch(type){
-         case "img":{
-                 element=document.createElement('img');
-                 element.className=settings.className;
-                 element.src=settings.src;
-                 element.alt=settings.alt;
-                 if(settings.width>0 && !isNaN(Number(settings.width))) element.style.width=settings.width+"px";
-                 if(settings.height>0 && !isNaN(Number(settings.height))) element.style.height=settings.height+"px";
-         }; break;
-         case "a":{
-                 element.href=settings.href;
-                 element.innerHTML=settings.text;
-         };break;
-         default:{
-                 element.innerHTML=settings.text;
-         }
-     }       
-     return element;
- }
-
- function formatBroja(num){
-     return new Intl.NumberFormat('sr-RS',{minimumFractionDigits: 2}).format(num);
- }
 
  function odgovor(odgovor)
      {
@@ -369,29 +329,7 @@
              let r=`Uspesno ste rezervisali auto sa tablicama ${odgovor.tablice}. Sifra rezervacije je ${odgovor.id_rez}.`;
              responseDiv.innerHTML=r;
              responseDiv2.innerHTML=r;
-             let dd=makeElement('div',{text:r,className:'response2'});
+             let dd=pf.makeElement('div',{text:r,className:'response2'});
              modelsWraper.append(dd);
          } 
      }
-
- function validateEmail(email) {
-     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-     return re.test(String(email).toLowerCase());
- }
-
- function createDate(inputDate)
- {
-     inputDate=inputDate.split('-');
-     return new Date(inputDate[0],inputDate[1]-1,inputDate[2]);
- }
-
- //da bismo mogli da rezervisemo danas, mi blefiramo da je danas u stvari sutra
- function createDateDayFoward(inputDate)
- {
-     inputDate=inputDate.split('-');
-     let time=new Date(inputDate[0],inputDate[1]-1,inputDate[2]);
-     console.log('time',time);
-     time=time.setTime(time.getTime()+(24*60*60*1000));
-     console.log('time',time);
-     return time;
- }
