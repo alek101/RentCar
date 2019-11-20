@@ -68,6 +68,7 @@ Route::prefix('/rezervacijeInfo')->middleware('login')->group(function()
     Route::get('/','ReservationController@defaultReservations');
     Route::post('/allReservationForm','ReservationController@allReservationForm');
     Route::get('/all','ReservationController@defaultReservations');
+    Route::get('/now','ReservationController@getReservationsNow');
     Route::post('/extendReservation','ReservationController@extendReservation');
     // Route::get('/all/{num}','ReservationController@allReservations'); //ne koristi se
     Route::get('/cancelReservation/{id}','ReservationController@cancelReservation');

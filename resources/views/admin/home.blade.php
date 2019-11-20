@@ -40,7 +40,7 @@
                     
                     // ."<td> <a href='/admin/delete/".$user->id."'>Delete</td>"
 
-                    ."<td><button class='obrisi' data-link='/admin/delete/$user->id'>Obrisi</button></td>"
+                    ."<td><button class='obrisi' data-link='/admin/delete/$user->id'>Obriši</button></td>"
                     
              . "</tr>";
             !!}
@@ -86,7 +86,7 @@
             div2.className='flexRow';
 
             let rand=Math.floor(Math.random()*91)+10;
-            div2.append('Upisite sledeci broj: ',rand);
+            div2.append('Upišite sledeci broj: ',rand);
 
             let div21=document.createElement('div');
             div21.className='flexRow';

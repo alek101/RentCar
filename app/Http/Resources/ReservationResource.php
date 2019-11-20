@@ -88,6 +88,29 @@ class ReservationResource extends JsonResource
         ",[$dateStart,$dateEnd,$dateStart,$dateEnd]);   
     }
 
+    //spisak rezervacija koje traju
+    public static function getReservationsCurrent()
+    {
+        return DB::select(
+            "SELECT
+            R.`ID_rezervacije` as 'id',
+            R.`Ime_prezime_kupca` as 'ime',
+            R.`Email` as 'meil',
+            R.`Broj_telefona` as 'telefon',
+            A.`Broj_registarskih_tablica` as 'tablice',
+            A.`Model` as 'model',
+            R.`Datum_pocetka` as 'start',
+            R.`Datum_zavrsetka` as 'finish',
+            R.`Cena` as 'cena',
+            R.`Napomena` as 'opis'
+        FROM
+            `rezervacija` as R
+        join `automobili` as A on R.ID_vozila=A.Broj_sasije
+        where ((R.`Datum_pocetka` <=CURDATE()) and (R.`Datum_zavrsetka` >=CURDATE()))
+        order by `Datum_pocetka` ASC
+        ",[]);   
+    }
+
     //pomocna funkcija koja proverava da li auto sme da se rezervise
     public static function checkExparationReg($id,$dateEnd,$crit_time=3)
     {

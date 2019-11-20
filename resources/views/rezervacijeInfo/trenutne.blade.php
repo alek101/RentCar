@@ -9,45 +9,7 @@
 
 <div class="prazan"></div>
 
-<h3>Sve Rezervacije</h3>
-
-<p>Ukoliko filter nije aktivan, prikazaće se buduće reyervacije u vremnskom periodu od 90 dana.</p>
-
-<form method="POST" action="/rezervacijeInfo/allReservationForm" class="sveRez">
-    <div class="flexColumn">
-        <div>@csrf</div>
-        <div class="flexRow">
-            <label for="selector">
-                Kriterijum: <br>
-                <select name="selector" id="selector">
-                    <option value="datum">Po Datumu</option>
-                    <option value="broj">Po Broju Unosa</option>
-                </select>
-            </label>
-        </div>
-        <div class="flexRow sDate">
-            <label for="start">Početni datum <input type="date" name="dateStart" id="start"></label>
-            <label for="end">Krajnji datum <input type="date" name="dateEnd" id="end"></label>
-        </div>
-        <div class="flexRow brUnos cardDisapear">
-            <label for="num">Broj Zadnjih Unosa <br> <input type="number" name="num" id="num"></label>
-        </div>
-        <div class="flexRow">
-            <label for="order">
-                Za opadajuće/rastuće vreme: <br>
-                <select name="order" id="order">
-                    <option value="DESC">Opadajuće</option>
-                    <option value="ASC">Rastuće</option>
-                </select>
-            </label>
-        </div>
-        <div><input type="submit" value="Pošalji" id="dugme"> </div>
-    </div>
-</form>
-
-
-
-
+<h3>Rezervacije u toku</h3>
 
 <table>
         <tr>
@@ -121,24 +83,6 @@
     </table>
 
     <script>
-        //menjanje forme
-        let selector=document.querySelector('#selector');
-        selector.addEventListener('change',function()
-        {
-            let val=selector.value;
-
-            if(val=="broj")
-            {
-                document.querySelector('.brUnos').classList.remove('cardDisapear');
-                document.querySelector('.sDate').classList.add('cardDisapear');
-            }
-
-            if(val=="datum")
-            {
-                document.querySelector('.brUnos').classList.add('cardDisapear');
-                document.querySelector('.sDate').classList.remove('cardDisapear');
-            }
-        })
         //produzenje rezervacije ili skracenje
         let butoniProduzi=[...document.querySelectorAll('.produzi')];
         butoniProduzi.map(b=>b.addEventListener('click', function()

@@ -111,6 +111,13 @@ class ReservationController extends Controller
         return view('rezervacijeInfo.sve',['niz'=>$niz]);
     }
 
+    //Pravi stranicu sa svim rezervacijama sa osnovnim kriterijumom
+    public function getReservationsNow()
+    {
+        $niz=ReservationResource::getReservationsCurrent();  
+        return view('rezervacijeInfo.trenutne',['niz'=>$niz]);
+    }
+
     //forma iz rezervacija
     public function allReservationForm(Request $request)
     {

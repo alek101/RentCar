@@ -30,6 +30,7 @@
                             <li><a href="/klient/sviModeli">Spisak aktivnih modela</a></li>
                             {{-- <li><a href="/rezervacija">Rezervisi</a></li> --}}
                             <li><a href="/zakazi" target="_blank">Rezerviši</a></li>
+                            <li><a href="/rezervacijeInfo/now">Rezervacije u toku</a></li>
                             <li><a href="/rezervacijeInfo/all">Sve rezervacije</a></li>
                             {{-- <li><a href="/rezervacijeInfo">Buduce Rezervacije</a></li> --}}
                         </ul>
