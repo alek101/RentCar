@@ -18,6 +18,46 @@ class ServiseResource extends JsonResource
         return parent::toArray($request);
     }
 
+    //pomocna funkcija koja radi servis
+    public static function madeServis($id,$tip,$datum,$opis,$registracija)
+    {
+        $km=ServiseResource::getKM($id)[0]->km;
+
+        if($tip=='mali')
+        {
+            DB::transaction(function() use($id,$datum,$opis,$km)
+            {
+                ServiseResource::insertServis($id,$datum,$km,'mali',$opis);
+                ServiseResource::setMaliServisKM($id,$km);
+                PomFunkResource::changeCarServis($id);
+            },5);
+            
+        }
+        if($tip=='veliki')
+        {
+            DB::transaction(function() use($id,$datum,$opis,$km)
+            {
+                ServiseResource::insertServis($id,$datum,$km,'mali',$opis);
+                ServiseResource::setMaliServisKM($id,$km);
+                ServiseResource::setVelikiServisKM($id,$km);
+                PomFunkResource::changeCarServis($id);
+            },5);
+            
+        }
+        // if ($tip=='cancel')
+        // {
+        //     PomFunkResource::changeCarServis($id);
+        // }
+        if($tip=='registracija')
+        {
+            DB::transaction(function() use($id,$registracija)
+            {
+                ServiseResource::setRegistracija($id,$registracija);
+                PomFunkResource::changeCarServis($id);
+            },5);
+        }
+    }
+
     //automobili na servisu
     public static function getAllCarsServis()
     {

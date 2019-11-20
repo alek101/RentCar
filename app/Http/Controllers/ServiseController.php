@@ -32,53 +32,34 @@ class ServiseController extends Controller
     //funkcija koja prima podatke za zavrsetak servisa
     public function endServis(Request $request)
     {
+        $request->validate([
+            'id'=>'required',
+            'tip'=>'required',
+        ]);
+
         $id=$request->id;
         $tip=$request->tip;
+
+        if($tip=='mali' or $tip=='veliki')
+        {
+            $request->validate([
+                'datum'=>'required|date',
+                'opis'=>'required',
+            ]);
+        }
+
+        if($tip=='registracija')
+        {
+            $request->validate([
+                'registracija'=>'required|date',
+            ]);
+        }
+
         $datum=$request->datum;
         $opis=$request->opis;
         $registracija=$request->registracija;
-        $this->madeServis($id,$tip,$datum,$opis,$registracija);
+        ServiseResource::madeServis($id,$tip,$datum,$opis,$registracija);
         return $this->servis();
-    }
-
-    //pomocna funkcija koja radi servis
-    function madeServis($id,$tip,$datum,$opis,$registracija)
-    {
-        $km=ServiseResource::getKM($id)[0]->km;
-
-        if($tip=='mali')
-        {
-            DB::transaction(function() use($id,$datum,$opis,$km)
-            {
-                ServiseResource::insertServis($id,$datum,$km,'mali',$opis);
-                ServiseResource::setMaliServisKM($id,$km);
-                PomFunkResource::changeCarServis($id);
-            },5);
-            
-        }
-        if($tip=='veliki')
-        {
-            DB::transaction(function() use($id,$datum,$opis,$km)
-            {
-                ServiseResource::insertServis($id,$datum,$km,'mali',$opis);
-                ServiseResource::setMaliServisKM($id,$km);
-                ServiseResource::setVelikiServisKM($id,$km);
-                PomFunkResource::changeCarServis($id);
-            },5);
-            
-        }
-        // if ($tip=='cancel')
-        // {
-        //     PomFunkResource::changeCarServis($id);
-        // }
-        if($tip=='registracija')
-        {
-            DB::transaction(function() use($id,$registracija)
-            {
-                ServiseResource::setRegistracija($id,$registracija);
-                PomFunkResource::changeCarServis($id);
-            },5);
-        }
     }
 
     //funkcija za dodavanje km automobilu
@@ -99,5 +80,7 @@ class ServiseController extends Controller
             ServiseResource::addKM($id,$km);
             return $this->prijem();
         }
+
+        return back();
     }
 }

@@ -39,7 +39,7 @@
         </div>
         
         
-        <div><label for="opis" class="labelOpis">  Opis radova: <br> <textarea name="opis" id="opis" cols="30" rows="10"></textarea></label></div>
+        <div><label for="opis" class="labelOpis">  Opis radova: <br> <textarea name="opis" id="opis" cols="30" rows="10" placeholder='Nema Opisa'></textarea></label></div>
         
         
         <div class="flexRow">

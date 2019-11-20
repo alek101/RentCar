@@ -101,6 +101,11 @@ class ReservationController extends Controller
     //produzenje rezervacije
     public function extendReservation(Request $request)
     {
+        $request->validate([
+            'id'=>'required',
+            'brojDana'=>'required',
+        ]);
+        
         $id=$request->id;
         $brojDana=$request->brojDana;
         $rezervacija=ReservationResource::returnInformation($id);

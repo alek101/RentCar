@@ -25,6 +25,11 @@ class CarInfoController extends Controller
     //trazenje pogodnog datuma za servis
     public function findServiseDate(Request $request )
     {
+        $request->validate([
+            'id'=>'required',
+            'brojDana'=>'required',
+        ]);
+
         $id=$request->id;
         $brojDana=$request->brojDana;
         if($brojDana>0)
@@ -43,6 +48,12 @@ class CarInfoController extends Controller
     //i konacno zakazivanje istog
     public function sheduleServise(Request $request )
     {
+        $request->validate([
+            'id'=>'required',
+            'dateStart'=>'required|date',
+            'dateEnd'=>'required|date',
+        ]);
+
         $id=$request->id;
         $dateStart=$request->dateStart;
         $dateEnd=$request->dateEnd;
