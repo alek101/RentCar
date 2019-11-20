@@ -41,8 +41,32 @@ class ReservationResource extends JsonResource
         return $rezultat;
     }
 
-    //spisak rezervacija u vremenskom okviru opadajuce
-    public static function getReservationsDateDESC($dateStart,$dateEnd)
+    //spisak rezervacija po broju
+    //$krit='DESC' or $krit='ASC'
+    public static function getAllReservationsNum($num,$krit='DESC')
+    {
+        return DB::select(
+            "SELECT
+            R.`ID_rezervacije` as 'id',
+            R.`Ime_prezime_kupca` as 'ime',
+            R.`Email` as 'meil',
+            R.`Broj_telefona` as 'telefon',
+            A.`Broj_registarskih_tablica` as 'tablice',
+            A.`Model` as 'model',
+            R.`Datum_pocetka` as 'start',
+            R.`Datum_zavrsetka` as 'finish',
+            R.`Cena` as 'cena',
+            R.`Napomena` as 'opis'
+        FROM
+            `rezervacija` as R
+        join `automobili` as A on R.ID_vozila=A.Broj_sasije
+        order by `Datum_pocetka` ".$krit."
+        LIMIT ?",[$num]);   
+    }
+
+    //spisak rezervacija u vremenskom okviru
+    //$krit='DESC' or $krit='ASC'
+    public static function getReservationsDate($dateStart,$dateEnd,$krit='DESC')
     {
         return DB::select(
             "SELECT
@@ -60,75 +84,8 @@ class ReservationResource extends JsonResource
             `rezervacija` as R
         join `automobili` as A on R.ID_vozila=A.Broj_sasije
         where ((R.`Datum_pocetka` >=? and R.`Datum_pocetka` <=?) and (R.`Datum_zavrsetka` >=? and R.`Datum_zavrsetka` <=?))
-        order by `Datum_pocetka` DESC
+        order by `Datum_pocetka` ".$krit."
         ",[$dateStart,$dateEnd,$dateStart,$dateEnd]);   
-    }
-
-    //spisak rezervacija po broju opadajuce
-    public static function getAllReservationsDESC($num)
-    {
-        return DB::select(
-            "SELECT
-            R.`ID_rezervacije` as 'id',
-            R.`Ime_prezime_kupca` as 'ime',
-            R.`Email` as 'meil',
-            R.`Broj_telefona` as 'telefon',
-            A.`Broj_registarskih_tablica` as 'tablice',
-            A.`Model` as 'model',
-            R.`Datum_pocetka` as 'start',
-            R.`Datum_zavrsetka` as 'finish',
-            R.`Cena` as 'cena',
-            R.`Napomena` as 'opis'
-        FROM
-            `rezervacija` as R
-        join `automobili` as A on R.ID_vozila=A.Broj_sasije
-        order by `Datum_pocetka` DESC
-        LIMIT ?",[$num]);   
-    }
-
-    //spisak rezervacija u vremenskom okviru rastuce
-    public static function getReservationsDateASC($dateStart,$dateEnd)
-    {
-        return DB::select(
-            "SELECT
-            R.`ID_rezervacije` as 'id',
-            R.`Ime_prezime_kupca` as 'ime',
-            R.`Email` as 'meil',
-            R.`Broj_telefona` as 'telefon',
-            A.`Broj_registarskih_tablica` as 'tablice',
-            A.`Model` as 'model',
-            R.`Datum_pocetka` as 'start',
-            R.`Datum_zavrsetka` as 'finish',
-            R.`Cena` as 'cena',
-            R.`Napomena` as 'opis'
-        FROM
-            `rezervacija` as R
-        join `automobili` as A on R.ID_vozila=A.Broj_sasije
-        where ((R.`Datum_pocetka` >=? and R.`Datum_pocetka` <=?) and (R.`Datum_zavrsetka` >=? and R.`Datum_zavrsetka` <=?))
-        order by `Datum_pocetka` ASC
-        ",[$dateStart,$dateEnd,$dateStart,$dateEnd]);   
-    }
-
-    //spisak rezervacija po broju rastuce
-    public static function getAllReservationsASC($num)
-    {
-        return DB::select(
-            "SELECT
-            R.`ID_rezervacije` as 'id',
-            R.`Ime_prezime_kupca` as 'ime',
-            R.`Email` as 'meil',
-            R.`Broj_telefona` as 'telefon',
-            A.`Broj_registarskih_tablica` as 'tablice',
-            A.`Model` as 'model',
-            R.`Datum_pocetka` as 'start',
-            R.`Datum_zavrsetka` as 'finish',
-            R.`Cena` as 'cena',
-            R.`Napomena` as 'opis'
-        FROM
-            `rezervacija` as R
-        join `automobili` as A on R.ID_vozila=A.Broj_sasije
-        order by `Datum_pocetka` ASC
-        LIMIT ?",[$num]);   
     }
 
     //pomocna funkcija koja proverava da li auto sme da se rezervise

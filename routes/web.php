@@ -65,11 +65,11 @@ Route::prefix('/auto')->middleware('login')->group(function()
 Route::prefix('/rezervacijeInfo')->middleware('login')->group(function()
 {
     // Route::get('/','MainController@rezervacijeInfo'); //buduce rezervacije-nepotrebno
-    Route::get('/','ReservationController@allReservations');
+    Route::get('/','ReservationController@defaultReservations');
     Route::post('/allReservationForm','ReservationController@allReservationForm');
-    Route::get('/all','ReservationController@allReservations');
+    Route::get('/all','ReservationController@defaultReservations');
     Route::post('/extendReservation','ReservationController@extendReservation');
-    Route::get('/all/{num}','ReservationController@allReservations'); //ne koristi se
+    // Route::get('/all/{num}','ReservationController@allReservations'); //ne koristi se
     Route::get('/cancelReservation/{id}','ReservationController@cancelReservation');
     Route::get('/extendForm/{id}','ReservationController@getExtendForm');
 });

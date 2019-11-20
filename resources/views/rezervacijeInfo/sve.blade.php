@@ -11,7 +11,7 @@
 
 <h3>Sve Rezervacije</h3>
 
-<p>Ukoliko filter nije aktivan, prikazaće se poslednjih 50 unosa.</p>
+<p>Ukoliko filter nije aktivan, prikazaće se buduće reyervacije u vremnskom periodu od 90 dana.</p>
 
 <form method="POST" action="/rezervacijeInfo/allReservationForm" class="sveRez">
     <div class="flexColumn">
@@ -20,17 +20,17 @@
             <label for="selector">
                 Kriterijum: <br>
                 <select name="selector" id="selector">
-                    <option value="broj">Po Broju Unosa</option>
                     <option value="datum">Po Datumu</option>
+                    <option value="broj">Po Broju Unosa</option>
                 </select>
             </label>
         </div>
-        <div class="flexRow brUnos">
-            <label for="num">Broj Zadnjih Unosa <br> <input type="number" name="num" id="num"></label>
-        </div>
-        <div class="flexRow sDate cardDisapear">
+        <div class="flexRow sDate">
             <label for="start">Početni datum <input type="date" name="dateStart" id="start"></label>
             <label for="end">Krajnji datum <input type="date" name="dateEnd" id="end"></label>
+        </div>
+        <div class="flexRow brUnos cardDisapear">
+            <label for="num">Broj Zadnjih Unosa <br> <input type="number" name="num" id="num"></label>
         </div>
         <div class="flexRow">
             <label for="order">

@@ -102,10 +102,12 @@ class ReservationController extends Controller
         }
     }
 
-    //Pravi stranicu sa svim rezervacijama
-    public function allReservations($num=50)
+    //Pravi stranicu sa svim rezervacijama sa osnovnim kriterijumom
+    public function defaultReservations()
     {
-        $niz=ReservationResource::getAllReservationsDESC($num);  
+        $dateStart=date('Y-m-d');
+        $dateEnd=date('Y-m-d', strtotime($dateStart." + 90 days"));
+        $niz=ReservationResource::getReservationsDate($dateStart,$dateEnd,'ASC');  
         return view('rezervacijeInfo.sve',['niz'=>$niz]);
     }
 
@@ -116,27 +118,27 @@ class ReservationController extends Controller
         {
             if(isset($request->num))
             {
-                $niz=ReservationResource::getAllReservationsDESC($request->num);  
+                $niz=ReservationResource::getAllReservationsNum($request->num,'DESC');  
                 return view('rezervacijeInfo.sve',['niz'=>$niz]);
             }
             
             if(isset($request->dateStart) && isset($request->dateEnd))
             {
-                $niz=ReservationResource::getReservationsDateDESC($request->dateStart,$request->dateEnd);  
+                $niz=ReservationResource::getReservationsDate($request->dateStart,$request->dateEnd,'DESC');  
                 return view('rezervacijeInfo.sve',['niz'=>$niz]);
             }
 
             if(isset($request->dateStart) && !isset($request->dateEnd))
             {
                 $dateEnd=date('Y-m-d', strtotime($request->dateStart." + 365 days"));
-                $niz=ReservationResource::getReservationsDateDESC($request->dateStart,$dateEnd);  
+                $niz=ReservationResource::getReservationsDate($request->dateStart,$dateEnd,'DESC');  
                 return view('rezervacijeInfo.sve',['niz'=>$niz]);
             }
             
             if(!isset($request->dateStart) && isset($request->dateEnd))
             {
                 $dateStart=date('Y-m-d', strtotime($request->dateEnd." - 365 days"));
-                $niz=ReservationResource::getReservationsDateDESC($dateStart,$request->dateEnd);  
+                $niz=ReservationResource::getReservationsDate($dateStart,$request->dateEnd,'DESC');  
                 return view('rezervacijeInfo.sve',['niz'=>$niz]);
             }
         }
@@ -145,27 +147,27 @@ class ReservationController extends Controller
         {
             if(isset($request->num))
             {
-                $niz=ReservationResource::getAllReservationsASC($request->num);  
+                $niz=ReservationResource::getAllReservationsNum($request->num,'ASC');  
                 return view('rezervacijeInfo.sve',['niz'=>$niz]);
             }
             
             if(isset($request->dateStart) && isset($request->dateEnd))
             {
-                $niz=ReservationResource::getReservationsDateASC($request->dateStart,$request->dateEnd);  
+                $niz=ReservationResource::getReservationsDate($request->dateStart,$request->dateEnd,'ASC');  
                 return view('rezervacijeInfo.sve',['niz'=>$niz]);
             }
 
             if(isset($request->dateStart) && !isset($request->dateEnd))
             {
                 $dateEnd=date('Y-m-d', strtotime($request->dateStart." + 365 days"));
-                $niz=ReservationResource::getReservationsDateASC($request->dateStart,$dateEnd);  
+                $niz=ReservationResource::getReservationsDate($request->dateStart,$dateEnd,'ASC');  
                 return view('rezervacijeInfo.sve',['niz'=>$niz]);
             }
             
             if(!isset($request->dateStart) && isset($request->dateEnd))
             {
                 $dateStart=date('Y-m-d', strtotime($request->dateEnd." - 365 days"));
-                $niz=ReservationResource::getReservationsDateASC($dateStart,$request->dateEnd);  
+                $niz=ReservationResource::getReservationsDate($dateStart,$request->dateEnd,'ASC');  
                 return view('rezervacijeInfo.sve',['niz'=>$niz]);
             }
         }
