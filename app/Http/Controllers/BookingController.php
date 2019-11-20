@@ -18,6 +18,11 @@ class BookingController extends Controller
     //funkcija koja pravi json za fron end stranu
     public function makeJSONforBooking(Request $request)
     {
+        $request->validate([
+            'dateStart'=>'required|date',
+            'dateEnd'=>'required|date',
+        ]);
+
         $dateStart=$request->dateStart;
         $dateEnd=$request->dateEnd;
 
@@ -57,13 +62,22 @@ class BookingController extends Controller
     //booking
     public function makeBookingWithFetch(Request $request)
     {
+        $request->validate([
+            'dateStart'=>'required|date',
+            'dateEnd'=>'required|date',
+            'model'=>'required',
+            'ime'=>'required',
+            'telefon'=>'required',
+            'email'=>'required',
+        ]);
+
         $dateStart=$request->dateStart;
         $dateEnd=$request->dateEnd;
         $model=$request->model;
         $ime=$request->ime;
         $telefon=$request->telefon;
         $email=$request->email;
-        $comment=$request->comment;
+        $comment=$request->comment ?? 'no comment';
 
         //SERVIS je rezervisana rec
         if($comment==="SERVIS")

@@ -114,7 +114,7 @@
                     email=emailInput.value;
                     comment=document.querySelector('#comment').value || 'no comment';
 
-                    errors=validateForm(errors,dateStart,dateEnd,ime,telefon,email,comment)
+                    errors=validateForm(errors,dateStart,dateEnd,ime,telefon,email,comment);
   
                      if (errors.length==0)
                      {
