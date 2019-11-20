@@ -117,5 +117,4 @@ class CarInfoController extends Controller
             return $dateStart;
         }
     }
-
 }
