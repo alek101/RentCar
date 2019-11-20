@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\HTTP\Resources\PomFunkResource;
+use App\HTTP\Resources\ServiseResource;
 
 class ServiseController extends Controller
 {

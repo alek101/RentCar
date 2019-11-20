@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\TipoviAutomobilaModel;
 use App\AutomobiliModel;
 use App\HTTP\Resources\PomFunkResource;
+use App\HTTP\Resources\ReservationResource;
 
 class ReservationController extends Controller
 {
