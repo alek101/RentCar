@@ -11,7 +11,7 @@
 
 <h3>Sve Rezervacije</h3>
 
-<p>Ukoliko filter nije aktivan, prikazaće se buduće reyervacije u vremnskom periodu od 90 dana.</p>
+<p>Ukoliko filter nije aktivan, prikazaće se buduće rezervacije u vremenskom periodu od 90 dana.</p>
 
 <form method="POST" action="/rezervacijeInfo/allReservationForm" class="sveRez">
     <div class="flexColumn">

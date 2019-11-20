@@ -27,12 +27,19 @@ class TipoviAutomobilaController extends Controller
         $modelsBook=TipoviAutomobilaModel::all();
         forEach($modelsBook as $singleModel)
         {
+            //proveravamo da li od datok modela singleModel, postojai barem jedan aktivan auto
+            $check=false;
             forEach($cars as $car)
             {
                 if($singleModel->Model===$car->Model)
                 {
-                    array_push($models,$singleModel);
+                    $check=true;
+                    break;
                 }
+            }
+            if($check)
+            {
+                array_push($models,$singleModel);
             }
         }
         $cenovnik=CenovnikModel::all();
