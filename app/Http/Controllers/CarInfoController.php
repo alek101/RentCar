@@ -13,27 +13,7 @@ class CarInfoController extends Controller
     //Daje automobile koji moraju uskoro da imaju servis
     public function kriticni()
     {
-        $niz=DB::select("SELECT
-        `Broj_sasije` as 'sasija',
-        `Broj_saobracajne_dozvole` as 'saobracajna',
-        `Broj_registarskih_tablica` as 'tablica',
-        `Model` as 'model',
-        `Godina_proizvodnje` as 'godiste',
-        `Predjena_km` as 'kilometraza',
-        `Datum_vazenja_registracije` as 'registracija',
-        `Radjen_mali_servis_km` as 'mali_servis',
-        `Radjen_veliki_servis_km` as 'veliki_servis',
-        DATEDIFF(`Datum_vazenja_registracije`,CURRENT_DATE()) as 'isticanje_registracije',
-        `Predjena_km`-`Radjen_mali_servis_km` as 'predjeno_km_mali',
-        `Predjena_km`-`Radjen_veliki_servis_km` as 'predjeno_km_veliki'
-    FROM
-        `automobili`
-    WHERE
-        `Servis`=0 and `Aktivan`=1 and
-         (DATEDIFF(`Datum_vazenja_registracije`,CURRENT_DATE())<=? OR
-         `Predjena_km`-`Radjen_mali_servis_km`>=? OR
-         `Predjena_km`-`Radjen_veliki_servis_km`>=?)",[30,10000,100000]);
-        
+        $niz=$this->getCriticalCars();
         return view('kriticni.kriticni',['niz'=>$niz]);
     }
 
@@ -198,5 +178,30 @@ class CarInfoController extends Controller
         join `automobili` as A on R.ID_vozila=A.Broj_sasije
         where CURRENT_DATE()<=R.`Datum_pocetka`+3 and A.Broj_sasije =?
         order by `Datum_pocetka` ASC",[$id]); 
+    }
+
+    //kriticni automobili
+    public function getCriticalCars($dayRegistratonExparation=30,$smallServise=10000,$mainServise=100000)
+    {
+        return DB::select("SELECT
+        `Broj_sasije` as 'sasija',
+        `Broj_saobracajne_dozvole` as 'saobracajna',
+        `Broj_registarskih_tablica` as 'tablica',
+        `Model` as 'model',
+        `Godina_proizvodnje` as 'godiste',
+        `Predjena_km` as 'kilometraza',
+        `Datum_vazenja_registracije` as 'registracija',
+        `Radjen_mali_servis_km` as 'mali_servis',
+        `Radjen_veliki_servis_km` as 'veliki_servis',
+        DATEDIFF(`Datum_vazenja_registracije`,CURRENT_DATE()) as 'isticanje_registracije',
+        `Predjena_km`-`Radjen_mali_servis_km` as 'predjeno_km_mali',
+        `Predjena_km`-`Radjen_veliki_servis_km` as 'predjeno_km_veliki'
+    FROM
+        `automobili`
+    WHERE
+        `Servis`=0 and `Aktivan`=1 and
+         (DATEDIFF(`Datum_vazenja_registracije`,CURRENT_DATE())<=? OR
+         `Predjena_km`-`Radjen_mali_servis_km`>=? OR
+         `Predjena_km`-`Radjen_veliki_servis_km`>=?)",[$dayRegistratonExparation,$smallServise,$mainServise]);
     }
 }

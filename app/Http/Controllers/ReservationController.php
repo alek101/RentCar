@@ -102,7 +102,7 @@ class ReservationController extends Controller
             foreach($models as $model)
             {
                 $readyModels[$model]=TipoviAutomobilaModel::where('Model',$model)->first();
-                $cene[$model]=$this->totalCost($model,$dateStart,$dateEnd);
+                $cene[$model]=PomFunkResource::totalCost($model,$dateStart,$dateEnd);
             }
 
             
@@ -141,7 +141,7 @@ class ReservationController extends Controller
         }
 
         
-        $cena=$this->totalCost($model,$dateStart,$dateEnd);
+        $cena=PomFunkResource::totalCost($model,$dateStart,$dateEnd);
         
         if($cena>0 )
         {
@@ -183,6 +183,126 @@ class ReservationController extends Controller
     }
 
     //Pomocne funkcije I reda
+
+    
+
+    //from reservation meni
+    public function cancelReservation($id)
+    {
+        $info=$this->returnInformation($id);
+        $this->cancelFutureReservation($id);
+        if($info[0]->opis=='SERVIS')
+        {
+            //ako ukidamo servis, izbaci auto iz spiska onih koji su na servisu
+            $auto=AutomobiliModel::where('Broj_sasije',$info->car_id)->firstOrFail();
+            $auto->Servis=0;
+            $auto->save();
+        }
+        else
+        {
+          $this->sendMeil($info[0],'cancel');  
+        }
+        
+        return redirect('/rezervacijeInfo/all');
+    }
+
+    //from car meni
+    public function cancelReservationA($id)
+    {
+        $info=$this->returnInformation($id);
+        $this->cancelFutureReservation($id);
+        if($info[0]->opis=='SERVIS')
+        {
+            //ako ukidamo servis, izbaci auto iz spiska onih koji su na servisu
+            $auto=AutomobiliModel::where('Broj_sasije',$info->car_id)->firstOrFail();
+            $auto->Servis=0;
+            $auto->save();
+        }
+        else
+        {
+          $this->sendMeil($info[0],'cancel');  
+        }
+        return redirect('/auto/info/'.$info[0]->car_id);
+    }
+
+    //produzenje rezervacije
+    public function extendReservation(Request $request)
+    {
+        $id=$request->id;
+        $brojDana=$request->brojDana;
+        $rezervacija=$this->returnInformation($id);
+        $dateStart=$rezervacija->dateStart;
+        $dateEnd=$rezervacija->dateEnd;
+        $trajanje = (strtotime($dateEnd)-strtotime($dateStart))/24/60/60;
+        $test=strtotime($dateStart) - strtotime(date("Y-m-d"));
+
+        $trajanjeDoKraja=(strtotime($dateEnd)-strtotime(date("Y-m-d")))/24/60/60;
+        $test2=strtotime($dateEnd) - strtotime(date("Y-m-d"));
+        
+        if($brojDana>0)
+        {
+            $id_auto=$rezervacija->car_id;
+            $model=$rezervacija->model;
+            $newDateStart=date('Y-m-d', strtotime($dateEnd." + 1 days"));
+            $newDateEnd=date('Y-m-d', strtotime($dateEnd." + ".$brojDana." days"));
+            if(PomFunkResource::freeCar($id_auto,$newDateStart,$newDateEnd) and $this->checkExparationReg($id_auto,$newDateEnd))
+            {
+                $newCost=PomFunkResource::totalCost($model,$dateStart,$newDateEnd);
+                $this->updateReservation($newDateEnd,$newCost,$id);
+                $info=$this->returnInformation($id);
+                $this->sendMeil($info,'extend');
+                return ("Rezervacija $id je produzena do $newDateEnd. Nova cena je $newCost.");
+            }
+            else
+            {
+                return ("Rezervacija se ne moze produziti!");
+            }
+        }
+        //jos uvek nije pocela i skracenje je manje od trajanja ili rezervacij je u toku, ali je skracivanje manje od ukupnog preostalog vremena
+        elseif(($test>0 and $trajanje>abs($brojDana)) or ($test<=0 and $test2>0 and $trajanjeDoKraja>abs($brojDana)))
+        {
+            $id_auto=$rezervacija->car_id;
+            $model=$rezervacija->model;
+            $newDateEnd=date('Y-m-d', strtotime($dateEnd." - ".abs($brojDana)." days"));
+            $newCost=PomFunkResource::totalCost($model,$dateStart,$newDateEnd);
+            $this->updateReservation($newDateEnd,$newCost,$id);
+            $info=$this->returnInformation($id);
+            $this->sendMeil($info,'shortend');
+            return ("Rezervacija $id je skracena do $newDateEnd. Nova cena je $newCost.");
+        }
+        
+        else
+        {
+            return ("Broj dana nije pravilan!");
+        }
+            
+    }
+
+    //svi automobili koji smeju da se rezervisu
+    public function aveilibleCars($dateStart,$dateEnd)
+    {
+        $automobili=PomFunkResource::getAllCars();
+        $rezultat=[];
+        foreach($automobili as $auto)
+        {
+            if(PomFunkResource::freeCar($auto->sasija,$dateStart,$dateEnd) and $this->checkExparationReg($auto->sasija,$dateEnd))
+            {
+                $model=$auto->model;
+                if(!isset($rezultat[$model]))
+                {
+                    $rezultat[$model]=[$auto->sasija];
+                }
+                else
+                {
+                    array_push($rezultat[$model],$auto->sasija);
+                }
+            }
+        }
+        return $rezultat;
+    }
+
+
+    //Pomocne funkcije II reda
 
     //spisak rezervacija u vremenskom okviru
     public function getReservationsDateDESC($dateStart,$dateEnd)
@@ -274,162 +394,6 @@ class ReservationController extends Controller
         LIMIT ?",[$num]);   
     }
 
-    //from reservation meni
-    public function cancelReservation($id)
-    {
-        $info=$this->returnInformation($id);
-        $this->cancelFutureReservation($id);
-        if($info[0]->opis=='SERVIS')
-        {
-            //ako ukidamo servis, izbaci auto iz spiska onih koji su na servisu
-            $auto=AutomobiliModel::where('Broj_sasije',$info->car_id)->firstOrFail();
-            $auto->Servis=0;
-            $auto->save();
-        }
-        else
-        {
-          $this->sendMeil($info[0],'cancel');  
-        }
-        
-        return redirect('/rezervacijeInfo/all');
-    }
-
-    //from car meni
-    public function cancelReservationA($id)
-    {
-        $info=$this->returnInformation($id);
-        $this->cancelFutureReservation($id);
-        if($info[0]->opis=='SERVIS')
-        {
-            //ako ukidamo servis, izbaci auto iz spiska onih koji su na servisu
-            $auto=AutomobiliModel::where('Broj_sasije',$info->car_id)->firstOrFail();
-            $auto->Servis=0;
-            $auto->save();
-        }
-        else
-        {
-          $this->sendMeil($info[0],'cancel');  
-        }
-        return redirect('/auto/info/'.$info[0]->car_id);
-    }
-
-    //produzenje rezervacije
-    public function extendReservation(Request $request)
-    {
-        $id=$request->id;
-        $brojDana=$request->brojDana;
-        $rezervacija=$this->returnInformation($id);
-        $dateStart=$rezervacija->dateStart;
-        $dateEnd=$rezervacija->dateEnd;
-        $trajanje = (strtotime($dateEnd)-strtotime($dateStart))/24/60/60;
-        $test=strtotime($dateStart) - strtotime(date("Y-m-d"));
-
-        $trajanjeDoKraja=(strtotime($dateEnd)-strtotime(date("Y-m-d")))/24/60/60;
-        $test2=strtotime($dateEnd) - strtotime(date("Y-m-d"));
-        
-        // return ("$id + $brojDana + $test");
-        
-        
-        if($brojDana>0)
-        {
-            $id_auto=$rezervacija->car_id;
-            $model=$rezervacija->model;
-            $newDateStart=date('Y-m-d', strtotime($dateEnd." + 1 days"));
-            $newDateEnd=date('Y-m-d', strtotime($dateEnd." + ".$brojDana." days"));
-            if(PomFunkResource::freeCar($id_auto,$newDateStart,$newDateEnd) and $this->checkExparationReg($id_auto,$newDateEnd))
-            {
-                $newCost=$this->totalCost($model,$dateStart,$newDateEnd);
-                DB::update(
-                    "
-                    UPDATE `rezervacija` 
-                    SET `Datum_zavrsetka` = ?, 
-                    `Cena`=? 
-                    WHERE `rezervacija`.`ID_rezervacije` = ?
-                    ",[$newDateEnd,$newCost,$id]
-                );
-                
-                $info=$this->returnInformation($id);
-                $this->sendMeil($info,'extend');
-                return ("Rezervacija $id je produzena do $newDateEnd. Nova cena je $newCost.");
-            }
-            else
-            {
-                return ("Rezervacija se ne moze produziti!");
-            }
-        }
-        //jos uvek nije pocela i skracenje je manje od trajanja ili rezervacij je u toku, ali je skracivanje manje od ukupnog preostalog vremena
-        elseif(($test>0 and $trajanje>abs($brojDana)) or ($test<=0 and $test2>0 and $trajanjeDoKraja>abs($brojDana)))
-        {
-            $id_auto=$rezervacija->car_id;
-            $model=$rezervacija->model;
-            $newDateEnd=date('Y-m-d', strtotime($dateEnd." - ".abs($brojDana)." days"));
-            $newCost=$this->totalCost($model,$dateStart,$newDateEnd);
-                DB::update(
-                    "
-                    UPDATE `rezervacija` 
-                    SET `Datum_zavrsetka` = ?, 
-                    `Cena`=? 
-                    WHERE `rezervacija`.`ID_rezervacije` = ?
-                    ",[$newDateEnd,$newCost,$id]
-                );
-                
-                $info=$this->returnInformation($id);
-                $this->sendMeil($info,'shortend');
-                return ("Rezervacija $id je skracena do $newDateEnd. Nova cena je $newCost.");
-        }
-        
-        else
-        {
-            return ("Broj dana nije pravilan!");
-        }
-            
-    }
-
-    //svi automobili koji smeju da se rezervisu
-    public function aveilibleCars($dateStart,$dateEnd)
-    {
-        $automobili=PomFunkResource::getAllCars();
-        $rezultat=[];
-        foreach($automobili as $auto)
-        {
-            if(PomFunkResource::freeCar($auto->sasija,$dateStart,$dateEnd) and $this->checkExparationReg($auto->sasija,$dateEnd))
-            {
-                $model=$auto->model;
-                if(!isset($rezultat[$model]))
-                {
-                    $rezultat[$model]=[$auto->sasija];
-                }
-                else
-                {
-                    array_push($rezultat[$model],$auto->sasija);
-                }
-            }
-        }
-        return $rezultat;
-    }
-
-    //funkcija za racunanje cene rezervacije
-    public function totalCost($model,$dateStart,$dateEnd)
-    {
-        $niz=DB::select("
-        SELECT `cena_po_danu` AS 'cena', DATEDIFF(?, ?) as 'razlika' 
-        FROM `cenovnik` WHERE 
-        `Model` = ? AND `Max_broj_dana` >= DATEDIFF(?, ?)",[$dateEnd,$dateStart,$model,$dateEnd,$dateStart]);
-
-        $max=0;
-        foreach($niz as $clan)
-        {
-            if($clan->cena>$max)
-            {
-                $max=$clan->cena;
-            }
-        }
-        return $niz[0]->razlika*$max;
-    }
-
-
-    //Pomocne funkcije II reda
-
     //pomocna funkcija koja proverava da li auto sme da se rezervise
     public function checkExparationReg($id,$dateEnd,$crit_time=3)
     {
@@ -485,6 +449,19 @@ class ReservationController extends Controller
             `rezervacija`
         WHERE
             `ID_rezervacije`=? and CURRENT_DATE()<=`Datum_pocetka`+3",[$id]);
+    }
+
+    //azuriranje rezervacija
+    public function updateReservation($newDateEnd,$newCost,$id)
+    {
+        DB::update(
+            "
+            UPDATE `rezervacija` 
+            SET `Datum_zavrsetka` = ?, 
+            `Cena`=? 
+            WHERE `rezervacija`.`ID_rezervacije` = ?
+            ",[$newDateEnd,$newCost,$id]
+        );
     }
 
     //Funkcija koja salje mejl kupcu-trenutno je iskljucena da ne bi bagovala

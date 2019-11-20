@@ -129,4 +129,23 @@ class PomFunkResource extends JsonResource
         `Broj_sasije`=?",[$val,$id]);
     }
 
+     //funkcija za racunanje cene rezervacije
+     public static function totalCost($model,$dateStart,$dateEnd)
+     {
+         $niz=DB::select("
+         SELECT `cena_po_danu` AS 'cena', DATEDIFF(?, ?) as 'razlika' 
+         FROM `cenovnik` WHERE 
+         `Model` = ? AND `Max_broj_dana` >= DATEDIFF(?, ?)",[$dateEnd,$dateStart,$model,$dateEnd,$dateStart]);
+ 
+         $max=0;
+         foreach($niz as $clan)
+         {
+             if($clan->cena>$max)
+             {
+                 $max=$clan->cena;
+             }
+         }
+         return $niz[0]->razlika*$max;
+     }
+
 }

@@ -13,23 +13,7 @@ class ServiseController extends Controller
     //automobili na servisu
     public function servis()
     {
-        $niz=DB::select("SELECT
-        `Broj_sasije` as 'sasija',
-        `Broj_saobracajne_dozvole` as 'saobracajna',
-        `Broj_registarskih_tablica` as 'tablica',
-        `Model` as 'model',
-        `Godina_proizvodnje` as 'godiste',
-        `Predjena_km` as 'kilometraza',
-        `Datum_vazenja_registracije` as 'registracija',
-        `Radjen_mali_servis_km` as 'mali_servis',
-        `Radjen_veliki_servis_km` as 'veliki_servis',
-        DATEDIFF(`Datum_vazenja_registracije`,CURRENT_DATE()) as 'isticanje_registracije',
-        `Predjena_km`-`Radjen_mali_servis_km` as 'predjeno_km_mali',
-        `Predjena_km`-`Radjen_veliki_servis_km` as 'predjeno_km_veliki'
-    FROM
-        `automobili`
-    WHERE
-        `Servis`=1 and `Aktivan`=1",[]);
+        $niz=$this->getAllCarsServis();
         
         return view('servis.servis',['niz'=>$niz]);
     }
@@ -121,6 +105,28 @@ class ServiseController extends Controller
     }
 
     //Pomocne funkcije II reda
+
+    //automobili na servisu
+    public function getAllCarsServis()
+    {
+        return DB::select("SELECT
+        `Broj_sasije` as 'sasija',
+        `Broj_saobracajne_dozvole` as 'saobracajna',
+        `Broj_registarskih_tablica` as 'tablica',
+        `Model` as 'model',
+        `Godina_proizvodnje` as 'godiste',
+        `Predjena_km` as 'kilometraza',
+        `Datum_vazenja_registracije` as 'registracija',
+        `Radjen_mali_servis_km` as 'mali_servis',
+        `Radjen_veliki_servis_km` as 'veliki_servis',
+        DATEDIFF(`Datum_vazenja_registracije`,CURRENT_DATE()) as 'isticanje_registracije',
+        `Predjena_km`-`Radjen_mali_servis_km` as 'predjeno_km_mali',
+        `Predjena_km`-`Radjen_veliki_servis_km` as 'predjeno_km_veliki'
+    FROM
+        `automobili`
+    WHERE
+        `Servis`=1 and `Aktivan`=1",[]);
+    }
 
     //funkcija koj upisuje servis u bazu
     public function insertServis($id,$datum,$km,$tip,$opis)
