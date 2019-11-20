@@ -43,9 +43,9 @@
         {!! 
         "<tr>" .
 
-            "<td>" .
+            "<td> <a href='/auto/info/$auto->sasija'>" .
                 $auto->sasija
-                . "</td>".
+                . "</a></td>".
 
                 "<td>" .
                 $auto->saobracajna
