@@ -98,13 +98,14 @@ class AdminController extends Controller
         //proverava da li je name::image slika
         $request->validate([
             'slika' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'slikaIme'=>'required',
         ]);
   
         //dodajemo ime slike i extenziju
-        // $imageName = $request->nazivSlike.'.'.$request->slika->extension(); 
+        // $imageName = $request->slikaIme.'.'.$request->slika->extension(); 
 
         //dodajemo ime slike bez ekstenzije
-        $imageName = $request->nazivSlike; 
+        $imageName = $request->slikaIme; 
    
         //preuzima sliku i ubacuje je u fajl images
         $request->slika->move(public_path('images'), $imageName);

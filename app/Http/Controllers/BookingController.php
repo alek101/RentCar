@@ -85,6 +85,8 @@ class BookingController extends Controller
             $comment.="_korisnik";
         }
 
+        $comment=substr($comment,0,255);
+
         $cena=PomFunkResource::totalCost($model,$dateStart,$dateEnd);
         
         if($cena>0 )

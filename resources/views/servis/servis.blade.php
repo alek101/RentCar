@@ -40,9 +40,9 @@
             {!! 
             "<tr>" .
     
-                "<td>" .
+                "<td> <a href='/auto/info/$auto->sasija'>" .
                     $auto->sasija
-                    . "</td>".
+                    . "</a></td>".
     
                     "<td>" .
                     $auto->saobracajna
@@ -88,7 +88,7 @@
                     $auto->predjeno_km_veliki
                     . "</td>"
     
-                    ."<td> <a href='/servis/servisCar/".$auto->sasija."'>Upisi</td>"
+                    ."<td> <a href='/servis/servisCar/".$auto->sasija."'>Upisi</a></td>"
     
     
     

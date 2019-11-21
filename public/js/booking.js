@@ -290,6 +290,8 @@
             comment+="_kupac";
         }
 
+        comment=comment.slice(0,255);
+
         return errors;
      }
 
