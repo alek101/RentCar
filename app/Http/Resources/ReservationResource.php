@@ -155,7 +155,15 @@ class ReservationResource extends JsonResource
             R.ID_vozila = A.Broj_sasije
         WHERE
             `ID_rezervacije` = ?",[$idRezervacije]);
-            return $pom[0];
+            if(count($pom)==1)
+            {
+               return $pom[0]; 
+            }
+            else
+            {
+                return [];
+            }
+            
     }
 
     //otkazivanje rezervacije u bazi

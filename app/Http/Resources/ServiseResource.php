@@ -21,7 +21,12 @@ class ServiseResource extends JsonResource
     //pomocna funkcija koja radi servis
     public static function madeServis($id,$tip,$datum,$opis,$registracija)
     {
-        $km=ServiseResource::getKM($id)[0]->km;
+        $pre_km=ServiseResource::getKM($id);
+        if(count($pre_km)!=1)
+        {
+            return redirect('/servis');
+        }
+        $km=$pre_km[0]->km;
 
         if($tip=='mali')
         {
@@ -121,7 +126,12 @@ class ServiseResource extends JsonResource
     //dodaje kilometrazu
     public static function addKM($id,$km)
     {
-        $predjena=ServiseResource::getKM($id)[0]->km;
+        $ulaz=ServiseResource::getKM($id);
+        if(count($ulaz)!=1)
+        {
+            return redirect('/kriticni');
+        }
+        $predjena=$ulaz[0]->km;
         $nova=$predjena+$km;
         ServiseResource::setKM($id,$nova);
     }

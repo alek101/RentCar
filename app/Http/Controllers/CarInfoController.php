@@ -95,6 +95,14 @@ class CarInfoController extends Controller
         $auto=CarInfoResource::getOneCar($id);
         $knjizica=CarInfoResource::servisnaKnjizica($id);
         $niz=CarInfoResource::getFutureReservationCar($id);
-        return view('auto.info',['auto'=>$auto[0],'knjizica'=>$knjizica, 'niz'=>$niz]);
+        if(count($auto)==1)
+        {
+           return view('auto.info',['auto'=>$auto[0],'knjizica'=>$knjizica, 'niz'=>$niz]); 
+        }
+        else
+        {
+            return $this->auto();
+        }
+        
     }
 }

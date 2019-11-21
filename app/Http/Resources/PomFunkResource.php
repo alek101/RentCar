@@ -95,7 +95,13 @@ class PomFunkResource extends JsonResource
     //Menja stanje servisa, 0 nije na servisu, 1 da jeste na servisu
     public static function changeCarServis($id)
     {
-        $val=PomFunkResource::getServis($id)[0]->Servis;
+        $pre_val=PomFunkResource::getServis($id);
+        if(count($pre_val)!=1)
+        {
+            return redirect('/kriticni');
+        }
+        
+        $val=$pre_val[0]->Servis;
 
         if($val==0)
         {

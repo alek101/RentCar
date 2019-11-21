@@ -100,15 +100,14 @@ class ReservationController extends Controller
 
     //produzenje rezervacije
     public function extendReservation(Request $request)
-    {
-        $request->validate([
-            'id'=>'required',
-            'brojDana'=>'required',
-        ]);
-        
+    {        
         $id=$request->id;
         $brojDana=$request->brojDana;
         $rezervacija=ReservationResource::returnInformation($id);
+        if($rezervacija===[])
+        {
+            return ("Rezervacija ne postoji!");
+        }
         $dateStart=$rezervacija->dateStart;
         $dateEnd=$rezervacija->dateEnd;
         $trajanje = (strtotime($dateEnd)-strtotime($dateStart))/24/60/60;
@@ -159,6 +158,10 @@ class ReservationController extends Controller
     public function cancelReservation($id)
     {
         $info=ReservationResource::returnInformation($id);
+        if($info===[])
+        {
+            return redirect('/rezervacijeInfo');
+        }
         ReservationResource::cancelFutureReservation($id);
         if($info->opis=='SERVIS')
         {
