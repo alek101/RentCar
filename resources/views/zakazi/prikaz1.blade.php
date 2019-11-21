@@ -24,13 +24,16 @@
                 <div class="flexColumn">
                     <div> @csrf </div>
                     <div class="flexRow">
-                        <label for="start" class="w100" id='labelStart'>Datum početka<input type="date" name="dateStart" id="start" value=""> </label>
-                        <label for="start2" class="w100 disapear" id='labelStart2'>Datum početka<input type="text" name="start2" id="start2"></label>
-                    </div>    
-                    <div class="flexRow">
-                        <label for="end" class="w100" id='labelEnd'>Datum završetka<input type="date" name="dateEnd" id="end" value="" ></label>
-                        <label for="end2" class="w100 disapear" id='labelEnd2'>Datum završetka<input type="text" name="dateEnd2" id="end2"></label>
+                        <div class="flexRow">
+                            <label for="start" class="w100" id='labelStart'>Datum početka<input type="date" name="dateStart" id="start" value=""> </label>
+                            <label for="start2" class="w100 disapear" id='labelStart2'>Datum početka<input type="text" name="start2" id="start2"></label>
+                        </div>    
+                        <div class="flexRow">
+                            <label for="end" class="w100" id='labelEnd'>Datum završetka<input type="date" name="dateEnd" id="end" value="" ></label>
+                            <label for="end2" class="w100 disapear" id='labelEnd2'>Datum završetka<input type="text" name="dateEnd2" id="end2"></label>
+                        </div>
                     </div>
+                    
                     <div class="flexRow">
                     
                         <label for="ime" class="w33"> Ime <input type="text" name="ime" id="ime" value="
