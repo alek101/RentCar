@@ -33,23 +33,21 @@
                             @auth
                                 {{ trim(Auth::user()->name) }}
                             @else
-                                ''
+                                {{ "" }}
                             @endauth 
-                            "
-                            required></label>
+                            "></label>
                         <label for="email" class="w33">Email <input type="email" name="email" id="email" value="
                             @auth
                                 {{ Auth::user()->email }}
                             @else
-                                ''
+                                {{ "" }}
                             @endauth 
-                            "
-                            required></label>
+                            "></label>
                         <label for="telefon" class="w33">Telefon <input type="text" name="telefon" id="telefon" value="
                             @auth
-                            {{ Auth::user()->phone }}
+                                {{ Auth::user()->phone }}
                             @else
-                            '000000000'
+                                 {{ "" }}
                             @endauth 
                             "></label>
                     </div>
