@@ -31,42 +31,53 @@ class PomFunkResource extends JsonResource
     public static function freeCar($id,$dateStart,$dateEnd)
     {
         //proveravamo da li pravimo rezervaciju u proslosti
-        $trenutni=date('Y-m-d');
-        $check=strtotime($dateEnd) - strtotime($trenutni);
-        if($check>0)
+        if((strtotime($dateEnd) - strtotime(date('Y-m-d')))>0)
         {
-            //vadimo sve rezervacije za auto u vremnskom periodu, ako neka postoji, auto nije slobodan
-            $niz=DB::select(
-                'SELECT
-                    *
-                FROM
-                    `automobili` AS A
-                LEFT JOIN `rezervacija` AS R
-                ON
-                    A.Broj_sasije = R.ID_vozila
-                WHERE
-                    A.Broj_sasije=? and A.Aktivan=1
-                    and
-                    ((
-                        ? >= R.Datum_pocetka AND ? < R.Datum_zavrsetka
-                    ) OR(
-                        ? > R.Datum_pocetka AND ? <= R.Datum_zavrsetka
-                    ))',[$id,$dateStart,$dateStart,$dateEnd,$dateEnd]
-            );
+            $checkDate=$dateStart;
 
-            if(count($niz)==0)
-                {
-                    return true;
-                }
-                else
+            while((strtotime($dateEnd) - strtotime($checkDate))>0)
+            {
+                if(PomFunkResource::freeCarSingleDay($id,$checkDate)===false)
                 {
                     return false;
-                };
+                }
+                $checkDate=date('Y-m-d', strtotime($checkDate." + 1 days"));
+            }
+            return true;
         }
         else
         {
             return false;
         }  
+    }
+
+    //da li je auto slobodnan jednog dana
+    public static function freeCarSingleDay($id,$date)
+    {
+        $niz=DB::select(
+            'SELECT
+                *
+            FROM
+                `automobili` AS A
+            LEFT JOIN `rezervacija` AS R
+            ON
+                A.Broj_sasije = R.ID_vozila
+            WHERE
+                A.Broj_sasije=? and A.Aktivan=1
+                and
+                ((
+                    ? >= R.Datum_pocetka AND ? < R.Datum_zavrsetka
+                ) )',[$id,$date,$date]
+        );
+
+        if(count($niz)==0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        };
     }
 
     //vraca sve automobile
