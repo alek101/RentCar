@@ -88,7 +88,8 @@ body
 {
     content: "";
     background-image: linear-gradient(var(--compl-color),var(--compl-color-2));
-    background-image: url('../images/white-pattern-wallpaper.png');
+    /* background-image: url('../images/white-pattern-wallpaper.png'); */
+    background-image: url('../images/air-atmosphere-blue-blue-sky-314726.jpg');
     opacity: 0.6;
     position: absolute;
     top: 0;
@@ -100,7 +101,8 @@ body
 
 .rezervacija
 {
-    background-image: url('../images/high-angle-view-of-cityscape-against-cloudy-sky-313782.jpg');
+    /* background-image: url('../images/high-angle-view-of-cityscape-against-cloudy-sky-313782.jpg'); */
+    background-image: url('../images/air-atmosphere-blue-blue-sky-314726.jpg');
     min-height: 100%;
 }
 
@@ -115,7 +117,7 @@ body
 .velikiTekst
 {
     padding: 10px;
-    color: rgb(224, 216, 201);
+    color: white;
 }
 
 .dodaci

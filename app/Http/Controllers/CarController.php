@@ -57,7 +57,7 @@ class CarController extends Controller
             return view('baza.carFormaIzmeni',['car'=>$car,'models'=>$models]);
         }
 
-        return redirect('/baza/change2');
+        return redirect('/baza/car/getChange');
     }
 
     //funkcija za izmenu automobila

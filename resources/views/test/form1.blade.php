@@ -1,7 +1,7 @@
 @extends('mainPage')
 @section('Page')
 
-
+TEST ONLY
 
 <form >
     {{-- @csrf      --}}

@@ -5,6 +5,8 @@
     var_dump($model);
 @endphp --}}
 
+DEPRICATED
+
 <div class="margin_20"><label for="filter">Filter tabela: <input type="text" id="filter" class='filter'></label></div>
 
 <table>
@@ -62,7 +64,7 @@
 <script>
     document.querySelector('.dodajModel').addEventListener('click', function(e)
     {
-        window.open("/tipovi/add");
+        window.open("/tipovi/add",'_self');
     })
 </script>
 

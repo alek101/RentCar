@@ -1,6 +1,7 @@
 @extends('mainPage')
 @section('Page')
 
+DEPRICATED
 {{-- @php
     var_dump($niz);
 @endphp --}}

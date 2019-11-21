@@ -1,6 +1,8 @@
 @extends('mainPage')
 @section('Page')
 
+DEPRICATED
+
 <form class="formZakazivanje" method="POST" action="/tipovi/posalji1">
     <div class="flexColumn">
         <div class="flexRow">

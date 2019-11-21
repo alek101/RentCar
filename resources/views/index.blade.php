@@ -15,6 +15,7 @@
                 <a href="/klient/nama">O Nama</a>
                 <a href="/zakazi">Zakaži</a>
                 <a href="/klient/sviModeli">Svi Modeli</a>
+                <a href="/klient/uslovi">Uslovi korišćenja</a>
                 @auth
                    @if (Auth::user()->role>=1)
                        <a href="/kriticni">Admin Panel</a>

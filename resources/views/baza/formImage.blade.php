@@ -15,7 +15,7 @@
     </div>
 </form>
 
-<a href="https://www.animatedimages.org/cat-photographers-1425.htm"><img src="https://www.animatedimages.org/data/media/1425/animated-photographer-image-0028.jpg" border="0" alt="animated-photographer-image-0028" /></a>
+
 
 
 @endsection

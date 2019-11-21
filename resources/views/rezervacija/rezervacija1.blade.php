@@ -1,6 +1,8 @@
 @extends('mainPage')
 @section('Page')
 
+DEPRICATED
+
 <form method="POST" action="/rezervacija/posalji1">
     @csrf
     {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}" id='token'> --}}

@@ -3,6 +3,8 @@
 
 @endphp --}}
 
+DEPRICATED
+
 @extends('mainPage')
 @section('Page')
 

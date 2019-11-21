@@ -1,6 +1,8 @@
 @extends('mainPage')
 @section('Page')
 
+DEPRICATED
+
 <form class="formZakazivanje">
         <div class="flexColumn">
             <div class="flexRow">

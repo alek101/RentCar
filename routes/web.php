@@ -127,6 +127,7 @@ Route::prefix('/klient')->group(function()
 {
     Route::get('/sviModeli','TipoviAutomobilaController@modeliAktivni');
     Route::get('/nama','FrontPageController@nama');
+    Route::get('/uslovi','FrontPageController@uslovi');
 });
 
 
