@@ -250,6 +250,8 @@
             emailInput.classList.remove('errorBorder'); 
         }
          
+        telefon=telefon.replace("+",99);
+
         if(telefon=="")
         {
             errors.push('Telefon nije validan!'); 

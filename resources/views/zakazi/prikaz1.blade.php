@@ -38,7 +38,7 @@
                     
                         <label for="ime" class="w33"> Ime <input type="text" name="ime" id="ime" value="
                             @auth
-                                {{ trim(Auth::user()->name) }}
+                                {{ Auth::user()->name }}
                             @else
                                 {{ "" }}
                             @endauth 
@@ -84,5 +84,6 @@
 <script src="{{ asset('/js/bookingPage.js') }}"></script>
 <script src="{{ asset('/js/booking.js') }}"></script>
 <script src="{{ asset('/js/datumi.js') }}"></script>
+<script src="{{ asset('/js/bookingTrim.js') }}"></script>
 
 @endsection

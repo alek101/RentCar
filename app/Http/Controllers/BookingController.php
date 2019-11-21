@@ -86,6 +86,7 @@ class BookingController extends Controller
         }
 
         $comment=substr($comment,0,255);
+        $telefon=str_replace("+",99,$telefon);
 
         $cena=PomFunkResource::totalCost($model,$dateStart,$dateEnd);
         
