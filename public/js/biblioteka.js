@@ -120,4 +120,9 @@ let pf={
         console.log('time',time);
         return time;
     },
+    dateToSerbianFormat:function(date)
+    {
+        let d=new Date(date);
+        return d.toLocaleDateString('sr-RS');
+    },
 }

@@ -24,8 +24,12 @@
                 <div class="flexColumn">
                     <div> @csrf </div>
                     <div class="flexRow">
-                        <label for="start" class="w50">Datum početka <input type="date" name="dateStart" id="start" value=""> </label>
-                        <label for="end" class="w50">Datum završetka <input type="date" name="dateEnd" id="end" value="" ></label>
+                        <label for="start" class="w100" id='labelStart'>Datum početka<input type="date" name="dateStart" id="start" value=""> </label>
+                        <label for="start2" class="w100 disapear" id='labelStart2'>Datum početka<input type="text" name="start2" id="start2"></label>
+                    </div>    
+                    <div class="flexRow">
+                        <label for="end" class="w100" id='labelEnd'>Datum završetka<input type="date" name="dateEnd" id="end" value="" ></label>
+                        <label for="end2" class="w100 disapear" id='labelEnd2'>Datum završetka<input type="text" name="dateEnd2" id="end2"></label>
                     </div>
                     <div class="flexRow">
                     
@@ -76,5 +80,6 @@
 <script src="{{ asset('/js/biblioteka.js') }}"></script>
 <script src="{{ asset('/js/bookingPage.js') }}"></script>
 <script src="{{ asset('/js/booking.js') }}"></script>
+<script src="{{ asset('/js/datumi.js') }}"></script>
 
 @endsection
