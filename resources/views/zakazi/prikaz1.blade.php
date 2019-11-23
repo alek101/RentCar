@@ -23,13 +23,13 @@
         <div class="formZakazivanje form">
                 <div class="flexColumn">
                     <div> @csrf </div>
-                    <div class="flexRow vueSelector">
-                        <div class="flexRow">
-                            <label for="start" class="" id='labelStart' v-if="showSD">Datum početka<input type="date" name="dateStart" id="start" v-model="dateStartModel" v-on:change="inputStartDate()"> </label>
+                    <div class="flexRow" id="vueSelector">
+                        <div class="flexRow" id="dateStartGroup">
+                            <label for="start" class="" id='labelStart' v-if="dateStartModel==null">Datum početka<input type="date" name="dateStart" id="start" v-model="dateStartModel" v-on:change="inputStartDate()"> </label>
                             <label for="start2" class="" id='labelStart2' v-else>Datum početka<input type="text" name="start2" id="start2" :value="dateStartNew" v-on:click="outputStartDate()"></label>
                         </div>    
-                        <div class="flexRow">
-                            <label for="end" class="" id='labelEnd' v-if="showED">Datum završetka<input type="date" name="dateEnd" id="end" v-model="dateEndModel"  v-on:change="inputEndDate()"></label>
+                        <div class="flexRow" id="dateEndGroup">
+                            <label for="end" class="" id='labelEnd' v-if="dateEndModel==null">Datum završetka<input type="date" name="dateEnd" id="end" v-model="dateEndModel"  v-on:change="inputEndDate()"></label>
                             <label for="end2" class="" id='labelEnd2' v-else>Datum završetka<input type="text" name="dateEnd2" id="end2" :value="dateEndNew" v-on:click="outputEndDate()"></label>
                         </div>
                     </div>
@@ -82,10 +82,10 @@
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="{{ asset('/js/biblioteka.js') }}"></script>
+<script src="{{ asset('/js/vueDatumi.js') }}"></script>
 <script src="{{ asset('/js/bookingPage.js') }}"></script>
 <script src="{{ asset('/js/booking.js') }}"></script>
 {{-- <script src="{{ asset('/js/datumi.js') }}"></script> --}}
 <script src="{{ asset('/js/bookingTrim.js') }}"></script>
-<script src="{{ asset('/js/vueDatumi.js') }}"></script>
 
 @endsection

@@ -1,12 +1,10 @@
 let vueDate=new Vue(
     {
-        el:".vueSelector",
+        el:"#vueSelector",
         data:
         {
-            dateStartNew:'',
-            dateEndNew:'',
-            showSD: true,
-            showED: true,
+            dateStartNew:null,
+            dateEndNew:null,
             dateStartModel:null,
             dateEndModel:null,
         },
@@ -15,25 +13,21 @@ let vueDate=new Vue(
             inputStartDate()
             {
                 this.dateStartNew=pf.dateToSerbianFormat(this.dateStartModel);
-                this.showSD=false;
             },
 
             inputEndDate()
             {
                 this.dateEndNew=pf.dateToSerbianFormat(this.dateEndModel);
-                this.showED=false;
             },
 
             outputStartDate()
             {
-                this.dateStartModel="";
-                this.showSD=true;
+                this.dateStartModel=null;
             },
 
             outputEndDate()
             {
-                this.dateEndModel="";
-                this.showED=true;
+                this.dateEndModel=null;
             },
         },
     }
