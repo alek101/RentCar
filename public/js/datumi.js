@@ -6,10 +6,10 @@
 // let dateStartInput2=document.querySelector('#start2');
 // let dateEndInput2=document.querySelector('#end2');
 
-// let dateStartLabel=document.querySelector('#labelStart');
-// let dateEndLabel=document.querySelector('#labelEnd');
-// let dateStartLabel2=document.querySelector('#labelStart2');
-// let dateEndLabel2=document.querySelector('#labelEnd2');
+let dateStartLabel=document.querySelector('#labelStart');
+let dateEndLabel=document.querySelector('#labelEnd');
+let dateStartLabel2=document.querySelector('#labelStart2');
+let dateEndLabel2=document.querySelector('#labelEnd2');
 
 function changeVisibilityStart()
 {

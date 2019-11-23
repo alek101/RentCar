@@ -10,13 +10,7 @@ let dateStartInput2=document.querySelector('#start2');
 let dateEndInput2=document.querySelector('#end2');
 let imeInput=document.querySelector('#ime');
 let emailInput=document.querySelector('#email');
-let telefonInput=document.querySelector('#telefon')
-let dateStartLabel=document.querySelector('#labelStart');
-let dateEndLabel=document.querySelector('#labelEnd');
-let dateStartLabel2=document.querySelector('#labelStart2');
-let dateEndLabel2=document.querySelector('#labelEnd2');
-let dateStartGroup=document.querySelector('#dateStartGroup');
-let dateEndGroup=document.querySelector('#dateEndGroup');
+let telefonInput=document.querySelector('#telefon');
 let danas=new Date();
 
 
@@ -181,49 +175,42 @@ let danas=new Date();
         if(dateStart=="")
         {
             errors.push('Mora da postoji pocetni datum!');
-            // dateStartInput.classList.add('errorBorder');
-            // dateStartInput2.classList.add('errorBorder');
-            dateStartGroup.classList.add('errorBorder');
+            dateStartInput.classList.add('errorBorder');
+            dateStartInput2.classList.add('errorBorder');
         }
 
         if(danas>=pf.createDateDayFoward(dateStart))
         {
             errors.push('Ne mozete da rezervisete proslost!');
-            // dateStartInput.classList.add('errorBorder');
-            // dateStartInput2.classList.add('errorBorder');
-            dateStartGroup.classList.add('errorBorder');
+            dateStartInput.classList.add('errorBorder');
+            dateStartInput2.classList.add('errorBorder');
         }
 
         if(dateStart!="" && danas<pf.createDateDayFoward(dateStart))
         {
-            // dateStartInput.classList.remove('errorBorder');
-            // dateStartInput2.classList.remove('errorBorder');
-            dateStartGroup.classList.remove('errorBorder');
+            dateStartInput.classList.remove('errorBorder');
+            dateStartInput2.classList.remove('errorBorder');
         }
 
         if(dateEnd=="")
         {
             errors.push('Mora da postoji krajnji datum!'); 
-            // dateEndInput.classList.add('errorBorder');
-            // dateEndInput2.classList.add('errorBorder');
-            dateEndGroup.classList.add('errorBorder');
+            dateEndInput.classList.add('errorBorder');
+            dateEndInput2.classList.add('errorBorder');
         }
         else
         {
-            // dateEndInput.classList.remove('errorBorder');
-            // dateEndInput2.classList.remove('errorBorder');
-            dateEndGroup.classList.remove('errorBorder');
+            dateEndInput.classList.remove('errorBorder');
+            dateEndInput2.classList.remove('errorBorder');
         }
 
         if(pf.createDate(dateStart)>=pf.createDate(dateEnd))
         {
             errors.push('Krajnji datum mora da bude veci od pocetnog'); 
-            // dateStartInput.classList.add('errorBorder');
-            // dateEndInput.classList.add('errorBorder');
-            // dateStartInput2.classList.add('errorBorder');
-            // dateEndInput2.classList.add('errorBorder');
-            dateStartGroup.classList.add('errorBorder');
-            dateEndGroup.classList.add('errorBorder');
+            dateStartInput.classList.add('errorBorder');
+            dateEndInput.classList.add('errorBorder');
+            dateStartInput2.classList.add('errorBorder');
+            dateEndInput2.classList.add('errorBorder');
         }
 
         return errors;
