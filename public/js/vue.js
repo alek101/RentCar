@@ -1,3 +1,4 @@
+//komponenta ide pre roditelja
 Vue.component('modelcard',
 {
     props:{
@@ -39,7 +40,7 @@ Vue.component('modelcard',
                     'Content-Type': 'application/json'   //BITNO!!!
                 }
             }
-    
+            //emituje se odgovor kako bi metoda u roditelju mogla da ga ostampa
             fetch('/zakazi/makeBookingWithFetch',opcije)
                 .then(resp=>resp.json())
                 .then(jsn=>this.$emit('resp',jsn))
@@ -68,6 +69,7 @@ let vueBooking=new Vue(
             maxCena:null || 100000,
             models:[],
             csrf:null,
+            serv_resp:"",
         },
         
         methods:
@@ -112,9 +114,10 @@ let vueBooking=new Vue(
                 this.filter=!this.filter;
             },
 
-            //prvi uput
+            //prvi uput ka serveru
             prviUput()
             {
+                this.serv_resp="";
                 this.errors=[];
                 this.errors=validateForm(this.errors,this.dateStartModel,this.dateEndModel,this.imeModel,this.telefonModel,this.emailModel,this.commentModel);
                 if(this.errors.length==0)
@@ -125,7 +128,7 @@ let vueBooking=new Vue(
                         dateEnd:this.dateEndModel,
                     }
             
-                    console.log(niz);
+                    console.log('vremenski period',niz);
 
                     let opcije={
                         method: "POST",
@@ -140,10 +143,6 @@ let vueBooking=new Vue(
                         .then(resp=>resp.json())
                         .then(jsn=>this.ispisi(jsn));
                         }
-                else
-                {
-                    // errorsPrint(this.errors);
-                }
             },
 
             //prvi ispis
@@ -166,7 +165,6 @@ let vueBooking=new Vue(
                         }
                     modelPom.niz=niz;    
                     this.models.push(modelPom);
-                    
                 }
             },
 
@@ -191,29 +189,24 @@ let vueBooking=new Vue(
                 });
             },
 
-            //odgovor
+            //odgovor servera na rezervaciju
             odgovorJSON(odgovor)
             {
-                console.log(odgovor);
-                let modelsWraper=document.querySelector('.modelsWraper');
-                let responseDiv=document.querySelector('#odgovor');
-                responseDiv.classList.remove('hidden');
-
+                console.log('odgovor servera', odgovor);
                 if(odgovor==='Nije proslo!')
                 {
-                    responseDiv.innerHTML="Rezervacija nije uspela, molimo pokusajte ponovo!";
+                    this.serv_resp="Rezervacija nije uspela, molimo pokusajte ponovo!";
                     
                 }
                 else if(odgovor==='Los period!')
                 {
-                    responseDiv.innerHTML=`Rezervacija nije uspela! Morate rezervisati barem jedan pun dan,
+                    this.serv_resp=`Rezervacija nije uspela! Morate rezervisati barem jedan pun dan,
                     krajnji datum mora ici pre pocetnog datuma!`; 
                 }
                 else
                 {
-                    let r=`Uspesno ste rezervisali auto sa tablicama ${odgovor.tablice}. Sifra rezervacije je ${odgovor.id_rez}.`;
-                    responseDiv.innerHTML=r;
-                    modelsWraper.innerHTML="";
+                    this.serv_resp=`Uspesno ste rezervisali auto sa tablicama ${odgovor.tablice}. Sifra rezervacije je ${odgovor.id_rez}.`;
+                    this.models=[];
                 } 
             }
         },

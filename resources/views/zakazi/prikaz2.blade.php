@@ -54,7 +54,6 @@
         <div class="response" v-show="errors.length!=0">
             <p v-for="error in errors">@{{ error }}</p>
         </div>
-        {{-- <div><a href="https://www.animatedimages.org/cat-cars-67.htm"><img src="https://www.animatedimages.org/data/media/67/animated-car-image-0124.gif" border="0" alt="animated-car-image-0124" /></a></div> --}}
     </div>
         
 
@@ -62,8 +61,8 @@
         <div class="modelsWraper" v-if='models.length>0'>
                 <div v-for="model in models"> <modelcard :model=model @resp='odgovorJSON'></modelcard></div>
         </div>
-        <div class='response2' v-if='models.length==0'>Nije pronadjen nijedan automobil koji moze da se rezervise u vremenskom periodu!</div>
-        <div class="response2 hidden" id="odgovor"></div>
+        <div class='response2' v-if="models.length==0 && serv_resp==''">Nije pronadjen nijedan automobil koji moze da se rezervise u vremenskom periodu!</div>
+        <div class="response2" id="odgovor" v-show="serv_resp!=''">@{{ serv_resp }}</div>
     </div>
 
     
