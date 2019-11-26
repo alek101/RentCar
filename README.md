@@ -8,7 +8,7 @@
 Opis tehnologija
 
 Najveći deo rada je uradjen uz pomoć Laravel-a, koji je framework PHP-a. Sav HTML je upisan u Laravel-ov blade. Stranice su uniformisane i imaju header i footer. Većina formi direktno pozivaju controler preko ruta i vode do preodredjene stranice. Deo poziva ka bazi je uradjen uz pomoć DB modela, preko raw SQL-a, a drugi deo preko Laravel Eloquent-a sa posebnim modelom za svaku tabelu. Upotrebljene su i transakcije. Login je izveden preko Laravel-ovih igradjenih metoda, a ovlašćenja za različite tipove korisnika, su regulisana preko middlewere-a koji su prikačeni na rute. 
-Front end deo za rezervacije je uradjen uz pomoć vanile Java Script-a, koji preko fetch API-ja poziva server, i onda dinamički pravi kartice sa automobilima. Forma koja produžava rezervacije takodje koristi fetch API. JS je korišćen za filter tabela, za ,,Da li ste sigurni" modul, i za druge pogodne operacije. U CSS-u je uglavnom korišćena Flex tehnologija. Animacije i padajući meniji su takodje uradjene preko CSS-a.  
+Front end deo za rezervacije je uradjen na dva načina: uz pomoć vanile Java Script-a, koji preko fetch API-ja poziva server, i onda dinamički pravi kartice sa automobilima i preko Vue-a koji koristi isti fetch API. Forma koja produžava rezervacije takodje koristi fetch API. JS je korišćen za filter tabela, za ,,Da li ste sigurni" modul, i za druge pogodne operacije. U CSS-u je uglavnom korišćena Flex tehnologija. Animacije i padajući meniji su takodje uradjene preko CSS-a.  
 Kao tekt editor je korišćen Visual Studio Code sa sledećim ekstenzijama: PHP Intelphense, PHP IntelliSense, Laravel Blade Snippets, Laravl Blade Spacer...
 
 Opis Baze
