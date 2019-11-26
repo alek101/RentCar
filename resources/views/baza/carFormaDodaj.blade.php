@@ -13,7 +13,8 @@
         </div>
         <div class="flexRow">
             <label for="Godina_proizvodnje">Godina proizvodnje<input type="number" name="Godina_proizvodnje" id="Godina_proizvodnje" value=<?=date('Y')?> required></label>
-            <label for="Datum_vazenja_registracije">Važenje registracije<input type="date" name="Datum_vazenja_registracije" id="Datum_vazenja_registracije" required></label>
+            <label for="Datum_vazenja_registracije" id="labelStart">Važenje registracije<input type="date" name="Datum_vazenja_registracije" id="Datum_vazenja_registracije" required></label>
+            <label for="Datum_vazenja_registracije_Input" id="labelStart2" class="disapear">Važenje registracije<input type="text" id="Datum_vazenja_registracije_Input"></label>
             <label for="Predjena_km">Predjena kilometraža [km]<input type="number" name="Predjena_km" id="Predjena_km" value=0 required></label>
         </div>
         <div class="flexRow">
@@ -50,5 +51,33 @@
         <div><input type="submit" value="Posalji" id='dugme'></div>  
     </div>
 </form>
+
+<script src="{{ asset('js/biblioteka.js') }}"></script>
+<script>
+    let dateStartLabel=document.querySelector('#labelStart');
+    let dateStartLabel2=document.querySelector('#labelStart2');
+    let dateStartInput=document.querySelector('#Datum_vazenja_registracije');
+    let dateStartInput2=document.querySelector('#Datum_vazenja_registracije_Input');
+
+    function changeVisibilityStart()
+    {
+        dateStartLabel.classList.toggle('disapear');
+        dateStartLabel2.classList.toggle('disapear');
+    }
+
+    //dogadjaji
+    dateStartInput.addEventListener('change',function()
+    {
+        changeVisibilityStart();
+        dateStartInput2.value=pf.dateToSerbianFormat(dateStartInput.value);
+    })
+
+    dateStartInput2.addEventListener('click',function()
+    {
+        changeVisibilityStart();
+        dateStartInput.value="";
+        dateStartInput.focus();
+    })
+</script>
 
 @endsection

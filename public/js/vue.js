@@ -75,6 +75,7 @@ let vueBooking=new Vue(
         methods:
         {
             //sledeca 4 su za kartice preko datuma
+            //new su oni napisani po naschki, a model su oni koji se zaista salju
             inputStartDate()
             {
                 this.dateStartNew=pf.dateToSerbianFormat(this.dateStartModel);
