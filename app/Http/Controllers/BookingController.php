@@ -14,6 +14,12 @@ class BookingController extends Controller
     {
         return view('zakazi.prikaz1');
     }
+
+    //pravi glavnu stranicu za rezervacije*
+    public function zakaziPrikaz2()
+    {
+        return view('zakazi.prikaz2');
+    }
     
     //funkcija koja pravi json za fron end stranu
     public function makeJSONforBooking(Request $request)

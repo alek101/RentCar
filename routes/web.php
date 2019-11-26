@@ -99,6 +99,7 @@ Route::prefix('/test')->group(function()
 Route::prefix('/zakazi')->group(function()
 {
     Route::get('/','BookingController@zakaziPrikaz1');
+    Route::get('/zakazi2','BookingController@zakaziPrikaz2');
     Route::post('/makeJSONforBooking','BookingController@makeJSONforBooking');
     Route::post('/makeBookingWithFetch','BookingController@makeBookingWithFetch');
 });

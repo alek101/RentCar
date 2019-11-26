@@ -16,6 +16,7 @@
                 <a href="/zakazi">Zakaži</a>
                 <a href="/klient/sviModeli">Svi Modeli</a>
                 <a href="/klient/uslovi">Uslovi korišćenja</a>
+                <a href="/zakazi/zakazi2">Zakaži*</a>
                 @auth
                    @if (Auth::user()->role>=1)
                        <a href="/kriticni">Admin Panel</a>
