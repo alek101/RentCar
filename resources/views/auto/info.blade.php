@@ -44,6 +44,12 @@
             <th></th>
             
         </tr>
+
+        @php
+            $date=explode('-',$auto->registracija);
+            $date=array_reverse($date);
+            $auto->registracija=implode('.',$date).".";
+        @endphp
     
             {!! 
             "<tr>" .
@@ -144,6 +150,13 @@
         </tr>
     
         @foreach ($knjizica as $unos)
+
+        @php
+            $date=explode('-',$unos->datum);
+            $date=array_reverse($date);
+            $unos->datum=implode('.',$date).".";
+        @endphp
+
             {!! 
             "<tr>" .
     
@@ -210,24 +223,44 @@
 
                     !!}
             @if ($rez->start==date('Y-m-d'))
+                @php
+                    $date=explode('-',$rez->start);
+                    $date=array_reverse($date);
+                    $rez->start=implode('.',$date).".";
+                @endphp
                 {!! 
                     "<td class='date bckRed'>" .
                     $rez->start
                     . "</td>";
                 !!}
             @else
+                @php
+                    $date=explode('-',$rez->start);
+                    $date=array_reverse($date);
+                    $rez->start=implode('.',$date).".";
+                @endphp
                 {!! "<td class='date'>" .
                     $rez->start
                     . "</td>";
                 !!}
             @endif
             @if ($rez->finish==date('Y-m-d'))
+                @php
+                    $date=explode('-',$rez->finish);
+                    $date=array_reverse($date);
+                    $rez->finish=implode('.',$date).".";
+                @endphp
                 {!! 
                     "<td class='date bckRed'>" .
                     $rez->finish
                     . "</td>";
                 !!}
             @else
+                @php
+                    $date=explode('-',$rez->finish);
+                    $date=array_reverse($date);
+                    $rez->finish=implode('.',$date).".";
+                @endphp
                 {!! "<td class='date'>" .
                     $rez->finish
                     . "</td>";

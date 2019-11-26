@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\DB;
+use App\AutomobiliModel;
 
 class ReservationResource extends JsonResource
 {
@@ -164,6 +165,28 @@ class ReservationResource extends JsonResource
                 return [];
             }
             
+    }
+
+    //pomocna funkcija za otkazivanje rezervacija
+    public static function eliminateReservation($id)
+    {
+        $info=ReservationResource::returnInformation($id);
+        if($info===[])
+        {
+            return redirect('/rezervacijeInfo');
+        }
+        ReservationResource::cancelFutureReservation($id);
+        if($info->opis=='SERVIS')
+        {
+            //ako ukidamo servis, izbaci auto iz spiska onih koji su na servisu
+            $auto=AutomobiliModel::where('Broj_sasije',$info->car_id)->firstOrFail();
+            $auto->Servis=0;
+            $auto->save();
+        }
+        else
+        {
+          ReservationResource::sendMeil($info,'cancel');  
+        }
     }
 
     //otkazivanje rezervacije u bazi

@@ -58,29 +58,49 @@
                     . "</td>";
             !!}
             @if ($rez->start==date('Y-m-d'))
-                {!! 
-                    "<td class='date bckRed'>" .
-                    $rez->start
-                    . "</td>";
-                !!}
-            @else
-                {!! "<td class='date'>" .
-                    $rez->start
-                    . "</td>";
-                !!}
-            @endif
-            @if ($rez->finish==date('Y-m-d'))
-                {!! 
-                    "<td class='date bckRed'>" .
-                    $rez->finish
-                    . "</td>";
-                !!}
-            @else
-                {!! "<td class='date'>" .
-                    $rez->finish
-                    . "</td>";
-                !!}
-            @endif  
+            @php
+                $date=explode('-',$rez->start);
+                $date=array_reverse($date);
+                $rez->start=implode('.',$date).".";
+            @endphp
+            {!! 
+                "<td class='date bckRed'>" .
+                $rez->start
+                . "</td>";
+            !!}
+        @else
+            @php
+                $date=explode('-',$rez->start);
+                $date=array_reverse($date);
+                $rez->start=implode('.',$date).".";
+            @endphp
+            {!! "<td class='date'>" .
+                $rez->start
+                . "</td>";
+            !!}
+        @endif
+        @if ($rez->finish==date('Y-m-d'))
+            @php
+                $date=explode('-',$rez->finish);
+                $date=array_reverse($date);
+                $rez->finish=implode('.',$date).".";
+            @endphp
+            {!! 
+                "<td class='date bckRed'>" .
+                $rez->finish
+                . "</td>";
+            !!}
+        @else
+            @php
+                $date=explode('-',$rez->finish);
+                $date=array_reverse($date);
+                $rez->finish=implode('.',$date).".";
+            @endphp
+            {!! "<td class='date'>" .
+                $rez->finish
+                . "</td>";
+            !!}
+        @endif  
             {!! 
                     "<td>" .
                     $rez->cena

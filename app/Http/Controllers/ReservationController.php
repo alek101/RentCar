@@ -8,6 +8,7 @@ use App\TipoviAutomobilaModel;
 use App\AutomobiliModel;
 use App\HTTP\Resources\PomFunkResource;
 use App\HTTP\Resources\ReservationResource;
+use App\HTTP\Resources\ViewResource;
 
 class ReservationController extends Controller
 {
@@ -89,7 +90,7 @@ class ReservationController extends Controller
             }
         }
             
-        return $this->allReservations();
+        return $this->defaultReservations();
     }   
 
     //stranica za produzenje rezervacije
@@ -128,6 +129,7 @@ class ReservationController extends Controller
                 Reservationresource::updateReservation($newDateEnd,$newCost,$id);
                 $info=ReservationResource::returnInformation($id);
                 Reservationresource::sendMeil($info,'extend');
+                $newDateEnd=ViewResource::dateLook($newDateEnd);
                 return ("Rezervacija $id je produzena do $newDateEnd. Nova cena je $newCost.");
             }
             else
@@ -145,6 +147,7 @@ class ReservationController extends Controller
             ReservationResource::updateReservation($newDateEnd,$newCost,$id);
             $info=ReservationResource::returnInformation($id);
             ReservationResource::sendMeil($info,'shortend');
+            $newDateEnd=ViewResource::dateLook($newDateEnd);
             return ("Rezervacija $id je skracena do $newDateEnd. Nova cena je $newCost.");
         }
         
@@ -154,28 +157,17 @@ class ReservationController extends Controller
         }
     }
 
-    //from reservation meni
+    //from get page
     public function cancelReservation($id)
     {
-        $info=ReservationResource::returnInformation($id);
-        if($info===[])
-        {
-            return redirect('/rezervacijeInfo');
-        }
-        ReservationResource::cancelFutureReservation($id);
-        if($info->opis=='SERVIS')
-        {
-            //ako ukidamo servis, izbaci auto iz spiska onih koji su na servisu
-            $auto=AutomobiliModel::where('Broj_sasije',$info->car_id)->firstOrFail();
-            $auto->Servis=0;
-            $auto->save();
-        }
-        else
-        {
-          ReservationResource::sendMeil($info,'cancel');  
-        }
-        
-        // return redirect('/rezervacijeInfo/all');
+        ReservationResource::eliminateReservation($id);
         return back();
+    }
+
+    //from rezervacijeInfoPage
+    public function cancelReservationFromRezervacijeInfoPage($id)
+    {
+        ReservationResource::eliminateReservation($id);
+        return redirect('/rezervacijeInfo');
     }
 }

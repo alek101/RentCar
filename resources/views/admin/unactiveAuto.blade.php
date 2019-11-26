@@ -37,6 +37,13 @@
         </tr>
     
         @foreach ($niz as $auto)
+
+            @php
+                $date=explode('-',$auto->registracija);
+                $date=array_reverse($date);
+                $auto->registracija=implode('.',$date).".";
+            @endphp
+            
             {!! 
             "<tr>" .
     

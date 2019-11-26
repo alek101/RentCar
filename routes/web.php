@@ -71,6 +71,7 @@ Route::prefix('/rezervacijeInfo')->middleware('login')->group(function()
     Route::get('/now','ReservationController@getReservationsNow');
     Route::post('/extendReservation','ReservationController@extendReservation');
     Route::get('/cancelReservation/{id}','ReservationController@cancelReservation');
+    Route::get('/cancelReservationFromRezervacijeInfoPage/{id}','ReservationController@cancelReservationFromRezervacijeInfoPage');
     Route::get('/extendForm/{id}','ReservationController@getExtendForm');
 });
 
