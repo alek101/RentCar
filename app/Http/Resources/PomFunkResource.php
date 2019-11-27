@@ -33,30 +33,18 @@ class PomFunkResource extends JsonResource
         //proveravamo da li pravimo rezervaciju u proslosti
         if((strtotime($dateEnd) - strtotime(date('Y-m-d')))>0)
         {
-            $checkDate=$dateStart;
-
-            while((strtotime($dateEnd) - strtotime($checkDate))>0)
-            {
-                if(PomFunkResource::freeCarSingleDay($id,$checkDate)===false)
-                {
-                    return false;
-                }
-                $checkDate=date('Y-m-d', strtotime($checkDate." + 1 days"));
-            }
-            return true;
-        }
-        else
-        {
-            return false;
-        }  
-    }
-
-    //da li je auto slobodnan jednog dana
-    public static function freeCarSingleDay($id,$date)
-    {
-        $niz=DB::select(
-            'SELECT
-                *
+            //vadimo sve rezervacije za auto u vremnskom periodu, ako neka postoji, auto nije slobodan
+            //svaka rezervacija ima svoj sopstveni vremenski period
+            //mi proveravamo za neki ukupni trazeni period i prodpostavljamo da ne postoji ni jedna rezervacija u njemu
+            //u tom ukupnom trazenom periodu, pocetak i kraj svake rezervacije ne sme da postoji, sto znaci da interval trjanja rezervacije ne sme da bude
+            //sadrzan u trazenom intervalu
+            //jer ako postoji, onda znaci da u tom trazenom intervalu postoji barem jedna rezervacija, sto je suprotno predpostavci
+            //granicni slucajevi su posebni, jer rezervacija moze da pocne istoga dana kada se predhodna zavrsi
+            //sto znaci da intervali rezervacije ne smeju da budu na pocetku, ili kraju unutar ukupnog trazenog intervala, ali smeju da budu sa spoljen strane
+            
+            $niz=DB::select(
+                'SELECT
+                A.Broj_sasije AS "id"
             FROM
                 `automobili` AS A
             LEFT JOIN `rezervacija` AS R
@@ -66,18 +54,25 @@ class PomFunkResource extends JsonResource
                 A.Broj_sasije=? and A.Aktivan=1
                 and
                 ((
-                    ? >= R.Datum_pocetka AND ? < R.Datum_zavrsetka
-                ) )',[$id,$date,$date]
-        );
+                    R.Datum_pocetka >=? AND  R.Datum_pocetka <?
+                ) OR (
+                    R.Datum_zavrsetka >? AND  R.Datum_zavrsetka <=?
+                ))',[$id,$dateStart,$dateEnd,$dateStart,$dateEnd]
+            );
 
-        if(count($niz)==0)
-        {
-            return true;
+            if(count($niz)==0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                };
         }
         else
         {
             return false;
-        };
+        }
     }
 
     //vraca sve automobile

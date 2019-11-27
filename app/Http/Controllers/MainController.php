@@ -84,36 +84,69 @@ class MainController extends Controller
         
     }
 
+    // //pomocna fun koja daje da li je auto slobodan tog datuma ili ne
+    // public function freeCar($id,$dateStart,$dateEnd)
+    // {
+    //     //proveravamo da li pravimo rezervaciju u proslosti
+    //     if((strtotime($dateEnd) - strtotime(date('Y-m-d')))>0)
+    //     {
+    //         $checkDate=$dateStart;
+
+    //         while((strtotime($dateEnd) - strtotime($checkDate))>0)
+    //         {
+    //             if($this->freeCarSingleDay($id,$checkDate)===false)
+    //             {
+    //                 return false;
+    //             }
+    //             $checkDate=date('Y-m-d', strtotime($checkDate." + 1 days"));
+    //         }
+    //         return true;
+    //     }
+    //     else
+    //     {
+    //         return false;
+    //     }  
+    // }
+
+    // //da li je auto slobodnan jednog dana
+    // public function freeCarSingleDay($id,$date)
+    // {
+    //     $niz=DB::select(
+    //         'SELECT
+    //             *
+    //         FROM
+    //             `automobili` AS A
+    //         LEFT JOIN `rezervacija` AS R
+    //         ON
+    //             A.Broj_sasije = R.ID_vozila
+    //         WHERE
+    //             A.Broj_sasije=? and A.Aktivan=1
+    //             and
+    //             ((
+    //                 ? >= R.Datum_pocetka AND ? < R.Datum_zavrsetka
+    //             ) )',[$id,$date,$date]
+    //     );
+
+    //     if(count($niz)==0)
+    //     {
+    //         return true;
+    //     }
+    //     else
+    //     {
+    //         return false;
+    //     };
+    // }
+
     //pomocna fun koja daje da li je auto slobodan tog datuma ili ne
     public function freeCar($id,$dateStart,$dateEnd)
     {
         //proveravamo da li pravimo rezervaciju u proslosti
         if((strtotime($dateEnd) - strtotime(date('Y-m-d')))>0)
         {
-            $checkDate=$dateStart;
-
-            while((strtotime($dateEnd) - strtotime($checkDate))>0)
-            {
-                if($this->freeCarSingleDay($id,$checkDate)===false)
-                {
-                    return false;
-                }
-                $checkDate=date('Y-m-d', strtotime($checkDate." + 1 days"));
-            }
-            return true;
-        }
-        else
-        {
-            return false;
-        }  
-    }
-
-    //da li je auto slobodnan jednog dana
-    public function freeCarSingleDay($id,$date)
-    {
-        $niz=DB::select(
-            'SELECT
-                *
+            //vadimo sve rezervacije za auto u vremnskom periodu, ako neka postoji, auto nije slobodan
+            $niz=DB::select(
+                'SELECT
+                A.Broj_sasije AS "id"
             FROM
                 `automobili` AS A
             LEFT JOIN `rezervacija` AS R
@@ -123,18 +156,25 @@ class MainController extends Controller
                 A.Broj_sasije=? and A.Aktivan=1
                 and
                 ((
-                    ? >= R.Datum_pocetka AND ? < R.Datum_zavrsetka
-                ) )',[$id,$date,$date]
-        );
+                    R.Datum_pocetka >=? AND  R.Datum_pocetka <?
+                ) OR (
+                    R.Datum_zavrsetka >? AND  R.Datum_zavrsetka <=?
+                ))',[$id,$dateStart,$dateEnd,$dateStart,$dateEnd]
+            );
 
-        if(count($niz)==0)
-        {
-            return true;
+            if(count($niz)==0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                };
         }
         else
         {
             return false;
-        };
+        }
     }
 
     //pomocna funkcija koja daje sledeci slobodan datum
