@@ -53,14 +53,14 @@ Route::prefix('/auto')->middleware('login')->group(function()
 });
 
 //depricated
-// Route::prefix('/rezervacija')->middleware('login')->group(function()
-// {
-//     Route::get('/','MainController@rezervacija1');
-//     Route::post('/posalji1','MainController@rezervacija2');
-//     Route::post('/posalji2','MainController@rezervacija3');
-//     Route::post('/posalji3','MainController@makeBookingWithFetch');
+Route::prefix('/rezervacija')->group(function()
+{
+    Route::get('/','MainController@rezervacija1');
+    Route::post('/posalji1','MainController@rezervacija2');
+    Route::post('/posalji2','MainController@rezervacija3');
+    Route::post('/posalji3','MainController@makeBookingWithFetch');
     
-// });
+});
 
 Route::prefix('/rezervacijeInfo')->middleware('login')->group(function()
 {

@@ -88,14 +88,32 @@ class MainController extends Controller
     public function freeCar($id,$dateStart,$dateEnd)
     {
         //proveravamo da li pravimo rezervaciju u proslosti
-        $trenutni=date('Y-m-d');
-        $check=strtotime($dateEnd) - strtotime($trenutni);
-        if($check>0)
+        if((strtotime($dateEnd) - strtotime(date('Y-m-d')))>0)
         {
-            //vadimo sve rezervacije za auto u vremnskom periodu, ako neka postoji, auto nije slobodan
-            $niz=DB::select(
-                'SELECT
-                A.Broj_sasije AS "id"
+            $checkDate=$dateStart;
+
+            while((strtotime($dateEnd) - strtotime($checkDate))>0)
+            {
+                if($this->freeCarSingleDay($id,$checkDate)===false)
+                {
+                    return false;
+                }
+                $checkDate=date('Y-m-d', strtotime($checkDate." + 1 days"));
+            }
+            return true;
+        }
+        else
+        {
+            return false;
+        }  
+    }
+
+    //da li je auto slobodnan jednog dana
+    public function freeCarSingleDay($id,$date)
+    {
+        $niz=DB::select(
+            'SELECT
+                *
             FROM
                 `automobili` AS A
             LEFT JOIN `rezervacija` AS R
@@ -106,25 +124,17 @@ class MainController extends Controller
                 and
                 ((
                     ? >= R.Datum_pocetka AND ? < R.Datum_zavrsetka
-                ) OR(
-                    ? > R.Datum_pocetka AND ? <= R.Datum_zavrsetka
-                ))',[$id,$dateStart,$dateStart,$dateEnd,$dateEnd]
-            );
+                ) )',[$id,$date,$date]
+        );
 
-            if(count($niz)==0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                };
+        if(count($niz)==0)
+        {
+            return true;
         }
         else
         {
             return false;
-        }
-        
+        };
     }
 
     //pomocna funkcija koja daje sledeci slobodan datum
@@ -552,9 +562,9 @@ class MainController extends Controller
         }
 
         //preko forme
-        // return view('rezervacija.rezervacija2',['cars'=>$cars,'models'=>$models, 'dateStart'=>$dateStart, 'dateEnd'=>$dateEnd, 'cene'=>$cene]);
+        return view('rezervacija.rezervacija2',['cars'=>$cars,'models'=>$models, 'dateStart'=>$dateStart, 'dateEnd'=>$dateEnd, 'cene'=>$cene]);
         //preko fetcha
-        return view('rezervacija.rezervacija4',['cars'=>$cars,'models'=>$models, 'dateStart'=>$dateStart, 'dateEnd'=>$dateEnd, 'cene'=>$cene]); 
+        // return view('rezervacija.rezervacija4',['cars'=>$cars,'models'=>$models, 'dateStart'=>$dateStart, 'dateEnd'=>$dateEnd, 'cene'=>$cene]); 
         //preko ajax-a i jQuerija
         // return view('rezervacija.rezervacija3',['cars'=>$cars,'models'=>$models, 'dateStart'=>$dateStart, 'dateEnd'=>$dateEnd, 'cene'=>$cene]);
         //preko axiosa
