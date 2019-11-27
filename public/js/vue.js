@@ -1,4 +1,5 @@
 //komponenta ide pre roditelja
+//komponenta sluzi da napravi kartice sa automobilima za rezervacije
 Vue.component('modelcard',
 {
     props:{
@@ -53,14 +54,17 @@ let vueBooking=new Vue(
         el:"#vueSelector",
         data:
         {
+            //lazni datumi
             dateStartNew:null,
             dateEndNew:null,
+            //podaci iz forme
             dateStartModel:null,
             dateEndModel:null,
             imeModel:null,
             emailModel:null,
             telefonModel:null,
             commentModel:null || 'no commment',
+            //druge promenljive
             errors:[],
             karticaForma:true,
             karticaRezultati:false,
