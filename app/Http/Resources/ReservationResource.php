@@ -19,7 +19,7 @@ class ReservationResource extends JsonResource
         return parent::toArray($request);
     }
 
-    //svi automobili koji smeju da se rezervisu
+    //vraca niz svih automobila koji su slobodni za rezervaciju (booking) u zavisnosti od njihovog modela
     public static function aveilibleCars($dateStart,$dateEnd)
     {
         $automobili=PomFunkResource::getAllCars();
@@ -42,7 +42,7 @@ class ReservationResource extends JsonResource
         return $rezultat;
     }
 
-    //spisak rezervacija po broju
+    //vraca niz rezervacija u odnosu na broj upisa
     //$krit='DESC' or $krit='ASC'
     public static function getAllReservationsNum($num,$krit='DESC')
     {
@@ -65,7 +65,7 @@ class ReservationResource extends JsonResource
         LIMIT ?",[$num]);   
     }
 
-    //spisak rezervacija u vremenskom okviru
+    //vraca niz rezervacija u vremenskom okviru
     //$krit='DESC' or $krit='ASC'
     public static function getReservationsDate($dateStart,$dateEnd,$krit='DESC')
     {
@@ -89,7 +89,9 @@ class ReservationResource extends JsonResource
         ",[$dateStart,$dateEnd,$dateStart,$dateEnd]);   
     }
 
-    //spisak rezervacija koje traju
+    //vraca niz rezervacija koje su trenutno u toku
+    //sto znaci da danasnji datum izmedju poceetnog i krajnjeg dana rezervacije i ukljucuje pocetni i 
+    //krajnji datum
     public static function getReservationsCurrent()
     {
         return DB::select(
@@ -113,6 +115,8 @@ class ReservationResource extends JsonResource
     }
 
     //pomocna funkcija koja proverava da li auto sme da se rezervise
+    //u zavisnosti da li autu istice registracija
+    //jer ne zelimo da izdamo auto sa isteklom registracijom
     public static function checkExparationReg($id,$dateEnd,$crit_time=3)
     {
         $razlika=DB::select(
@@ -133,7 +137,7 @@ class ReservationResource extends JsonResource
         }
     }
 
-    //informacije o rezervaciji
+    //informacije o jednoj rezervaciji
     public static function returnInformation($idRezervacije)
     {
         $pom=DB::select(
@@ -190,6 +194,7 @@ class ReservationResource extends JsonResource
     }
 
     //otkazivanje rezervacije u bazi
+    //radi samo za rezervacije koje ce se desiti u buducnosti ili su zapocele u skorijoj proslosti
     public static function cancelFutureReservation($id)
     {
         DB::delete("DELETE
@@ -212,7 +217,7 @@ class ReservationResource extends JsonResource
         );
     }
 
-    //Funkcija koja salje mejl kupcu-trenutno je iskljucena da ne bi bagovala
+    //Funkcija koja salje mejl musteriji-trenutno je iskljucena da ne bi bagovala
     public static function sendMeil($info,$tip='new')
         {
 

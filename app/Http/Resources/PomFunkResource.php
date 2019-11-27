@@ -41,7 +41,7 @@ class PomFunkResource extends JsonResource
             //jer ako postoji, onda znaci da u tom trazenom intervalu postoji barem jedna rezervacija, sto je suprotno predpostavci
             //granicni slucajevi su posebni, jer rezervacija moze da pocne istoga dana kada se predhodna zavrsi
             //sto znaci da intervali rezervacije ne smeju da budu na pocetku, ili kraju unutar ukupnog trazenog intervala, ali smeju da budu sa spoljen strane
-            
+
             $niz=DB::select(
                 'SELECT
                 A.Broj_sasije AS "id"
@@ -75,7 +75,26 @@ class PomFunkResource extends JsonResource
         }
     }
 
-    //vraca sve automobile
+    //funkcija za racunanje cene rezervacije u zavisnosti od modela i duzine trajanja rezervacije
+    public static function totalCost($model,$dateStart,$dateEnd)
+    {
+        $niz=DB::select("
+        SELECT `cena_po_danu` AS 'cena', DATEDIFF(?, ?) as 'razlika' 
+        FROM `cenovnik` WHERE 
+        `Model` = ? AND `Max_broj_dana` >= DATEDIFF(?, ?)",[$dateEnd,$dateStart,$model,$dateEnd,$dateStart]);
+
+        $max=0;
+        foreach($niz as $clan)
+        {
+            if($clan->cena>$max)
+            {
+                $max=$clan->cena;
+            }
+        }
+        return $niz[0]->razlika*$max;
+    }
+
+    //vraca sve automobile u zavisnosti da li su aktivni ili obrisani
     public static function getAllCars($aktivan=1)
     {
         return DB::select("SELECT
@@ -119,7 +138,7 @@ class PomFunkResource extends JsonResource
         }
     }
 
-    //
+    //vraca podatak da li je auto na servisu
     public static function getServis($id)
         {
             return DB::select("SELECT
@@ -130,7 +149,7 @@ class PomFunkResource extends JsonResource
             `Broj_sasije`=?",[$id]);
         }
 
-    //
+    //menja podatak da li je auto na sevisu
     public static function setServis($id,$val)
     {
         DB::update("UPDATE
@@ -140,24 +159,4 @@ class PomFunkResource extends JsonResource
     WHERE
         `Broj_sasije`=?",[$val,$id]);
     }
-
-     //funkcija za racunanje cene rezervacije
-     public static function totalCost($model,$dateStart,$dateEnd)
-     {
-         $niz=DB::select("
-         SELECT `cena_po_danu` AS 'cena', DATEDIFF(?, ?) as 'razlika' 
-         FROM `cenovnik` WHERE 
-         `Model` = ? AND `Max_broj_dana` >= DATEDIFF(?, ?)",[$dateEnd,$dateStart,$model,$dateEnd,$dateStart]);
- 
-         $max=0;
-         foreach($niz as $clan)
-         {
-             if($clan->cena>$max)
-             {
-                 $max=$clan->cena;
-             }
-         }
-         return $niz[0]->razlika*$max;
-     }
-
 }

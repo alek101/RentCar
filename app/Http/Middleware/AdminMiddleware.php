@@ -13,6 +13,8 @@ class AdminMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
+
+     //useri koji imaju rolu vecu ili jednaku 10 ce dobiti trazenu stranicu
     public function handle($request, Closure $next)
     {
         $user=$request->user();

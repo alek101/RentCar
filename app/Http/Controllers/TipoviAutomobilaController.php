@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 class TipoviAutomobilaController extends Controller
 {
-    //spisak modela
+    //vraca spisak svih modela (tipova) automobila
     public function modeliSvi()
     {
         $models=TipoviAutomobilaModel::all();
@@ -46,13 +46,13 @@ class TipoviAutomobilaController extends Controller
         return view('klient.sviModeli', ['models'=>$models,'cenovnik'=>$cenovnik]);
     }
 
-    //stranica za dodavanje tipa
+    //stranica za dodavanje novog tipa
     public function getAdd()
     {
         return view('baza.formaDodaj');
     }
 
-    //funkcija za dodavanje novog modela
+    //funkcija za dodavanje novog tipa
     public function add(Request $request)
     {
         $request->validate([
@@ -70,6 +70,7 @@ class TipoviAutomobilaController extends Controller
         $newModel->Broj_torbi=$request->Broj_torbi;
         $newModel->opis=$request->opis;
 
+        //zajedno uz nov model dodajemo i cene za tri kriterijuma po broju dana
         $newCena1=new CenovnikModel;
         $newCena1->Model=$request->Model;
         $newCena1->Max_broj_dana=3;
@@ -120,7 +121,7 @@ class TipoviAutomobilaController extends Controller
         return view('baza.modelID',['models'=>$models]);
     }
 
-    //forma koja sluzi za izmenu modela
+    //forma koja sluzi za azuriranje modela
     public function getFormChange(Request $request)
     {
         $modelID=str_replace("_"," ",$request->Model);
@@ -131,7 +132,7 @@ class TipoviAutomobilaController extends Controller
         return view('baza.formaIzmeni',['model'=>$model,'cena_3'=>$cena_3,'cena_7'=>$cena_7,'cena_max'=>$cena_max]);
     }
 
-    //funkcija koja menja model
+    //funkcija koja azurira model
     public function change(Request $request)
     {
         $model=str_replace("_"," ",$request->Model);

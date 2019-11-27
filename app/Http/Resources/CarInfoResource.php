@@ -18,7 +18,36 @@ class CarInfoResource extends JsonResource
         return parent::toArray($request);
     }
 
-    //pomocna funkcija koja daje sledeci slobodan datum
+    //vraca spisak kriticnih automobila u zavisnosti od kriterijuma kriticnosti
+    //automobil je kritican ukoliko je presao dovoljan broj kilometara da je ispunjena preporuka
+    //o obavljanju malog ili velikog servisa
+    //ili da ce registracija isteci u narednoj blizoj buducnosti
+    public static function getCriticalCars($dayRegistratonExparation=30,$smallServise=10000,$mainServise=100000)
+    {
+        return DB::select("SELECT
+        `Broj_sasije` as 'sasija',
+        `Broj_saobracajne_dozvole` as 'saobracajna',
+        `Broj_registarskih_tablica` as 'tablica',
+        `Model` as 'model',
+        `Godina_proizvodnje` as 'godiste',
+        `Predjena_km` as 'kilometraza',
+        `Datum_vazenja_registracije` as 'registracija',
+        `Radjen_mali_servis_km` as 'mali_servis',
+        `Radjen_veliki_servis_km` as 'veliki_servis',
+        DATEDIFF(`Datum_vazenja_registracije`,CURRENT_DATE()) as 'isticanje_registracije',
+        `Predjena_km`-`Radjen_mali_servis_km` as 'predjeno_km_mali',
+        `Predjena_km`-`Radjen_veliki_servis_km` as 'predjeno_km_veliki'
+    FROM
+        `automobili`
+    WHERE
+        `Servis`=0 and `Aktivan`=1 and
+         (DATEDIFF(`Datum_vazenja_registracije`,CURRENT_DATE())<=? OR
+         `Predjena_km`-`Radjen_mali_servis_km`>=? OR
+         `Predjena_km`-`Radjen_veliki_servis_km`>=?)",[$dayRegistratonExparation,$smallServise,$mainServise]);
+    }
+
+    //pomocna funkcija koja daje sledeci slobodan datum kada auto nije rezervisan
+    //sluzi da se pronadje pogadan vremsnki interval za obavljanje servisa ili tehnickog pregleda
     public static function findNextFreeDate($id,$brojDana)
     {
         if($brojDana>=1)
@@ -85,7 +114,7 @@ class CarInfoResource extends JsonResource
         );
     }
 
-    //daj buduce rezervacije za odredjeni auto
+    //daje spisak buducih rezervacije za odredjeni auto
     public static function getFutureReservationCar($id)
     {
         return DB::select("SELECT
@@ -104,30 +133,5 @@ class CarInfoResource extends JsonResource
         join `automobili` as A on R.ID_vozila=A.Broj_sasije
         where CURRENT_DATE()<=R.`Datum_pocetka`+ INTERVAL 3 DAY and A.Broj_sasije =?
         order by `Datum_pocetka` ASC",[$id]); 
-    }
-
-    //kriticni automobili
-    public static function getCriticalCars($dayRegistratonExparation=30,$smallServise=10000,$mainServise=100000)
-    {
-        return DB::select("SELECT
-        `Broj_sasije` as 'sasija',
-        `Broj_saobracajne_dozvole` as 'saobracajna',
-        `Broj_registarskih_tablica` as 'tablica',
-        `Model` as 'model',
-        `Godina_proizvodnje` as 'godiste',
-        `Predjena_km` as 'kilometraza',
-        `Datum_vazenja_registracije` as 'registracija',
-        `Radjen_mali_servis_km` as 'mali_servis',
-        `Radjen_veliki_servis_km` as 'veliki_servis',
-        DATEDIFF(`Datum_vazenja_registracije`,CURRENT_DATE()) as 'isticanje_registracije',
-        `Predjena_km`-`Radjen_mali_servis_km` as 'predjeno_km_mali',
-        `Predjena_km`-`Radjen_veliki_servis_km` as 'predjeno_km_veliki'
-    FROM
-        `automobili`
-    WHERE
-        `Servis`=0 and `Aktivan`=1 and
-         (DATEDIFF(`Datum_vazenja_registracije`,CURRENT_DATE())<=? OR
-         `Predjena_km`-`Radjen_mali_servis_km`>=? OR
-         `Predjena_km`-`Radjen_veliki_servis_km`>=?)",[$dayRegistratonExparation,$smallServise,$mainServise]);
     }
 }

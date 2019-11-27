@@ -18,7 +18,31 @@ class ServiseResource extends JsonResource
         return parent::toArray($request);
     }
 
-    //pomocna funkcija koja radi servis
+
+    //vraca spisak svih automobila kojima je zakazan servis
+    public static function getAllCarsServis()
+    {
+        return DB::select("SELECT
+        `Broj_sasije` as 'sasija',
+        `Broj_saobracajne_dozvole` as 'saobracajna',
+        `Broj_registarskih_tablica` as 'tablica',
+        `Model` as 'model',
+        `Godina_proizvodnje` as 'godiste',
+        `Predjena_km` as 'kilometraza',
+        `Datum_vazenja_registracije` as 'registracija',
+        `Radjen_mali_servis_km` as 'mali_servis',
+        `Radjen_veliki_servis_km` as 'veliki_servis',
+        DATEDIFF(`Datum_vazenja_registracije`,CURRENT_DATE()) as 'isticanje_registracije',
+        `Predjena_km`-`Radjen_mali_servis_km` as 'predjeno_km_mali',
+        `Predjena_km`-`Radjen_veliki_servis_km` as 'predjeno_km_veliki'
+    FROM
+        `automobili`
+    WHERE
+        `Servis`=1 and `Aktivan`=1",[]);
+    }
+
+    //pomocna funkcija koja u zavisnosti od ulaznih parametara ili odradjuje sve stavke vezane za
+    //upis malog ili velikog servisa, ili vezane za produzenje registracije
     public static function madeServis($id,$tip,$datum,$opis,$registracija)
     {
         $pre_km=ServiseResource::getKM($id);
@@ -62,37 +86,15 @@ class ServiseResource extends JsonResource
             },5);
         }
     }
-
-    //automobili na servisu
-    public static function getAllCarsServis()
-    {
-        return DB::select("SELECT
-        `Broj_sasije` as 'sasija',
-        `Broj_saobracajne_dozvole` as 'saobracajna',
-        `Broj_registarskih_tablica` as 'tablica',
-        `Model` as 'model',
-        `Godina_proizvodnje` as 'godiste',
-        `Predjena_km` as 'kilometraza',
-        `Datum_vazenja_registracije` as 'registracija',
-        `Radjen_mali_servis_km` as 'mali_servis',
-        `Radjen_veliki_servis_km` as 'veliki_servis',
-        DATEDIFF(`Datum_vazenja_registracije`,CURRENT_DATE()) as 'isticanje_registracije',
-        `Predjena_km`-`Radjen_mali_servis_km` as 'predjeno_km_mali',
-        `Predjena_km`-`Radjen_veliki_servis_km` as 'predjeno_km_veliki'
-    FROM
-        `automobili`
-    WHERE
-        `Servis`=1 and `Aktivan`=1",[]);
-    }
-
-    //funkcija koj upisuje servis u bazu
+    
+    //funkcija koj upisuje podatke o servisu u servisnu knjizicu
     public static function insertServis($id,$datum,$km,$tip,$opis)
     {
         DB::insert("INSERT INTO `servisna_knjizica`(`ID_automobila`, `Datum`, `Kilometraza`, `Tip_servisa`, `Opis`) 
             VALUES (?,?,?,?,?)",[$id,$datum,$km,$tip,$opis]);
     }
 
-    //
+    //upisije na kojoj predjenoj kilometrazi je uradjen mali servis
     public static function setMaliServisKm($id,$km)
     {
         DB::update("
@@ -102,7 +104,7 @@ class ServiseResource extends JsonResource
         ",[$km,$id]);
     }
 
-    //
+    //upisije na kojoj predjenoj kilometrazi je uradjen veliki servis
     public static function setVelikiServisKM($id,$km)
     {
         DB::update("
@@ -112,7 +114,7 @@ class ServiseResource extends JsonResource
         ",[$km,$id]);
     }
 
-    //
+    //upisiuje vazenje registracije
     public static function setRegistracija($id,$newDate)
     {
         DB::update(
@@ -123,7 +125,7 @@ class ServiseResource extends JsonResource
         ",[$newDate,$id]);
     }
 
-    //dodaje kilometrazu
+    //dodaje predjene kilometre
     public static function addKM($id,$km)
     {
         $ulaz=ServiseResource::getKM($id);
@@ -136,7 +138,7 @@ class ServiseResource extends JsonResource
         ServiseResource::setKM($id,$nova);
     }
 
-    //
+    //vraca predjenu kilometrazu
     public static function getKM($id)
     {
         return DB::select("SELECT
@@ -147,7 +149,7 @@ class ServiseResource extends JsonResource
         `Broj_sasije`=?",[$id]);
     }
     
-    //
+    //upisuje predjenu kilometrazu
     public static function setKM($id,$km)
     {
         DB::update("

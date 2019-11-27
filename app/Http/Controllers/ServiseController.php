@@ -9,7 +9,7 @@ use App\HTTP\Resources\ServiseResource;
 
 class ServiseController extends Controller
 {
-    //automobili na servisu
+    //vraca stranicu za automobile na servisu
     public function servis()
     {
         $niz=ServiseResource::getAllCarsServis();

@@ -29,7 +29,7 @@ class ReservationController extends Controller
         return view('rezervacijeInfo.trenutne',['niz'=>$niz]);
     }
 
-    //forma iz rezervacija
+    //forma iz rezervacija koja vraca niz rezervacija u zavisnosti od zadatih kriterijuma korisnika
     public function allReservationForm(Request $request)
     {
         if($request->order=="DESC")
@@ -99,7 +99,11 @@ class ReservationController extends Controller
         return view('rezervacijeInfo.extendForm',['id'=>$id]);
     }
 
-    //produzenje rezervacije
+    //funkcija za produzenje rezervacije
+    //funkcija pazi da li se rezervacija moze produziti, ili je auto vec rezervisan posle 
+    //orginalne rezervacije, ukljucujuci i da li je auto registrovan u novom zeljenom periodu 
+    //funkcija takodje moze i da skrati rezervaciju u zavisnosti da li jos uvek nije zapocela, ili da jeste zapocela
+    //takodje racuna novu cenu u zavisnosti od izmene
     public function extendReservation(Request $request)
     {        
         $id=$request->id;
@@ -157,14 +161,16 @@ class ReservationController extends Controller
         }
     }
 
-    //from get page
+    //funkcija za otkazivanje rezervacije
     public function cancelReservation($id)
     {
         ReservationResource::eliminateReservation($id);
         return back();
     }
 
-    //from rezervacijeInfoPage
+    //funkcija za otkazivanje registracije iz stranice o svim regitracijama
+    //return back() je ovde pravio bag, jer ova stranica zahteva post metodu
+    //zbog ugradjenog filtera koji prima i salje podatke post metodom
     public function cancelReservationFromRezervacijeInfoPage($id)
     {
         ReservationResource::eliminateReservation($id);

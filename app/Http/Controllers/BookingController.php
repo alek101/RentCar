@@ -16,12 +16,17 @@ class BookingController extends Controller
     }
 
     //pravi glavnu stranicu za rezervacije*
+    //koja koristi Vue.js
     public function zakaziPrikaz2()
     {
         return view('zakazi.prikaz2');
     }
     
     //funkcija koja pravi json za fron end stranu
+    //ona odredjuje koji modeli (tipovi) automobila su slobodni za izdavanje 
+    //u vremenskom periodu koji je trazio korisnik
+    //i salje podatke o tim modelima kako bi FE napravio kartice sa modelima
+    //za zakazivanje
     public function makeJSONforBooking(Request $request)
     {
         $request->validate([
@@ -65,7 +70,7 @@ class BookingController extends Controller
         return $paket;
     }
 
-    //booking
+    //funkcija koja vrsi rezervaciju za korisnika
     public function makeBookingWithFetch(Request $request)
     {
         $request->validate([

@@ -9,14 +9,14 @@ use App\HTTP\Resources\CarInfoResource;
 
 class CarInfoController extends Controller
 {
-    //Daje automobile koji moraju uskoro da imaju servis
+    //Daje stranicu o kriticnim automobile (koji moraju uskoro da imaju servis ili im registracija istice u blizoj buducnosti)
     public function kriticni()
     {
         $niz=CarInfoResource::getCriticalCars();
         return view('kriticni.kriticni',['niz'=>$niz]);
     }
 
-    //zakazivanje servisa
+    //stranica za zakazivanje servisa
     public function initiateServis($id)
     {
         return view('kriticni.zakaziServis',['id'=>$id]);
@@ -45,7 +45,7 @@ class CarInfoController extends Controller
         }
     }
 
-    //i konacno zakazivanje istog
+    //funkcija za zakazivanje servisa
     public function sheduleServise(Request $request )
     {
         $request->validate([

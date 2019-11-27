@@ -17,7 +17,7 @@ class ViewResource extends JsonResource
         return parent::toArray($request);
     }
 
-    //menja izgled datuma u naschki
+    //menja izgled datuma iz yyyy-mm-dd u dd.mm.yyyy. format
     public static function dateLook($date)
     {
         $date=explode('-',$date);
