@@ -165,36 +165,36 @@ catch (error)
 
 //vadi ime slike iz session storaga i upisuje u polje sa imenom slike
 
-try 
-{
-    if(document.querySelector('#slikaIme')!=null)
-    {
-        let nameImage=sessionStorage.getItem('nameImage');
-        if(nameImage!=null)
-        {
-            document.querySelector('#slikaIme').value=nameImage;
-        }
-    }
-} catch (error) 
-{
-    console.log('uzimanje imena slika is sess. stor. '+error);
-}
+// try 
+// {
+//     if(document.querySelector('#slikaIme')!=null)
+//     {
+//         let nameImage=sessionStorage.getItem('nameImage');
+//         if(nameImage!=null)
+//         {
+//             document.querySelector('#slikaIme').value=nameImage;
+//         }
+//     }
+// } catch (error) 
+// {
+//     console.log('uzimanje imena slika is sess. stor. '+error);
+// }
 
 //da izvadi ime slike iz fajla i upise ga na mesto i u session storage
 
-try 
-{
-    if(document.querySelector('#slika')!=null && document.querySelector('#slikaIme')!=null)
-    {
-        document.querySelector('#slika').addEventListener('change',function(e)
-        {
-            let nameImage=document.querySelector('#slika').value.slice(12);
-            document.querySelector('#slikaIme').value=nameImage;
-            sessionStorage.setItem('nameImage',nameImage);
-        })
-    }
-} catch (error) 
-{
-    console.log('upis ime slike '+error);
-}
+// try 
+// {
+//     if(document.querySelector('#slika')!=null && document.querySelector('#slikaIme')!=null)
+//     {
+//         document.querySelector('#slika').addEventListener('change',function(e)
+//         {
+//             let nameImage=document.querySelector('#slika').value.slice(12);
+//             document.querySelector('#slikaIme').value=nameImage;
+//             sessionStorage.setItem('nameImage',nameImage);
+//         })
+//     }
+// } catch (error) 
+// {
+//     console.log('upis ime slike '+error);
+// }
     

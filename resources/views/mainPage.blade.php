@@ -49,7 +49,7 @@
                                 <li><a href="/baza/model/getChange">Izmeni model i cenu</a></li>
                                 <li><a href="/baza/car/getAdd">Dodaj automobil</a></li>
                                 <li><a href="/baza/car/getChange">Izmeni automobil</a></li>
-                                <li><a href="/baza/addImage1">Uploaduj Sliku</a></li>
+                                {{-- <li><a href="/baza/addImage1">Uploaduj Sliku</a></li> --}}
                             </ul>
                         </div>
                     </div>

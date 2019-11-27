@@ -61,7 +61,7 @@ class TipoviAutomobilaController extends Controller
 
         $newModel=new TipoviAutomobilaModel;
         $newModel->Model=$request->Model;
-        $imeSlike=str_replace("_"," ",$request->slikaIme);
+        $imeSlike=$_FILES['slika']['name']; //ime slike, ['slika'] je ime inputa
         $newModel->slika='/images/'.$imeSlike;
         $newModel->Klasa=$request->Klasa;
         $newModel->Tip_menjaca=$request->Tip_menjaca;
@@ -138,7 +138,6 @@ class TipoviAutomobilaController extends Controller
         $model=str_replace("_"," ",$request->Model);
         $newModel=TipoviAutomobilaModel::where('Model',$model)->firstOrFail();
 
-        $newModel->slika='/images/'.str_replace("_"," ",$request->slikaIme);
         $newModel->Klasa=$request->Klasa;
         $newModel->Tip_menjaca=$request->Tip_menjaca;
         $newModel->Broj_sedista=$request->Broj_sedista;
@@ -158,10 +157,22 @@ class TipoviAutomobilaController extends Controller
         $newCena2->cena_po_danu=$request->cena_7;    
         }
 
-        $newCena3=CenovnikModel::where('Model',$model)->where('Max_broj_dana',7)->firstOrFail();
+        $newCena3=CenovnikModel::where('Model',$model)->where('Max_broj_dana',12700)->firstOrFail();
         if($request->cena_max>0)
         {
         $newCena3->cena_po_danu=$request->cena_max;    
+        }
+
+        //ako menjamo sliku, dodaj je
+        if(isset($request->slika))
+        {
+            $request->validate([
+                'slika' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+
+            $imeSlike=$_FILES['slika']['name'];
+            $newModel->slika='/images/'.$imeSlike;
+            $request->slika->move(public_path('images'), $imeSlike);
         }
 
         //treba transakcija

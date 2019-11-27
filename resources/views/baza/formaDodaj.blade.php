@@ -9,7 +9,7 @@
         <div class="flexRow">
             <label for="Model">Model Automobila<input type="text" name="Model" id="Model" required></label>
             <label for="slika">Slika: <input type="file" name="slika" id="slika"></label>
-            <label for="slikaIme">Ime slike<input type="text" name="slikaIme" id="slikaIme" required></label>
+            {{-- <label for="slikaIme">Ime slike<input type="text" name="slikaIme" id="slikaIme" required></label> --}}
         </div>
         <div class="flexRow">
             <label for="Klasa">

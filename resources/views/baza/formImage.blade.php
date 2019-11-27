@@ -1,5 +1,6 @@
 @extends('mainPage')
 @section('Page')
+DEPRICATED
 
 <form class="formZakazivanje" method="POST" enctype="multipart/form-data" action="/baza/posaljiSliku">
     <div class="flexColumn">

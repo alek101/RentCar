@@ -7,14 +7,15 @@
     // var_dump($model->opis);
 @endphp --}}
 
-<form class="formZakazivanje" method="POST" action="/baza/model/change">
+<form class="formZakazivanje" method="POST" enctype="multipart/form-data" action="/baza/model/change">
     <div class="flexColumn">
         <div class="flexRow">
                 @csrf 
         </div>
         <div class="flexRow">
             <label for="Model">Model Automobila<input type="text" name="Model" id="Model" value={!! str_replace(' ','_',$model->Model) !!} required></label>
-            <label for="slikaIme">Ime slike<input type="text" name="slikaIme" id="slikaIme" value={!! str_replace(' ','_',substr($model->slika,8)) !!} required></label>
+            {{-- <label for="slikaIme">Ime slike<input type="text" name="slikaIme" id="slikaIme" value={!! str_replace(' ','_',substr($model->slika,8)) !!} required></label> --}}
+            <label for="slika">Slika: <input type="file" name="slika" id="slika"></label>
         </div>
         <div class="flexRow">
             <label for="Klasa">

@@ -93,6 +93,7 @@ class AdminController extends Controller
     }
 
     //funkcije za upload slike
+    //depricated
     public function uploadImage(Request $request)
     {
         //proverava da li je name::image slika
