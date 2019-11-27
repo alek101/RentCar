@@ -196,7 +196,7 @@ class ReservationResource extends JsonResource
         FROM
             `rezervacija`
         WHERE
-            `ID_rezervacije`=? and CURRENT_DATE()<=`Datum_pocetka`+3",[$id]);
+            `ID_rezervacije`=? and CURRENT_DATE()<=`Datum_pocetka`+ INTERVAL 3 DAY",[$id]);
     }
 
     //azuriranje rezervacija

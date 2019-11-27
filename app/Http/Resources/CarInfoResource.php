@@ -102,7 +102,7 @@ class CarInfoResource extends JsonResource
         FROM
             `rezervacija` as R
         join `automobili` as A on R.ID_vozila=A.Broj_sasije
-        where CURRENT_DATE()<=R.`Datum_pocetka`+3 and A.Broj_sasije =?
+        where CURRENT_DATE()<=R.`Datum_pocetka`+ INTERVAL 3 DAY and A.Broj_sasije =?
         order by `Datum_pocetka` ASC",[$id]); 
     }
 
