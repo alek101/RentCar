@@ -1,6 +1,5 @@
 function validateForm(errors,dateStart,dateEnd,ime,telefon,email,comment)
 {
-    console.log('validacija: ',errors,dateStart,dateEnd,ime,telefon,email,comment);
     let danas=new Date();
     let dateStartInput=document.querySelector('#dateStartGroup');
     let dateEndInput=document.querySelector('#dateEndGroup');

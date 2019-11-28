@@ -115,9 +115,7 @@ let pf={
         //da bismo mogli da rezervisemo danas, mi blefiramo da je danas u stvari sutra
         inputDate=inputDate.split('-');
         let time=new Date(inputDate[0],inputDate[1]-1,inputDate[2]);
-        console.log('time',time);
         time=time.setTime(time.getTime()+(24*60*60*1000));
-        console.log('time',time);
         return time;
     },
     dateToSerbianFormat:function(date)

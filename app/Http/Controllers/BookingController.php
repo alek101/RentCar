@@ -10,14 +10,14 @@ use App\HTTP\Resources\ReservationResource;
 class BookingController extends Controller
 {
     //pravi glavnu stranicu za rezervacije
-    public function zakaziPrikaz1()
+    public function zakaziPrikazJS()
     {
         return view('zakazi.prikaz1');
     }
 
     //pravi glavnu stranicu za rezervacije*
     //koja koristi Vue.js
-    public function zakaziPrikaz2()
+    public function zakaziPrikazVUE()
     {
         return view('zakazi.prikaz2');
     }

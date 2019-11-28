@@ -1,5 +1,8 @@
 @extends('index')
 @section('PageF')
+
+{{-- koristi vue --}}
+
 <div> @csrf </div> 
 {{-- csrf izvan Vua --}}
 
@@ -39,10 +42,25 @@
                     <div class="flexRow">
                     
                         <label for="ime" class="w33" id="imeLabel"> Ime <input type="text" name="ime" id="ime" value="
+                            @auth
+                                {{ Auth::user()->name }}
+                            @else
+                                {{ "" }}
+                            @endauth 
                             " v-model='imeModel'></label>
                         <label for="email" class="w33" id='emailLabel'>Email <input type="email" name="email" id="email" value="
+                            @auth
+                                {{ Auth::user()->email }}
+                            @else
+                                {{ "" }}
+                            @endauth 
                             " v-model='emailModel'></label>
                         <label for="telefon" class="w33" id='telefonLabel'>Telefon <input type="text" name="telefon" id="telefon" value="
+                            @auth
+                                {{ Auth::user()->phone }}
+                            @else
+                                 {{ "" }}
+                            @endauth 
                             " v-model='telefonModel'></label>
                     </div>
                     <div>
@@ -74,9 +92,16 @@
 
 </div> --}}
 
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="{{ asset('/js/biblioteka.js') }}"></script>
+{{-- -develpment version --}}
 <script src="{{ asset('/js/vue.js') }}"></script>
+{{-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> --}}
+
+{{-- prodaction version --}}
+{{-- <script src="{{ asset('/js/vue.min.js') }}"></script> --}}
+{{-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script> --}}
+
+<script src="{{ asset('/js/biblioteka.js') }}"></script>
+<script src="{{ asset('/js/vueBooking.js') }}"></script>
 <script src="{{ asset('/js/validateForm.js') }}"></script>
 
 

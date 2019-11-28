@@ -1,6 +1,8 @@
 @extends('index')
 @section('PageF')
 
+{{-- koristi vanilu js --}}
+
 <section class="rezervacija">
     <div class="velikiTekst">
         <h1>Rezervišite vaš auto</h1>
