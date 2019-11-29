@@ -47,7 +47,7 @@
             ?>
 
             {!! 
-            "<tr>" .
+            "<tr class='tr_img'>" .
 
                 "<td>" .
                     "<img src=".($model->slika)." alt='Nema Slike'>"
