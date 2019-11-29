@@ -639,8 +639,8 @@ label
 
 .slicica
 {
-    max-width: 300px;
-    max-height: 182px;
+    width: 300px;
+    height: 182px;
 }
 
 .top-right a
@@ -793,4 +793,17 @@ p
 .date
 {
     min-width: 105px;
+}
+
+.card
+{
+    width: 506px;
+    height: 182px;
+    margin: 20px;
+}
+
+
+.padding_top_20
+{
+    padding-top: 20px;
 }

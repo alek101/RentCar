@@ -90,10 +90,13 @@
 </div>
 
 {{-- Ova sekcija je predvidjena za nesto, na primer komentare ili ponude --}}
-<div class="dodaci flexRow" id="vueDodaci">
-        <div v-for="ad in ads">
-            <adcard :model=ad></adcard>
-        </div>
+<div class="dodaci" id="vueDodaci">
+        <h2 class='white padding_top_20'>Najbolje ponude</h2>
+        <div class="flexRow">
+            <div v-for="ad in ads">
+                <adcard :model=ad></adcard>
+            </div>
+        </div>    
 </div>
 
 {{-- -develpment version --}}
