@@ -20,7 +20,7 @@
     <div class="container">
         <div class="header">
             <div class="links">
-                <a href="/">Korisnicki deo</a>
+                <a href="/">Korisnički deo</a>
                 <div class="meni">Meni
                     <div class="meniCart">
                         <ul>
