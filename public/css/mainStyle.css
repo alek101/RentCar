@@ -63,13 +63,14 @@ body
     justify-content: space-between;
     background-color:var(--main-color);;
     height: 80px;
-    font-size: 1.2em;
     position: absolute;
     bottom: 0px;
     width: 100%;
     margin: 0 auto;
     color: white;
     padding: 10px;
+    font-weight: normal;
+    font-style: italic;
 }
 
 
