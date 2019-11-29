@@ -597,6 +597,7 @@ textarea
 .card
 {
     max-width: 600px;
+    min-height: 182px;
     display: flex;
     flex-direction: row;
     margin: 20px;
@@ -795,7 +796,7 @@ p
     min-width: 105px;
 }
 
-.card
+.card2
 {
     width: 506px;
     height: 182px;
@@ -806,4 +807,9 @@ p
 .padding_top_20
 {
     padding-top: 20px;
+}
+
+.cenaOpisCard
+{
+    color: var(--link-hover);
 }

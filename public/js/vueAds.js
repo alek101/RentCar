@@ -10,7 +10,7 @@ Vue.component('adcard',
     },
     template:
         `
-        <div class="card">
+        <div class="card card2">
             <img class="slicica" :src=model.slika alt="nema">
             <div class="opis">
                 <p class="modelCardName">{{ model.Model }}</p>
