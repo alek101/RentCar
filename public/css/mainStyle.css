@@ -596,6 +596,7 @@ textarea
 
 .card
 {
+    min-width: 531px;
     max-width: 600px;
     min-height: 182px;
     display: flex;
