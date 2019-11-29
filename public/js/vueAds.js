@@ -10,9 +10,9 @@ Vue.component('adcard',
     },
     template:
         `
-        <div class="card card2">
-            <img class="slicica" :src=model.slika alt="nema">
-            <div class="opis">
+        <div class="cardAd">
+            <img class="slicicaAd" :src=model.slika alt="nema">
+            <div class="opisAd">
                 <p class="modelCardName">{{ model.Model }}</p>
                 <p class=""><img class="icon" src="/images/icons/solid--car-gears.svg" alt="Tip Menjaca: ">{{ model.Tip_menjaca }}</p>
                 <div class="flexRow">

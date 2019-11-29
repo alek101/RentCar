@@ -406,6 +406,7 @@ button,#dugme
 .dugmeRezervisi
 {
     box-shadow: 0 0 0 black;
+    overflow: hidden;
 }
 
 
@@ -600,7 +601,8 @@ textarea
 {
     min-width: 531px;
     max-width: 600px;
-    max-height: 182px;
+    /* max-height: 182px; */
+    height: 182px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -623,10 +625,17 @@ textarea
     box-shadow: 2px 10px 25px rgba(0,0,0,0.5);
 }
 
+.slicica
+{
+    width: 50%;
+    height: 100%;
+}
+
 .opis
 {
     text-align: center;
     padding: 15px;
+    width: 33.4%;
 }
 
 label
@@ -641,12 +650,6 @@ label
     font-size: 1.2em;
     padding-bottom: 20px;
     
-}
-
-.slicica
-{
-    max-width: 300px;
-    max-height: 182px;
 }
 
 .top-right a
@@ -801,14 +804,33 @@ p
     min-width: 105px;
 }
 
-.card2
+.cardAd
 {
+    min-width: 331px;
+    max-width: 531px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 20px;
+    background-color: var(--main-color);
     width: 531px;
     height: 182px;
     margin: 20px;
     justify-content: flex-start;
 }
 
+.slicicaAd
+{
+    width: 56.5%;
+    height: 100%;
+}
+
+.opisAd
+{
+    width: 43.5%;
+    text-align: center;
+    padding: 15px;
+}
 
 .padding_top_20
 {
@@ -921,13 +943,7 @@ p
     {
         min-width: 320px;
         max-width: 389px;
-        max-height: 120px;
-    }
-
-    .slicica 
-    {
-        max-width: 200px;
-        max-height: 120px;
+        max-height: 130px;
     }
 
     .opis
@@ -944,13 +960,21 @@ p
     .dugmeRezervisi
     {
         font-size: 0.9em;
+        width: 16.6%;
     }
 
-    .card2
+    .cardAd
     {
-        width: 320px;
-        height: 120px;
+        min-width: 320px;
+        max-width: 389px;
+        height: 130px;
         margin: 10px;
         justify-content: space-between;
+    }
+
+    .opisAd
+    {
+        padding: 5px;
+        font-size: 0.65em;
     }
 }
