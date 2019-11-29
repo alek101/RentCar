@@ -130,6 +130,7 @@ Route::prefix('/klient')->group(function()
     Route::get('/sviModeli','TipoviAutomobilaController@modeliAktivniStranica');
     Route::get('/nama','FrontPageController@nama');
     Route::get('/uslovi','FrontPageController@uslovi');
+    Route::get('/jsonAds','AdsController@makeJSONforAds');
 });
 
 

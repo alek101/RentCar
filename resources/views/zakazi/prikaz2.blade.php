@@ -90,8 +90,8 @@
 </div>
 
 {{-- Ova sekcija je predvidjena za nesto, na primer komentare ili ponude --}}
-<div class="dodaci" id="vueDodaci">
-        <h2 class='white padding_top_20'>Najbolje ponude</h2>
+<div class="dodaci" id="vueAds">
+        <h2 class='white padding_top_20'>Ponude</h2>
         <div class="flexRow">
             <div v-for="ad in ads">
                 <adcard :model=ad></adcard>
@@ -110,6 +110,6 @@
 <script src="{{ asset('/js/biblioteka.js') }}"></script>
 <script src="{{ asset('/js/vueBooking.js') }}"></script>
 <script src="{{ asset('/js/validateForm.js') }}"></script>
-<script src="{{ asset('/js/vueDodaci.js') }}"></script>
+<script src="{{ asset('/js/vueAds.js') }}"></script>
 
 @endsection
