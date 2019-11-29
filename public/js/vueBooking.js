@@ -1,5 +1,6 @@
 //komponenta ide pre roditelja
 //komponenta sluzi da napravi kartice sa automobilima za rezervacije
+//ime komponenete mora da bude malim slovima
 Vue.component('modelcard',
 {
     props:{

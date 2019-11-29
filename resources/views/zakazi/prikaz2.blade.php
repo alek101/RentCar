@@ -76,8 +76,10 @@
         
 
     <div class="divKartice" v-if='karticaRezultati'>
-        <div class="modelsWraper" v-if='models.length>0'>
-                <div v-for="model in models"> <modelcard :model=model @resp='odgovorJSON'></modelcard></div>
+        <div class="modelsWraper" v-if='models.length>0' >
+            <div v-for="model in models">
+                <modelcard :model=model @resp='odgovorJSON'></modelcard>
+            </div>  
         </div>
         <div class='response2' v-if="models.length==0 && serv_resp==''">Nije pronadjen nijedan automobil koji moze da se rezervise u vremenskom periodu!</div>
         <div class="response2" id="odgovor" v-show="serv_resp!=''">@{{ serv_resp }}</div>
@@ -88,9 +90,11 @@
 </div>
 
 {{-- Ova sekcija je predvidjena za nesto, na primer komentare ili ponude --}}
-{{-- <div class="dodaci">
-
-</div> --}}
+<div class="dodaci flexRow" id="vueDodaci">
+        <div v-for="ad in ads">
+            <adcard :model=ad></adcard>
+        </div>
+</div>
 
 {{-- -develpment version --}}
 <script src="{{ asset('/js/vue.js') }}"></script>
@@ -103,6 +107,6 @@
 <script src="{{ asset('/js/biblioteka.js') }}"></script>
 <script src="{{ asset('/js/vueBooking.js') }}"></script>
 <script src="{{ asset('/js/validateForm.js') }}"></script>
-
+<script src="{{ asset('/js/vueDodaci.js') }}"></script>
 
 @endsection
