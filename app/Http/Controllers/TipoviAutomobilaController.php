@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\TipoviAutomobilaModel;
 use App\CenovnikModel;
 use App\AutomobiliModel;
+use App\Http\Resources\TipoviAutomobilaResource;
 use Illuminate\Support\Facades\DB;
 
 
@@ -19,29 +20,10 @@ class TipoviAutomobilaController extends Controller
         return view('auto.modeli', ['models'=>$models,'cenovnik'=>$cenovnik]);
     }
 
-    //vraca podatke za spisak modela za koji postoji barem jedan aktivan automobil
-    public function modeliAktivni()
+    //pravi stranicu sa aktivnim mdelima
+    public function modeliAktivniStranica()
     {
-        $models=[];
-        $cars=AutomobiliModel::where('Aktivan',1)->get();
-        $modelsBook=TipoviAutomobilaModel::all();
-        forEach($modelsBook as $singleModel)
-        {
-            //proveravamo da li od datok modela singleModel, postojai barem jedan aktivan auto
-            $check=false;
-            forEach($cars as $car)
-            {
-                if($singleModel->Model===$car->Model)
-                {
-                    $check=true;
-                    break;
-                }
-            }
-            if($check)
-            {
-                array_push($models,$singleModel);
-            }
-        }
+        $models=TipoviAutomobilaResource::modeliAktivni();
         $cenovnik=CenovnikModel::all();
         return view('klient.sviModeli', ['models'=>$models,'cenovnik'=>$cenovnik]);
     }

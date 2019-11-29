@@ -639,8 +639,8 @@ label
 
 .slicica
 {
-    width: 300px;
-    height: 182px;
+    max-width: 300px;
+    max-height: 182px;
 }
 
 .top-right a
