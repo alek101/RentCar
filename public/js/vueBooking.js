@@ -77,6 +77,7 @@ let vueBooking=new Vue(
             csrf:null,
             serv_resp:"",
             posZah:false,
+            prosirenaForma:false,
         },
         
         methods:
@@ -86,21 +87,25 @@ let vueBooking=new Vue(
             inputStartDate()
             {
                 this.dateStartNew=pf.dateToSerbianFormat(this.dateStartModel);
+                this.prosiriFormu();
             },
 
             inputEndDate()
             {
                 this.dateEndNew=pf.dateToSerbianFormat(this.dateEndModel);
+                this.prosiriFormu();
             },
 
             outputStartDate()
             {
                 this.dateStartModel=null;
+                this.prosiriFormu();
             },
 
             outputEndDate()
             {
                 this.dateEndModel=null;
+                this.prosiriFormu();
             },
 
             //za prikazivanje forme ili datuma
@@ -218,11 +223,24 @@ let vueBooking=new Vue(
                 } 
             },
 
-            //
+            //da li da otkrije posebne zahteve
             posZahtMet()
             {
                 this.posZah=!this.posZah;
             },
+
+            //da li forma treba da ima samo datume ili ostatak
+            prosiriFormu()
+            {
+                if(this.dateStartModel!=null && this.dateEndModel!=null)
+                {
+                    this.prosirenaForma=true;
+                }
+                if(this.dateStartModel==null || this.dateEndModel==null)
+                {
+                    this.prosirenaForma=false;
+                }
+            }
         
         },
     }

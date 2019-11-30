@@ -89,7 +89,7 @@ class BookingController extends Controller
         $ime=$request->ime;
         $telefon=$request->telefon;
         $email=$request->email;
-        $comment=$request->comment ?? 'Kupac nema posebih zahteva.';
+        $comment=$request->comment ?? 'Kupac nema posebnih zahteva.';
 
         //SERVIS je rezervisana rec
         if($comment==="SERVIS")

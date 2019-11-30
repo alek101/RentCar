@@ -39,34 +39,37 @@
                         </div>
                     </div>
                     
-                    <div class="flexRow">
-                    
-                        <label for="ime" class="w33" id="imeLabel"> Ime <input type="text" name="ime" id="ime" value="
-                            @auth
-                                {{ Auth::user()->name }}
-                            @else
-                                {{ "" }}
-                            @endauth 
-                            " v-model='imeModel'></label>
-                        <label for="email" class="w33" id='emailLabel'>Email <input type="email" name="email" id="email" value="
-                            @auth
-                                {{ Auth::user()->email }}
-                            @else
-                                {{ "" }}
-                            @endauth 
-                            " v-model='emailModel'></label>
-                        <label for="telefon" class="w33" id='telefonLabel'>Telefon <input type="text" name="telefon" id="telefon" value="
-                            @auth
-                                {{ Auth::user()->phone }}
-                            @else
-                                 {{ "" }}
-                            @endauth 
-                            " v-model='telefonModel'></label>
+                    <div class='flexColumn' v-show='prosirenaForma'>
+                        <div class="flexRow">
+                        
+                            <label for="ime" class="w33" id="imeLabel"> Ime <input type="text" name="ime" id="ime" value="
+                                @auth
+                                    {{ Auth::user()->name }}
+                                @else
+                                    {{ "" }}
+                                @endauth 
+                                " v-model='imeModel'></label>
+                            <label for="email" class="w33" id='emailLabel'>Email <input type="email" name="email" id="email" value="
+                                @auth
+                                    {{ Auth::user()->email }}
+                                @else
+                                    {{ "" }}
+                                @endauth 
+                                " v-model='emailModel'></label>
+                            <label for="telefon" class="w33" id='telefonLabel'>Telefon <input type="text" name="telefon" id="telefon" value="
+                                @auth
+                                    {{ Auth::user()->phone }}
+                                @else
+                                    {{ "" }}
+                                @endauth 
+                                " v-model='telefonModel'></label>
+                        </div>
+                        <div>
+                            <label for="comment"> <p class='posZaht' @click='posZahtMet'> Posebni zahtevi</p><textarea v-show='posZah' name="comment" id="comment" cols="30" rows="10" v-model='commentModel'></textarea></label>
+                        </div>
+                        <div><button class='posalji' @click.prevent='prviUput'>Pošalji uput</button></div>
                     </div>
-                    <div>
-                        <label for="comment"> <p class='posZaht' @click='posZahtMet'> Posebni zahtevi</p><textarea v-show='posZah' name="comment" id="comment" cols="30" rows="10" v-model='commentModel'></textarea></label>
-                    </div>
-                    <div><button class='posalji' @click.prevent='prviUput'>Pošalji uput</button></div>  
+                      
                 </div>
             </div>
         <div class="response" v-show="errors.length!=0">
