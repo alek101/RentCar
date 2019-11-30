@@ -20,7 +20,7 @@ Vue.component('adcard',
                     <p class=""><img class="icon" src="/images/icons/solid--car-seat.svg" alt="Broj Sedišta: ">{{ model.Broj_sedista }}</p>
                     <p class=""><img class="icon" src="/images/icons/solid--big-bag.svg" alt="Broj Torbi: ">{{ model.Broj_torbi }}</p>
                 </div>
-                <p class="cenaOpisCard">Cena: {{ model.cena }} za 7 dana</p>
+                <p class="cenaOpisCard">Cena: {{ model.cena }} za {{ model.brojDana }} dana</p>
             </div>
         </div>
         `,
@@ -37,7 +37,8 @@ let vueAds=new Vue({
     {
         callData()
         {
-            fetch('/klient/jsonAds')
+            // fetch('/klient/jsonAds')
+            fetch('/klient/jsonAdsFixedNumber')
             .then(res=>res.json())
             // this se odnosi na data 
             .then(json=>this.ads=json);
