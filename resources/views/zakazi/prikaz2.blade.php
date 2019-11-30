@@ -64,7 +64,7 @@
                             " v-model='telefonModel'></label>
                     </div>
                     <div>
-                        <label for="comment"> Komentar <br><textarea name="comment" id="comment" cols="30" rows="10" v-model='commentModel'></textarea></label>
+                        <label for="comment"> <p class='posZaht' @click='posZahtMet'> Posebni zahtevi</p><textarea v-show='posZah' name="comment" id="comment" cols="30" rows="10" v-model='commentModel'></textarea></label>
                     </div>
                     <div><button class='posalji' @click.prevent='prviUput'>Pošalji uput</button></div>  
                 </div>

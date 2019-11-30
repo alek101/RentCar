@@ -65,7 +65,7 @@ let vueBooking=new Vue(
             imeModel:document.querySelector('#ime').value.trim(),
             emailModel:document.querySelector('#email').value.trim(),
             telefonModel:document.querySelector('#telefon').value.trim(),
-            commentModel:null || 'no commment',
+            commentModel:null || '',
             //druge promenljive
             errors:[],
             karticaForma:true,
@@ -76,6 +76,7 @@ let vueBooking=new Vue(
             models:[],
             csrf:null,
             serv_resp:"",
+            posZah:false,
         },
         
         methods:
@@ -215,7 +216,14 @@ let vueBooking=new Vue(
                     this.serv_resp=`Uspesno ste rezervisali auto sa tablicama ${odgovor.tablice}. Sifra rezervacije je ${odgovor.id_rez}.`;
                     this.models=[];
                 } 
-            }
+            },
+
+            //
+            posZahtMet()
+            {
+                this.posZah=!this.posZah;
+            },
+        
         },
     }
 );
