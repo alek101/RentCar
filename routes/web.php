@@ -19,8 +19,9 @@ Route::get('/', function () {
 });
 
 Route::get('/izmeniPodatkeUser','AdminController@changeUser')->middleware('auth');
-// Route::view('/izmeniLozinku','auth.passwords.reset')->middleware('auth');
+Route::get('/izmeniLozinku','ChangePasswordController@changePassForm')->middleware('auth');
 Route::post('/madeChangeUser','AdminController@madeChangeUser')->middleware('auth');
+Route::post('/changePassword','ChangePasswordController@changePassword')->middleware('auth');
 
 Route::get('/glavna','CarInfoController@kriticni')->middleware('login');
 

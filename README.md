@@ -33,6 +33,7 @@ TipoviAutomobilaVontroller je zadužen za dodavanje i izmenu tipova (modela) aut
 CarController je zadužen za dodavanje i izmenu automobila za administratore. 
 FrontPageController je zadužen za pozivanje front end stranica koje nemaju veze sa bazom. 
 AdsController pravi reklamice sa ponudom za nedelju dana.
+ChangePasswordController je zaduzen za izmenu lozinki za korisnike. 
 Laravel takodje ima više sopstvenih ugradjenih controllera. 
 Kontrolori su podržani resource-ima.
 
@@ -60,7 +61,8 @@ Osim toga što može da uradi sve i što može neregistrovani korisnik,
 
 1. Može da menja sopstevne podatke, username, email adresu i broj telefona. 
 2. U formi za rezervaciju predhodna 3 podatka su već upisana iz baze. 
-3. Druge funkcijonalnosti koje daje Laravel registrovanim korisnicima. 
+3. Moze da izmeni sopstvene podatke i sopstvenu lozinku.
+4. Druge funkcijonalnosti koje daje Laravel registrovanim korisnicima. 
 
 -Zaposleni (role 1-9)
 

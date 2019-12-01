@@ -27,9 +27,9 @@
 
                     <br>
 
-                    {{-- <a href="/izmeniLozinku">Promeni lozinku</a>
+                    <a href="/izmeniLozinku">Promeni lozinku</a>
 
-                    <br> --}}
+                    <br>
 
                     <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
