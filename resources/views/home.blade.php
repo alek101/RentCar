@@ -26,7 +26,11 @@
                     <a href="/izmeniPodatkeUser">Promeni podatke</a>
 
                     <br>
-                    
+
+                    {{-- <a href="/izmeniLozinku">Promeni lozinku</a>
+
+                    <br> --}}
+
                     <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
