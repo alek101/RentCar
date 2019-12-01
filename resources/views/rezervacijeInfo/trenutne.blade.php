@@ -22,7 +22,7 @@
             <th>Datum početka</th>
             <th>Datum završetka</th>
             <th>Cena</th>
-            <th>Opis</th>
+            <th>PZK</th>
             <th>Produži/Skrati</th>
             <th>Otkaži</th>
         </tr>

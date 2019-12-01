@@ -1,3 +1,4 @@
+DEPRICATED
 @extends('index')
 @section('PageF')
 
