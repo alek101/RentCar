@@ -13,13 +13,13 @@
         <div class="header">
             <div class="links">
                 <a href="/klient/nama">O Nama</a>
-                <a href="/zakazi">Zakaži</a>
+                <a href="/zakazi">Rezerviši</a>
                 <a href="/klient/sviModeli">Svi Modeli</a>
                 <a href="/klient/uslovi">Uslovi korišćenja</a>
                 {{-- <a href="/zakazi/zakaziStaro">ZakažiJS</a> --}}
                 @auth
                    @if (Auth::user()->role>=1)
-                       <a href="/kriticni">Admin Panel</a>
+                       <a href="/kriticni">Zaposleni</a>
                    @endif 
                 @endauth
                 
@@ -72,8 +72,9 @@
             </div>
 
             <div>
-                Aleksandar Petrović <br>
-                PHP grupa II
+                <span><a href="http://www.facebook.com"><img class="img_drust_m" src="/images/facebook_logos_PNG19748.png" alt="facebook"></a></span>
+                <span><a href="http://www.instragram.com"><img class="img_drust_m" src="/images/instagram_PNG11.png" alt="instagram"></a></span>
+                <span><a href="http://www.twitter.com"><img class="img_drust_m" src="/images/twitter_PNG14.png" alt="twitter"></a></span>
             </div>
         </div>
         

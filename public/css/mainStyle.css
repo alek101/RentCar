@@ -1,6 +1,6 @@
-
-@import url('https://fonts.googleapis.com/css?family=Lora:400,700|Muli:400,700|Noto+Sans:400,700|Noto+Serif:400,700|Playfair+Display:400,700|Rubik:400,700&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Muli:400,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Archivo:400,700&display=swap');
+
 
 :root
 {
@@ -20,13 +20,12 @@ html
     margin: 0;
     padding: 0;
     font-weight: bold;
-    
-    
-    
-    
     font-family: 'Muli', sans-serif;
-    
-    /* font-family: 'Noto Serif', serif; */
+}
+
+.card,.cardAd,table
+{
+    font-family: 'Archivo', sans-serif;
 }
 
 body
@@ -602,7 +601,6 @@ textarea
     /* padding: 0px 2px 2px 0px; */
     box-shadow: 2px 5px 10px rgba(0,0,0,0.5);
     transition: 0.2s;
-
 }
 
 .cardDisapear
@@ -842,6 +840,30 @@ p
 .posZaht:hover
 {
     color: var(--link-hover);
+}
+
+.margin_top_20
+{
+    margin-top: 20px;
+}
+
+.margin_top_40
+{
+    margin-top: 40px;
+}
+
+.img_drust
+{
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+}
+
+.img_drust_m
+{
+    width: 40px;
+    height: 40px;
+    margin: 5px;
 }
 
 
