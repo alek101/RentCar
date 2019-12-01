@@ -78,6 +78,7 @@ let vueBooking=new Vue(
             serv_resp:"",
             posZah:false,
             prosirenaForma:false,
+            butShow: false,
         },
         
         methods:
@@ -232,16 +233,34 @@ let vueBooking=new Vue(
             //da li forma treba da ima samo datume ili ostatak
             prosiriFormu()
             {
-                if(this.dateStartModel!=null && this.dateEndModel!=null)
-                {
-                    this.prosirenaForma=true;
-                }
                 if(this.dateStartModel==null || this.dateEndModel==null)
                 {
                     this.prosirenaForma=false;
                 }
-            }
+                else
+                {
+                    this.prosirenaForma=true;
+                }
+            },
+
+            //da li da pokaze dugme
+            checkButton()
+            {
+                if(this.imeModel=="" || this.emailModel=="" || this.telefonModel=="")
+                {
+                    this.butShow=false;
+                }
+                else
+                {
+                    this.butShow=true;
+                }
+            },
         
+        },
+        //pre nego sto renderuje virtuelnu dom, proveri da li su podaci vec upisani iz baze
+        beforeMount()
+        {
+            this.checkButton();
         },
     }
 );

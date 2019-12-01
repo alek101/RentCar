@@ -69,7 +69,9 @@ class AdsController extends Controller
             $spec=[];
             //nasumican index niza $aktiveModels
             $spec['indexModel']=rand(0,$numberModels-1);
-            $spec['brojDana']=rand(3,14);
+            //zelimo nasumicni broj dana iz niza broja dana
+            $nizBrojDana=[1,3,5,7,10,14];
+            $spec['brojDana']=$nizBrojDana[rand(0,count($nizBrojDana)-1)];
 
             //osiguravamo se da ne postoje dve iste reklame
             $check=true;
