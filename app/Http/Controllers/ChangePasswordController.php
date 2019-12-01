@@ -29,7 +29,7 @@ class ChangePasswordController extends Controller
         {
            User::findOrFail(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
    
-            return back()->withErrors(['Šifra je uspešno promenjena!']); 
+            return back()->withErrors(['Lozinka je uspešno promenjena!']); 
         }
         else
         {
