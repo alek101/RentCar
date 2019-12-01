@@ -266,7 +266,7 @@ font-weight: bold;
     }
 }
 
-li:hover
+.header li:hover
 {
     background-color: var(--mono-color);
 }
