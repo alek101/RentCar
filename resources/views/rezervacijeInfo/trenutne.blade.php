@@ -49,9 +49,9 @@
                     $rez->telefon
                     . "</td>".
     
-                    "<td>" .
+                    "<td><a href='/auto/infoPlates/".$rez->tablice."'>" .
                     $rez->tablice
-                    . "</td>".
+                    . "</a></td>".
     
                     "<td>" .
                     $rez->model

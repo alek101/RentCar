@@ -159,4 +159,19 @@ class PomFunkResource extends JsonResource
     WHERE
         `Broj_sasije`=?",[$val,$id]);
     }
+
+    //vraca broj sasije u odnosu na broj tablica
+    public static function getID($tablica)
+    {
+        return DB::select(
+            "
+            SELECT
+            `Broj_sasije`as 'id'
+            FROM
+                `automobili`
+            WHERE
+                `Broj_registarskih_tablica`=?
+            ",[$tablica]
+        )[0]->id;
+    }
 }

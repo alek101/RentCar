@@ -76,7 +76,7 @@ class ServiseController extends Controller
         }
         if(isset($tablica) and $km>0)
         {
-            $id=ServiseResource::getID($tablica);
+            $id=PomFunkResource::getID($tablica);
             ServiseResource::addKM($id,$km);
             return $this->prijem();
         }

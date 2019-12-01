@@ -102,7 +102,13 @@ class CarInfoController extends Controller
         else
         {
             return $this->auto();
-        }
-        
+        }  
+    }
+
+    //naknadna funkcija
+    //vrati jedan auto u odnosu na tablice
+    public function autoInfoPlates($plates)
+    {
+        return $this->autoInfo(PomFunkResource::getID($plates));
     }
 }

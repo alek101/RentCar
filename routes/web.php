@@ -50,6 +50,7 @@ Route::prefix('/auto')->middleware('login')->group(function()
     Route::get('/','CarInfoController@auto');
     Route::get('/info/{id}','CarInfoController@autoInfo');
     Route::get('/cancelReservation/{id}','ReservationController@cancelReservation');
+    Route::get('/infoPlates/{plates}','CarInfoController@autoInfoPlates');
 });
 
 //depricated

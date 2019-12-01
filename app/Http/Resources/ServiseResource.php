@@ -73,10 +73,6 @@ class ServiseResource extends JsonResource
             },5);
             
         }
-        // if ($tip=='cancel')
-        // {
-        //     PomFunkResource::changeCarServis($id);
-        // }
         if($tip=='registracija')
         {
             DB::transaction(function() use($id,$registracija)
@@ -157,20 +153,5 @@ class ServiseResource extends JsonResource
             SET `Predjena_km`=?
             where `Broj_sasije`=?
             ",[$km,$id]);   
-    }
-
-    //vraca broj sasije u odnosu na broj tablica
-    public static function getID($tablica)
-    {
-        return DB::select(
-            "
-            SELECT
-            `Broj_sasije`as 'id'
-            FROM
-                `automobili`
-            WHERE
-                `Broj_registarskih_tablica`=?
-            ",[$tablica]
-        )[0]->id;
     }
 }
