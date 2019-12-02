@@ -117,3 +117,68 @@ cb.fk.addEventListener('change',function()
     }
         
 })
+
+//promenu datuma u registraciji
+
+
+let dateStartLabel=document.querySelector('#labelStart');
+let dateStartLabel2=document.querySelector('#labelStart2');
+let dateStartInput=document.querySelector('#registracija');
+let dateStartInput2=document.querySelector('#Datum_vazenja_registracije_Input');
+
+function changeVisibilityStart()
+{
+    dateStartLabel.classList.toggle('disapear');
+    dateStartLabel2.classList.toggle('disapear');
+}
+
+//dogadjaji
+dateStartInput.addEventListener('change',function()
+{
+    changeVisibilityStart();
+    dateStartInput2.value=pf.dateToSerbianFormat(dateStartInput.value);
+})
+
+dateStartInput2.addEventListener('click',function()
+{
+    changeVisibilityStart();
+    dateStartInput.value="";
+    dateStartInput.focus();
+})
+
+//automatsko pozivanje
+changeVisibilityStart();
+dateStartInput2.value=pf.dateToSerbianFormat(dateStartInput.value);
+
+
+//promenu datuma u datumu servisa
+
+
+let dateStartLabelB=document.querySelector('#labelStartB');
+let dateStartLabel2B=document.querySelector('#labelStart2B');
+let dateStartInputB=document.querySelector('#datum');
+let dateStartInput2B=document.querySelector('#Datum_vazenja_registracije_InputB');
+
+function changeVisibilityStartB()
+{
+    dateStartLabelB.classList.toggle('disapear');
+    dateStartLabel2B.classList.toggle('disapear');
+}
+
+//dogadjaji
+dateStartInputB.addEventListener('change',function()
+{
+    changeVisibilityStartB();
+    dateStartInput2B.value=pf.dateToSerbianFormat(dateStartInputB.value);
+})
+
+dateStartInput2B.addEventListener('click',function()
+{
+    changeVisibilityStartB();
+    dateStartInputB.value="";
+    dateStartInputB.focus();
+})
+
+//automatsko pozivanje
+changeVisibilityStartB();
+dateStartInput2B.value=pf.dateToSerbianFormat(dateStartInputB.value);

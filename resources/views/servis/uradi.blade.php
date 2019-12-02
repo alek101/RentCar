@@ -1,7 +1,7 @@
 @extends('mainPage')
 @section('Page')
 
-<h3>Za produženje registracije, izaberite tip.</h3>
+<h3>Za produženje registracije, izaberite tip radova: Registracija.</h3>
 
 <form method="POST" action="/servis/endServis" class='formZakazivanje'>
     <div class="flexColumn">
@@ -20,14 +20,20 @@
             </label>
         </div>
         <div class="flexRow ser">
-            <label for="datum">
+            <label for="datum" id="labelStartB">
                 Datum Servisa <input type="date" name="datum" id="datum" value='<?php echo date("Y-m-d")?>'>
+            </label>
+            <label for="Datum_vazenja_registracije_Input" id="labelStart2B"  class="disapear"> 
+                    Datum Servisa<input type="text" id="Datum_vazenja_registracije_InputB">
             </label>
         </div> 
 
         <div class="flexRow reg cardDisapear">       
-            <label for="registracija">
-                Novo Važanje Registracije <input type="date" name="registracija" id="registracija" value=''>
+            <label for="registracija" id="labelStart" class="disapear">
+                Novo Važenje Registracije <input type="date" name="registracija" id="registracija" value=''>
+            </label>
+            <label for="Datum_vazenja_registracije_Input" id="labelStart2" > 
+                Novo Važenje Registracije <input type="text" id="Datum_vazenja_registracije_Input">
             </label>
         </div>
         <div class="flexRow ser2">
@@ -51,6 +57,7 @@
     
 </form>
 
+<script src="{{ asset('js/biblioteka.js') }}"></script>
 <script src="{{ asset('js/upisiServis.js') }}"></script>
 
 
