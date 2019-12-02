@@ -32,6 +32,6 @@ extendFormBlade={
 
                     function ispisi(odgovor)
                     {          
-                        document.querySelector('.response').innerHTML=odgovor;
+                        document.querySelector('.response').innerHTML=`<a href="/rezervacijeInfo/all">${odgovor}</a>`;
                     }}
 }
