@@ -13,7 +13,7 @@
         <th>Username</th>
         <th>Email</th>
         <th>Role</th>
-        <th>ChangeRole</th>
+        <th>Change Role</th>
         <th>Remove</th>
         
     </tr>
@@ -34,10 +34,9 @@
                     "<td>" .
                     $user->role
                     . "</td>"
-    
-                    ."<td> <a href='/admin/roleChange/".$user->id."'>Change</td>"
+                    ."<td><button class='linkDugme' data-link='/admin/roleChange/".$user->id."'>Change Role</button></td>"
 
-                    ."<td><button class='obrisi' data-link='/admin/delete/$user->id'>Obriši</button></td>"
+                    ."<td><button class='obrisi' data-link='/admin/delete/$user->id'>Remove</button></td>"
                     
              . "</tr>";
             !!}

@@ -94,8 +94,9 @@
                     "<td>" .
                     $auto->predjeno_km_veliki
                     . "</td>"
-    
-                    ."<td> <a href='/auto/info/$auto->sasija'>Detaljnije</a></td>"
+
+                    ."<td><button class='linkDugme' data-link='/auto/info/".$auto->sasija."'>Detaljnije</button></td>"
+
              . "</tr>";
             !!}
         @endforeach

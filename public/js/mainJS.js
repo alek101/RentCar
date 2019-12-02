@@ -150,8 +150,28 @@ try
         let dugmici=[...document.querySelectorAll('.zakaziServis')];
         dugmici.map(c=>c.addEventListener('click',function(e)
         {
-            let sasija=e.target.getAttribute("date-sasija");
+            let sasija=e.target.getAttribute("data-sasija");
             window.open("/kriticni/initiateServis/"+sasija,'_self');
+        }))
+    }
+} 
+catch (error) 
+{
+    console.log('zakazi servis '+error);
+}
+
+//poziv za otvaranje linka
+
+try 
+{
+    if(document.querySelectorAll('.linkDugme')!=null)
+    {
+        let dugmici=[...document.querySelectorAll('.linkDugme')];
+        dugmici.map(c=>c.addEventListener('click',function(e)
+        {
+            let link=e.target.getAttribute("data-link");
+            console.log(link);
+            window.open(link,'_self');
         }))
     }
 } 

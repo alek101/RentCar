@@ -103,7 +103,7 @@
                     . "</td>"
 
                    ."<td>
-                        <button class='zakaziServis'>Servis</button>
+                        <button class='zakaziServis' data-sasija='".$auto->sasija."'>Servis</button>
                      </td>"
     
              . "</tr>";

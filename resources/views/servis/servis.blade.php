@@ -95,7 +95,7 @@
                     $auto->predjeno_km_veliki
                     . "</td>"
     
-                    ."<td> <a href='/servis/servisCar/".$auto->sasija."'>Upisi</a></td>"
+                    ."<td><button class='linkDugme' data-link='/servis/servisCar/".$auto->sasija."'>Upiši</button></td>"
     
     
     

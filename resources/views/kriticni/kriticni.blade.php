@@ -117,7 +117,7 @@
                 . "</td>"; !!}
             @endif
                  {!! "<td>
-                        <button class='zakaziServis' date-sasija=".$auto->sasija.">Servis</button>
+                        <button class='zakaziServis' data-sasija=".$auto->sasija.">Servis</button>
                      </td></tr>"; !!}
                         
                     
