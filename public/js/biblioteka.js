@@ -7,6 +7,10 @@ let pf={
         width:0,
         height:0,
         href:"",
+        for:"",
+        id:"",
+        type:"",
+        value:"",
         })
         {
 
@@ -15,8 +19,15 @@ let pf={
             settings.src=settings.src || "";
             settings.alt=settings.alt || "There is no Picture aveilable";
             settings.href=settings.href || "";
+            settings.for=settings.for || "";
+            settings.id=settings.id || "";
+            settings.type=settings.type || "text";
+            settings.value=settings.value || null;
+            
+            
         let element=document.createElement(type);
             element.className=settings.className;
+            element.id=settings.id;
         switch(type){
             case "img":{
                     element=document.createElement('img');
@@ -28,6 +39,17 @@ let pf={
             }; break;
             case "a":{
                     element.href=settings.href;
+                    element.innerHTML=settings.text;
+            };break;
+            case "label":{
+                    element.innerHTML=settings.text;
+                    element.setAttribute('for',settings.for);
+            };break;
+            case "input":{
+                    element.setAttribute('type',settings.type);
+                    element.value=settings.value;
+            };break;
+            case "button":{
                     element.innerHTML=settings.text;
             };break;
             default:{
@@ -123,4 +145,19 @@ let pf={
         let d=new Date(date);
         return d.toLocaleDateString('sr-RS');
     },
+    filterWordTable(word,disapearClass)
+    {
+        //disapearClass=dispay:none;
+        if(typeof(word)!=='string') throw new Error('Word must be string');
+
+        let trArray=[...document.querySelectorAll('tr')];
+        word=word.toLowerCase();
+
+        for(let tr of trArray)
+        {
+            ([...tr.childNodes].some(c=>c.tagName==='TH' || (typeof(c.innerHTML)==='string' && c.innerHTML.toLowerCase().includes(word))))? 
+            tr.classList.remove(disapearClass): tr.classList.add(disapearClass);
+        }
+    },
+
 }
