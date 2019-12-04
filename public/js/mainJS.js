@@ -24,7 +24,7 @@ function searchTable()
     let word=document.querySelector('#filter').value.toLowerCase();
     sessionStorage.setItem('filterTabela',word);
     let trNiz=[...document.querySelectorAll('tr')];
-    for(tr of trNiz)
+    for(let tr of trNiz)
     {
         let array=[...tr.childNodes];
         let c1=false; let c2=false;
