@@ -156,5 +156,26 @@ let pf={
             tr.classList.remove(disapearClass): tr.classList.add(disapearClass);
         }
     },
+    openLink(button)
+    {
+        button.addEventListener('click',function(e)
+        {
+            window.open(button.getAttribute("data-link"),'_self');
+        })
+    },
+    openLinks(className)
+    {
+        //className is name of class with out of . in fron of it
+        if(typeof(className)!=='string' || className[0]===".") throw new Error('className must be string; className is name of class with out of . in fron of it');
+
+        let buttons=[...document.querySelectorAll("."+className)];
+        for(let button of buttons)
+        {
+            button.addEventListener('click',function(e)
+            {
+                window.open(button.getAttribute("data-link"),'_self');
+            })
+        }
+    },
 
 }
