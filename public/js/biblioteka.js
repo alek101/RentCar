@@ -10,7 +10,7 @@ let pf={
         for:"",
         id:"",
         type:"",
-        value:"",
+        value:null,
         })
         {
 
@@ -26,12 +26,14 @@ let pf={
             
             
         let element=document.createElement(type);
-            element.className=settings.className;
-            element.id=settings.id;
+
+            if(settings.id!=="") element.id=settings.id;
+            if(settings.className!=="") element.className=settings.className;
+            if(settings.text!=="") element.innerHTML=settings.text;
+           
         switch(type){
             case "img":{
                     element=document.createElement('img');
-                    element.className=settings.className;
                     element.src=settings.src;
                     element.alt=settings.alt;
                     if(settings.width>0 && !isNaN(Number(settings.width))) element.style.width=settings.width+"px";
@@ -39,21 +41,16 @@ let pf={
             }; break;
             case "a":{
                     element.href=settings.href;
-                    element.innerHTML=settings.text;
             };break;
             case "label":{
-                    element.innerHTML=settings.text;
                     element.setAttribute('for',settings.for);
             };break;
             case "input":{
                     element.setAttribute('type',settings.type);
                     element.value=settings.value;
             };break;
-            case "button":{
-                    element.innerHTML=settings.text;
-            };break;
             default:{
-                    element.innerHTML=settings.text;
+                    
             }
         }       
         return element;
