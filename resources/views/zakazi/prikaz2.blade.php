@@ -102,7 +102,7 @@
         </div>    
 </div>
 
-{{-- -develpment version --}}
+{{-- -develpment version
 <script src="{{ asset('/js/vue.js') }}"></script>
 {{-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> --}}
 
@@ -110,9 +110,9 @@
 {{-- <script src="{{ asset('/js/vue.min.js') }}"></script> --}}
 {{-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script> --}}
 
-<script src="{{ asset('/js/biblioteka.js') }}"></script>
+{{-- <script src="{{ asset('/js/biblioteka.js') }}"></script>
 <script src="{{ asset('/js/vueBooking.js') }}"></script>
 <script src="{{ asset('/js/validateForm.js') }}"></script>
-<script src="{{ asset('/js/vueAds.js') }}"></script>
+<script src="{{ asset('/js/vueAds.js') }}"></script>  --}}
 
 @endsection

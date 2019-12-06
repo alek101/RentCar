@@ -11,8 +11,6 @@
 |
 */
 
-use Illuminate\Support\Facades\Redirect;
-
 Route::get('/', function () {
     // return view('index');
     return Redirect('/zakazi');

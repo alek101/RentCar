@@ -7,6 +7,18 @@
     <title>RentCar</title>
     <link rel="stylesheet" href="{{ url('/css/mainStyle.css') }}">
     <script src={{ asset('/js/mainJS.js') }} defer></script>
+    {{-- -develpment version --}}
+    <script src="{{ asset('/js/vue.js') }}" defer></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" defer></script> --}}
+
+    {{-- prodaction version --}}
+    {{-- <script src="{{ asset('/js/vue.min.js') }}" defer></script> --}}
+    {{-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0" defer></script> --}}
+
+    <script src="{{ asset('/js/biblioteka.js') }}" defer></script>
+    <script src="{{ asset('/js/vueBooking.js') }}" defer></script>
+    <script src="{{ asset('/js/validateForm.js') }}" defer></script>
+    <script src="{{ asset('/js/vueAds.js') }}" defer></script>
 </head>
 <body>
     <div class="container">
