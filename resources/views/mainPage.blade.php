@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ url('/css/mainStyle.css') }}">
     <script src={{ asset('/js/mainJS.js') }} defer></script>
     {{-- -develpment version --}}
-    <script src="{{ asset('/js/vue.js') }}" defer></script>
+    {{-- <script src="{{ asset('/js/vue.js') }}" defer></script> --}}
     <script src="{{ asset('/js/biblioteka.js') }}" defer></script>
     {{-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" defer></script> --}}
 
